@@ -1,6 +1,10 @@
 #include "libft.h"
+#include <fcntl.h>
 
+//  ##############################################################################################
 //                                       PARTIE 1
+//  ##############################################################################################
+
 // int	main(void)
 // {
 // 	printf("\n#####   ft_calloc   #####\n");
@@ -108,43 +112,106 @@
 // 	return (0);
 // }
 
+//  ##############################################################################################
 //                                       PARTIE 2
+//  ##############################################################################################
+
+// char my_func(unsigned int i, char c)
+// {
+//     printf("My other function: index = %d and %c\n", i, c);
+//     return c - 32;
+// }
+
+// void new_func(unsigned int i, char *str)
+// {
+//     printf("new function: index = %d and the string is %s\n", i, str);
+// }
+
 int	main(void)
 {
-    // printf("\n\n#####   ft_substr    #####\n");
-	// char src[] = "Hello World !";
-    // int m = 0;
-    // int n = 4;
-    // char* dest = ft_substr(src, m, n);
-    // printf("src = \"%s\"\nstart = %d\nlenght = %d\nnew = \"%s\"\n", src, m, n, dest);
+    printf("\n\n#####   ft_substr    #####\n");
+	char src[] = "Hello World !";
+    int m = 0;
+    int n = 4;
+    char* dest = ft_substr(src, m, n);
+    printf("src = \"%s\"\nstart = %d\nlenght = %d\nnew = \"%s\"\n", src, m, n, dest);
 
-    // printf("\n\n#####   ft_strjoin   #####\n");
-	// char    *s1 = "Hello ";
-    // char    *s2 = "World !";
-	// char    *result = ft_strjoin(s1, s2);
-	// printf("%s\n", result);
-	// free(result);
+//     printf("\n\n#####   ft_strjoin   #####\n");
+// 	char    *s1 = "Hello ";
+//     char    *s2 = "World !";
+// 	char    *result = ft_strjoin(s1, s2);
+// 	printf("%s\n", result);
+// 	free(result);
 
-    // printf("\n\n#####   ft_strtrim   #####\n");
-    // char    *nasty = "oyoyHello World !yoy";
-    // char    *sub = "yo";
-    // result = ft_strtrim(nasty, sub);
-	// printf("%s\n", result);
-	// free(result);
+//     printf("\n\n#####   ft_strtrim   #####\n");
+//     char    *nasty = "oyoyHello World !yoy";
+//     char    *sub = "yo";
+//     result = ft_strtrim(nasty, sub);
+// 	printf("%s\n", result);
+// 	free(result);
 
-    printf("\n\n#####   ft_split     #####\n");
-    char test[] = "S58VHQ     p70fL       Kx2sRP0So 3E4rC9 bpv3J5ousO84Pa1HjUQOImUhjwZpGn    X28iT7Ap9   DIYAF9ZSpKcs0Rcv uzO   7zjE eonALOKQF5xq   Qxp0b1ufFKGJ 2n8R9zUvZEtOwmqf   ";
-    char **arr = ft_split(test, 32);
-    int i = 0;
-    while (arr[i] != 0)
-    {
-        printf("'%s'\n", arr[i]);
-        free(arr[i]);
-        ++i;
-    }
-    printf("'%s'\n", arr[i]);
-    free(arr[i]);
-    free(arr);
-    
-	return 0;
+//     printf("\n\n#####   ft_split     #####\n");
+//     char test[] = "S58VHQ     p70fL       Kx2sRP0So 3E4rC9 bpv3J5ousO84Pa1HjUQOImUhjwZpGn    X28iT7Ap9   DIYAF9ZSpKcs0Rcv uzO   7zjE eonALOKQF5xq   Qxp0b1ufFKGJ 2n8R9zUvZEtOwmqf   ";
+//     char **arr = ft_split(test, 32);
+//     int i = 0;
+//     while (arr[i] != 0)
+//     {
+//         printf("'%s'\n", arr[i]);
+//         free(arr[i]);
+//         ++i;
+//     }
+//     printf("'%s'\n", arr[i]);
+//     free(arr[i]);
+//     free(arr);
+
+//     printf("\n#####     ft_itoa     #####\n");
+//     printf("424457 -> %s\n", ft_itoa(424457));
+// 	printf("0 -> %s\n", ft_itoa(0));
+// 	printf("1337 -> %s\n", ft_itoa(1337));
+// 	printf("-0 -> %s\n", ft_itoa(-0));
+// 	printf("+132 -> %s\n", ft_itoa(+132));
+// 	printf("-2147483648 -> %s\n", ft_itoa(-2147483648));
+//     printf("+2147483647 -> %s\n", ft_itoa(+2147483647));
+
+//     printf("\n#####   ft_strmapi    #####\n");
+//     char *str = "hello";
+//     printf("str = '%s'\n", str);
+//     char *map = ft_strmapi(str, my_func);
+//     printf("res = '%s'\n", map);
+
+//     printf("\n#####   ft_striteri    #####\n");
+// 	printf("str = '%s'\n", str);
+// 	ft_striteri(str, new_func);
+
+
+
+//     //	Open a file descriptor for the "test.txt" file, in
+//     //	truncated write only mode, and create the file if it doesn't
+//     //	already exist. Read and write permissions for the owner, read
+//     //	permissions for the group.
+//     int fd = open("write_in.txt", O_WRONLY | O_TRUNC | O_CREAT, 0640);
+//     //	Stop everything if the file could not be opened
+// 	if (fd == -1)
+// 		return (1);
+// 	// printf("fd = %d\n", fd);
+
+//     printf("\n#####   ft_putchar_fd  #####\n");
+// 	ft_putchar_fd('x', fd);
+//     ft_putchar_fd('\n', fd);
+
+//     printf("\n#####   ft_putstr_fd   #####\n");
+//     ft_putstr_fd("hello world !", fd);
+//     ft_putchar_fd('\n', fd);
+
+//     printf("\n#####   ft_putendl_fd  #####\n");
+//     ft_putendl_fd("this is me~", fd);
+//     ft_putstr_fd("Life should be fun for everyone <3", fd);
+//     ft_putchar_fd('\n', fd);
+
+//     printf("\n#####   ft_putnbr_fd   #####\n");
+//     ft_putnbr_fd(1312, fd);
+//     ft_putchar_fd('\n', fd);
+
+// 	close(fd);
+// 	return 0;
 }

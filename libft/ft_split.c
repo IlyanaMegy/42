@@ -38,19 +38,19 @@ static void	give_to(char **tab, char const *s, char sep)
 	res = tab;
 	while (*tmp)
 	{
-		while (*s == sep)						// pass sep in *s
+		while (*s == sep)
 			++s;
-		tmp = s;								// update *tmp pointer to *s
-		while (*tmp && *tmp != sep)				// increment *tmp pointer
+		tmp = s;
+		while (*tmp && *tmp != sep)
 			++tmp;
-		if (*tmp == sep || tmp > s)				// if sep again or if end of *s
+		if (*tmp == sep || tmp > s)
 		{
-			*res = ft_substr(s, 0, tmp - s);	// add passed word to res
-			s = tmp;							// update *s pointer at *tmp position
-			++res;								// get to next res block
+			*res = ft_substr(s, 0, tmp - s);
+			s = tmp;
+			++res;
 		}
+		*res = NULL;
 	}
-	*res = NULL;
 }
 
 char	**ft_split(char const *s, char sep)
