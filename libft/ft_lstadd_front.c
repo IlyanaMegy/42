@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 13:01:04 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/05/02 13:01:08 by ilymegy          ###   ########.fr       */
+/*   Created: 2023/05/04 10:09:41 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/05/04 10:09:44 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest,const char *src, size_t size)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int		x;
-	size_t	len_dest;
-	size_t	len_src;
+	t_list	*tmp;
 
-	len_dest = ft_strlen(dest);
-	len_src = ft_strlen(src);
-	if (size)
+	if (*lst == NULL)
 	{
-		if (size < len_dest)
-			len_src += size;
-		else
-			len_src += len_dest;
-		x = 0;
-		while (src[x] && (len_dest + x) < size - 1)
-		{
-			dest[len_dest + x] = src[x];
-			++x;
-		}
-		dest[len_dest + x] = '\0';
-		return (len_src);
+		*lst = new;
+		return ;
 	}
-	return (len_src);
+	tmp = *lst;
+	*lst = new;
+	new->next = tmp;
 }

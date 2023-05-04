@@ -22,8 +22,8 @@ char	*ft_strcat(char *dest, const char *src)
 	while (src[i])
 	{
 		dest[dest_size] = src[i];
-		dest_size += 1;
-		i += 1;
+		dest_size++;
+		i++;
 	}
 	dest[dest_size] = '\0';
 	return (dest);
@@ -34,14 +34,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	len;
 	char	*str;
 
-	len = ft_strlen(s1) + ft_strlen(s1);
-	if (len > 0)
-	{
-		str = (char *)malloc(sizeof(char) * (len + 1));
-		if (!str)
-			return (NULL);
-		str = ft_strcat((ft_strcat(str, s1)), s2);
-		return (str);
-	}
-	return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	if (len == 0)
+		return ("");
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	str = ft_strcat((ft_strcat(str, s1)), s2);
+	str[len] = '\0';
+	return (str);
 }

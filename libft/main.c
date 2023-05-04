@@ -127,14 +127,14 @@
 //     printf("new function: index = %d and the string is %s\n", i, str);
 // }
 
-int	main(void)
-{
-    printf("\n\n#####   ft_substr    #####\n");
-	char src[] = "Hello World !";
-    int m = 0;
-    int n = 4;
-    char* dest = ft_substr(src, m, n);
-    printf("src = \"%s\"\nstart = %d\nlenght = %d\nnew = \"%s\"\n", src, m, n, dest);
+// int	main(void)
+// {
+//     printf("\n\n#####   ft_substr    #####\n");
+// 	char src[] = "Hello World !";
+//     int m = 0;
+//     int n = 4;
+//     char* dest = ft_substr(src, m, n);
+//     printf("src = \"%s\"\nstart = %d\nlenght = %d\nnew = \"%s\"\n", src, m, n, dest);
 
 //     printf("\n\n#####   ft_strjoin   #####\n");
 // 	char    *s1 = "Hello ";
@@ -152,7 +152,7 @@ int	main(void)
 
 //     printf("\n\n#####   ft_split     #####\n");
 //     char test[] = "S58VHQ     p70fL       Kx2sRP0So 3E4rC9 bpv3J5ousO84Pa1HjUQOImUhjwZpGn    X28iT7Ap9   DIYAF9ZSpKcs0Rcv uzO   7zjE eonALOKQF5xq   Qxp0b1ufFKGJ 2n8R9zUvZEtOwmqf   ";
-//     char **arr = ft_split(test, 32);
+//     char arr = ft_split(test, 32);
 //     int i = 0;
 //     while (arr[i] != 0)
 //     {
@@ -214,4 +214,32 @@ int	main(void)
 
 // 	close(fd);
 // 	return 0;
+// }
+
+//  ##############################################################################################
+//                                       PARTIE BONUS
+//  ##############################################################################################
+
+int main()
+{
+    printf("\n#####   ft_lstnew  #####\n");
+    char content[20] = "CONTENT.";
+	t_list *result = ft_lstnew((void *)content);
+ 	printf("The content is %s", (char *)result->content);
+
+    printf("\n#####   ft_lstadd_front  #####\n");
+    t_list *my_tlist = (t_list *)malloc(sizeof(t_list) * 5);
+ 	char content1[20] = "CONTENT.";
+ 	t_list *linked_list_item1 = ft_lstnew((void *)content1);
+ 	char content2[20] = "CONTENT2.";
+ 	t_list *linked_list_item2 = ft_lstnew((void *)content2);
+ 	ft_lstadd_front(&my_tlist, linked_list_item1);
+ 	ft_lstadd_front(&my_tlist, linked_list_item2);
+ 	printf("The result is %s\n", (char *)my_tlist[0].content);
+ 	printf("The result is %s\n", (char *)my_tlist[0].next->content);
+    free(my_tlist);
+
+    printf("\n#####   ft_lstsize  #####\n");
+
+ 	return 0;
 }

@@ -10,23 +10,28 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = libft
 CC = gcc -Wall -Wextra -Werror
-SRC = $(shell find . -name 'ft_*')
+SRC = $(shell find . -name 'ft_*' '!' -iname 'ft_lst*')
+SRC_BONUS = $(shell find . -name 'ft_lst*')
 OBJS = $(SRC:.c=.o)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar -rcs $(NAME) $(OBJS)
+	ar -rcs $(NAME).a $(OBJS)
 
 %.o: %.c
 	$(CC) -c $< -o $@
 
 clean:
-	rm -rf *.o
+	rm -rf $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME).a $(NAME).so
 
 re: fclean all
+
+bonus : $(OBJS) $(OBJS_BONUS)
+	ar -rcs $(NAME).a $(OBJS) $(OBJS_BONUS)

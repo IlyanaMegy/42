@@ -16,10 +16,10 @@
 
 #include "libft.h"
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
-	int	minus;
-	int	res;
+	int			minus;
+	long int	res;
 
 	minus = 1;
 	res = 0;

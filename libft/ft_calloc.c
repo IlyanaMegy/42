@@ -16,6 +16,8 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	char	*call;
 
+	if (count == 18446744073709551615UL || size == 18446744073709551615UL)
+		return (NULL);
 	call = malloc(count * size);
 	if (!call)
 		return (0);
