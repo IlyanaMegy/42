@@ -1,5 +1,11 @@
 #include "libft.h"
 #include <fcntl.h>
+// https://github.com/Tripouille/libftTester
+// https://www.programiz.com/dsa/linked-list-operations#delete
+// https://github.com/VictorianRoques/libft/blob/master/ft_lstclear.c
+// https://gitlab.com/42-Istanbul/libft/-/tree/main
+// https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c/19733-stockez-les-donnees-avec-les-listes-chainees
+
 
 //  ##############################################################################################
 //                                       PARTIE 1
@@ -220,26 +226,61 @@
 //                                       PARTIE BONUS
 //  ##############################################################################################
 
-int main()
+// int main()
+// {
+//     // printf("\n#####		ft_lstnew		#####\n");
+//     // char *content = "CONTENT.";
+// 	// t_list *l = ft_lstnew((void *)content);
+// 	// /* 1 */ assert(l->content == (void*)content);
+// 	// /* 2 */ assert(l->next == 0);
+// 	// printf("	    OK!\n");
+
+//     printf("\n#####		ft_lstadd_front		#####\n");
+//     t_list *l = NULL;
+// 	char	*old_first = "old_first";
+// 	char	*new_first = "new first";
+// 	assert(ft_lstlast(l) == 0);
+// 	ft_lstadd_front(&l, ft_lstnew((void *)old_first));
+//  ft_lstadd_front(&l,  ft_lstnew((void *)new_first));
+// 	/* 1 */ assert(l->content == (void *)new_first);
+// 	/* 2 */ assert(l->next->content == (void*)old_first);
+// 	printf("	    OK!\n");
+
+//     printf("\n#####		ft_lstsize		#####\n");
+// 	/* 1 */ assert(ft_lstsize(l) == 2);
+// 	// printf("size = %d\n", ft_lstsize(l));
+// 	printf("	    OK!\n");
+
+// 	printf("\n#####		ft_lstlast	#####\n");
+// 	/* 1 */ assert(ft_lstlast(l)->content == (void *)old_first);
+// 	// printf("last content = %s\n.",(char *)(ft_lstlast(l))->content );
+// 	printf("	    OK!\n");
+
+// 	printf("\n#####		ft_lstadd_back		#####\n");
+// 	char	*last = "last";
+// 	ft_lstadd_back(&l, ft_lstnew((void *)last));
+	
+// 	printf("\n#####    ft_lstdelone   #####\n");
+
+	
+// 	free(l);
+//  	return 0;
+// }
+
+
+int main(void)
 {
-    printf("\n#####   ft_lstnew  #####\n");
-    char content[20] = "CONTENT.";
-	t_list *result = ft_lstnew((void *)content);
- 	printf("The content is %s", (char *)result->content);
-
-    printf("\n#####   ft_lstadd_front  #####\n");
-    t_list *my_tlist = (t_list *)malloc(sizeof(t_list) * 5);
- 	char content1[20] = "CONTENT.";
- 	t_list *linked_list_item1 = ft_lstnew((void *)content1);
- 	char content2[20] = "CONTENT2.";
- 	t_list *linked_list_item2 = ft_lstnew((void *)content2);
- 	ft_lstadd_front(&my_tlist, linked_list_item1);
- 	ft_lstadd_front(&my_tlist, linked_list_item2);
- 	printf("The result is %s\n", (char *)my_tlist[0].content);
- 	printf("The result is %s\n", (char *)my_tlist[0].next->content);
-    free(my_tlist);
-
-    printf("\n#####   ft_lstsize  #####\n");
-
- 	return 0;
+	printf("ft_lstclear\t: ");
+	char	*n = "toto";
+	t_list * l =  NULL;
+	assert(ft_lstlast(l) == 0);
+	for (int i = 0; i < 10; ++i)
+	{
+		ft_lstadd_front(&l, ft_lstnew((void *)n));
+	}
+	print_list(l);
+	ft_lstclear(&l, free);
+	// /* 1 */ assert(l == 0);
+	// write(1, "\n", 1);
+	return (0);
 }
