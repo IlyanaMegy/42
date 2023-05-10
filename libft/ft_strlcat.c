@@ -12,28 +12,27 @@
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest,const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int		x;
-	size_t	len_dest;
-	size_t	len_src;
+	size_t	i;
+	size_t	len_d;
+	size_t	len_s;
 
-	len_dest = ft_strlen(dest);
-	len_src = ft_strlen(src);
-	if (size)
+	len_s = ft_strlen(src);
+	len_d = ft_strlen(dst);
+	i = 0;
+	if (len_d < size - 1 && size > 0)
 	{
-		if (size < len_dest)
-			len_src += size;
-		else
-			len_src += len_dest;
-		x = 0;
-		while (src[x] && (len_dest + x) < size - 1)
+		while (src[i] && len_d + i < size - 1)
 		{
-			dest[len_dest + x] = src[x];
-			++x;
+			dst[len_d + i] = src[i];
+			i++;
 		}
-		dest[len_dest + x] = '\0';
-		return (len_src);
+		dst[len_d + i] = 0;
 	}
-	return (len_src);
+	if (len_d >= size)
+		len_d = size;
+	return (len_d + len_s);
 }
+
+// https://github.com/0x050f/libft-war-machine

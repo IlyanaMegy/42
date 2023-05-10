@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 20:20:50 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/05/09 20:20:52 by ilymegy          ###   ########.fr       */
+/*   Created: 2023/05/10 15:18:51 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/05/10 15:18:52 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
+	t_list	*head;
 	t_list	*tmp;
 
-	if (lst)
+	head = NULL;
+	while (lst)
 	{
-		while (*lst)
+		tmp = ft_lstnew((*f)(lst->content));
+		if (!tmp)
 		{
-			tmp = (*lst)->next;
-			ft_lstdelone(*lst, del);
-			(*lst) = tmp;
+			ft_lstclear(&head, del);
+			return (NULL);
 		}
+		ft_lstadd_back(&head, tmp);
+		lst = lst->next;
 	}
+	return (head);
 }

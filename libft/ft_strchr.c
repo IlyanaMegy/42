@@ -18,7 +18,7 @@ char	*ft_strchr(const char *string, int searchedChar)
 
 	i = 0;
 	if (!searchedChar)
-		return ((char*)(string + ft_strlen(string)));
+		return ((char *)(string + ft_strlen(string)));
 	while (string[i])
 	{
 		if (string[i] == ((unsigned char)searchedChar))

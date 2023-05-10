@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	words_count(char *s, char sep)
+int	words_count(const char *s, char sep)
 {
 	int	count;
 
@@ -49,8 +49,8 @@ static void	give_to(char **tab, char const *s, char sep)
 			s = tmp;
 			++res;
 		}
-		*res = NULL;
 	}
+	*res = NULL;
 }
 
 char	**ft_split(char const *s, char sep)
@@ -59,7 +59,7 @@ char	**ft_split(char const *s, char sep)
 
 	if (!s)
 		return (NULL);
-	res = (char **)malloc((words_count((char *)s, sep) + 1) * sizeof(char *));
+	res = (char **)malloc((words_count(s, sep) + 1) * sizeof(char *));
 	if (!res)
 		return (NULL);
 	give_to(res, s, sep);

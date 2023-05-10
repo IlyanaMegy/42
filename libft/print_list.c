@@ -10,5 +10,5 @@ void	print_list(t_list *mylist)
 		printf("%s --> ",(char *)lst->content);
 		lst = lst->next;
 	}
-	printf("%s --> ",(char *)lst->content);
+	printf("%s\n",(char *)lst->content);
 }

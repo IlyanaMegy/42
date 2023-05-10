@@ -44,7 +44,7 @@ void				*ft_memmove(void *dst, const void *src, size_t size);
 void				*ft_memset(void *pointer, int value, size_t count);
 
 char				*ft_strchr(const char *string, int searchedChar);
-char				*ft_strdup(char *src);
+char				*ft_strdup(const char *src);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 size_t				ft_strlen(const char *str);
@@ -77,7 +77,8 @@ t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
+void				ft_lstiter(t_list *lst, void (*f)(void *));
+t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
+						void (*del)(void *));
 
-// TO DELETE
-void				print_list(t_list *mylist);
 #endif
