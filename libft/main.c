@@ -107,25 +107,25 @@ int	main(void)
 // 	printf("	    OK!\n");
 
 // 	printf("\n\n#####   ft_strchr    #####\n");
-// 	char *string = "hello world !";
-// 	int	c = 101;
+	char *string = "hello worled !";
+	int	c = 101;
 // 	assert(ft_strchr(string, c) == strchr(string, c));
 // 	printf("	    OK!\n");
 
-// 	printf("\n\n#####   ft_strrchr   #####\n");
-// 	assert(ft_strrchr(string, c) == strrchr(string, c));
-// 	printf("	    OK!\n");
+	printf("\n\n#####   ft_strrchr   #####\n");
+	assert(ft_strrchr(string, c) == strrchr(string, c));
+	printf("	    OK!\n");
 
 
-	char	str[] = "lorem ipsum dolor sit amet";
-	char	*str_dup;
+	// char	str[] = "lorem ipsum dolor sit amet";
+	// char	*str_dup;
 
-	if (!(str_dup = ft_strdup(str)))
-		printf("NULL");
-	else
-		printf("%s\n",str_dup);
-	if (str_dup == str)
-		printf("\nstr_dup's adress == str's adress");
+	// if (!(str_dup = ft_strdup(str)))
+	// 	printf("NULL");
+	// else
+	// 	printf("%s\n",str_dup);
+	// if (str_dup == str)
+	// 	printf("\nstr_dup's adress == str's adress");
 
 	return (0);
 }
