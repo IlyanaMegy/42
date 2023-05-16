@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
+#include <stdio.h>
 
-int	int_len(int num)
+int	int_len(long int num)
 {
 	int	len;
 
@@ -27,9 +28,9 @@ int	int_len(int num)
 
 char	*p_nbr(int nbr)
 {
-	long	n;
-	int		len;
-	char	*res;
+	long int	n;
+	int			len;
+	char		*res;
 
 	n = nbr;
 	len = int_len(n) + 1;
@@ -44,6 +45,7 @@ char	*p_nbr(int nbr)
 	{
 		res = (char *)malloc(sizeof(char) * (len));
 		res[len] = '\0';
+		len--;
 		if (n == 0)
 			res[0] = 0 + 48;
 	}

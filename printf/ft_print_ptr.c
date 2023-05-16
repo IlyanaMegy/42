@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ptr_len(uintptr_t num)
 {
@@ -43,14 +43,14 @@ void	print_ptr(uintptr_t num)
 
 int	p_ptr(unsigned long long ptr)
 {
-	int print_length;
+	int	print_length;
 
 	print_length = 0;
-	print_length += write(1, "0x", 2);
 	if (ptr == 0)
-		print_length += write(1, "0", 1);
+		return (write(1, "(nil)", 5));
 	else
 	{
+		print_length += write(1, "0x", 2);
 		print_ptr(ptr);
 		print_length += ptr_len(ptr);
 	}

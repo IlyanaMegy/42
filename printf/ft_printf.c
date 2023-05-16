@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	err(const char *str)
 {
@@ -33,6 +33,8 @@ int	p_char(char c)
 
 int	p_str(char *res, int *res_l)
 {
+	if (!res)
+		res = "(null)";
 	while (*res)
 	{
 		*res_l += p_char(*res);

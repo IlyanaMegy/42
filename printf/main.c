@@ -19,15 +19,17 @@
 // alias -g cc_malloc="clang -Wextra -Wall -Werror -g3 -fsanitize=address"
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 // int	main(int argc, char *argv[])
 int	main(void)
 {
+	char *empty = 0;
 	// ft_printf("%dhello\n %");
-	unsigned int i = 0;
-	printf("%d expected %d\n", ft_printf("%u hello %c %s %%%%\n",i, '%', "\0"), printf("%u hello %c %s %%%%\n",i, '%', "\0"));
+	// unsigned int i = 0;
+	printf("%d expected %d\n", ft_printf("%i %i %i %i %i %i %i\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42), printf("%i %i %i %i %i %i %i\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42));
 	// printf("\n");
 	return 0;
 }
