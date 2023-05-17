@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 18:06:57 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/05/16 18:06:59 by ilymegy          ###   ########.fr       */
+/*   Created: 2023/05/17 11:15:41 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/05/17 11:15:44 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef PRINTF_H
+# define PRINTF_H
 # include <stdarg.h>
 # include <stdint.h>
 # include <stdlib.h>

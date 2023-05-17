@@ -19,17 +19,16 @@
 // alias -g cc_malloc="clang -Wextra -Wall -Werror -g3 -fsanitize=address"
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "ft_printf.h"
-#include <stdio.h>
-#include <limits.h>
+// ---------------------------------------------------------------------------------------------------------------------
+//													~ TESTER ~
+// gcl git@github.com:Tripouille/printfTester.git
+// ---------------------------------------------------------------------------------------------------------------------
 
-// int	main(int argc, char *argv[])
+#include "printf.h"
+
 int	main(void)
 {
-	char *empty = 0;
-	// ft_printf("%dhello\n %");
-	// unsigned int i = 0;
-	printf("%d expected %d\n", ft_printf("%i %i %i %i %i %i %i\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42), printf("%i %i %i %i %i %i %i\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42));
+	printf("%d expected %d\n", ft_printf(" %d %d %d %d %d %d %d\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42), printf(" %d %d %d %d %d %d %d\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42));
 	// printf("\n");
 	return 0;
 }

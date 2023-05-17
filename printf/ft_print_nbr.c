@@ -10,14 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "printf.h"
 
 int	int_len(long int num)
 {
 	int	len;
 
 	len = 0;
+	if (num < 0)
+		len++;
 	while (num != 0)
 	{
 		len++;
@@ -33,22 +34,16 @@ char	*p_nbr(int nbr)
 	char		*res;
 
 	n = nbr;
-	len = int_len(n) + 1;
+	len = int_len(n);
+	res = (char *)malloc(sizeof(char) * (len +1));
+	res[len] = '\0';
 	if (n < 0)
 	{
-		res = (char *)malloc(sizeof(char) * (len + 1));
 		res[0] = '-';
-		res[len] = '\0';
 		n = -n;
 	}
-	else
-	{
-		res = (char *)malloc(sizeof(char) * (len));
-		res[len] = '\0';
-		len--;
-		if (n == 0)
-			res[0] = 0 + 48;
-	}
+	else if (n == 0)
+		res[0] = 0 + 48;
 	while (n > 0)
 	{
 		res[--len] = n % 10 + 48;

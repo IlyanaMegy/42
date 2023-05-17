@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "printf.h"
 
 int	err(const char *str)
 {
@@ -44,37 +44,31 @@ int	p_str(char *res, int *res_l)
 	return (0);
 }
 
-int	print_it(const char *str, va_list p)
+int	print_it(const char *str, va_list p, int *res_l)
 {
-	int	res_l;
-
-	res_l = 0;
 	while (*str)
 	{
 		if (*str == '%')
 		{
 			str++;
 			if (*str == 'c')
-				res_l += p_char((unsigned char)va_arg(p, int));
+				*res_l += p_char((unsigned char)va_arg(p, int));
 			else if (*str == 's')
-				p_str(va_arg(p, char *), &res_l);
+				p_str(va_arg(p, char *), res_l);
 			else if (*str == 'd' || *str == 'i')
-				p_str(p_nbr(va_arg(p, int)), &res_l);
+				p_str(p_nbr(va_arg(p, int)), res_l);
 			else if (*str == 'u' || *str == 'x' || *str == 'X')
-				p_str(p_uint(va_arg(p, unsigned int), *str), &res_l);
+				p_str(p_uint(va_arg(p, unsigned int), *str), res_l);
 			else if (*str == 'p')
-				res_l += p_ptr(va_arg(p, unsigned long long));
+				*res_l += p_ptr(va_arg(p, unsigned long long));
 			else if (*str == '%')
-				res_l += write(1, "%", 1);
+				*res_l += write(1, "%", 1);
 		}
 		else
-		{
-			write(1, str, 1);
-			res_l++;
-		}
+			*res_l += write(1, str, 1);
 		str++;
 	}
-	return (res_l);
+	return (0);
 }
 
 int	ft_printf(const char *str, ...)
@@ -85,7 +79,7 @@ int	ft_printf(const char *str, ...)
 	va_start(params, str);
 	output_len = 0;
 	if (*str && !err(str))
-		output_len = print_it(str, params);
+		print_it(str, params, &output_len);
 	va_end(params);
 	return (output_len);
 }

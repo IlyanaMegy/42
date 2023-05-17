@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "printf.h"
 
 int	uint_len(unsigned int num, int base)
 {
@@ -28,17 +28,17 @@ int	uint_len(unsigned int num, int base)
 char	*what_base(char format)
 {
 	char	*base_10;
-	char	*base_16;
-	char	*BASE_16;
+	char	*base_16_x;
+	char	*base_16_maj;
 
 	base_10 = "0123456789";
-	base_16 = "0123456789abcdef";
-	BASE_16 = "0123456789ABCDEF";
+	base_16_x = "0123456789abcdef";
+	base_16_maj = "0123456789ABCDEF";
 	if (format == 'u')
 		return (base_10);
 	else if (format == 'x')
-		return (base_16);
-	return (BASE_16);
+		return (base_16_x);
+	return (base_16_maj);
 }
 
 char	*p_uint(unsigned int n, char format)
