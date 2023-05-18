@@ -22,19 +22,13 @@
 // ---------------------------------------------------------------------------------------------------------------------
 //													~ TESTER ~
 // gcl git@github.com:Tripouille/printfTester.git
-// https://github.com/FreekBes/improved_intra
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "printf.h"
-#include <stdio.h>
 
 int	main(void)
 {
-	int i = 0;
-	// printf("%d expected %d\n", ft_printf(" %u %d %d %d %d %d %d\n",i, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42), printf(" %d %d %d %d %d %d %d\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42));
-	i = printf("some naugty tests: %d%s\n", i, "0000%");
-	printf("exit value:%d\n", i);
-	i = ft_printf("some naugty tests: %d%s", i, "0000%");
-	printf("exit value:%d\n", i);
+	printf("%d expected %d\n", ft_printf(" %d %d %d %d %d %d %d\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42), printf(" %d %d %d %d %d %d %d\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42));
+	// printf("\n");
 	return 0;
 }

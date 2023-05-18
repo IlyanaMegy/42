@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_search_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 13:11:25 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/05/02 13:11:39 by ilymegy          ###   ########.fr       */
+/*   Created: 2023/05/18 12:29:56 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/05/18 12:30:02 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "printf.h"
 
-int	ft_toupper(int c)
+int	search_str(const char *string, int searchedChar)
 {
-	if (c >= 97 && c <= 122)
-		return (c - 32);
-	else
-		return (c);
+	int	i;
+
+	if (!searchedChar)
+		return (-1);
+	i = 0;
+	while (string[i])
+	{		
+		if (string[i] == ((unsigned char)searchedChar))
+			return (i);
+		i++;
+	}
+	return (-1);
 }

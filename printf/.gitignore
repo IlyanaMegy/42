@@ -1,1 +1,7 @@
-a.out
+*.out
+*.png
+main.c
+*.o
+*.a
+printfTester
+ft_print_tester

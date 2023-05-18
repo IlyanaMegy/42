@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "printf.h"
 
 int	err(const char *str)
@@ -18,7 +19,7 @@ int	err(const char *str)
 	{
 		if (*str == '%' && (*(str + 1) != '%' && *(str - 1) != '%'))
 		{
-			if (ft_strchr("csdiupxX", *(str + 1)) == -1)
+			if (search_str("csdiupxX", *(str + 1)) == -1)
 				return (1);
 		}
 		str += 2;
@@ -33,12 +34,18 @@ int	p_char(char c)
 
 int	p_str(char *res, int *res_l)
 {
+	size_t	i;
+
+	i = 0;
 	if (!res)
-		res = "(null)";
-	while (*res)
+		*res_l += write(1, "(null)", 6);
+	else
 	{
-		*res_l += p_char(*res);
-		res++;
+		while (i < ft_strlen(res))
+		{
+			*res_l += p_char(res[i]);
+			i++;
+		}
 	}
 	free(res);
 	return (0);

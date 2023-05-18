@@ -14,7 +14,8 @@
 // ---------------------------------------------------------------------------------------------------------------------
 // 													~ ALIAS ~
 // alias -g cc_me="cc -Wall -Wextra -Werror"
-// alias -g norme_me="echo 'yes sir !\n'; norminette -R CheckForbiddenSourceHeader"
+// alias -g norme_me="echo 'yes sir !\n'; norminette
+//	-R CheckForbiddenSourceHeader"
 // alias cl="clear; echo '\naww~ look at u all cleaned up :*'"
 // alias -g cc_malloc="clang -Wextra -Wall -Werror -g3 -fsanitize=address"
 // ---------------------------------------------------------------------------------------------------------------------
@@ -22,13 +23,15 @@
 // ---------------------------------------------------------------------------------------------------------------------
 //													~ TESTER ~
 // gcl git@github.com:Tripouille/printfTester.git
+// https://github.com/FreekBes/improved_intra
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "printf.h"
+#include "include/printf.h"
+#include <stdio.h>
 
 int	main(void)
 {
-	printf("%d expected %d\n", ft_printf(" %d %d %d %d %d %d %d\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42), printf(" %d %d %d %d %d %d %d\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42));
-	// printf("\n");
-	return 0;
+	char *null_str = "    %";
+	printf(" -> expected	: %d\n", printf("some naugty tests: everywhere %s", null_str));
+	printf(" -> result	: %d\n",  ft_printf("some naugty tests: everywhere %s", null_str));
 }

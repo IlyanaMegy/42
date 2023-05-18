@@ -1,55 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 14:22:11 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/05/03 14:22:27 by ilymegy          ###   ########.fr       */
+/*   Created: 2023/05/16 15:56:03 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/05/16 15:56:08 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "printf.h"
 #include "libft.h"
 
-int	len_res(long int n)
+int	int_len(long int num)
 {
 	int	len;
 
 	len = 0;
-	if (n <= 0)
+	if (num < 0)
 		len++;
-	while (n)
+	while (num != 0)
 	{
-		n /= 10;
 		len++;
+		num = num / 10;
 	}
 	return (len);
 }
 
-char	*ft_itoa(int nb)
+char	*p_nbr(int nbr)
 {
 	long int	n;
 	int			len;
 	char		*res;
 
-	n = (long int)nb;
-	len = len_res(n);
-	res = ft_calloc((len + 1), sizeof(char));
-	if (!res)
-		return (NULL);
-	if (n == 0)
-		res[0] = '0';
+	n = nbr;
+	len = int_len(n);
+	res = (char *)malloc(sizeof(char) * (len +1));
+	res[len] = '\0';
 	if (n < 0)
 	{
 		res[0] = '-';
 		n = -n;
 	}
-	len--;
-	while (n)
+	else if (n == 0)
+		res[0] = 0 + 48;
+	while (n > 0)
 	{
-		res[len--] = (n % 10) + '0';
-		n /= 10;
+		res[--len] = n % 10 + 48;
+		n = n / 10;
 	}
 	return (res);
 }

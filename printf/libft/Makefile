@@ -16,7 +16,8 @@ INCLUDE		=	../include
 SRCS_DIR	=	src/
 OBJS_DIR	=	obj/
 FLAGS		=	-Wall -Wextra -Werror -I
-SRC_FILES	=	/$(shell find $(SRCS_DIR) -name 'ft_*.c')
+SRC_FILES	=	$(shell find $(SRCS_DIR) -name 'ft_*.c' | cut -d/ -f2 | cut -d. -f1)
+
 SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS		=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRC_FILES)))
 OBJSF		=	.cache_exists
@@ -38,7 +39,7 @@ all:		$(NAME)
 $(NAME): $(OBJS)
 			ar -rcs $(NAME) $(OBJS)
 			@ranlib $(NAME)
-			@echo "$(GREEN)Libft compiled!$(DEF_COLOR)"
+			@echo "$(GREEN)My Libft compiled!$(DEF_COLOR)"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJSF)
 			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"

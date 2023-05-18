@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 20:20:50 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/05/09 20:20:52 by ilymegy          ###   ########.fr       */
+/*   Created: 2023/05/17 11:15:41 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/05/17 11:15:44 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PRINTF_H
+# define PRINTF_H
+# include <stdarg.h>
+# include <stdint.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*tmp;
+int		ft_printf(const char *str, ...);
+int		search_str(const char *string, int searchedChar);
+char	*p_nbr(int nbr);
+char	*p_uint(unsigned int n, char format);
+int		p_char(char c);
+int		p_str(char *str, int *res_l);
+int		p_ptr(unsigned long long ptr);
 
-	if (lst)
-	{
-		while (*lst)
-		{
-			tmp = (*lst)->next;
-			ft_lstdelone(*lst, del);
-			(*lst) = tmp;
-		}
-	}
-}
+#endif
