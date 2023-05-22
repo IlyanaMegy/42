@@ -1,5 +1,6 @@
 #include "get_next_line.h"
-
+// https://git.chevro.fr/42-cestoliv/get_next_line/-/blob/main/get_next_line.c
+// https://github.com/n1kito/Get_next_line/blob/main/src/get_next_line.c
 
 int	main(void)
 {
