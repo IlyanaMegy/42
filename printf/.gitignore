@@ -3,5 +3,6 @@
 main.c
 *.o
 *.a
-printfTester
-ft_print_tester
+obj/
+printfTester/
+ft_printf_tester/

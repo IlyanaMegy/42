@@ -31,7 +31,7 @@
 
 int	main(void)
 {
-	char *null_str = "    %";
-	printf(" -> expected	: %d\n", printf("some naugty tests: everywhere %s", null_str));
-	printf(" -> result	: %d\n",  ft_printf("some naugty tests: everywhere %s", null_str));
+	int i = 0;
+	printf(" -> expected	: %d\n", printf(" %i\n", i));
+	printf(" -> result	: %d\n",  ft_printf(" %i\n", i));
 }

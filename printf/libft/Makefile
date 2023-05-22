@@ -15,7 +15,7 @@ CC			=	gcc
 INCLUDE		=	../include
 SRCS_DIR	=	src/
 OBJS_DIR	=	obj/
-FLAGS		=	-Wall -Wextra -Werror -I
+FLAGS		=	-Wall -Wextra -Werror -g3 -I
 SRC_FILES	=	$(shell find $(SRCS_DIR) -name 'ft_*.c' | cut -d/ -f2 | cut -d. -f1)
 
 SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRC_FILES)))

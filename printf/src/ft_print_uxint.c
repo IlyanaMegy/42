@@ -18,6 +18,8 @@ int	uint_len(unsigned int num, int base)
 	int	len;
 
 	len = 0;
+	if (num == 0)
+		return (1);
 	while (num != 0)
 	{
 		len++;

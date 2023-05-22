@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include "printf.h"
+#include <stdio.h>
 
 int	err(const char *str)
 {
@@ -37,11 +38,13 @@ int	p_str(char *res, int *res_l)
 	size_t	i;
 
 	i = 0;
-	if (!res)
+	if (res == NULL)
 		*res_l += write(1, "(null)", 6);
+	else if (res[0] == '\0')
+		*res_l += 0;
 	else
 	{
-		while (i < ft_strlen(res))
+		while (res[i])
 		{
 			*res_l += p_char(res[i]);
 			i++;
@@ -85,7 +88,7 @@ int	ft_printf(const char *str, ...)
 
 	va_start(params, str);
 	output_len = 0;
-	if (*str && !err(str))
+	if (str && *str && !err(str))
 		print_it(str, params, &output_len);
 	va_end(params);
 	return (output_len);

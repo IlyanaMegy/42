@@ -11,12 +11,15 @@
 /* ************************************************************************** */
 
 #include "printf.h"
+#include <stdint.h>
 
 int	ptr_len(uintptr_t num)
 {
 	int	len;
 
 	len = 0;
+	if (num == 0)
+		return (1);
 	while (num != 0)
 	{
 		len++;
