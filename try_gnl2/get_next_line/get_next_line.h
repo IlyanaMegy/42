@@ -22,11 +22,18 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-char	*get_next_line(int fd);
-long	ft_strchr(const char *string, int searchedChar);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char *s1, char const *s2);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+typedef struct s_list
+{
+	char			*content;
+	struct s_list	*next;
+
+}					t_list;
+
+char				*get_next_line(int fd);
+t_list				*get_last(t_list *str);
+void				create_line(t_list *str, char **line);
+void				free_str(t_list *str);
+int					is_newline(t_list *s);
+int					ft_strlen(const char *str);
 
 #endif
