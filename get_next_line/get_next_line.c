@@ -11,107 +11,133 @@
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-// char	*empty_str(void)
-// {
-// 	char	*str;
+void	clean_me(t_list **str)
+{
+	t_list	*last;
+	t_list	*clear;
+	int		i;
+	int		j;
 
-// 	str = (char *)malloc(sizeof(char));
-// 	if (!str)
-// 		return (NULL);
-// 	str[0] = 0;
-// 	return (str);
-// }
+	clear = malloc(sizeof(t_list));
+	if (!clear || !str)
+		return ;
+	clear->next = NULL;
+	last = get_last(*str);
+	i = 0;
+	while (last->content[i] && last->content[i] != '\n')
+		i++;
+	if (last->content && last->content[i] == '\n')
+		i++;
+	clear->content = malloc(sizeof(char) * ((ft_len(last->content) - i) + 1));
+	if (!(clear->content))
+		return ;
+	j = 0;
+	while (last->content[i])
+		clear->content[j++] = last->content[i++];
+	clear->content[j] = '\0';
+	free_str(*str);
+	*str = clear;
+}
 
-// void	shiftstr(char **str, size_t start)
-// {
-// 	char	*tmp;
+void	extract_me(t_list *str, char **line)
+{
+	int	i;
+	int	j;
 
-// 	tmp = *str;
-// 	*str = ft_substr(*str, start, ft_strlen(*str));
-// 	free(tmp);
-// }
+	if (!str)
+		return ;
+	create_line(str, line);
+	if (!(*line))
+		return ;
+	j = 0;
+	while (str)
+	{
+		i = 0;
+		while (str->content[i])
+		{
+			if (str->content[i] == '\n')
+			{
+				(*line)[j++] = str->content[i];
+				break ;
+			}
+			(*line)[j++] = str->content[i++];
+		}
+		str = str->next;
+	}
+	(*line)[j] = '\0';
+}
 
-// int	get_prev(char **previous, int fd)
-// {
-// 	char	*str;
-// 	ssize_t	res;
+void	add_to_str(t_list **str, char *buffer, int size)
+{
+	int		i;
+	t_list	*last;
+	t_list	*new;
 
-// 	if (!BUFFER_SIZE || BUFFER_SIZE < 1 || fd < 0 || read(fd, 0, 0) < 0)
-// 		return (0);
-// 	if (!(*previous))
-// 		*previous = empty_str();
-// 	if (!(*previous))
-// 		return (0);
-// 	str = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-// 	if (!str)
-// 		return (0);
-// 	res = read(fd, str, BUFFER_SIZE);
-// 	while (res)
-// 	{
-// 		str[res] = 0;
-// 		*previous = ft_strjoin(*previous, str);
-// 		if (ft_strchr(*previous, '\n') >= 0)
-// 			break ;
-// 		res = read(fd, str, BUFFER_SIZE);
-// 	}
-// 	free(str);
-// 	return (1);
-// }
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return ;
+	new->next = NULL;
+	new->content = malloc(sizeof(char) * (size + 1));
+	if (!(new->content))
+		return ;
+	i = 0;
+	while (buffer[i] && i < size)
+	{
+		new->content[i] = buffer[i];
+		i++;
+	}
+	new->content[i] = '\0';
+	if (!(*str))
+	{
+		*str = new;
+		return ;
+	}
+	last = get_last(*str);
+	last->next = new;
+}
 
-// char	*get_next_line(int fd)
-// {
-// 	static char	*prev;
-// 	char		*readed;
-// 	int			i;
+void	read_me(int fd, t_list **str)
+{
+	char	*buffer;
+	int		size_readed;
 
-// 	prev = NULL;
-// 	if (!get_prev(&prev, fd))
-// 		return (NULL);
-// 	i = ft_strchr(prev, '\n');
-// 	if (i >= 0)
-// 	{
-// 		readed = ft_substr(prev, 0, i + 1);
-// 		shiftstr(&prev, i + 1);
-// 	}
-// 	else
-// 	{
-// 		readed = ft_substr(prev, 0, ft_strlen(prev));
-// 		free(prev);
-// 		prev = NULL;
-// 	}
-// 	if (ft_strlen(readed) == 0)
-// 	{
-// 		free(readed);
-// 		return (NULL);
-// 	}
-// 	return (readed);
-// }
+	size_readed = 1;
+	while (!is_newline(*str) && size_readed != 0)
+	{
+		buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!buffer)
+			return ;
+		size_readed = (int)read(fd, buffer, BUFFER_SIZE);
+		if ((size_readed == 0 && !(*str)) || size_readed == -1)
+		{
+			free(buffer);
+			return ;
+		}
+		buffer[size_readed] = '\0';
+		add_to_str(str, buffer, size_readed);
+		free(buffer);
+	}
+}
 
 char	*get_next_line(int fd)
 {
-	int		i;
-	int		rd;
-	char	character;
-	char	*buffer;
+	static t_list	*str = NULL;
+	char			*line;
 
-	if (BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
 		return (NULL);
-	i = 0;
-	rd = read(fd, &character, BUFFER_SIZE - BUFFER_SIZE + 1);
-	printf("rd = %d\n", rd);
-	buffer = malloc(100000);
-	if (rd > 0)
+	line = NULL;
+	read_me(fd, &str);
+	if (!str)
+		return (NULL);
+	extract_me(str, &line);
+	clean_me(&str);
+	if (line[0] == '\0')
 	{
-		while (rd > 0)
-		{
-			buffer[i++] = character;
-			if (character == '\n')
-				break ;
-			rd = read(fd, &character, BUFFER_SIZE - BUFFER_SIZE + 1);
-		}
+		free_str(str);
+		str = NULL;
+		free(line);
+		return (NULL);
 	}
-	buffer[i] = '\0';
-	if (rd == -1 || i == 0 || (!buffer[i - 1] && !rd))
-		return (free(buffer), NULL);
-	return (buffer);
+	return (line);
 }

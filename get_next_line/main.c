@@ -1,24 +1,22 @@
 #include "get_next_line.h"
 
-
 int	main(void)
 {
-	//	Open a file descriptor for the "test.txt" file, in
-    //	truncated write only mode, and create the file if it doesn't
-    //	already exist. Read and write permissions for the owner, read
-    // //	permissions for the group.
-    int fd = open("file.txt", O_RDONLY);
-    int i = 0;
-    // //	Stop everything if the file could not be opened
-	if (fd == -1)
-		return (1);
-	printf("fd = %d\n", fd);
-    while(i < 6)
-    {
-	    printf("%d:\n%s\n",i, get_next_line(fd));
-        i++;
-    }
+	int fd;
+	char *line;
+	int i = 0;
 
+	fd = open("file.txt", O_RDONLY);
+	// printf("%d\n%s\n", 1, get_next_line(fd));
+    // printf("%d\n%s\n", 2, get_next_line(fd));
+	while (1)
+	{
+		line = get_next_line(fd);
+		printf("%d\n%s\n", i++, line);
+		if (line == NULL)
+			break ;
+		free(line);
+	}
 	close(fd);
-	return 0;
+	return (0);
 }

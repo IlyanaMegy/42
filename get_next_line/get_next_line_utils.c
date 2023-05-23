@@ -12,9 +12,9 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_len(const char *str)
 {
-	size_t	n;
+	int	n;
 
 	n = 0;
 	while (str[n])
@@ -22,80 +22,69 @@ size_t	ft_strlen(const char *str)
 	return (n);
 }
 
-long	ft_strchr(const char *string, int searchedChar)
+int	is_newline(t_list *s)
 {
-	long	i;
+	int		i;
+	t_list	*curr;
 
 	i = 0;
-	while (string[i])
-	{
-		if (string[i] == ((unsigned char)searchedChar))
-			return (i);
-		i++;
-	}
-	if (string[i] == ((unsigned char)searchedChar))
-		return (i);
-	return (-1);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*new;
-	size_t	l;
-
 	if (!s)
-		return (NULL);
-	if (ft_strlen(s) < start)
+		return (0);
+	curr = get_last(s);
+	while (curr->content[i])
 	{
-		new = malloc(sizeof(char));
-		new[0] = 0;
-		if (!new)
-			return (NULL);
-	}
-	else
-	{
-		l = ft_strlen(s + start);
-		if (!(l < len))
-			l = len;
-		new = (char *)malloc((l + 1) * sizeof(char));
-		if (!new)
-			return (NULL);
-		new[l] = 0;
-		while (l-- > 0)
-			new[l] = s[start + l];
-	}
-	return (new);
-}
-
-char	*ft_strjoin(char *s1, char const *s2)
-{
-	size_t	len;
-	char	*str;
-
-	if (!s1 || !s2)
-		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = (char *)malloc(sizeof(char) * len);
-	if (!str)
-		return (NULL);
-	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
-	ft_strlcpy((str + ft_strlen(s1)), s2, ft_strlen(s2) + 1);
-	free(s1);
-	return (str);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-
-	if (size == 0)
-		return (ft_strlen(src));
-	i = 0;
-	while (src[i] && i < (size - 1))
-	{
-		dst[i] = src[i];
+		if (curr->content[i] == '\n')
+			return (1);
 		i++;
 	}
-	dst[i] = 0;
-	return (ft_strlen(src));
+	return (0);
+}
+
+t_list	*get_last(t_list *str)
+{
+	t_list	*curr;
+
+	curr = str;
+	while (curr && curr->next)
+		curr = curr->next;
+	return (curr);
+}
+
+void	create_line(t_list *str, char **line)
+{
+	int	i;
+	int	len;
+
+	len = 0;
+	while (str)
+	{
+		i = 0;
+		while (str->content[i])
+		{
+			if (str->content[i] == '\n')
+			{
+				len++;
+				break ;
+			}
+			len++;
+			i++;
+		}
+		str = str->next;
+	}
+	*line = malloc(sizeof(char) * (len + 1));
+}
+
+void	free_str(t_list *str)
+{
+	t_list	*curr;
+	t_list	*next;
+
+	curr = str;
+	while (curr)
+	{
+		free(curr->content);
+		next = curr->next;
+		free(curr);
+		curr = next;
+	}
 }
