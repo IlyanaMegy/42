@@ -1,0 +1,12 @@
+https://gitlab.com/it4lik/b2-linux-2020/-/blob/master/cours/memo/part.md#lvm
+https://gitlab.com/it4lik/b2-linux-2020/-/blob/master/cours/memo/centos_network.md#changer-son-nom-de-domaine
+https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server-fr#options-cote-client
+https://bobcares.com/blog/virtualbox-ssh-nat/
+https://debian-facile.org/doc:install:partitions-manuel
+https://cdn.intra.42.fr/pdf/pdf/81696/fr.subject.pdf
+https://gitlab.com/it4lik/b2-linux-2020/-/blob/master/cours/memo/basics.md#r%C3%A9seau
+https://wiki.debian.org/fr/LVM
+https://gitlab.com/it4lik/b1-reseau-2022/-/tree/main
+
+https://github.com/pasqualerossi/Born2BeRoot-Guide
+https://baigal.medium.com/born2beroot-e6e26dfb50ac
