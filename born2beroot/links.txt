@@ -10,3 +10,5 @@ https://gitlab.com/it4lik/b1-reseau-2022/-/tree/main
 
 https://github.com/pasqualerossi/Born2BeRoot-Guide
 https://baigal.medium.com/born2beroot-e6e26dfb50ac
+
+https://github.com/mcombeau/Born2beroot/blob/main/guide/bonus_debian.md
