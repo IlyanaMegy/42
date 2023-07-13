@@ -1,80 +1,64 @@
-NAME		= libft.a
-CC			= gcc
-FLAGS		= -Wall -Wextra -Werror
-OBJ			= $(SRC:.c=.o)
-SRC			= 	ft_atoi_base.c \
-				ft_atoi.c \
-				ft_bzero.c \
-				ft_calloc.c \
-				ft_convert_base.c \
-				ft_csplit.c \
-				ft_free_strs.c \
-				ft_isalnum.c \
-				ft_isalpha.c \
-				ft_isascii.c \
-				ft_ischarset.c \
-				ft_isdigit.c \
-				ft_islower.c \
-				ft_isprint.c \
-				ft_isspace.c \
-				ft_isupper.c \
-				ft_itoa_base.c \
-				ft_itoa.c \
-				ft_lstadd_back.c \
-				ft_lstadd_front.c \
-				ft_lstclear.c \
-				ft_lstdelone.c \
-				ft_lstiter.c \
-				ft_lstlast.c \
-				ft_lstmap.c \
-				ft_lstnew.c \
-				ft_lstsize.c \
-				ft_memccpy.c \
-				ft_memchr.c \
-				ft_memcmp.c \
-				ft_memcpy.c \
-				ft_memmove.c \
-				ft_memset.c \
-				ft_nbrlen_base.c \
-				ft_nbrlen.c \
-				ft_putchar_fd.c \
-				ft_putendl_fd.c \
-				ft_putnbr_fd.c \
-				ft_putstr_fd.c \
-				ft_split.c \
-				ft_strcat.c \
-				ft_strchr.c \
-				ft_strclen.c \
-				ft_strcmp.c \
-				ft_strcpy.c \
-				ft_strdup.c \
-				ft_strjoin.c \
-				ft_strlcat.c \
-				ft_strlcpy.c \
-				ft_strlen.c \
-				ft_strmapi.c \
-				ft_strncmp.c \
-				ft_strnstr.c \
-				ft_strrchr.c \
-				ft_strtrim.c \
-				ft_substr.c \
-				ft_tolower.c \
-				ft_toupper.c
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/02 14:22:12 by ilymegy           #+#    #+#              #
+#    Updated: 2023/05/02 14:22:36 by ilymegy          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME		=	libft.a
+CC			=	gcc
+INCLUDE		=	../inc
+SRCS_DIR	=	src/
+OBJS_DIR	=	obj/
+FLAGS		=	-Wall -Wextra -Werror -g3 -I
+SRC_FILES	=	$(shell find $(SRCS_DIR) -name 'ft_*.c' | cut -d/ -f2 | cut -d. -f1)
+
+SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJS		=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRC_FILES)))
+OBJSF		=	.cache_exists
+NORME_ME	=	norminette -R CheckForbiddenSourceHeader
+
+#RAINBOOOW
+DEF_COLOR = \033[0;39m
+GRAY = \033[0;90m
+RED = \033[0;91m
+GREEN = \033[0;92m
+YELLOW = \033[0;93m
+BLUE = \033[0;94m
+MAGENTA = \033[0;95m
+CYAN = \033[0;96m
+WHITE = \033[0;97m
 
 all:		$(NAME)
 
-$(NAME):	$(OBJ)
-			ar rcs $@ $^
+$(NAME): $(OBJS)
+			ar -rcs $(NAME) $(OBJS)
+			@ranlib $(NAME)
+			@echo "$(GREEN)My Libft compiled!$(DEF_COLOR)"
 
-%.o:		%.c
-			$(CC) $(FLAGS) -o $@ -c $<
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJSF)
+			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+			@$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
+
+$(OBJSF):
+			@mkdir -p $(OBJS_DIR)
 
 clean:
-			rm -rf $(OBJ)
+			rm -rf $(OBJS_DIR)
+			@$(RM) -f $(OBJSF)
+			@echo "$(BLUE)libft objects files cleaned!$(DEF_COLOR)"
 
 fclean:		clean
 			rm -rf $(NAME)
+			@echo "$(CYAN)libft executable files cleaned!$(DEF_COLOR)"
 
 re:			fclean all
+			@echo "$(GREEN)Cleaned and rebuilt everything for libft!$(DEF_COLOR)"
 
-.PHONY:		all clean fclean re
+norm:
+			$(NORME_ME) $(SRCS) $(INCLUDE) | grep -v Norme -B1 || true

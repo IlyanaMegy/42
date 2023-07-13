@@ -1,13 +1,16 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <unistd.h>
+# include <errno.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <string.h>
-# include <errno.h>
-# include <mlx.h>
-# include <mlx_int.h>
-# include "libft.h"
+# include <unistd.h>
+
+typedef struct s_game
+{
+	void	*mlx_ptr;
+	void	*mlx_win;
+}			t_game;
 
 #endif
