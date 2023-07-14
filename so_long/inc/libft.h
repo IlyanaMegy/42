@@ -3,12 +3,17 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
+# include <stdint.h>
+# include <string.h>
 
 typedef struct s_list
 {
 	void *content;
 	struct s_list *next;
 } t_list;
+
+// LIBFT
 int	ft_atoi_base(const char *str, const char *base, size_t len_base);
 int	ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
@@ -68,5 +73,14 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int	ft_toupper(int c);
 int	ft_tolower(int c);
+
+// PRINTF
+int		ft_printf(const char *str, ...);
+int		search_str(const char *string, int searchedChar);
+char	*p_nbr(int nbr);
+char	*p_uint(unsigned int n, char format);
+int		p_char(char c);
+int		p_str(char *str, int *res_l);
+int		p_ptr(unsigned long long ptr);
 
 #endif
