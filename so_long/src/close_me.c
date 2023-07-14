@@ -30,10 +30,15 @@ void	end_game(char *msg, t_game *game, enum e_state state)
 {
 	if (state == event_end)
 	{
-		ft_printf("%s\n", msg);
+		ft_printf("%s\n" RED, msg);
 		destroy_the(game);
 		exit(0);
 		return ;
+	}
+	else if (state == file_error || state == error)
+	{
+		ft_printf("Error\n%s\n" RED, msg);
+		exit(1);
 	}
 	ft_printf("Error\n%s\n" RED, msg);
 	destroy_the(game);

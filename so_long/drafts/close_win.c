@@ -1,15 +1,7 @@
-<<<<<<< HEAD
 #include "../inc/libft.h"
 #include "../inc/so_long.h"
 #include "mlx.h"
 
-=======
-#include "../inc/so_long.h"
-#include "mlx.h"
-
-#include "../inc/libft.h"
-
->>>>>>> 0a3331fb9ced29dc6d5a312dd866b348e4ddfd9c
 void	destroy_the(t_game *game)
 {
 	// mlx_destroy_image(game->mlx_pointer, game->wall.ptr);

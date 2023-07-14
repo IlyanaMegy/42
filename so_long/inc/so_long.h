@@ -7,11 +7,22 @@
 
 // EVENTS
 # define ON_DESTROY 17
+# define KEY_PRESSED 2
+# define KEY_RELEASED 3
+# define UP 119
+# define DOWN 115
+# define LEFT 97
+# define RIGHT 100
+# define ESC 65307
+
 # define NO_EVENT_MASK 0
+# define KEY_RELEASED_MASK 2
 
 // INCLUDES
+# include "../inc/libft.h"
 # include <errno.h>
 # include <fcntl.h>
+# include <mlx.h>
 # include <stdlib.h> //malloc
 # include <string.h>
 # include <unistd.h> //read, close, write
@@ -32,5 +43,9 @@ enum		e_state
 	file_error = 3,
 	map_char_error = 4,
 };
+
+// FUNCTIONS
+void		destroy_the(t_game *game);
+void		end_game(char *msg, t_game *game, enum e_state state);
 
 #endif

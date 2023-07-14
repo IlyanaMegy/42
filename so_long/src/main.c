@@ -11,40 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
-<<<<<<< HEAD
-=======
-#include "mlx.h"
-
-#include "../inc/libft.h"
-
-void	destroy_the(t_game *game)
-{
-	// mlx_destroy_image(game->mlx_pointer, game->wall.ptr);
-	// mlx_destroy_image(game->mlx_pointer, game->floor.ptr);
-	// mlx_destroy_image(game->mlx_pointer, game->portal.ptr);
-	// [...]
-	mlx_destroy_window(game->mlx_ptr, game->mlx_win);
-	mlx_destroy_display(game->mlx_ptr);
-	// free_map(game);
-	free(game->mlx_ptr);
-	return ;
-}
-
-void	end_game(char *msg, t_game *game, enum e_state state)
-{
-	if (state == event_end)
-	{
-		ft_printf("%s\n", msg);
-		destroy_the(game);
-		exit(0);
-		return ;
-	}
-	ft_printf("Error\n%s\n" RED, msg);
-	destroy_the(game);
-	exit(1);
-	return ;
-}
->>>>>>> 0a3331fb9ced29dc6d5a312dd866b348e4ddfd9c
 
 int	exit_event(t_game *game)
 {
@@ -52,7 +18,6 @@ int	exit_event(t_game *game)
 	return (0);
 }
 
-<<<<<<< HEAD
 int	key_check(int keycode, t_game *game)
 {
 	if (keycode == ESC)
@@ -68,8 +33,6 @@ int	key_check(int keycode, t_game *game)
 	return (0);
 }
 
-=======
->>>>>>> 0a3331fb9ced29dc6d5a312dd866b348e4ddfd9c
 static void	init_hook(t_game *game, int event, int mask, int (*f)())
 {
 	mlx_hook(game->mlx_win, event, mask, f, game);
@@ -80,26 +43,36 @@ static void	init_game(t_game *game)
 	game->mlx_ptr = mlx_init();
 	// init win
 	game->mlx_win = mlx_new_window(game->mlx_ptr, 640, 360, "Event Parameters");
-<<<<<<< HEAD
 	// init images
 	// key hook event
 	init_hook(game, KEY_RELEASED, KEY_RELEASED_MASK, key_check);
 	// exit hook event
-=======
->>>>>>> 0a3331fb9ced29dc6d5a312dd866b348e4ddfd9c
 	init_hook(game, ON_DESTROY, NO_EVENT_MASK, exit_event);
 	mlx_loop(game->mlx_ptr);
 }
 
-int	main(void)
+static int	is_ber_file(const char *av)
 {
-<<<<<<< HEAD
+	char	*string;
+
+	string = ft_strrchr(av, '.');
+	if (string)
+		return (ft_strcmp(string, ".ber") == 0);
+	return (1);
+}
+
+int	main(int ac, char **av)
+{
 	t_game	game;
 
-	// check args, check is it .ber in arg
-=======
-	t_game game;
->>>>>>> 0a3331fb9ced29dc6d5a312dd866b348e4ddfd9c
-	init_game(&game);
+	if(ac == 2 && (is_ber_file(av[1])))
+		init_game(&game);
+	else if (ac == 2 && !(is_ber_file(av[1])))
+		end_game("Can't open file. The format is not supported!", &game, error);
+	else if (ac > 2)
+		end_game("Can't open multiple files!", &game, error);
+	else if (ac < 2)
+		end_game("Invalid number of arguments : Missing .ber file!\nExit game bye.", &game, error);
+	end_game("Please specify file name!", &game, error);
 	return (0);
 }
