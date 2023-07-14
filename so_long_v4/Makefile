@@ -15,8 +15,7 @@ INC			=	-I ./inc/\
 			-I ./minilibx/
 
 SRC_PATH	= ./src/
-SRC			= main.c \
-			close_me.c
+SRC			= main.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/
