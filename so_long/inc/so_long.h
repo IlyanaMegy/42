@@ -28,6 +28,11 @@ typedef struct s_game
 {
 	void *mlx_ptr;
 	void *mlx_win;
+	int win_w;
+	int win_h;
+	int x_p;
+	int y_p;
+	void *img;
 	char **map;
 } t_game;
 
@@ -55,12 +60,15 @@ enum e_state
 void destroy_the(t_game *game);
 void end_game(char *msg, t_game *game, enum e_state state);
 int exit_event(t_game *game);
+
 // init map
 void get_map(char *map_file, t_game *game);
 int get_height(char **map);
-char *unknown_element(t_game **game);
+void render_map(t_game *game);
 
 // check map
-int check_map(t_game *game);
-
+void check_map_rect(t_game *game);
+void check_map_walls(t_game *game);
+void check_map_elem(t_game *game);
+void show_table(t_game *game);
 #endif

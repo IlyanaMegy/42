@@ -59,6 +59,20 @@ void check_map_walls(t_game *game)
         end_game(err, game, file_error);
 }
 
+void unknown_element(t_game **game)
+{
+    int x;
+
+    x = 0;
+    while ((*game)->map[x])
+    {
+        free((*game)->map[x]);
+        x++;
+    }
+    free((*game)->map);
+    end_game("Unknown element found", *game, file_error);
+}
+
 void check_map_elem(t_game *game)
 {
     t_game_map map;
@@ -88,10 +102,25 @@ void check_map_elem(t_game *game)
         end_game("One element is missing.", game, file_error);
 }
 
-int check_map(t_game *game)
+
+// DELETE THIS LATER 
+void show_table(t_game *game)
 {
-    check_map_rect(game);
-    check_map_walls(game);
-    check_map_elem(game);
-    return 0;
+    int height = get_height(game->map) - 1;
+	ft_printf("\n\tShowing map...\n\n");
+	int y = 0;
+	int x;
+	
+    while (y <= height)
+    {
+        x = 0;
+        while (game->map[y][x] != '\0')
+        {
+			ft_printf("%c ", game->map[y][x]);
+			x++;
+		}
+		y++;
+		ft_printf("\n");
+	}
+	ft_printf("\n");
 }
