@@ -3,20 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/02 14:22:12 by ilymegy           #+#    #+#              #
-#    Updated: 2023/05/02 14:22:36 by ilymegy          ###   ########.fr        #
+#    Updated: 2023/07/18 11:09:01 by ilymegy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	libft.a
+NAME		=	libft
 CC			=	gcc
 INCLUDE		=	../inc
 SRCS_DIR	=	src/
 OBJS_DIR	=	obj/
 FLAGS		=	-Wall -Wextra -Werror -g3 -I
-SRC_FILES	=	$(shell find $(SRCS_DIR) -name 'ft_*.c' | cut -d/ -f2 | cut -d. -f1)
+SRC_FILES	=	$(shell find $(SRCS_DIR) -name '*.c' | cut -d/ -f2 | cut -d. -f1)
 
 SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJS		=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRC_FILES)))
