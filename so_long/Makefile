@@ -17,7 +17,8 @@ INC			= -I ./inc/\
 SRC_PATH	= ./src/
 SRC			= main.c \
 			close_me.c \
-			init_map.c
+			init_map.c \
+			check_map.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/

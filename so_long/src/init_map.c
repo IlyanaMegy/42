@@ -26,3 +26,29 @@ void get_map(char *map_file, t_game *game)
     game->map = ft_split(lines, '\n');
     return;
 }
+
+int	get_height(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i] != NULL)
+		i++;
+	return (i);
+}
+
+// c = game->map[map.y][map.x]
+char	*unknown_element(t_game **game)
+{
+	int	x;
+
+	x = 0;
+	while ((*game)->map[x])
+	{
+		free((*game)->map[x]);
+		x++;
+	}
+	free((*game)->map);
+	end_game("Unknown element found", *game, file_error);
+	exit(1);
+}

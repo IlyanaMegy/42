@@ -31,6 +31,15 @@ typedef struct s_game
 	char **map;
 } t_game;
 
+typedef struct s_game_map
+{
+	int c;
+	int p;
+	int e;
+	int x;
+	int y;
+} t_game_map;
+
 // TOOLS
 enum e_state
 {
@@ -48,5 +57,10 @@ void end_game(char *msg, t_game *game, enum e_state state);
 int exit_event(t_game *game);
 // init map
 void get_map(char *map_file, t_game *game);
+int get_height(char **map);
+char *unknown_element(t_game **game);
+
+// check map
+int check_map(t_game *game);
 
 #endif
