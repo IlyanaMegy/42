@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:48:22 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/07/14 14:37:45 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/07/19 15:09:08 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ int exit_event(t_game *game)
 
 void destroy_the(t_game *game)
 {
-	// mlx_destroy_image(game->mlx_pointer, game->wall.ptr);
-	// mlx_destroy_image(game->mlx_pointer, game->floor.ptr);
-	// mlx_destroy_image(game->mlx_pointer, game->portal.ptr);
-	// [...]
+	mlx_destroy_image(game->mlx_ptr, game->wall_img);
+	mlx_destroy_image(game->mlx_ptr, game->bg_img);
+	// mlx_destroy_image(game->mlx_ptr, game->wong_img);
+	mlx_destroy_image(game->mlx_ptr, game->rick_img);
+	mlx_destroy_image(game->mlx_ptr, game->collec_img);
+	mlx_destroy_image(game->mlx_ptr, game->exit_img);
+	
 	mlx_destroy_window(game->mlx_ptr, game->mlx_win);
 	mlx_destroy_display(game->mlx_ptr);
 	// free_map(game);

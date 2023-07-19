@@ -18,7 +18,9 @@ SRC_PATH	= ./src/
 SRC			= main.c \
 			close_me.c \
 			init_map.c \
-			check_map.c
+			check_map.c \
+			check_map_utils.c \
+			init_game.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/

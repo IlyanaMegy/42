@@ -26,20 +26,6 @@ void check_map_rect(t_game *game)
     }
 }
 
-static int check_line(char *line)
-{
-    int i;
-
-    i = 0;
-    while (line[i] != '\0')
-    {
-        if (line[i] != '1')
-            return (1);
-        i++;
-    }
-    return (0);
-}
-
 void check_map_walls(t_game *game)
 {
     int i;
@@ -57,20 +43,6 @@ void check_map_walls(t_game *game)
     }
     if (check_line(game->map[get_height(game->map) - 1]))
         end_game(err, game, file_error);
-}
-
-void unknown_element(t_game **game)
-{
-    int x;
-
-    x = 0;
-    while ((*game)->map[x])
-    {
-        free((*game)->map[x]);
-        x++;
-    }
-    free((*game)->map);
-    end_game("Unknown element found", *game, file_error);
 }
 
 void check_map_elem(t_game *game)
@@ -102,7 +74,21 @@ void check_map_elem(t_game *game)
         end_game("One element is missing.", game, file_error);
 }
 
+// int is_playable(t_game *game)
+// {
+//     int collec;
+//     int exit_count;
 
+//     collec = 0;
+//     exit_count = 0;
+
+
+// }
+
+
+
+
+// -----------------------------------------------------------------------
 // DELETE THIS LATER 
 void show_table(t_game *game)
 {

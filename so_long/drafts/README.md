@@ -12,3 +12,5 @@ https://anyconv.com/png-to-xpm-converter/ //png to xpm
 https://overlay.imageonline.co/fr/#google_vignette //remove bg
 
 https://github.com/augustobecker/so_long/blob/main/Makefile
+
+https://reactive.so/post/42-a-comprehensive-guide-to-so_long
