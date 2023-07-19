@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:25:39 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/07/18 16:43:14 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/07/19 13:27:06 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ static void init_game(t_game *game, char *map_file)
 		check_map_rect(game);
 		check_map_walls(game);
 		check_map_elem(game);
-		
 		ft_printf("Completed check-in, we can start now!\nControls :\nArrows : up, left, down, right.\nKeyboard : W,A,S,D.\nESC to quit.\n");
 		init_vars(game);
 		game->mlx_ptr = mlx_init();
 		ft_printf("width = %d * 100, height = %d * 100\n", game->win_w, game->win_h);
 		game->mlx_win = mlx_new_window(game->mlx_ptr, game->win_w * 100, game->win_h * 100, "Event Parameters");
-		render_map(game);
 		show_table(game);
+		render_map(game);
+		
 		// init images
 		mlx_hook(game->mlx_win, KEY_RELEASED, KEY_RELEASED_MASK, key_check, game);
 		mlx_hook(game->mlx_win, ON_DESTROY, NO_EVENT_MASK, exit_event, game);

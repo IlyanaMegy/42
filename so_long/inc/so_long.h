@@ -24,6 +24,13 @@
 #include <X11/keysym.h>
 
 // STRUCTURES
+
+typedef struct s_vector
+{
+	int x;
+	int y;
+} t_vector;
+
 typedef struct s_game
 {
 	void *mlx_ptr;
@@ -33,8 +40,16 @@ typedef struct s_game
 	int x_p;
 	int y_p;
 	void *img;
+	void *wall_img;
+	void *collec_img;
+	void *rick_img;
+	void *wong_img;
+	void *exit_img;
+	void *bg_img;
+	t_vector img_size;
 	char **map;
 } t_game;
+
 
 typedef struct s_game_map
 {

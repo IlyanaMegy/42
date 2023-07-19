@@ -37,40 +37,38 @@ int get_height(char **map)
     return (i);
 }
 
-void img_here(t_game ***g, int x, int y, char *img_path)
-{
-    int img_w;
-    int img_h;
-    img_path = "./test.xpm";
-
-    (**g)->img = mlx_xpm_file_to_image((**g)->mlx_ptr, img_path, &img_w, &img_h);
-    ft_printf("ptr = %p, img = %d, res = %d\n", (char *)(**g)->mlx_ptr, (**g)->img, mlx_xpm_file_to_image((**g)->mlx_ptr, img_path, &img_w, &img_h));
-    mlx_put_image_to_window((**g)->mlx_ptr, (**g)->mlx_win, (**g)->img, x, y);
-}
-
-void img_on_map(char p, int x, int y, t_game **g)
+void img_on_map(char p, int x, int y, t_game *g)
 {
     if (p == '1')
     {
-        ft_printf("ptr = %p, img = %d\n", (char *)(*g)->mlx_ptr, (*g)->img);
-        img_here(&g, x, y, "../img/aste1.xpm");
+        mlx_put_image_to_window(g->mlx_ptr, g->mlx_win, g->wall_img, x, y);
     }
     else if (p == 'C')
     {
-        img_here(&g, x, y, "../img/bottle.xpm");
+        mlx_put_image_to_window(g->mlx_ptr, g->mlx_win, g->collec_img, x, y);
     }
     else if (p == 'E')
     {
-        img_here(&g, x, y, "../img/portal.xpm");
+        mlx_put_image_to_window(g->mlx_ptr, g->mlx_win, g->exit_img, x, y);
     }
     else if (p == 'P')
     {
-        (*g)->y_p = y;
-        (*g)->x_p = x;
-        img_here(&g, x, y, "../img/main.xpm");
+        g->y_p = y;
+        g->x_p = x;
+        mlx_put_image_to_window(g->mlx_ptr, g->mlx_win, g->rick_img, x, y);
     }
     else
-        img_here(&g, x, y, "../img/bg.xpm");
+        mlx_put_image_to_window(g->mlx_ptr, g->mlx_win, g->bg_img, x, y);
+}
+
+void init_img(t_game *game)
+{
+    game->wall_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/aste1.xpm", &game->img_size.x, &game->img_size.y);
+    game->wong_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/wong.xpm", &game->img_size.x, &game->img_size.y);
+    game->rick_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/main.xpm", &game->img_size.x, &game->img_size.y);
+    game->exit_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/portal.xpm", &game->img_size.x, &game->img_size.y);
+    game->collec_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/bottle.xpm", &game->img_size.x, &game->img_size.y);
+    game->bg_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/bg.xpm", &game->img_size.x, &game->img_size.y);
 }
 
 void render_map(t_game *game)
@@ -84,17 +82,16 @@ void render_map(t_game *game)
     y = 0;
     map_y = 0;
     tmp_w = game->win_w;
+    init_img(game);
     while (game->win_h > 0)
     {
         x = 0;
         map_x = 0;
         while (game->win_w > 0)
         {
-            ft_printf("game->map[%d][%d] = %c, x = %d, y = %d\nnext:\n", map_y, map_x, game->map[map_y][map_x], x, y);
-            img_on_map(game->map[map_y][map_x], x, y, &game);
+            img_on_map(game->map[map_y][map_x], x, y, game);
             map_x++;
             x += 100;
-            ft_printf("game->map[%d][%d] = %c, x = %d, y = %d\n\n", map_y, map_x, game->map[map_y][map_x], x, y);
             game->win_w--;
         }
         game->win_w = tmp_w;
