@@ -37,7 +37,7 @@ void check_map_walls(t_game *game)
     i = get_height(game->map) - 1;
     while (i)
     {
-        if (game->map[i][0] != '1' || game->map[i][ft_strlen(game->map[i] - 1)] != '1')
+        if (game->map[i][0] != '1' || game->map[i][ft_strlen(game->map[i]) - 1] != '1')
             end_game(err, game, file_error);
         i--;
     }

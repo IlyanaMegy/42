@@ -1,29 +1,99 @@
 #include "../inc/so_long.h"
 
+// void get_map(char *map_file, t_game *game)
+// {
+//     char *curr;
+//     char *lines;
+//     int fd;
+
+//     lines = ft_strdup("");
+//     fd = open(map_file, O_RDONLY);
+//     if (fd < 0)
+//         end_game("This file can't be read.", game, error);
+//     curr = get_next_line(fd);
+//     while (curr && curr[0] == '\n')
+//     {
+//         free(curr);
+//         curr = get_next_line(fd);
+//     }
+//     while (curr)
+//     {
+//         if (curr == NULL || curr[0] == '\n')
+//             break;
+//         lines = ft_strjoin(lines, curr);
+//         free(curr);
+//         curr = get_next_line(fd);
+//     }
+//     free(curr);
+//     close(fd);
+//     if (*lines == '\0')
+//         end_game("This file is empty!", game, error);
+//     game->map = ft_split(lines, '\n');
+//     free(lines);
+//     return;
+// }
+
+// int map_len(char *file, t_game *game)
+// {
+//     char *str;
+//     int len;
+//     int fd;
+
+//     fd = open(file, O_RDONLY);
+//     str = get_next_line(fd);
+//     while (str && str[0] == '\n')
+//     {
+//         free(str);
+//         str = get_next_line(fd);
+//     }
+//     while(str)
+//     {
+//         len+=
+//     }
+// }
+
 void get_map(char *map_file, t_game *game)
 {
     char *curr;
     char *lines;
     int fd;
+    char *tmp;
 
-    curr = "";
-    lines = ft_strdup("");
+    lines = malloc(sizeof(char) * 1);
+    if (!lines)
+        end_game("", game, error);
     fd = open(map_file, O_RDONLY);
-    if (fd < 0)
+    if (fd < 0){
+        free(lines);
         end_game("This file can't be read.", game, error);
+    }
+    curr = get_next_line(fd);
+    while (curr && curr[0] == '\n')
+    {
+        free(curr);
+        curr = get_next_line(fd);
+    }
     while (curr)
     {
-        curr = get_next_line(fd);
-        if (curr == NULL || curr[0] == '\n')
+        if (curr[0] == '\n')
+        {
+            free(curr);
             break;
+        }
+        tmp = lines;
         lines = ft_strjoin(lines, curr);
+        free(tmp);
         free(curr);
+        curr = get_next_line(fd);
     }
-    free(curr);
     close(fd);
     if (*lines == '\0')
+    {
+        free(lines);
         end_game("This file is empty!", game, error);
+    }
     game->map = ft_split(lines, '\n');
+    free(lines);
     return;
 }
 
@@ -58,7 +128,7 @@ void img_on_map(char p, int x, int y, t_game *g)
 void init_img(t_game *game)
 {
     game->wall_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/a1.xpm", &game->img_size.x, &game->img_size.y);
-    game->wong_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/wong.xpm", &game->img_size.x, &game->img_size.y);
+    //game->wong_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/wong.xpm", &game->img_size.x, &game->img_size.y);
     game->rick_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/rick.xpm", &game->img_size.x, &game->img_size.y);
     game->exit_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/exit.xpm", &game->img_size.x, &game->img_size.y);
     game->collec_img = mlx_xpm_file_to_image(game->mlx_ptr, "./img/bottle.xpm", &game->img_size.x, &game->img_size.y);

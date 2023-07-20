@@ -19,7 +19,7 @@ int check_line(char *line)
     int i;
 
     i = 0;
-    while (line[i] != '\0')
+    while (line && line[i] != '\0')
     {
         if (line[i] != '1')
             return (1);

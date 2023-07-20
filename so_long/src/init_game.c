@@ -41,4 +41,5 @@ void init_game(t_game *game, char *map_file)
 		mlx_hook(game->mlx_win, ON_DESTROY, NO_EVENT_MASK, exit_event, game);
 		mlx_loop(game->mlx_ptr);
 	}
+	
 }
