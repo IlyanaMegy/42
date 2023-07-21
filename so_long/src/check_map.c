@@ -19,7 +19,7 @@ void check_map_rect(t_game *game)
         if (temp != 0)
         {
             if (temp != x)
-                end_game("This map is not rectangular!", game, file_error);
+                end_game("This map is not rectangular!", game, map_error, NULL);
         }
         else
             temp = x;
@@ -29,20 +29,20 @@ void check_map_rect(t_game *game)
 void check_map_walls(t_game *game)
 {
     int i;
-    char *err;
 
-    err = "This map is not surrounded by walls!";
     if (check_line(game->map[0]))
-        end_game(err, game, file_error);
+        end_game("This map is not surrounded by walls! Check first line...", game, map_error, NULL);
     i = get_height(game->map) - 1;
+    if (i <= 4 || ft_strlen(game->map[0]) <= 4)
+        end_game("Too small map!", game, map_error, NULL);
     while (i)
     {
         if (game->map[i][0] != '1' || game->map[i][ft_strlen(game->map[i]) - 1] != '1')
-            end_game(err, game, file_error);
+            end_game("This map is not surrounded by walls!", game, map_error, NULL);
         i--;
     }
     if (check_line(game->map[get_height(game->map) - 1]))
-        end_game(err, game, file_error);
+        end_game("This map is not surrounded by walls! Check last line...", game, map_error, NULL);
 }
 
 void check_map_elem(t_game *game)
@@ -66,47 +66,33 @@ void check_map_elem(t_game *game)
                 map.c++;
             else if (game->map[map.y][map.x] != '1' &&
                      game->map[map.y][map.x] != '0')
-                unknown_element(&game);
+                end_game("Unknown element found in the map.", game, map_error, NULL);
             map.x++;
         }
     }
     if (map.c == 0 || map.p == 0 || map.e == 0 || map.p > 1)
-        end_game("One element is missing.", game, file_error);
+        end_game("One element is missing.", game, map_error, NULL);
 }
 
-// int is_playable(t_game *game)
-// {
-//     int collec;
-//     int exit_count;
-
-//     collec = 0;
-//     exit_count = 0;
-
-
-// }
-
-
-
-
 // -----------------------------------------------------------------------
-// DELETE THIS LATER 
+// DELETE THIS LATER
 void show_table(t_game *game)
 {
     int height = get_height(game->map) - 1;
-	ft_printf("\n\tShowing map...\n\n");
-	int y = 0;
-	int x;
-	
+    ft_printf("\n\tShowing map...\n\n");
+    int y = 0;
+    int x;
+
     while (y <= height)
     {
         x = 0;
         while (game->map[y][x] != '\0')
         {
-			ft_printf("%c ", game->map[y][x]);
-			x++;
-		}
-		y++;
-		ft_printf("\n");
-	}
-	ft_printf("\n");
+            ft_printf("%c ", game->map[y][x]);
+            x++;
+        }
+        y++;
+        ft_printf("\n");
+    }
+    ft_printf("\n");
 }

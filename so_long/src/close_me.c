@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:48:22 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/07/20 17:36:44 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/07/21 16:52:52 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int exit_event(t_game *game)
 {
-	end_game("closing the window...", game, event_end);
+	end_game("", game, event_end, NULL);
 	return (0);
 }
 
@@ -23,7 +23,6 @@ void free_map(char **map)
 {
 	int i;
 	i = 0;
-	// char *tmp;
 	while (map[i])
 	{
 		free(map[i]);
@@ -49,7 +48,7 @@ void destroy_the(t_game *game)
 	return;
 }
 
-void end_game(char *msg, t_game *game, enum e_state state)
+void end_game(char *msg, t_game *game, enum e_state state, char *free_me)
 {
 	if (state == event_end)
 	{
@@ -58,11 +57,20 @@ void end_game(char *msg, t_game *game, enum e_state state)
 		exit(0);
 		return;
 	}
-	else if (state == file_error || state == error)
+	else if (state == file_error)
 	{
-		ft_printf("Error\n%s\n" RED, msg);
+		ft_printf("Error\n__FILE_ERROR__ : %s\n" RED, msg);
+		if (free_me != NULL)
+			free(free_me);
 		exit(1);
 	}
+	else if (state == map_error)
+	{
+		ft_printf("Error\n__MAP_ERROR__ : %s\n" RED, msg);
+		free_map(game->map);
+		exit(2);
+	}
+	// else if (state == init_error)
 	ft_printf("Error\n%s\n" RED, msg);
 	destroy_the(game);
 	exit(1);

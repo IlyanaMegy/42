@@ -1,57 +1,5 @@
 #include "../inc/so_long.h"
 
-// void get_map(char *map_file, t_game *game)
-// {
-//     char *curr;
-//     char *lines;
-//     int fd;
-
-//     lines = ft_strdup("");
-//     fd = open(map_file, O_RDONLY);
-//     if (fd < 0)
-//         end_game("This file can't be read.", game, error);
-//     curr = get_next_line(fd);
-//     while (curr && curr[0] == '\n')
-//     {
-//         free(curr);
-//         curr = get_next_line(fd);
-//     }
-//     while (curr)
-//     {
-//         if (curr == NULL || curr[0] == '\n')
-//             break;
-//         lines = ft_strjoin(lines, curr);
-//         free(curr);
-//         curr = get_next_line(fd);
-//     }
-//     free(curr);
-//     close(fd);
-//     if (*lines == '\0')
-//         end_game("This file is empty!", game, error);
-//     game->map = ft_split(lines, '\n');
-//     free(lines);
-//     return;
-// }
-
-// int map_len(char *file, t_game *game)
-// {
-//     char *str;
-//     int len;
-//     int fd;
-
-//     fd = open(file, O_RDONLY);
-//     str = get_next_line(fd);
-//     while (str && str[0] == '\n')
-//     {
-//         free(str);
-//         str = get_next_line(fd);
-//     }
-//     while(str)
-//     {
-//         len+=
-//     }
-// }
-
 void get_map(char *map_file, t_game *game)
 {
     char *curr;
@@ -59,20 +7,17 @@ void get_map(char *map_file, t_game *game)
     int fd;
     char *tmp;
 
-    lines = malloc(sizeof(char) * 1);
-    if (!lines)
-        end_game("", game, error);
     fd = open(map_file, O_RDONLY);
     if (fd < 0){
+        end_game("This file can't be read : error while trying opening.", game, file_error, NULL);
+    }
+    lines = get_next_line(fd);
+    while (lines && lines[0] == '\n')
+    {
         free(lines);
-        end_game("This file can't be read.", game, error);
+        lines = get_next_line(fd);
     }
     curr = get_next_line(fd);
-    while (curr && curr[0] == '\n')
-    {
-        free(curr);
-        curr = get_next_line(fd);
-    }
     while (curr)
     {
         if (curr[0] == '\n')
@@ -88,10 +33,7 @@ void get_map(char *map_file, t_game *game)
     }
     close(fd);
     if (*lines == '\0')
-    {
-        free(lines);
-        end_game("This file is empty!", game, error);
-    }
+        end_game("This file is empty!", game, file_error, lines);
     game->map = ft_split(lines, '\n');
     free(lines);
     return;

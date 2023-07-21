@@ -64,15 +64,15 @@ enum e_state
 {
 	event_end = -1,
 	game_over = -1,
-	error = 2,
+	map_error = 2,
 	file_error = 3,
-	map_char_error = 4,
+	init_error = 4,
 };
 
 // FUNCTIONS
 // exit game
 void destroy_the(t_game *game);
-void end_game(char *msg, t_game *game, enum e_state state);
+void end_game(char *msg, t_game *game, enum e_state state, char *free_me);
 int exit_event(t_game *game);
 
 // init game
@@ -90,6 +90,6 @@ void check_map_elem(t_game *game);
 void show_table(t_game *game);
 
 //check map utils
-void unknown_element(t_game **game);
 int check_line(char *line);
+void	check_map_valid(t_game *game);
 #endif
