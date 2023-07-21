@@ -2,8 +2,9 @@
 
 static void init_vars(t_game *game)
 {
-	game->win_w = ft_strlen(game->map[0]);
-	game->win_h = get_height(game->map);
+	game->map_size.x = ft_strlen(game->map[0]);
+	game->map_size.y = get_height(game->map);
+	game->nb_collectible = 0;
 }
 
 int key_check(int keycode, t_game *game)
@@ -27,13 +28,13 @@ void init_game(t_game *game, char *map_file)
 	game->map = get_map(map_file, game);
 	if (game->map != NULL)
 	{
+		init_vars(game);
 		check_map_valid(game, map_file);
 		ft_printf("Completed check-in, we can start now!\nControls :\nArrows : up, left, down, right.\nKeyboard : W,A,S,D.\nESC to quit.\n");
-		init_vars(game);
 		game->mlx_ptr = mlx_init();
 		if (!game->mlx_ptr)
 			end_game("Falling mlx_init(). Aborting, bye.", game, map_error, NULL);
-		game->mlx_win = mlx_new_window(game->mlx_ptr, game->win_w * 50, game->win_h * 50, "Event Parameters");
+		game->mlx_win = mlx_new_window(game->mlx_ptr, game->map_size.x  * 50, game->map_size.y * 50, "Event Parameters");
 		if (!game->mlx_win)
 			end_game("Falling mlx_new_window(). Aborting, bye.", game, map_error, game->mlx_ptr);
 		show_table(game->map);

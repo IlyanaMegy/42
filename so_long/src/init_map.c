@@ -85,22 +85,22 @@ void render_map(t_game *game)
 
     y = 0;
     map_y = 0;
-    tmp_w = game->win_w;
+    tmp_w = game->map_size.x ;
     init_img(game);
-    while (game->win_h > 0)
+    while (game->map_size.y > 0)
     {
         x = 0;
         map_x = 0;
-        while (game->win_w > 0)
+        while (game->map_size.x  > 0)
         {
             img_on_map(game->map[map_y][map_x], x, y, game);
             map_x++;
             x += 50;
-            game->win_w--;
+            game->map_size.x --;
         }
-        game->win_w = tmp_w;
+        game->map_size.x  = tmp_w;
         map_y++;
         y += 50;
-        game->win_h--;
+        game->map_size.y--;
     }
 }

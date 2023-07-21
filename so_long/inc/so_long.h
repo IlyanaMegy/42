@@ -35,8 +35,6 @@ typedef struct s_game
 {
 	void *mlx_ptr;
 	void *mlx_win;
-	int win_w;
-	int win_h;
 	int x_p;
 	int y_p;
 	void *wall_img;
@@ -47,8 +45,10 @@ typedef struct s_game
 	void *bg_img;
 	t_vector img_size;
 	char **map;
+	t_vector map_size;
+	t_vector p_pos;
+	int nb_collectible;
 } t_game;
-
 
 typedef struct s_game_map
 {
@@ -71,6 +71,7 @@ enum e_state
 
 // FUNCTIONS
 // exit game
+void free_map(char **map);
 void destroy_the(t_game *game);
 void end_game(char *msg, t_game *game, enum e_state state, char *free_me);
 int exit_event(t_game *game);
@@ -86,11 +87,12 @@ void render_map(t_game *game);
 // check map
 void check_map_rect(t_game *game);
 void check_map_walls(t_game *game);
-void check_map_elem(t_game *game);
+void check_map_elem(t_game *game, t_game_map *map);
 void is_map_playable(t_game *game, char *map_file);
 void show_table(char **map);
 
-//check map utils
+// check map utils
 int check_line(char *line);
-void	check_map_valid(t_game *game, char *map_file);
+void check_map_valid(t_game *game, char *map_file);
+int to_find(char *str, char c);
 #endif
