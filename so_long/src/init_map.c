@@ -1,6 +1,6 @@
 #include "../inc/so_long.h"
 
-void get_map(char *map_file, t_game *game)
+char **get_map(char *map_file, t_game *game)
 {
     char *curr;
     char *lines;
@@ -34,9 +34,7 @@ void get_map(char *map_file, t_game *game)
     close(fd);
     if (*lines == '\0')
         end_game("This file is empty!", game, file_error, lines);
-    game->map = ft_split(lines, '\n');
-    free(lines);
-    return;
+    return (ft_split(lines, '\n'));
 }
 
 int get_height(char **map)

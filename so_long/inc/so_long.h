@@ -79,7 +79,7 @@ int exit_event(t_game *game);
 void init_game(t_game *game, char *map_file);
 
 // init map
-void get_map(char *map_file, t_game *game);
+char **get_map(char *map_file, t_game *game);
 int get_height(char **map);
 void render_map(t_game *game);
 
@@ -87,9 +87,10 @@ void render_map(t_game *game);
 void check_map_rect(t_game *game);
 void check_map_walls(t_game *game);
 void check_map_elem(t_game *game);
-void show_table(t_game *game);
+void is_map_playable(t_game *game, char *map_file);
+void show_table(char **map);
 
 //check map utils
 int check_line(char *line);
-void	check_map_valid(t_game *game);
+void	check_map_valid(t_game *game, char *map_file);
 #endif

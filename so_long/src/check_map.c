@@ -1,5 +1,16 @@
 #include "../inc/so_long.h"
 
+void is_map_playable(t_game *game, char *map_file)
+{
+    // int collec;
+    // int exit_count;
+    char **map_clone;
+
+    map_clone = get_map(map_file, game);
+    ft_printf("\n\tcloned map...\n\n");
+    show_table(map_clone);
+}
+
 void check_map_rect(t_game *game)
 {
     int y;
@@ -72,13 +83,14 @@ void check_map_elem(t_game *game)
     }
     if (map.c == 0 || map.p == 0 || map.e == 0 || map.p > 1)
         end_game("One element is missing.", game, map_error, NULL);
+    map.y = get_height(game->map);
 }
 
 // -----------------------------------------------------------------------
 // DELETE THIS LATER
-void show_table(t_game *game)
+void show_table(char **map)
 {
-    int height = get_height(game->map) - 1;
+    int height = get_height(map) - 1;
     ft_printf("\n\tShowing map...\n\n");
     int y = 0;
     int x;
@@ -86,9 +98,9 @@ void show_table(t_game *game)
     while (y <= height)
     {
         x = 0;
-        while (game->map[y][x] != '\0')
+        while (map[y][x] != '\0')
         {
-            ft_printf("%c ", game->map[y][x]);
+            ft_printf("%c ", map[y][x]);
             x++;
         }
         y++;

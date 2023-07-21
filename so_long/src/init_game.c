@@ -24,10 +24,10 @@ int key_check(int keycode, t_game *game)
 void init_game(t_game *game, char *map_file)
 {
 	(void)map_file;
-	get_map(map_file, game);
+	game->map = get_map(map_file, game);
 	if (game->map != NULL)
 	{
-		check_map_valid(game);
+		check_map_valid(game, map_file);
 		ft_printf("Completed check-in, we can start now!\nControls :\nArrows : up, left, down, right.\nKeyboard : W,A,S,D.\nESC to quit.\n");
 		init_vars(game);
 		game->mlx_ptr = mlx_init();
@@ -36,7 +36,7 @@ void init_game(t_game *game, char *map_file)
 		game->mlx_win = mlx_new_window(game->mlx_ptr, game->win_w * 50, game->win_h * 50, "Event Parameters");
 		if (!game->mlx_win)
 			end_game("Falling mlx_new_window(). Aborting, bye.", game, map_error, game->mlx_ptr);
-		show_table(game);
+		show_table(game->map);
 		render_map(game);
 		mlx_hook(game->mlx_win, KEY_RELEASED, KEY_RELEASED_MASK, key_check, game);
 		mlx_hook(game->mlx_win, ON_DESTROY, NO_EVENT_MASK, exit_event, game);

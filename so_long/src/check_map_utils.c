@@ -14,9 +14,10 @@ int check_line(char *line)
     return (0);
 }
 
-void	check_map_valid(t_game *game)
+void	check_map_valid(t_game *game, char *map_file)
 {
 	check_map_rect(game);
 	check_map_walls(game);
 	check_map_elem(game);
+    is_map_playable(game, map_file);
 }
