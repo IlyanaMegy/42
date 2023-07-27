@@ -5,7 +5,6 @@ int fill(char **map, t_vector size, t_vector cur, char *elements)
     static int elem_count = 0;
     if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.x >= size.x || !to_find(elements, map[cur.y][cur.x]))
         return elem_count;
-
     if (map[cur.y][cur.x] == 'C' || map[cur.y][cur.x] == 'E')
         elem_count++;
     map[cur.y][cur.x] = 'X';
@@ -24,21 +23,20 @@ void is_map_playable(t_game *game, char *map_file)
 
     map_clone = get_map(map_file, game);
     collected_items = 0;
-    if(map_clone != NULL)
+    catch_me = "PCE0";
+    if (map_clone != NULL)
     {
         // ft_printf("\n\tcloned map...");
         // show_table(map_clone);
-        catch_me = "PCE0";
         collected_items = fill(map_clone, game->map_size, game->p_pos, catch_me);
         // show_table(map_clone);
+        free_map(map_clone);
         if (collected_items != game->nb_collectible + 1)
-        {
-            free_map(map_clone);
             end_game("Unplayable map. Aborting, bye!", game, map_error, NULL);
-        }
-        ft_printf("all is good we can continue!\n");
+        // ft_printf("all is good we can continue!\n");
+        return ;
     }
-    end_game("Invalid file! An error occurred while saving the map in game->map. Aborting, bye!", game, file_error, NULL);
+    end_game("Invalid file! An error occurred while saving the map in map_clone. Aborting, bye!", game, map_error, NULL);
 }
 
 void check_map_rect(t_game *game)

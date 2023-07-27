@@ -79,9 +79,8 @@ int exit_event(t_game *game);
 // init game
 void init_game(t_game *game, char *map_file);
 
-// init map
+// init map && init map utils
 char **get_map(char *map_file, t_game *game);
-int get_height(char **map);
 void render_map(t_game *game);
 
 // check map
@@ -92,6 +91,7 @@ void is_map_playable(t_game *game, char *map_file);
 void show_table(char **map);
 
 // check map utils
+int get_height(char **map);
 int check_line(char *line);
 void check_map_valid(t_game *game, char *map_file);
 int to_find(char *str, char c);

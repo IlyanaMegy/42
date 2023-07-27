@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:55:25 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/02/27 19:55:27 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/07/27 18:38:00 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	give_to(char **tab, char const *s, char sep)
 	*res = NULL;
 }
 
-char	**ft_split(char const *s, char sep)
+char	**ft_split(char *s, char sep)
 {
 	char	**res;
 
@@ -63,5 +63,6 @@ char	**ft_split(char const *s, char sep)
 	if (!res)
 		return (NULL);
 	give_to(res, s, sep);
+	free(s);
 	return (res);
 }

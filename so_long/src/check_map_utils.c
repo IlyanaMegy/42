@@ -1,4 +1,13 @@
 #include "../inc/so_long.h"
+int get_height(char **map)
+{
+    int i;
+
+    i = 0;
+    while (map[i] != NULL)
+        i++;
+    return (i);
+}
 
 int check_line(char *line)
 {

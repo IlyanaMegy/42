@@ -18,6 +18,7 @@ SRC_PATH	= ./src/
 SRC			= main.c \
 			close_me.c \
 			init_map.c \
+			init_map_utils.c \
 			check_map.c \
 			check_map_utils.c \
 			init_game.c
