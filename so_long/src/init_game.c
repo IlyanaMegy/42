@@ -13,16 +13,14 @@ int key_check(int keycode, t_game *game)
 		end_game("", game, event_end, NULL);
 	else if (keycode == XK_a || keycode == XK_Left)
 	{
-		mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, game->bg_img, game->p_pos.x*50, game->p_pos.y*50);
-		game->p_pos.x -= 1;
-		mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, game->rick_img, game->p_pos.x*50, game->p_pos.y*50);
+		move_left(game);
 	}
 	else if (keycode == XK_d || keycode == XK_Right)
-		ft_printf("right !\n");
+		move_right(game);
 	else if (keycode == XK_w || keycode == XK_Up)
-		ft_printf("up !\n");
+		move_up(game);
 	else if (keycode == XK_s || keycode == XK_Down)
-		ft_printf("down !\n");
+		move_down(game);
 	return (0);
 }
 

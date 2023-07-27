@@ -95,4 +95,10 @@ int get_height(char **map);
 int check_line(char *line);
 void check_map_valid(t_game *game, char *map_file);
 int to_find(char *str, char c);
+
+// move to
+void move_left(t_game *game);
+void move_right(t_game *game);
+void move_down(t_game *game);
+void move_up(t_game *game);
 #endif
