@@ -1,52 +1,27 @@
 #include "../inc/so_long.h"
 
-int check_env(t_game *game, int x, int y)
+void	put_that_img(void *img, int x, int y, t_game *game)
 {
-    if (game->map[x][y] == '1')
-        return 0;
-    else if (game->map[x][y] == 'C')
-        game->nb_collectible++;
-    else if (game->map[x][y] == 'E')
-        end_game("Congratulation you win!", game, game_over, NULL);
-    return 1;
+	mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, img, x * 50, y * 50);
 }
 
-void move_left(t_game *game)
+void	move_to(int x, int y, t_game *game)
 {
-    if (check_env(game, game->p_pos.x - 1, game->p_pos.y))
-    {
-        mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, game->bg_img, game->p_pos.x * 50, game->p_pos.y * 50);
-        game->p_pos.x -= 1;
-        mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, game->rick_img, game->p_pos.x * 50, game->p_pos.y * 50);
-    }
-}
-
-void move_right(t_game *game)
-{
-    if (check_env(game, game->p_pos.x + 1, game->p_pos.y))
-    {
-        mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, game->bg_img, game->p_pos.x * 50, game->p_pos.y * 50);
-        game->p_pos.x += 1;
-        mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, game->rick_img, game->p_pos.x * 50, game->p_pos.y * 50);
-    }
-}
-
-void move_up(t_game *game)
-{
-    if (check_env(game, game->p_pos.x, game->p_pos.y - 1))
-    {
-        mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, game->bg_img, game->p_pos.x * 50, game->p_pos.y * 50);
-        game->p_pos.y -= 1;
-        mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, game->rick_img, game->p_pos.x * 50, game->p_pos.y * 50);
-    }
-}
-
-void move_down(t_game *game)
-{
-    if (check_env(game, game->p_pos.x, game->p_pos.y + 1))
-    {
-        mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, game->bg_img, game->p_pos.x * 50, game->p_pos.y * 50);
-        game->p_pos.y += 1;
-        mlx_put_image_to_window(game->mlx_ptr, game->mlx_win, game->rick_img, game->p_pos.x * 50, game->p_pos.y * 50);
-    }
+    put_that_img(game->bg_img, game->p_pos.x, game->p_pos.y, game);
+	game->map[game->p_pos.y][game->p_pos.x] = '0';
+	game->p_pos.y = y;
+	game->p_pos.x = x;
+	if (game->map[y][x] == 'C')
+	{
+		game->collected_items++;
+		game->nb_collectible--;
+	}
+	put_that_img(game->rick_img, game->p_pos.x, game->p_pos.y, game);
+	game->moves++;
+	ft_printf("moves : %d\n", game->moves);
+	if (game->map[y][x] == 'E')
+		end_game("Congratulation you win!", game, game_over, NULL);
+	game->map[y][x] = 'P';
+	ft_printf("pos x = %d, y = %d\n", game->p_pos.x, game->p_pos.y);
+	show_table(game->map);
 }
