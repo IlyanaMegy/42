@@ -12,9 +12,9 @@
 
 #include "../inc/so_long.h"
 
-static int is_ber_file(const char *av)
+static int	is_ber_file(const char *av)
 {
-	char *string;
+	char	*string;
 
 	string = ft_strrchr(av, '.');
 	if (string)
@@ -22,18 +22,18 @@ static int is_ber_file(const char *av)
 	return (1);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_game game;
+	t_game	game;
 
 	if (ac == 2 && (is_ber_file(av[1])))
 		init_game(&game, av[1]);
 	else if (ac == 2 && !(is_ber_file(av[1])))
-		end_game("Can't open file. The format is not supported!", &game, file_error, NULL);
+		end_game("Format not supported!", &game, file_error, NULL);
 	else if (ac > 2)
 		end_game("Can't open multiple files!", &game, file_error, NULL);
 	else if (ac < 2)
-		end_game("Invalid number of arguments : Missing .ber file!\nExit game bye.", &game, file_error, NULL);
+		end_game("Missing .ber file!", &game, file_error, NULL);
 	else
 		end_game("Please specify file name!", &game, file_error, NULL);
 	return (0);

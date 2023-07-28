@@ -9,8 +9,8 @@
 # define ON_DESTROY 17
 # define KEY_PRESSED 2
 # define KEY_RELEASED 3
-# define NO_EVENT_MASK 0
-# define KEY_RELEASED_MASK 2
+# define EXIT_MASK 0
+# define KEY_MASK 2
 
 // INCLUDES
 # include "../inc/libft.h"
@@ -56,6 +56,7 @@ typedef struct s_game_map
 	int			c;
 	int			p;
 	int			e;
+	int			b;
 	int			x;
 	int			y;
 }				t_game_map;
@@ -97,8 +98,10 @@ int				get_height(char **map);
 int				check_line(char *line);
 void			check_map_valid(t_game *game, char *map_file);
 int				to_find(char *str, char c);
+int				is_out(int x, int y, int size_x, int size_y);
 
 // move to
 void			move_to(int x, int y, char *img_path, t_game *game);
 int				is_wall(t_game *game, int y, int x);
+void			*save_that_img(char *img_path, t_game *game);
 #endif

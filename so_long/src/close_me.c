@@ -10,18 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "../inc/so_long.h"
+#include <mlx.h>
 
-int exit_event(t_game *game)
+int	exit_event(t_game *game)
 {
 	end_game("", game, event_end, NULL);
 	return (0);
 }
 
-void free_map(char **map)
+void	free_map(char **map)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (map[i])
 	{
@@ -29,33 +30,32 @@ void free_map(char **map)
 		i++;
 	}
 	free(map);
-	return;
+	return ;
 }
 
-void destroy_the(t_game *game)
+void	destroy_the(t_game *game)
 {
 	mlx_destroy_image(game->mlx_ptr, game->wall_img);
 	mlx_destroy_image(game->mlx_ptr, game->bg_img);
-	// mlx_destroy_image(game->mlx_ptr, game->wong_img);
+	mlx_destroy_image(game->mlx_ptr, game->enemy_img);
 	mlx_destroy_image(game->mlx_ptr, game->main_img);
 	mlx_destroy_image(game->mlx_ptr, game->collec_img);
 	mlx_destroy_image(game->mlx_ptr, game->exit_img);
-
 	mlx_destroy_window(game->mlx_ptr, game->mlx_win);
 	mlx_destroy_display(game->mlx_ptr);
 	free_map(game->map);
 	free(game->mlx_ptr);
-	return;
+	return ;
 }
 
-void end_game(char *msg, t_game *game, enum e_state state, char *free_me)
+void	end_game(char *msg, t_game *game, enum e_state state, char *free_me)
 {
 	if (state == event_end)
 	{
 		ft_printf("%s\n" RED, msg);
 		destroy_the(game);
 		exit(0);
-		return;
+		return ;
 	}
 	else if (state == file_error)
 	{
@@ -70,9 +70,8 @@ void end_game(char *msg, t_game *game, enum e_state state, char *free_me)
 		free_map(game->map);
 		exit(2);
 	}
-	// else if (state == init_error)
 	ft_printf("Error\n%s\n" RED, msg);
 	destroy_the(game);
 	exit(1);
-	return;
+	return ;
 }
