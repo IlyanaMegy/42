@@ -39,8 +39,8 @@ typedef struct s_game
 	int			y_p;
 	void		*wall_img;
 	void		*collec_img;
-	void		*rick_img;
-	void		*wong_img;
+	void		*main_img;
+	void		*enemy_img;
 	void		*exit_img;
 	void		*bg_img;
 	t_vector	img_size;
@@ -48,7 +48,6 @@ typedef struct s_game
 	t_vector	map_size;
 	t_vector	p_pos;
 	int			nb_collectible;
-	int			collected_items;
 	int			moves;
 }				t_game;
 
@@ -100,9 +99,6 @@ void			check_map_valid(t_game *game, char *map_file);
 int				to_find(char *str, char c);
 
 // move to
-void			move_left(t_game *game);
-void			move_to(int x, int y, t_game *game);
-void			move_right(t_game *game);
-void			move_down(t_game *game);
-void			move_up(t_game *game);
+void			move_to(int x, int y, char *img_path, t_game *game);
+int				is_wall(t_game *game, int y, int x);
 #endif

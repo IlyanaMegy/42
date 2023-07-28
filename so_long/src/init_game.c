@@ -5,7 +5,6 @@ static void	init_vars(t_game *game)
 	game->map_size.x = ft_strlen(game->map[0]);
 	game->map_size.y = get_height(game->map);
 	game->nb_collectible = 0;
-	game->collected_items = 0;
 	game->moves = 0;
 }
 
@@ -15,16 +14,15 @@ int	key_check(int keycode, t_game *game)
 		end_game("", game, event_end, NULL);
 	else if ((keycode == XK_a || keycode == XK_Left)
 			&& game->map[game->p_pos.y][game->p_pos.x - 1] != '1')
-		move_to(game->p_pos.x - 1, game->p_pos.y, game);
-	else if ((keycode == XK_d || keycode == XK_Right)
-			&& game->map[game->p_pos.y][game->p_pos.x + 1] != '1')
-		move_to(game->p_pos.x + 1, game->p_pos.y, game);
-	else if ((keycode == XK_w || keycode == XK_Up)
-			&& game->map[game->p_pos.y - 1][game->p_pos.x] != '1')
-		move_to(game->p_pos.x, game->p_pos.y - 1, game);
-	else if ((keycode == XK_s || keycode == XK_Down)
-			&& game->map[game->p_pos.y + 1][game->p_pos.x] != '1')
-		move_to(game->p_pos.x, game->p_pos.y + 1, game);
+		move_to(game->p_pos.x - 1, game->p_pos.y, "./img/left.xpm", game);
+	else if ((keycode == XK_d || keycode == XK_Right) && !is_wall(game, game->p_pos.y, game->p_pos.x + 1))
+		move_to(game->p_pos.x + 1, game->p_pos.y, "./img/right.xpm", game);
+	else if ((keycode == XK_w || keycode == XK_Up) && game->map[game->p_pos.y
+			- 1][game->p_pos.x] != '1')
+		move_to(game->p_pos.x, game->p_pos.y - 1, "./img/up.xpm", game);
+	else if ((keycode == XK_s || keycode == XK_Down) && game->map[game->p_pos.y
+			+ 1][game->p_pos.x] != '1')
+		move_to(game->p_pos.x, game->p_pos.y + 1, "./img/down.xpm", game);
 	return (0);
 }
 
@@ -38,12 +36,11 @@ void	init_game(t_game *game, char *map_file)
 		init_vars(game);
 		check_map_valid(game, map_file);
 		// ft_printf("Completed check-in,
-		// we can start now!\nControls :\nArrows : up, left, down,
-		// right.\nKeyboard : W,A,S,D.\nESC to quit.\n");
+				// we can start now!\nControls :\nArrows : up, left, down,
+				// right.\nKeyboard : W,A,S,D.\nESC to quit.\n");
 		game->mlx_ptr = mlx_init();
 		if (!game->mlx_ptr)
-			end_game("Falling mlx_init(). Aborting, bye.", game, map_error,
-					NULL);
+			end_game("Failing init mlx. Aborting, bye.", game, map_error, NULL);
 		game->mlx_win = mlx_new_window(game->mlx_ptr, game->map_size.x * 50,
 				game->map_size.y * 50, "Event Parameters");
 		if (!game->mlx_win)
@@ -57,5 +54,5 @@ void	init_game(t_game *game, char *map_file)
 		mlx_hook(game->mlx_win, ON_DESTROY, NO_EVENT_MASK, exit_event, game);
 		mlx_loop(game->mlx_ptr);
 	}
-	end_game("Invalid file! An error occurred while saving the map in game->map. Aborting, bye!", game, file_error, NULL);
+	end_game("An error occurred while saving the map.", game, file_error, NULL);
 }

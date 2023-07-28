@@ -37,7 +37,7 @@ void destroy_the(t_game *game)
 	mlx_destroy_image(game->mlx_ptr, game->wall_img);
 	mlx_destroy_image(game->mlx_ptr, game->bg_img);
 	// mlx_destroy_image(game->mlx_ptr, game->wong_img);
-	mlx_destroy_image(game->mlx_ptr, game->rick_img);
+	mlx_destroy_image(game->mlx_ptr, game->main_img);
 	mlx_destroy_image(game->mlx_ptr, game->collec_img);
 	mlx_destroy_image(game->mlx_ptr, game->exit_img);
 
