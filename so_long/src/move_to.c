@@ -34,7 +34,7 @@ void	*save_that_img(char *img_path, t_game *game)
 
 void	move_to(int x, int y, char *img_path, t_game *game)
 {
-	if (game->map[y][x] == 'E' && game->nb_collectible != 0)
+	if (game->map[y][x] == 'E' && game->nb_c != 0)
 		return ;
 	if (game->map[y][x] == 'B')
 		end_game("GAME OVER!", game, event_end, NULL);
@@ -43,12 +43,12 @@ void	move_to(int x, int y, char *img_path, t_game *game)
 	game->p_pos.y = y;
 	game->p_pos.x = x;
 	if (game->map[y][x] == 'C')
-		game->nb_collectible--;
+		game->nb_c--;
 	game->main_img = save_that_img(img_path, game);
 	put_that_img(game->main_img, game->p_pos.x, game->p_pos.y, game);
 	game->moves++;
 	ft_printf("moves : %d\n", game->moves);
-	if (game->map[y][x] == 'E' && game->nb_collectible == 0)
+	if (game->map[y][x] == 'E' && game->nb_c == 0)
 		end_game("Congratulation you win!", game, event_end, NULL);
 	game->map[y][x] = 'P';
 }

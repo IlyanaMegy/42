@@ -16,7 +16,7 @@ static void	init_vars(t_game *game)
 {
 	game->map_size.x = ft_strlen(game->map[0]);
 	game->map_size.y = get_height(game->map);
-	game->nb_collectible = 0;
+	game->nb_c = 0;
 	game->moves = 0;
 }
 

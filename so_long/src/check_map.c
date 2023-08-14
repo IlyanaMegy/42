@@ -18,7 +18,7 @@ int	fill(char **map, t_vector size, t_vector cur, char *e)
 
 	if (is_out(cur.x, cur.y, size.x, size.y) || !to_find(e, map[cur.y][cur.x]))
 		return (elem_count);
-	if (map[cur.y][cur.x] == 'C' || map[cur.y][cur.x] == 'E')
+	if (map[cur.y][cur.x] == e[0])
 		elem_count++;
 	map[cur.y][cur.x] = 'X';
 	fill(map, size, (t_vector){cur.x - 1, cur.y}, e);
@@ -32,16 +32,21 @@ void	is_map_playable(t_game *game, char *map_file)
 {
 	char	**map_clone;
 	int		collected;
-	char	*catch_me;
 
 	map_clone = get_map(map_file, game);
 	collected = 0;
-	catch_me = "PCE0";
 	if (map_clone != NULL)
 	{
-		collected = fill(map_clone, game->map_size, game->p_pos, catch_me);
+		show_table(map_clone);
+		collected = fill(map_clone, game->map_size, game->p_pos, "CP0");	
 		free_map(map_clone);
-		if (collected != game->nb_collectible + 1)
+		if (collected == game->nb_c)
+		{
+			map_clone = get_map(map_file, game);
+			collected = fill(map_clone, game->map_size, game->p_pos, "ECP0");
+			free_map(map_clone);
+		}
+		if (collected != game->nb_c + 1)
 			end_game("Unplayable map. Aborting, bye!", game, map_error, NULL);
 		return ;
 	}
@@ -111,7 +116,7 @@ void	check_map_elem(t_game *game, t_game_map *map)
 				game->p_pos.y = map->y;
 			}
 			else if (game->map[map->y][map->x] == 'C')
-				game->nb_collectible++;
+				game->nb_c++;
 			else if (game->map[map->y][map->x] == 'B')
 				map->b++;
 			else if (game->map[map->y][map->x] != '1')
@@ -120,7 +125,7 @@ void	check_map_elem(t_game *game, t_game_map *map)
 			map->x++;
 		}
 	}
-	if (game->nb_collectible < 1 || map->p != 1 || map->e != 1 || map->b < 1)
+	if (game->nb_c < 1 || map->p != 1 || map->e != 1 || map->b < 1)
 		end_game("Wrong number of elements", game, map_error, NULL);
 }
 

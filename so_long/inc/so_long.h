@@ -47,7 +47,7 @@ typedef struct s_game
 	char		**map;
 	t_vector	map_size;
 	t_vector	p_pos;
-	int			nb_collectible;
+	int			nb_c;
 	int			moves;
 }				t_game;
 

@@ -1,5 +1,8 @@
 */*.out
 */*.o
 ./so_long
-*/obj/
+obj/
+img/rick
+img/trash
+drafts/
 minilibx/
