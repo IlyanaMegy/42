@@ -1,6 +1,7 @@
 */*.out
 */*.o
-./so_long
+so_long
+libft/libft
 obj/
 img/rick
 img/trash

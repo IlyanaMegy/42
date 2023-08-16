@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:48:22 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/07/21 18:54:45 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/08/16 22:37:02 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	exit_event(t_game *game)
 
 void	free_map(char **map)
 {
-	int	i;
-
+	int i;
+	
 	i = 0;
 	while (map[i])
 	{
@@ -30,7 +30,7 @@ void	free_map(char **map)
 		i++;
 	}
 	free(map);
-	return ;
+	return;
 }
 
 void	destroy_the(t_game *game)
@@ -55,7 +55,6 @@ void	end_game(char *msg, t_game *game, enum e_state state, char *free_me)
 		ft_printf("%s\n" RED, msg);
 		destroy_the(game);
 		exit(0);
-		return ;
 	}
 	else if (state == file_error)
 	{
@@ -68,10 +67,11 @@ void	end_game(char *msg, t_game *game, enum e_state state, char *free_me)
 	{
 		ft_printf("Error\n__MAP_ERROR__ : %s\n" RED, msg);
 		free_map(game->map);
+		if (free_me != NULL)
+			free(free_me);
 		exit(2);
 	}
 	ft_printf("Error\n%s\n" RED, msg);
 	destroy_the(game);
-	exit(1);
-	return ;
+	exit(3);
 }

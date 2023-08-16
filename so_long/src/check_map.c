@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 16:41:02 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/07/28 16:41:10 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/08/16 23:20:47 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,19 @@ void	is_map_playable(t_game *game, char *map_file)
 	collected = 0;
 	if (map_clone != NULL)
 	{
-		show_table(map_clone);
-		collected = fill(map_clone, game->map_size, game->p_pos, "CP0");	
+		collected = fill(map_clone, game->map_size, game->p_pos, "CP0");
 		free_map(map_clone);
+		// if (map_clone)
+		// 	ft_printf("\n\nWTF\n\n");
 		if (collected == game->nb_c)
 		{
 			map_clone = get_map(map_file, game);
 			collected = fill(map_clone, game->map_size, game->p_pos, "ECP0");
 			free_map(map_clone);
+			// ft_printf("map line len %d\nmap content line at i=2 : %c\n", ft_strlen(map_clone[1]), map_clone[1][2]);
 		}
 		if (collected != game->nb_c + 1)
-			end_game("Unplayable map. Aborting, bye!", game, map_error, NULL);
+			end_game("Unplayable map. Aborting, bye!", game, map_error, NULL);			
 		return ;
 	}
 	end_game("An error occurred while saving the map.", game, map_error, NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:33:19 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/07/28 17:33:24 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/08/16 23:13:11 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ char	**get_map(char *map_file, t_game *game)
 	if (fd < 0)
 		end_game("Error while trying opening the map.", game, file_error, NULL);
 	pass_empty_lines(&lines, &fd);
+	// ft_printf("\nlines content =\n%s\n", lines);
 	curr = get_next_line(fd);
+	// ft_printf("curr content =\n%s\n", curr);
 	while (curr)
 	{
 		if (curr[0] == '\n')
@@ -54,7 +56,9 @@ char	**get_map(char *map_file, t_game *game)
 		curr = get_next_line(fd);
 	}
 	close(fd);
-	if (*lines == '\0')
+	if (lines[0] == '\0')
 		end_game("This file is empty!", game, file_error, lines);
+	// ft_printf("lines content =\n%s\n\n", lines);
+	// ft_printf("*lines content =\n%c\n\n", *lines);
 	return (ft_split(lines, '\n'));
 }
