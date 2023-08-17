@@ -51,4 +51,5 @@ void	move_to(int x, int y, char *img_path, t_game *game)
 	if (game->map[y][x] == 'E' && game->nb_c == 0)
 		end_game("Congratulation you win!", game, event_end, NULL);
 	game->map[y][x] = 'P';
+	show_table(game->map);
 }

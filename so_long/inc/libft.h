@@ -87,6 +87,16 @@ int p_ptr(unsigned long long ptr);
 // GNL
 # define BUFFER_SIZE 42
 
-char			*get_next_line(int fd);
-int				ft_index(const char *s, char c);
+typedef struct s_gnl
+{
+	char			*content;
+	struct s_gnl	*next;
+}					t_gnl;
+
+char				*get_next_line(int fd);
+t_gnl				*get_last(t_gnl *str);
+void				create_line(t_gnl *str, char **line);
+void				free_str(t_gnl *str);
+int					is_newline(t_gnl *s);
+int					ft_len(const char *str);
 #endif

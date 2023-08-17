@@ -12,99 +12,131 @@
 
 #include "../../inc/libft.h"
 
-static char	*get_line(char *backup)
+void	clean_me(t_gnl **str)
 {
-	int		len;
-	int		x;
-	char	*line;
-
-	len = 0;
-	if (*backup == '\0')
-		return (NULL);
-	while (backup[len] && backup[len] != '\n')
-		len++;
-	if (backup[len] == '\n')
-		len++;
-	line = malloc(sizeof(char) * len + 1);
-	if (!line)
-		return (NULL);
-	x = 0;
-	while (x < len)
-	{
-		line[x] = backup[x];
-		x++;
-	}
-	line[x] = '\0';
-	return (line);
-}
-
-static char	*get_backup(char *backup)
-{
-	char	*str;
-	int		start;
+	t_gnl	*last;
+	t_gnl	*clear;
 	int		i;
+	int		j;
 
-	start = 0;
-	while (backup[start] && backup[start] != '\n')
-		start++;
-	if (backup[start] == '\n')
-		start++;
-	if (backup[start] == '\0')
-	{
-		free(backup);
-		return (NULL);
-	}
-	str = malloc(sizeof(char) * (ft_strlen(backup) - start + 1));
-	if (!str)
-		return (NULL);
+	clear = malloc(sizeof(t_gnl));
+	if (!clear || !str)
+		return ;
+	clear->next = NULL;
+	last = get_last(*str);
 	i = 0;
-	while (backup[start])
-		str[i++] = backup[start++];
-	str[i] = '\0';
-	free(backup);
-	return (str);
+	while (last->content[i] && last->content[i] != '\n')
+		i++;
+	if (last->content && last->content[i] == '\n')
+		i++;
+	clear->content = malloc(sizeof(char) * ((ft_len(last->content) - i) + 1));
+	if (!(clear->content))
+		return ;
+	j = 0;
+	while (last->content[i])
+		clear->content[j++] = last->content[i++];
+	clear->content[j] = '\0';
+	free_str(*str);
+	*str = clear;
 }
 
-static char	*read_line(char *backup, int fd)
+void	extract_me(t_gnl *str, char **line)
 {
-	int		byte;
-	char	*buff;
+	int	i;
+	int	j;
 
-	buff = malloc(BUFFER_SIZE + 1 * sizeof(char));
-	if (!buff)
-		return (NULL);
-	byte = 1;
-	while (byte > 0 && ft_index(backup, '\n') == -1)
+	if (!str)
+		return ;
+	create_line(str, line);
+	if (!(*line))
+		return ;
+	j = 0;
+	while (str)
 	{
-		byte = read(fd, buff, BUFFER_SIZE);
-		if (byte == 0)
-			break ;
-		if (byte == -1)
+		i = 0;
+		while (str->content[i])
 		{
-			free(buff);
-			return (NULL);
+			if (str->content[i] == '\n')
+			{
+				(*line)[j++] = str->content[i];
+				break ;
+			}
+			(*line)[j++] = str->content[i++];
 		}
-		buff[byte] = '\0';
-		backup = ft_strjoin(backup, buff);
+		str = str->next;
 	}
-	free(buff);
-	return (backup);
+	(*line)[j] = '\0';
+}
+
+void	add_to_str(t_gnl **str, char *buffer, int size)
+{
+	int		i;
+	t_gnl	*last;
+	t_gnl	*new;
+
+	new = malloc(sizeof(t_gnl));
+	if (!new)
+		return ;
+	new->next = NULL;
+	new->content = malloc(sizeof(char) * (size + 1));
+	if (!(new->content))
+		return ;
+	i = 0;
+	while (buffer[i] && i < size)
+	{
+		new->content[i] = buffer[i];
+		i++;
+	}
+	new->content[i] = '\0';
+	if (!(*str))
+	{
+		*str = new;
+		return ;
+	}
+	last = get_last(*str);
+	last->next = new;
+}
+
+void	read_me(int fd, t_gnl **str)
+{
+	char	*buffer;
+	int		size_readed;
+
+	size_readed = 1;
+	while (!is_newline(*str) && size_readed != 0)
+	{
+		buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		size_readed = (int)read(fd, buffer, BUFFER_SIZE);
+		if ((size_readed == 0 && !(*str)) || size_readed == -1)
+		{
+			free(buffer);
+			return ;
+		}
+		buffer[size_readed] = '\0';
+		add_to_str(str, buffer, size_readed);
+		free(buffer);
+	}
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*backup;
-	char		*line;
+	static t_gnl	*str = NULL;
+	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	line = NULL;
+	read_me(fd, &str);
+	if (!str)
+		return (NULL);
+	extract_me(str, &line);
+	clean_me(&str);
+	if (line[0] == '\0')
 	{
-		exit(1);
+		free_str(str);
+		str = NULL;
+		free(line);
 		return (NULL);
 	}
-	backup = read_line(backup, fd);
-	if (!backup)
-		return (NULL);
-	line = get_line(backup);
-	backup = get_backup(backup);
 	return (line);
 }

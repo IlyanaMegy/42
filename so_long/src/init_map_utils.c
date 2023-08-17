@@ -42,6 +42,11 @@ char	**get_map(char *map_file, t_game *game)
 	if (fd < 0)
 		end_game("Error while trying opening the map.", game, file_error, NULL);
 	pass_empty_lines(&lines, &fd);
+	if (lines[0] == '\0')
+	{
+		close(fd);
+		end_game("This file is empty!", game, file_error, lines);
+	}	
 	// ft_printf("\nlines content =\n%s\n", lines);
 	curr = get_next_line(fd);
 	// ft_printf("curr content =\n%s\n", curr);
@@ -55,10 +60,6 @@ char	**get_map(char *map_file, t_game *game)
 		join_me(&lines, &curr);
 		curr = get_next_line(fd);
 	}
-	close(fd);
-	if (lines[0] == '\0')
-		end_game("This file is empty!", game, file_error, lines);
-	// ft_printf("lines content =\n%s\n\n", lines);
-	// ft_printf("*lines content =\n%c\n\n", *lines);
+	close(fd);	
 	return (ft_split(lines, '\n'));
 }
