@@ -39,7 +39,10 @@ typedef struct s_game
 	int			y_p;
 	void		*wall_img;
 	void		*collec_img;
-	void		*main_img;
+	void		*main_img_u;
+	void		*main_img_d;
+	void		*main_img_l;
+	void		*main_img_r;
 	void		*enemy_img;
 	void		*exit_img;
 	void		*bg_img;
@@ -101,7 +104,7 @@ int				to_find(char *str, char c);
 int				is_out(int x, int y, int size_x, int size_y);
 
 // move to
-void			move_to(int x, int y, char *img_path, t_game *game);
+void			move_to(int x, int y, void *dir, t_game *game);
 int				is_wall(t_game *game, int y, int x);
 void			*save_that_img(char *img_path, t_game *game);
 #endif

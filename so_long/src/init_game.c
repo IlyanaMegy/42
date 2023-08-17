@@ -30,13 +30,13 @@ int	key_check(int keycode, t_game *game)
 	if (keycode == XK_Escape)
 		end_game("", game, event_end, NULL);
 	else if (keycode == XK_a && !is_wall(game, y, x - 1))
-		move_to(x - 1, y, "./img/left.xpm", game);
+		move_to(x - 1, y, game->main_img_l, game);
 	else if (keycode == XK_d && !is_wall(game, y, x + 1))
-		move_to(x + 1, y, "./img/right.xpm", game);
+		move_to(x + 1, y, game->main_img_r, game);
 	else if (keycode == XK_w && !is_wall(game, y - 1, x))
-		move_to(x, y - 1, "./img/up.xpm", game);
+		move_to(x, y - 1, game->main_img_u, game);
 	else if (keycode == XK_s && !is_wall(game, y + 1, x))
-		move_to(x, y + 1, "./img/down.xpm", game);
+		move_to(x, y + 1, game->main_img_d, game);
 	return (0);
 }
 

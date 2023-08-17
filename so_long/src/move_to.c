@@ -32,7 +32,7 @@ void	*save_that_img(char *img_path, t_game *game)
 	return (mlx_xpm_file_to_image(game->mlx_ptr, img_path, &img_x, &img_y));
 }
 
-void	move_to(int x, int y, char *img_path, t_game *game)
+void	move_to(int x, int y, void *dir, t_game *game)
 {
 	if (game->map[y][x] == 'E' && game->nb_c != 0)
 		return ;
@@ -44,8 +44,7 @@ void	move_to(int x, int y, char *img_path, t_game *game)
 	game->p_pos.x = x;
 	if (game->map[y][x] == 'C')
 		game->nb_c--;
-	game->main_img = save_that_img(img_path, game);
-	put_that_img(game->main_img, game->p_pos.x, game->p_pos.y, game);
+	put_that_img(dir, game->p_pos.x, game->p_pos.y, game);
 	game->moves++;
 	ft_printf("moves : %d\n", game->moves);
 	if (game->map[y][x] == 'E' && game->nb_c == 0)

@@ -24,7 +24,7 @@ void	img_on_map(char p, int x, int y, t_game *g)
 	{
 		g->y_p = y;
 		g->x_p = x;
-		mlx_put_image_to_window(g->mlx_ptr, g->mlx_win, g->main_img, x, y);
+		mlx_put_image_to_window(g->mlx_ptr, g->mlx_win, g->main_img_d, x, y);
 	}
 	else if (p == 'B')
 		mlx_put_image_to_window(g->mlx_ptr, g->mlx_win, g->enemy_img, x, y);
@@ -36,7 +36,10 @@ void	init_img(t_game *game)
 {
 	game->wall_img = save_that_img("./img/wall.xpm", game);
 	game->enemy_img = save_that_img("./img/spider1.xpm", game);
-	game->main_img = save_that_img("./img/down.xpm", game);
+	game->main_img_d = save_that_img("./img/down.xpm", game);
+	game->main_img_u = save_that_img("./img/up.xpm", game);
+	game->main_img_l = save_that_img("./img/left.xpm", game);
+	game->main_img_r = save_that_img("./img/right.xpm", game);
 	game->exit_img = save_that_img("./img/exit.xpm", game);
 	game->collec_img = save_that_img("./img/apple.xpm", game);
 	game->bg_img = save_that_img("./img/bg.xpm", game);

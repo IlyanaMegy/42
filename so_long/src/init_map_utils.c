@@ -46,10 +46,8 @@ char	**get_map(char *map_file, t_game *game)
 	{
 		close(fd);
 		end_game("This file is empty!", game, file_error, lines);
-	}	
-	// ft_printf("\nlines content =\n%s\n", lines);
+	}
 	curr = get_next_line(fd);
-	// ft_printf("curr content =\n%s\n", curr);
 	while (curr)
 	{
 		if (curr[0] == '\n')
