@@ -6,17 +6,17 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 13:00:49 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/07/20 16:27:32 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/08/17 22:06:55 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
-	unsigned int size;
-	char *ptr;
-	int i;
+	unsigned int	size;
+	char			*ptr;
+	int				i;
 
 	size = ft_strlen(s1);
 	ptr = malloc((size + 1) * sizeof(char));

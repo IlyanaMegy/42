@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 16:41:02 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/08/16 23:20:47 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/08/17 22:31:20 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ void	is_map_playable(t_game *game, char *map_file, int err)
 		free_map(map_clone);
 	}
 	if (collected != game->nb_c + 1)
-		end_game("Unplayable map. Aborting, bye!", game, map_error, NULL);			
+		end_game("Unplayable map. Aborting, bye!", game, map_error, NULL);
 	return ;
-	
-	
 }
 
 void	check_map_rect(t_game *game)

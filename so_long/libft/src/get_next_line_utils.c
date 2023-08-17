@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:59:13 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/07/21 15:50:38 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/08/17 22:25:55 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	create_line(t_gnl *str, char **line)
 {
 	int	i;
 	int	len;
- 
+
 	len = 0;
 	while (str)
 	{
@@ -72,6 +72,11 @@ void	create_line(t_gnl *str, char **line)
 		str = str->next;
 	}
 	*line = malloc(sizeof(char) * (len + 1));
+	if (!(*line))
+	{
+		free_str(str);
+		str = NULL;
+	}
 }
 
 void	free_str(t_gnl *str)

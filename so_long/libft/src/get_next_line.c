@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:58:52 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/07/21 15:50:09 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/08/17 22:26:29 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	extract_me(t_gnl *str, char **line)
 	int	i;
 	int	j;
 
-	if (!str)
-		return ;
 	create_line(str, line);
 	if (!(*line))
 		return ;
@@ -134,12 +132,9 @@ char	*get_next_line(int fd, int *err)
 	extract_me(str, &line);
 	if (!line)
 	{
-		free_str(str);
-		str = NULL;
 		*err = 1;
 		return (NULL);
 	}
-	clean_me(&str);
 	if (!line[0])
 	{
 		free(line);
@@ -147,5 +142,6 @@ char	*get_next_line(int fd, int *err)
 		str = NULL;
 		return (NULL);
 	}
+	clean_me(&str);
 	return (line);
 }

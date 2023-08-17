@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 17:12:01 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/08/16 23:47:39 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/08/17 22:28:10 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ void	init_game(t_game *game, char *map_file)
 {
 	int	x;
 	int	y;
-	int err;
+	int	err;
 
 	(void)map_file;
 	err = 0;
 	game->map = get_map(map_file, game, err);
 	if (game->map == NULL)
-		end_game("An error occurred while saving the map.", game, file_error, NULL);
+		end_game("An error occurred while saving the map.", game, file_error,
+			NULL);
 	init_vars(game);
 	check_map_valid(game, map_file, err);
 	game->mlx_ptr = mlx_init();
@@ -65,5 +66,5 @@ void	init_game(t_game *game, char *map_file)
 	mlx_hook(game->mlx_win, KEY_RELEASED, KEY_MASK, key_check, game);
 	mlx_hook(game->mlx_win, ON_DESTROY, EXIT_MASK, exit_event, game);
 	mlx_loop(game->mlx_ptr);
-	return;
+	return ;
 }
