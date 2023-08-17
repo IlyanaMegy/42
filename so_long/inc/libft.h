@@ -93,7 +93,7 @@ typedef struct s_gnl
 	struct s_gnl	*next;
 }					t_gnl;
 
-char				*get_next_line(int fd);
+char				*get_next_line(int fd, int *err);
 t_gnl				*get_last(t_gnl *str);
 void				create_line(t_gnl *str, char **line);
 void				free_str(t_gnl *str);

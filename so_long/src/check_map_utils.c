@@ -36,7 +36,7 @@ int	check_line(char *line)
 	return (0);
 }
 
-void	check_map_valid(t_game *game, char *map_file)
+void	check_map_valid(t_game *game, char *map_file, int err)
 {
 	t_game_map	map;
 
@@ -47,7 +47,7 @@ void	check_map_valid(t_game *game, char *map_file)
 	check_map_rect(game);
 	check_map_walls(game);
 	check_map_elem(game, &map);
-	is_map_playable(game, map_file);
+	is_map_playable(game, map_file, err);
 }
 
 int	to_find(char *str, char c)

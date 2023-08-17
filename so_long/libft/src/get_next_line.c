@@ -106,6 +106,8 @@ void	read_me(int fd, t_gnl **str)
 	while (!is_newline(*str) && size_readed != 0)
 	{
 		buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!buffer)
+			return ;
 		size_readed = (int)read(fd, buffer, BUFFER_SIZE);
 		if ((size_readed == 0 && !(*str)) || size_readed == -1)
 		{
@@ -118,7 +120,7 @@ void	read_me(int fd, t_gnl **str)
 	}
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int *err)
 {
 	static t_gnl	*str = NULL;
 	char			*line;
@@ -130,12 +132,19 @@ char	*get_next_line(int fd)
 	if (!str)
 		return (NULL);
 	extract_me(str, &line);
-	clean_me(&str);
-	if (line[0] == '\0')
+	if (!line)
 	{
 		free_str(str);
 		str = NULL;
+		*err = 1;
+		return (NULL);
+	}
+	clean_me(&str);
+	if (!line[0])
+	{
 		free(line);
+		free_str(str);
+		str = NULL;
 		return (NULL);
 	}
 	return (line);

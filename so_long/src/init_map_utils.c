@@ -12,7 +12,7 @@
 
 #include "../inc/so_long.h"
 
-void	join_me(char **lines, char **curr)
+void	join_me(char **lines, char **curr, t_game *game)
 {
 	char	*tmp;
 
@@ -20,19 +20,24 @@ void	join_me(char **lines, char **curr)
 	*lines = ft_strjoin(*lines, *curr);
 	free(tmp);
 	free(*curr);
+	if (!(*lines))
+		end_game("Error trying saving the map.", game, file_error, NULL);
 }
 
-void	pass_empty_lines(char **lines, int *fd)
+void	pass_empty_lines(char **lines, int *fd, t_game *game, int *err)
 {
-	*lines = get_next_line(*fd);
+	*lines = get_next_line(*fd, err);
+	if (!(*lines))
+		end_game("This file is empty!", game, file_error, NULL);
 	while (*lines && *lines[0] == '\n')
 	{
 		free(*lines);
-		*lines = get_next_line(*fd);
+		*lines = get_next_line(*fd, err);
 	}
+	return ;
 }
 
-char	**get_map(char *map_file, t_game *game)
+char	**get_map(char *map_file, t_game *game, int err)
 {
 	char	*curr;
 	char	*lines;
@@ -40,14 +45,11 @@ char	**get_map(char *map_file, t_game *game)
 
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
-		end_game("Error while trying opening the map.", game, file_error, NULL);
-	pass_empty_lines(&lines, &fd);
-	if (lines[0] == '\0')
-	{
-		close(fd);
-		end_game("This file is empty!", game, file_error, lines);
-	}
-	curr = get_next_line(fd);
+		end_game("Error trying opening the map.", game, file_error, NULL);
+	pass_empty_lines(&lines, &fd, game, &err);
+	curr = get_next_line(fd, &err);
+	if (!curr)
+		free(lines);
 	while (curr)
 	{
 		if (curr[0] == '\n')
@@ -55,9 +57,10 @@ char	**get_map(char *map_file, t_game *game)
 			free(curr);
 			break ;
 		}
-		join_me(&lines, &curr);
-		curr = get_next_line(fd);
+		join_me(&lines, &curr, game);
+		curr = get_next_line(fd, &err);
+		if (err == 1)
+			end_game("Error trying saving the map.", game, file_error, NULL);
 	}
-	close(fd);	
 	return (ft_split(lines, '\n'));
 }

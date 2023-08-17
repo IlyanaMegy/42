@@ -44,13 +44,15 @@ void	init_game(t_game *game, char *map_file)
 {
 	int	x;
 	int	y;
+	int err;
 
 	(void)map_file;
-	game->map = get_map(map_file, game);
+	err = 0;
+	game->map = get_map(map_file, game, err);
 	if (game->map == NULL)
 		end_game("An error occurred while saving the map.", game, file_error, NULL);
 	init_vars(game);
-	check_map_valid(game, map_file);
+	check_map_valid(game, map_file, err);
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 		end_game("Fail init mlx.", game, map_error, NULL);

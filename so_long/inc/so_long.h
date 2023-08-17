@@ -68,10 +68,8 @@ typedef struct s_game_map
 enum			e_state
 {
 	event_end = -1,
-	game_over = -1,
 	map_error = 2,
 	file_error = 3,
-	init_error = 4,
 };
 
 // FUNCTIONS
@@ -86,20 +84,20 @@ int				exit_event(t_game *game);
 void			init_game(t_game *game, char *map_file);
 
 // init map && init map utils
-char			**get_map(char *map_file, t_game *game);
+char			**get_map(char *map_file, t_game *game, int err);
 void			render_map(t_game *game);
 
 // check map
 void			check_map_rect(t_game *game);
 void			check_map_walls(t_game *game);
 void			check_map_elem(t_game *game, t_game_map *map);
-void			is_map_playable(t_game *game, char *map_file);
+void			is_map_playable(t_game *game, char *map_file, int err);
 void			show_table(char **map);
 
 // check map utils
 int				get_height(char **map);
 int				check_line(char *line);
-void			check_map_valid(t_game *game, char *map_file);
+void			check_map_valid(t_game *game, char *map_file, int err);
 int				to_find(char *str, char c);
 int				is_out(int x, int y, int size_x, int size_y);
 

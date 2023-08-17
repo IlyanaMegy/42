@@ -28,31 +28,29 @@ int	fill(char **map, t_vector size, t_vector cur, char *e)
 	return (elem_count);
 }
 
-void	is_map_playable(t_game *game, char *map_file)
+void	is_map_playable(t_game *game, char *map_file, int err)
 {
 	char	**map_clone;
 	int		collected;
 
-	map_clone = get_map(map_file, game);
-	collected = 0;
-	if (map_clone != NULL)
+	map_clone = get_map(map_file, game, err);
+	if (!map_clone)
+		end_game("An error occurred saving the map.", game, map_error, NULL);
+	collected = fill(map_clone, game->map_size, game->p_pos, "CP0");
+	free_map(map_clone);
+	if (collected == game->nb_c)
 	{
-		collected = fill(map_clone, game->map_size, game->p_pos, "CP0");
+		map_clone = get_map(map_file, game, err);
+		if (!map_clone)
+			end_game("Could not save the map.", game, map_error, NULL);
+		collected = fill(map_clone, game->map_size, game->p_pos, "ECP0");
 		free_map(map_clone);
-		// if (map_clone)
-		// 	ft_printf("\n\nWTF\n\n");
-		if (collected == game->nb_c)
-		{
-			map_clone = get_map(map_file, game);
-			collected = fill(map_clone, game->map_size, game->p_pos, "ECP0");
-			free_map(map_clone);
-			// ft_printf("map line len %d\nmap content line at i=2 : %c\n", ft_strlen(map_clone[1]), map_clone[1][2]);
-		}
-		if (collected != game->nb_c + 1)
-			end_game("Unplayable map. Aborting, bye!", game, map_error, NULL);			
-		return ;
 	}
-	end_game("An error occurred while saving the map.", game, map_error, NULL);
+	if (collected != game->nb_c + 1)
+		end_game("Unplayable map. Aborting, bye!", game, map_error, NULL);			
+	return ;
+	
+	
 }
 
 void	check_map_rect(t_game *game)
@@ -89,8 +87,6 @@ void	check_map_walls(t_game *game)
 	if (check_line(game->map[0]))
 		end_game("Map not surrounded by walls!", game, map_error, NULL);
 	i = game->map_size.y - 1;
-	// if (i <= 4 || ft_strlen(game->map[0]) <= 4)
-	// 	end_game("Map is too small.", game, map_error, NULL);
 	while (i)
 	{
 		end = ft_strlen(game->map[i]) - 1;
