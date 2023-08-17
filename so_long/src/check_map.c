@@ -89,8 +89,8 @@ void	check_map_walls(t_game *game)
 	if (check_line(game->map[0]))
 		end_game("Map not surrounded by walls!", game, map_error, NULL);
 	i = game->map_size.y - 1;
-	if (i <= 4 || ft_strlen(game->map[0]) <= 4)
-		end_game("Map is too small.", game, map_error, NULL);
+	// if (i <= 4 || ft_strlen(game->map[0]) <= 4)
+	// 	end_game("Map is too small.", game, map_error, NULL);
 	while (i)
 	{
 		end = ft_strlen(game->map[i]) - 1;
