@@ -55,26 +55,26 @@ void	end_game(char *msg, t_game *game, enum e_state state, char *free_me)
 {
 	if (state == event_end)
 	{
-		ft_printf("%s\n" RED, msg);
+		ft_printf("%s\n", msg);
 		destroy_the(game);
 		exit(0);
 	}
 	else if (state == file_error)
 	{
-		ft_printf("Error\n__FILE_ERROR__ : %s\n" RED, msg);
+		ft_printf("Error\n__FILE_ERROR__ : %s\n", msg);
 		if (free_me != NULL)
 			free(free_me);
 		exit(1);
 	}
 	else if (state == map_error)
 	{
-		ft_printf("Error\n__MAP_ERROR__ : %s\n" RED, msg);
+		ft_printf("Error\n__MAP_ERROR__ : %s\n", msg);
 		free_map(game->map);
 		if (free_me != NULL)
 			free(free_me);
 		exit(2);
 	}
-	ft_printf("Error\n%s\n" RED, msg);
+	ft_printf("Error\n%s\n", msg);
 	destroy_the(game);
 	exit(3);
 }
