@@ -1,2 +1,1 @@
-# 42
-projects
+![ft_](https://biolibre.fr/media/cache/articleMainImg/images/articles/school_42.jpeg)
