@@ -46,7 +46,7 @@ void	move_to(int x, int y, void *dir, t_game *game)
 		game->nb_c--;
 	put_that_img(dir, game->p_pos.x, game->p_pos.y, game);
 	game->moves++;
-	ft_printf("moves : %d\n", game->moves);
+	put_text(game);
 	if (game->map[y][x] == 'E' && game->nb_c == 0)
 		end_game("Congratulation you win!", game, event_end, NULL);
 	game->map[y][x] = 'P';

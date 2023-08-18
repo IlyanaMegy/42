@@ -19,9 +19,9 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <mlx.h>
-# include <stdlib.h> //malloc
+# include <stdlib.h>
 # include <string.h>
-# include <unistd.h> //read, close, write
+# include <unistd.h>
 
 // STRUCTURES
 
@@ -105,4 +105,9 @@ int				is_out(int x, int y, int size_x, int size_y);
 void			move_to(int x, int y, void *dir, t_game *game);
 int				is_wall(t_game *game, int y, int x);
 void			*save_that_img(char *img_path, t_game *game);
+void			put_that_img(void *img, int x, int y, t_game *game);
+
+// put_text
+void			put_text(t_game *game);
+
 #endif

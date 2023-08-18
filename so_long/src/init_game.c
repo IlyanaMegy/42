@@ -50,8 +50,7 @@ void	init_game(t_game *game, char *map_file)
 	err = 0;
 	game->map = get_map(map_file, game, err);
 	if (game->map == NULL)
-		end_game("An error occurred while saving the map.", game, file_error,
-			NULL);
+		end_game("An error occurred saving the map.", game, file_error, NULL);
 	init_vars(game);
 	check_map_valid(game, map_file, err);
 	game->mlx_ptr = mlx_init();
@@ -65,6 +64,7 @@ void	init_game(t_game *game, char *map_file)
 	render_map(game);
 	mlx_hook(game->mlx_win, KEY_RELEASED, KEY_MASK, key_check, game);
 	mlx_hook(game->mlx_win, ON_DESTROY, EXIT_MASK, exit_event, game);
+	mlx_string_put(game->mlx_ptr, game->mlx_win, 5, 10, 0xff0000, "Move: 0");
 	mlx_loop(game->mlx_ptr);
 	return ;
 }

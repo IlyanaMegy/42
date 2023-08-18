@@ -22,7 +22,8 @@ SRC			= main.c \
 			check_map.c \
 			check_map_utils.c \
 			init_game.c \
-			move_to.c
+			move_to.c \
+			put_text.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/
