@@ -5,5 +5,5 @@
 
 
 // verifs
-void    check_args(char **args);
+void    check_args(int ac, char **args);
 #endif
