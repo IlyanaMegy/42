@@ -19,6 +19,7 @@
 #include <stdarg.h>
 #include <stdint.h>
 #include <string.h>
+#include <stddef.h>
 
 typedef struct s_list
 {

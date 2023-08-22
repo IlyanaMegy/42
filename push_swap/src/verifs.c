@@ -1,45 +1,33 @@
 #include "../inc/pushswap.h"
 
-void	check_args(int ac, char **args)
+void	check_args(char **args)
 {
 	int i;
-	int nb;
 	size_t start;
-    size_t end;
-    char *tmp;
+	size_t end;
+	char *tmp;
 
 	i = 1;
-	start = 0;
-    end = 0;
-	ft_printf("%d\n", ac);
 	while (args[i])
 	{
-        while (end < ft_strlen(args[i]))
-        {
-            while (*args[i] == ' ')
-            {
-                start++;
-                args[i]++;
-            }
-            ft_printf("start at %d, end at %d\n", start, end);
-            while (*args[i] != ' ')
-            {
-                end++;
-                args[i]++;
-            }
-            ft_printf("start at %d, end at %d\ns[0]=%c", start, end, args[i][0]);
-            tmp = ft_substr(args[i], 0, end+1);
-            ft_printf("\"%s\" len = %d\n", tmp, ft_strlen(tmp));
-            nb = ft_atoi(tmp);
-            if (!nb)
-            {
-                ft_printf("not a number !\n");
-                break ;
-            }
-            ft_printf("%d", nb);
-            start = end;
-        }
-		
+		start = 0;
+		end = 0;
+		while (end < ft_strlen(args[i]))
+		{
+			while (args[i][start] == ' ')
+				start++;
+			end = start;
+			while (args[i][end] != ' ')
+				end++;
+			tmp = ft_substr(args[i], start, end - start);
+			if (!ft_strlen(tmp))
+				break ;
+			else if (!ft_atoi(tmp))
+				if (!(ft_strlen(tmp) == 1 && tmp[0] == '0'))
+					return ;
+			start = end;
+			ft_printf("---------\n%d\n\n", ft_atoi(tmp));
+		}
 		i++;
 	}
 }

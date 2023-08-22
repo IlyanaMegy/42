@@ -3,16 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 13:18:12 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/05/02 13:18:17 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/08/23 00:00:27 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
-** Transforme une chaine de caracteres en entier.
-** Convert a string to integer.
-*/
 
 #include "libft.h"
 
@@ -33,5 +29,7 @@ int	ft_atoi(const char *str)
 	}
 	while (*str >= 48 && *str <= 57)
 		res = res * 10 + *str++ - 48;
+	if(*str++)
+		return 0;
 	return (res * minus);
 }
