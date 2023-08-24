@@ -4,6 +4,6 @@
 # include "../inc/libft.h"
 
 // verifs
-int		check_args(char **args);
-void	fill_pA(char **av, int **pA);
+int		check_args(char **av);
+int	fill_pA(char **av, char **pA);
 #endif
