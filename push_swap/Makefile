@@ -6,7 +6,7 @@
 #    By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 11:53:13 by ilymegy           #+#    #+#              #
-#    Updated: 2023/08/21 12:38:13 by ilymegy          ###   ########.fr        #
+#    Updated: 2023/08/25 00:14:04 by ilymegy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ INC			= -I ./inc/\
 			
 SRC_PATH	= ./src/
 SRC			= main.c\
-			verifs.c
+			verifs.c\
+			cmd.c\
+			push_swap.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/

@@ -6,29 +6,31 @@ void	end_prog(void)
 	exit(1);
 }
 
+void	init_piles(t_ps *ps, char **av)
+{
+	(*ps).pileA = malloc((sizeof(char) * ((*ps).len_pA + 1)));
+	(*ps).pileA[0] = '\0';
+	(*ps).pileB = malloc((sizeof(char) * ((*ps).len_pA + 1)));
+	(*ps).pileB[0] = '\0';
+	if (!((*ps).pileB) || !((*ps).pileA))
+		end_prog();
+	fill_pA(av, &((*ps).pileA));
+	if (!((*ps).pileA)[0] || !((*ps).pileA))
+		end_prog();
+}
+
 int	main(int ac, char **av)
 {
-	char *pileA;
-	char *pileB;
-	int len_pileA;
+	t_ps ps;
 
-	len_pileA = 0;
 	if (ac > 1)
 	{
-		len_pileA = check_args(av);
-		if (!len_pileA)
+		ps.len_pA = check_args(av);
+		if (!ps.len_pA)
 			end_prog();
-		pileA = malloc((sizeof(char) * (len_pileA + 1)));
-		pileA[0] = '\0';
-		pileB = malloc((sizeof(char) * (len_pileA + 1)));
-		pileB[0] = '\0';
-		if (!pileB || !pileA)
-			end_prog();
-		fill_pA(av, &pileA);
-		if (!pileA[0] || !pileA)
-			end_prog();
-        ft_printf("%s\npa\tpb\n", pileA);
-		free(pileA);
+		init_piles(&ps, av);
+		in_order(ps.pileA, ps.len_pA);
+		free(ps.pileA);
 	}
 	else
 		end_prog();
