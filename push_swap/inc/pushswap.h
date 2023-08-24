@@ -3,7 +3,7 @@
 
 # include "../inc/libft.h"
 
-
 // verifs
-void    check_args(char **args);
+int		check_args(char **args);
+void	fill_pA(char **av, int **pA);
 #endif
