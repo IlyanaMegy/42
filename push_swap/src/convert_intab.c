@@ -61,13 +61,14 @@ int	get_nb(char **tmp, int i, char *pX)
 	return (i);
 }
 
-int	*int_tab(char *pX, t_ps *ps)
+int	*int_tab(char *pX, t_ps *ps, int *nb_nb)
 {
 	int *int_pX;
 	int i;
 	char *tmp;
 	int j;
 
+	*nb_nb = nb_nbr(ps);
 	int_pX = malloc(sizeof(int) * (nb_nbr(ps) + 1));
 	int_pX[0] = 0;
 	if (!int_pX)

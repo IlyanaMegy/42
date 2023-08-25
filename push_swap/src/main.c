@@ -17,8 +17,8 @@ void	init_piles(t_ps *ps, char **av)
 	fill_pA(av, &(ps->pileA));
 	if (!(ps->pileA)[0] || !(ps->pileA))
 		end_prog();
-	ps->intab_pA = int_tab(ps->pileA, ps);
-	ps->intab_pB = int_tab(ps->pileB, ps);
+	ps->intab_pA.tab = int_tab(ps->pileA, ps, &ps->intab_pA.nb_nbr);
+	ps->intab_pB.tab = int_tab(ps->pileB, ps, &ps->intab_pB.nb_nbr);
 }
 
 int	main(int ac, char **av)
