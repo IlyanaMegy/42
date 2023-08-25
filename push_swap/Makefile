@@ -21,6 +21,7 @@ SRC_PATH	= ./src/
 SRC			= main.c\
 			verifs.c\
 			cmd.c\
+			convert_intab.c\
 			push_swap.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
