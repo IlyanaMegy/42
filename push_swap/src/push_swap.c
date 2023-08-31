@@ -2,42 +2,57 @@
 
 void	big_n_smol(int *big, int *smol, int *pile)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (pile[i])
 	{
-		if (pile[i] > pile[i+1])
+		if (pile[i] > pile[i + 1])
 			*big = i;
-		else if(pile[i] < pile[i+1])
+		else if (pile[i] < pile[i + 1])
 			*smol = i;
 		i++;
 	}
-
 }
 
-int	in_order(int *pile)
+int	in_order(t_ps *ps, char pile)
 {
-	int big;
-	int smol;
+	int	*tab;
+	int	len;
+	int	i;
 
-	big = 0;
-	smol = 0;
-	if (pile[1])
+	i = 0;
+	if (pile == 'a')
 	{
-		ft_printf("pX[1] = %d\n", pile[1]);
-		big_n_smol(&big, &smol, pile);
-		ft_printf("big = %d, smol = %d\n", big, smol);
+		tab = ps->intab_pA.tab;
+		len = ps->intab_pA.nb_nbr;
 	}
-		
+	else
+	{
+		tab = ps->intab_pB.tab;
+		len = ps->intab_pB.nb_nbr;
+	}
+	if (tab[0])
+	{
+		while (tab[i] < tab[i + 1])
+			i++;
+		if (i + 1 < len)
+			return (0);
+		return (1);
+	}
 	return (1);
 }
 
 void	push_swap(t_ps *ps)
 {
-	ft_printf("nb_nbr tabpA = %d\n", ps->intab_pA.nb_nbr);
-	if (in_order(ps->intab_pA.tab))
+	if(ps->intab_pA.tab)
+		print_tab(ps->intab_pA.tab);
+	if (in_order(ps, 'a') && !ps->intab_pB.tab[0])
+	{
 		ft_printf("in order !\n");
+		end_prog(ps);
+	}
+		
 	else
 		ft_printf("not in order.\n");
 }

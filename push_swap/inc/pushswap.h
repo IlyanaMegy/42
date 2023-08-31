@@ -22,7 +22,7 @@ typedef struct s_ps
 }			t_ps;
 
 // main
-void		end_prog(void);
+void		end_prog(t_ps *ps);
 
 // verifs
 int			check_args(char **av);

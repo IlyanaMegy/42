@@ -19,6 +19,7 @@ int	len_incr(size_t *start, size_t *end, char *s, int *len_pA)
 				return (1);
 		*len_pA += ft_strlen(tmp) + 1;
 		*start = *end;
+		free(tmp);
 	}
 	return (0);
 }
@@ -80,8 +81,15 @@ void	join_me(char **pA, char *curr)
 		(*pA)[i + j] = curr[j];
 		j++;
 	}
-	(*pA)[i + j] = '\n';
-	(*pA)[i + j + 1] = 0;
+	if (!(*pA))
+		return ;
+	if (ft_strlen(*pA) > 1)
+	{
+		(*pA)[i + j] = '\n';
+		(*pA)[i + j + 1] = 0;
+	}
+	else if (ft_strlen(*pA) == 1)
+		(*pA)[0] = 0;
 }
 
 int	fill_pA(char **av, char **pA)
@@ -99,13 +107,17 @@ int	fill_pA(char **av, char **pA)
 		while (end < ft_strlen(av[i]))
 		{
 			res = get_number(&start, &end, av[i]);
-			if (res)
+			if (ft_strlen(res))
+			{
 				join_me(pA, res);
-			if (!(*pA))
-				return (1);
+				free(res);
+			}
 		}
 		i++;
 	}
-	(*pA)[ft_strlen(*pA) - 1] = '\0';
+	if (ft_strlen(*pA) > 1)
+		(*pA)[ft_strlen(*pA) - 1] = '\0';
+	else if (ft_strlen(*pA) == 1)
+		(*pA)[0] = 0;
 	return (0);
 }

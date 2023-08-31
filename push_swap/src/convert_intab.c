@@ -72,14 +72,14 @@ int	*int_tab(char *pX, t_ps *ps, int *nb_nb)
 	int_pX = malloc(sizeof(int) * (nb_nbr(ps) + 1));
 	int_pX[0] = 0;
 	if (!int_pX)
-		end_prog();
+		end_prog(ps);
 	i = 0;
 	j = 0;
 	while (pX[i])
 	{
 		i = get_nb(&tmp, i, pX);
 		if (i < 0)
-			end_prog();
+			end_prog(ps);
 		int_pX[j] = ft_atoi(tmp);
 		j++;
 		i++;
