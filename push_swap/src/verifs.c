@@ -92,7 +92,7 @@ void	join_me(char **pA, char *curr)
 		(*pA)[0] = 0;
 }
 
-int	fill_pA(char **av, char **pA)
+int	fill_pA(char **av, *pA)
 {
 	int i;
 	size_t start;
@@ -107,11 +107,11 @@ int	fill_pA(char **av, char **pA)
 		while (end < ft_strlen(av[i]))
 		{
 			res = get_number(&start, &end, av[i]);
-			if (ft_strlen(res))
-			{
-				join_me(pA, res);
-				free(res);
-			}
+			// if (ft_strlen(res))
+			// {
+			// 	join_me(pA, res);
+			// 	free(res);
+			// }
 		}
 		i++;
 	}

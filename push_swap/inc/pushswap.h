@@ -3,36 +3,30 @@
 
 # include "../inc/libft.h"
 
-typedef struct s_tab
+typedef struct s_pA
 {
-	int		*tab;
-	int		nb_nbr;
-}			t_tab;
+	int			nb;
+	struct s_pA	*next;
+}				t_pA;
 
-typedef struct s_ps
+typedef struct s_pB
 {
-	char	*pileA;
-	char	*pileB;
-	int		len_pA;
-	int		len_pB;
-	t_tab	intab_pA;
-	t_tab	intab_pB;
-	int		nb_nbrA;
-	int		nb_nbrB;
-}			t_ps;
+	int			nb;
+	struct s_pB	*next;
+}				t_pB;
 
 // main
-void		end_prog(t_ps *ps);
+void			end_prog(t_pA *pA, t_pB *pB);
 
-// verifs
-int			check_args(char **av);
-int			fill_pA(char **av, char **pA);
-char		*get_number(size_t *start, size_t *end, char *s);
+// // verifs
+// int				check_args(char **av);
+// int				fill_pA(char **av, char **pA);
+// char			*get_number(size_t *start, size_t *end, char *s);
 
-// convert_intab
-int			*int_tab(char *pX, t_ps *ps, int *nb_nb);
-void		print_tab(int *tab);
+// // convert_intab
+// int				*int_tab(char *pX, t_ps *ps, int *nb_nb);
+// void			print_tab(int *tab);
 
-// push_swap
-void		push_swap(t_ps *ps);
+// // push_swap
+// void			push_swap(t_ps *ps);
 #endif
