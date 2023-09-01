@@ -16,11 +16,11 @@ typedef struct s_pB
 }				t_pB;
 
 // main
-void			end_prog(t_pA *pA, t_pB *pB);
+void			end_prog(char *msg, int exit_nb);
 
 // // verifs
-// int				check_args(char **av);
-// int				fill_pA(char **av, char **pA);
+int				check_args(char **av);
+int				fill_pA(char **av, t_pA **pA);
 // char			*get_number(size_t *start, size_t *end, char *s);
 
 // // convert_intab
