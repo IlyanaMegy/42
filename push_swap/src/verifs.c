@@ -26,44 +26,50 @@ int	len_incr(size_t *start, size_t *end, char *s, int *len_pA)
 
 int	check_args(char **av)
 {
-	int		i;
-	size_t	start;
-	size_t	end;
-	int		len_pileA;
-	int		err;
+	int	i;
+	int	j;
+	int	len;
 
 	i = 1;
-	len_pileA = 0;
-	err = 0;
+	len = 0;
 	while (av[i])
 	{
-		start = 0;
-		end = 0;
-		err = len_incr(&start, &end, av[i], &len_pileA);
-		if (err)
-			return (0);
+		j = 0;
+		while (av[i][j])
+		{
+			if (av[i][j] < 48 || av[i][j] > 57)
+				return (0);
+			j++;
+			len++;
+		}
 		i++;
-		len_pileA--;
 	}
-	return (len_pileA);
+	return (len);
 }
 
-char	*get_number(size_t *start, size_t *end, char *s)
+char	*get_number(char *s)
 {
 	char	*tmp;
+	int		j;
 
-	while (s[*start] == ' ')
-		(*start)++;
-	*end = *start;
-	while (s[*end] != ' ')
-		(*end)++;
-	tmp = ft_substr(s, *start, *end - *start);
+	j = 0;
+	while (s[j])
+		j++;
+	tmp = malloc(sizeof(char) * (j + 1));
+	if (!tmp)
+		return (NULL);
+	j = 0;
+	while (s[j])
+	{
+		tmp[j] = s[j];
+		j++;
+	}
+	tmp[j] = '\0';
 	if (!ft_strlen(tmp))
 		return (NULL);
 	else if (!ft_atoi(tmp))
 		if (!(ft_strlen(tmp) == 1 && tmp[0] == '0'))
 			return (NULL);
-	*start = *end;
 	return (tmp);
 }
 
@@ -92,32 +98,24 @@ void	join_me(char **pA, char *curr)
 		(*pA)[0] = 0;
 }
 
-int	fill_pA(char **av, t_pA **pA)
+int	fill_pA(char **av)
 {
 	int i;
-	size_t start;
-	size_t end;
-	char *res;
+	char *tmp;
+	t_pA *pA;
 
 	i = 1;
-	if (pA)
-		ft_printf("lol.\n");
+	// pA = lstnew(0);
 	while (av[i])
 	{
-		start = 0;
-		end = 0;
-		while (end < ft_strlen(av[i]))
-		{
-			res = get_number(&start, &end, av[i]);
-			ft_printf("res = %s\n", res);
-			
-			// if (ft_strlen(res))
-			// {
-			// 	join_me(pA, res);
-			// 	free(res);
-			// }
-		}
+		tmp = get_number(av[i]);
+		if (!tmp)
+			return 1;
+		ft_printf("tmp = %s\n", tmp);
+		lstadd_back(&pA, lstnew(atoi(tmp)));
+		free(tmp);
 		i++;
 	}
+	print_list(pA);
 	return (0);
 }
