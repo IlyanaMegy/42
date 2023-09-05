@@ -19,11 +19,11 @@ int	main(int ac, char **av)
 	}
 	stack_a = init_stack(ac, av);
 	stack_b = NULL;
-	if (push_swap(stack_a, stack_b))
+	if (all_good(stack_a, stack_b))
 	{
 		ft_lstclear(&stack_a, free);
-		ft_printf("already in order\n");
 		return (0);
 	}
+	push_swap(&stack_a, &stack_b);
 	return (0);
 }

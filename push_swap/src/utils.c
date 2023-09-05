@@ -52,10 +52,11 @@ void	print_lst(t_list *mylist)
 	t_list	*lst;
 
 	lst = mylist;
+	ft_printf("\n  ");
 	while (lst->next)
 	{
-		ft_printf("%d --> ",lst->content->nb);
+		ft_printf("%d - ",lst->content->nb);
 		lst = lst->next;
 	}
-	ft_printf("%d --> ",lst->content->nb);
+	ft_printf("%d\n\n",lst->content->nb);
 }

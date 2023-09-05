@@ -42,6 +42,7 @@ void				print_tab(int *tab);
 void				print_lst(t_list *mylist);
 
 // pushswap.c
-int					push_swap(t_list *s_a, t_list *s_b);
+int					push_swap(t_list **s_a, t_list **s_b);
+int					all_good(t_list *s_a, t_list *s_b);
 
 #endif
