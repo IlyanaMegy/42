@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   print_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 14:38:42 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/05/09 14:38:44 by ilymegy          ###   ########.fr       */
+/*   Created: 2023/09/05 13:57:28 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/09/05 13:57:31 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	print_list(t_list *mylist)
 {
-	t_list	*tmp;
+	t_list	*lst;
 
-	if (new == NULL || lst == NULL)
-		return ;
-	if (!lst)
+	lst = mylist;
+	while (lst->next)
 	{
-		*lst = new;
-		return ;
+		ft_printf("%s --> ",(char *)lst->content);
+		lst = lst->next;
 	}
-	tmp = ft_lstlast(*(lst));
-	tmp->next = new;
+	ft_printf("%s\n",(char *)lst->content);
 }

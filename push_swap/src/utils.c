@@ -1,6 +1,6 @@
 #include "../inc/pushswap.h"
 
-void	free_double_ptr_char(char **arr_char)
+void	free_double_char(char **arr_char)
 {
 	size_t	i;
 
@@ -42,6 +42,6 @@ void	print_double_array(char **a)
 
 void	end_n_free(char **array, char *msg, int exit_nb)
 {
-	free_double_ptr_char(array);
+	free_double_char(array);
 	end_prog(msg, exit_nb);
 }

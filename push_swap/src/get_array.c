@@ -22,7 +22,7 @@ char	**get_array_multiple_args(int ac, char **av)
 		array[i] = ft_strdup(av[i + 1]);
 		if (array[i] == NULL)
 		{
-			free_double_ptr_char(array);
+			free_double_char(array);
 			return (NULL);
 		}
 		i++;
@@ -40,10 +40,7 @@ char	**get_array(int ac, char **av)
 	else
 		array = get_array_multiple_args(ac, av);
 	if (array == NULL || *array == NULL)
-	{
-		ft_putendl_fd("Error", STDERR_FILENO);
-		exit (EXIT_FAILURE);
-	}
+		end_prog("Error\n", 1);
 	return (array);
 }
 

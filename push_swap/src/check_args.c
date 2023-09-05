@@ -1,5 +1,59 @@
 #include "../inc/pushswap.h"
 
+static int	check_duplicate(int *array, size_t size)
+{
+	size_t	i;
+	size_t	j;
+	size_t	counter;
+
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		counter = 0;
+		while (j < size)
+		{
+			if (array[i] == array[j])
+				counter++;
+			j++;
+		}
+		if (counter != 1)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	check_intlim(char **array)
+{
+	size_t		i;
+	size_t		j;
+	size_t		lenght;
+	long int	conv;
+
+	i = 0;
+	j = 0;
+	while (array[i])
+	{
+		j = 0;
+		lenght = 0;
+		if (array[i][j] == '+' || array[i][j] == '-')
+			j++;
+		while (array[i][j] == '0')
+			j++;
+		while (ft_isdigit(array[i][j]))
+		{
+			lenght++;
+			j++;
+		}
+		conv = ft_atol(array[i]);
+		if (lenght > 10 || conv > INT_MAX || conv < INT_MIN)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	check_formats(char **array)
 {
 	int	i;
@@ -26,9 +80,9 @@ void	check_formats(char **array)
 	}
 }
 
-int	check_args(int ac, char **av, size_t *s)
+int	*check_args(int ac, char **av, size_t *s)
 {
-	char	**array;
+	char **array;
 	int *array_int;
 
 	*s = 0;
@@ -37,9 +91,14 @@ int	check_args(int ac, char **av, size_t *s)
 	*s = 0;
 	while (array[*s])
 		(*s)++;
-	print_double_array(array);
 	array_int = convert_to_int(array);
 	if (array_int == NULL)
 		end_n_free(array, "", 1);
-	return (0);
+	if (check_intlim(array) || check_duplicate(array_int, *s))
+	{
+		free(array_int);
+		end_n_free(array, "Error\n", 1);
+	}
+	free_double_char(array);
+	return (array_int);
 }

@@ -20,17 +20,17 @@ typedef struct s_stack
 void				end_prog(char *msg, int exit_nb);
 
 // init_stack.c
-int					init_stack(int ac, char **av);
+t_list				*init_stack(int ac, char **av);
 
 // check_args.c
-int					check_args(int ac, char **av, size_t *s);
+int					*check_args(int ac, char **av, size_t *s);
 
 // get_array.c
 char				**get_array(int ac, char **av);
 int					*convert_to_int(char **array);
 
 // utils.c
-void				free_double_ptr_char(char **arr_char);
+void				free_double_char(char **arr_char);
 void				print_double_array(char **a);
 void				end_n_free(char **array, char *msg, int exit_nb);
 void				print_tab(int *tab);

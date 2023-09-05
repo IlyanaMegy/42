@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 14:38:42 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/05/09 14:38:44 by ilymegy          ###   ########.fr       */
+/*   Created: 2023/09/05 12:56:12 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/09/05 12:56:19 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+long	ft_atol(const char *nptr)
 {
-	t_list	*tmp;
+	size_t			i;
+	unsigned long	nbr;
+	int				signe;
 
-	if (new == NULL || lst == NULL)
-		return ;
-	if (!lst)
+	i = 0;
+	nbr = 0;
+	signe = 1;
+	while (nptr[i] == ' ')
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		*lst = new;
-		return ;
+		if (nptr[i] == '-')
+			signe = -1;
+		i++;
 	}
-	tmp = ft_lstlast(*(lst));
-	tmp->next = new;
+	while (nptr[i] == '0')
+		i++;
+	while (ft_isdigit(nptr[i]))
+	{
+		nbr = nbr * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (signe * nbr);
 }

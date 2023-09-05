@@ -1,20 +1,54 @@
 #include "../inc/pushswap.h"
 
-int	init_stack(int ac, char **av)
+t_list	*create_node(int value)
 {
-	size_t	size;
-	int		i;
+	t_stack	*node;
+	t_list	*list;
 
-	// t_list			*node;
-	// t_list			*stack_a;
-	// int				*array;
-	i = check_args(ac, av, &size);
-	ft_printf("i = %d\n", i);
-	// i = 0;
-	// stack_a = NULL;
-	return (0);
+	list = malloc(sizeof(*list));
+	if (list == NULL)
+		return (NULL);
+	node = malloc(sizeof(*node));
+	if (node == NULL)
+	{
+		free(list);
+		return (NULL);
+	}
+	node->nb = value;
+	list->content = node;
+	list->next = NULL;
+	return (list);
 }
 
+t_list	*init_stack(int ac, char **av)
+{
+	size_t	size;
+	size_t	i;
+	t_list	*node;
+	t_list	*stack_a;
+	int		*array;
+
+	array = check_args(ac, av, &size);
+	i = 0;
+	stack_a = NULL;
+	while (i < size)
+	{
+		node = create_node(array[i++]);
+		if (node == NULL)
+		{
+			ft_lstclear(&stack_a, free);
+			free(array);
+			end_prog("", 1);
+		}
+		if (!stack_a)
+			ft_lstnew(node);
+		else
+			ft_lstadd_back(&stack_a, node);
+	}
+	free(array);
+	// ft_printf("content is : %s\n", (char *)stack_a->content);
+	return (stack_a);
+}
 
 // char	*get_number(char *s)
 // {

@@ -17,6 +17,7 @@
 # define LIBFT_H
 
 # include <fcntl.h>
+# include <limits.h>
 # include <stdarg.h>
 # include <stddef.h>
 # include <stdint.h>
@@ -38,6 +39,7 @@ typedef struct s_list
 // LIBFT
 int	ft_atoi_base(const char *str, const char *base, size_t len_base);
 int	ft_atoi(const char *nptr);
+long	ft_atol(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_convert_base(
@@ -95,6 +97,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int	ft_toupper(int c);
 int	ft_tolower(int c);
+void	print_list(t_list *mylist);
 
 // PRINTF
 int	ft_printf(const char *str, ...);
