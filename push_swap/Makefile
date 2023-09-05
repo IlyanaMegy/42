@@ -22,6 +22,7 @@ SRC			= main.c\
 			init_stack.c\
 			check_args.c\
 			get_array.c\
+			push_swap.c\
 			utils.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 

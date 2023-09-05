@@ -1,4 +1,5 @@
 #include "../inc/pushswap.h"
+#include "../inc/libft.h"
 
 void	free_double_char(char **arr_char)
 {
@@ -44,4 +45,17 @@ void	end_n_free(char **array, char *msg, int exit_nb)
 {
 	free_double_char(array);
 	end_prog(msg, exit_nb);
+}
+
+void	print_lst(t_list *mylist)
+{
+	t_list	*lst;
+
+	lst = mylist;
+	while (lst->next)
+	{
+		ft_printf("%d --> ",lst->content->nb);
+		lst = lst->next;
+	}
+	ft_printf("%d --> ",lst->content->nb);
 }

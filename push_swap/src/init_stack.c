@@ -1,4 +1,5 @@
 #include "../inc/pushswap.h"
+#include "../inc/libft.h"
 
 t_list	*create_node(int value)
 {
@@ -40,13 +41,9 @@ t_list	*init_stack(int ac, char **av)
 			free(array);
 			end_prog("", 1);
 		}
-		if (!stack_a)
-			ft_lstnew(node);
-		else
-			ft_lstadd_back(&stack_a, node);
-	}
+		ft_lstadd_back(&stack_a, node);
+}
 	free(array);
-	// ft_printf("content is : %s\n", (char *)stack_a->content);
 	return (stack_a);
 }
 

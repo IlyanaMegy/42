@@ -1,4 +1,6 @@
 #include "../inc/pushswap.h"
+#include "../inc/libft.h"
+
 
 static int	check_duplicate(int *array, size_t size)
 {
@@ -85,7 +87,6 @@ int	*check_args(int ac, char **av, size_t *s)
 	char **array;
 	int *array_int;
 
-	*s = 0;
 	array = get_array(ac, av);
 	check_formats(array);
 	*s = 0;

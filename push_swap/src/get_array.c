@@ -1,4 +1,5 @@
 #include "../inc/pushswap.h"
+#include "../inc/libft.h"
 
 char	**get_array_single_arg(char *av)
 {
