@@ -19,28 +19,30 @@ void	end_prog(char *msg, int exit_nb)
 
 int	main(int ac, char **av)
 {
-	// t_pA *pA;
-	// t_pB *pB;
-	int pA_len;
+	// t_list	*stack_a;
+	// t_list	*stack_b;
+	int		res;
 
-	if (ac > 1)
+	if (ac == 1)
 	{
-		pA_len = check_args(av);
-		ft_printf("pA_len = %d\n", pA_len);
-		if (!pA_len) // pas de nombre ou erreur
-		{
-			end_prog("Error", 1);
-			return (1);
-		}
-		else if (pA_len == 1) // un seul nombre deja en ordre
-		{
-			end_prog("", 0);
-			return (0);
-		}
-		// init_piles(&pA, &pB, av);
-		fill_pA(av);
-		return (0);
+		end_prog("Error", 1);
+		return (1);
 	}
-	end_prog("Error", 1);
-	return (1);
+	res = init_stack(ac, av);
+	// stack_a = NULL;
+	// stack_b = NULL;
+	ft_printf("res = %d", res);
+	// if (!pA_len) // pas de nombre ou erreur
+	// {
+	// 	end_prog("Error", 1);
+	// 	return (1);
+	// }
+	// else if (pA_len == 1) // un seul nombre deja en ordre
+	// {
+	// 	end_prog("", 0);
+	// 	return (0);
+	// }
+	// // init_piles(&pA, &pB, av);
+	// fill_pA(av);
+	return (0);
 }

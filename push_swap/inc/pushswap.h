@@ -1,36 +1,38 @@
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
-
 # include "../inc/libft.h"
 
-typedef struct s_pA
+# ifndef T_LIST
+#  define T_LIST
+
+typedef struct s_list
 {
-	int			nb;
-	struct s_pA	*next;
-}				t_pA;
+	t_stack			*content;
+	struct s_list	*next;
+}					t_list;
+# endif
 
-typedef struct s_pB
+typedef struct s_stack
 {
-	int			nb;
-	struct s_pB	*next;
-}				t_pB;
+	int				nb;
+}					t_stack;
+// main.c
+void				end_prog(char *msg, int exit_nb);
 
-// main
-void			end_prog(char *msg, int exit_nb);
+// init_stack.c
+int					init_stack(int ac, char **av);
 
-// // verifs
-int				check_args(char **av);
-int				fill_pA(char **av);
-// char			*get_number(size_t *start, size_t *end, char *s);
+// check_args.c
+int					check_args(int ac, char **av, size_t *s);
 
-// lst_func
-void			lstadd_back(t_pA **lst, t_pA *new);
-t_pA			*lstnew(int nb);
-void			print_list(t_pA *mylist);
-// // convert_intab
-// int				*int_tab(char *pX, t_ps *ps, int *nb_nb);
-// void			print_tab(int *tab);
+// get_array.c
+char				**get_array(int ac, char **av);
+int					*convert_to_int(char **array);
 
-// // push_swap
-// void			push_swap(t_ps *ps);
+// utils.c
+void				free_double_ptr_char(char **arr_char);
+void				print_double_array(char **a);
+void				end_n_free(char **array, char *msg, int exit_nb);
+void				print_tab(int *tab);
+
 #endif

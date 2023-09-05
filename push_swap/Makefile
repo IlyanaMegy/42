@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= pushswap
+NAME 		= push_swap
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -g3
 
@@ -19,8 +19,10 @@ INC			= -I ./inc/\
 			
 SRC_PATH	= ./src/
 SRC			= main.c\
-			verifs.c\
-			lst_func.c
+			init_stack.c\
+			check_args.c\
+			get_array.c\
+			utils.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/
