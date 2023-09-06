@@ -1,5 +1,5 @@
 */*.out
 */*.o
-pushswap
 libft/libft
 obj/
+push_swap
