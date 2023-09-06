@@ -6,7 +6,7 @@
 #    By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 11:53:13 by ilymegy           #+#    #+#              #
-#    Updated: 2023/09/02 00:09:34 by ilymegy          ###   ########.fr        #
+#    Updated: 2023/09/07 00:33:46 by ilymegy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,13 +59,13 @@ $(LIBFT):
 
 $(NAME):	$(OBJS)
 			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INC) 
-						@echo "Push_swap \033[1;32mOK\033[m"
+						@echo "push_swap \033[1;32mOK\033[m"
 
 clean:
 			@rm -rf $(OBJ_PATH)
 			@make clean -C $(LIBFT_PATH) --no-print-directory
 
-fclean:
+fclean:		clean
 			@rm -rf $(NAME)
 			@rm -rf $(LIBFT_PATH)$(LIBFT_NAME)
 
