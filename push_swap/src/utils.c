@@ -1,6 +1,7 @@
 #include "../inc/pushswap.h"
 #include "../inc/libft.h"
 
+
 void	free_double_char(char **arr_char)
 {
 	size_t	i;
@@ -16,9 +17,9 @@ void	free_double_char(char **arr_char)
 
 void	print_tab(int *tab)
 {
-	ft_printf("\n-----\ntab :\n-----\n");
-	size_t i;
+	size_t	i;
 
+	ft_printf("\n-----\ntab :\n-----\n");
 	i = 0;
 	while (tab[i])
 	{
@@ -47,16 +48,21 @@ void	end_n_free(char **array, char *msg, int exit_nb)
 	end_prog(msg, exit_nb);
 }
 
-void	print_lst(t_list *mylist)
+void	print_lst(t_list *mylist, char pile)
 {
-	t_list	*lst;
+	t_list *lst;
 
-	lst = mylist;
-	ft_printf("\n  ");
-	while (lst->next)
+	ft_printf("\n");
+	if (mylist)
 	{
-		ft_printf("%d - ",lst->content->nb);
-		lst = lst->next;
+		lst = mylist;
+		while (lst->next)
+		{
+			ft_printf("%d\n", lst->content->nb);
+			lst = lst->next;
+		}
+		ft_printf("%d\n--------\n%c\n", lst->content->nb, pile);
+		return;
 	}
-	ft_printf("%d\n\n",lst->content->nb);
+	ft_printf("--------\n%c\n", pile);
 }

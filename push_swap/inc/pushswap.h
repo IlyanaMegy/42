@@ -39,7 +39,7 @@ void				free_double_char(char **arr_char);
 void				print_double_array(char **a);
 void				end_n_free(char **array, char *msg, int exit_nb);
 void				print_tab(int *tab);
-void				print_lst(t_list *mylist);
+void				print_lst(t_list *mylist, char pile);
 
 // pushswap.c
 int					push_swap(t_list **s_a, t_list **s_b);
