@@ -46,4 +46,7 @@ void				print_lists(t_list *s_A, t_list *s_B);
 int					push_swap(t_list **s_a, t_list **s_b);
 int					all_good(t_list *s_a, t_list *s_b);
 
+// pa_pb.c
+int					p_move(t_list **src, t_list **dest, char p);
+
 #endif

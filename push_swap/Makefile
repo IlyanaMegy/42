@@ -23,7 +23,8 @@ SRC			= main.c\
 			check_args.c\
 			get_array.c\
 			push_swap.c\
-			utils.c
+			utils.c\
+			pa_pb.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/

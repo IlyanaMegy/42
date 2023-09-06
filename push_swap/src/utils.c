@@ -74,7 +74,7 @@ void	print_lists(t_list *s_A, t_list *s_B)
 	ft_printf("\n");
 	a = s_A;
 	b = s_B;
-	while ((a && a->next) ||(b && b->next))
+	while ((a && a->next) || (b && b->next))
 	{
 		if (a && a->next)
 		{
