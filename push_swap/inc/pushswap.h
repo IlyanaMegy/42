@@ -47,6 +47,21 @@ int					push_swap(t_list **s_a, t_list **s_b);
 int					all_good(t_list *s_a, t_list *s_b);
 
 // pa_pb.c
-int					p_move(t_list **src, t_list **dest, char p);
+void				p_move(t_list **src, t_list **dest, char p);
+
+// sa_sb.c
+void				sa(t_list **a);
+void				sb(t_list **b);
+void				ss(t_list **a, t_list **b);
+
+// rra_rrb.c
+void				rra(t_list **a);
+void				rrb(t_list **b);
+void				rrr(t_list **a, t_list **b);
+
+// ra_rb.c
+void				ra(t_list **a);
+void				rb(t_list **b);
+void				rr(t_list **a, t_list **b);
 
 #endif

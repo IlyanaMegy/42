@@ -51,8 +51,12 @@ int	push_swap(t_list **s_a, t_list **s_b)
 	if ((*s_b) != NULL)
 		return (0);
 	p_move(s_a, s_b, 'b');
+	p_move(s_a, s_b, 'b');
+	p_move(s_a, s_b, 'b');
 	print_lists(*s_a, *s_b);
-	p_move(s_b, s_a, 'b');
+	ss(s_a, s_b);
+	print_lists(*s_a, *s_b);
+	rr(s_a, s_b);
 	print_lists(*s_a, *s_b);
 	return (1);
 }

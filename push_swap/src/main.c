@@ -25,5 +25,9 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	push_swap(&stack_a, &stack_b);
+	ft_lstclear(&stack_a, free);
+	ft_lstclear(&stack_b, free);
+	free(stack_a);
+	free(stack_b);
 	return (0);
 }

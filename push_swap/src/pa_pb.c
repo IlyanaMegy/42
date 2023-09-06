@@ -1,10 +1,13 @@
 #include "../inc/pushswap.h"
 #include "../inc/libft.h"
 
-int	p_move(t_list **src, t_list **dest, char p)
+
+void	p_move(t_list **src, t_list **dest, char p)
 {
 	t_list *node;
-
+	
+	if (src == NULL)
+		return ;
 	node = *src;
 	*src = (*src)->next;
 	node->next = NULL;
@@ -13,5 +16,5 @@ int	p_move(t_list **src, t_list **dest, char p)
 		ft_printf("pb\n");
 	else
 		ft_printf("pa\n");
-	return (0);
+	return;
 }
