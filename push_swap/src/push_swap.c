@@ -103,8 +103,9 @@ int	in_order(t_list *lst)
 
 int	push_swap(t_list **s_a, t_list **s_b)
 {
-	print_lst(*s_a, 'a');
-	print_lst(*s_b, 'b');
+	// print_lst(*s_a, 'a');
+	// print_lst(*s_b, 'b');
+	print_lists(*s_a, *s_b);
 	if ((*s_b) != NULL)
 		return (0);
 	return (1);
