@@ -27,7 +27,8 @@ SRC			= main.c\
 			pa_pb.c\
 			sa_sb.c\
 			rra_rrb.c\
-			ra_rb.c
+			ra_rb.c\
+			five_or_less.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/

@@ -3,8 +3,8 @@
 
 int	all_good(t_list *s_a, t_list *s_b)
 {
-	int	max_value;
-	t_list *lst;
+	int		max_value;
+	t_list	*lst;
 
 	if (s_b != NULL)
 		return (0);
@@ -43,20 +43,18 @@ int	in_order(t_list *lst)
 	return (1);
 }
 
+
+
 int	push_swap(t_list **s_a, t_list **s_b)
 {
-	// print_lst(*s_a, 'a');
-	// print_lst(*s_b, 'b');
-	print_lists(*s_a, *s_b);
-	if ((*s_b) != NULL)
-		return (0);
-	p_move(s_a, s_b, 'b');
-	p_move(s_a, s_b, 'b');
-	p_move(s_a, s_b, 'b');
-	print_lists(*s_a, *s_b);
-	ss(s_a, s_b);
-	print_lists(*s_a, *s_b);
-	rr(s_a, s_b);
-	print_lists(*s_a, *s_b);
+	p_lsts(*s_a, *s_b);
+	// ft_printf("len = %d\n", ft_lstsize(*s_a));
+	if (ft_lstsize(*s_a) == 2)
+		finish_prog(*s_a, *s_b, "sa\n");
+	// ft_printf("2nd = %d\n", (*s_a)->next->content->nb);
+	if (ft_lstsize(*s_a) <= 5)
+	{
+		five_or_less(s_a, s_b);
+	}
 	return (1);
 }

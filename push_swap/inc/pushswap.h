@@ -23,6 +23,7 @@ typedef struct s_list
 
 // main.c
 void				end_prog(char *msg, int exit_nb);
+void				finish_prog(t_list *a, t_list *b, char *msg);
 
 // init_stack.c
 t_list				*init_stack(int ac, char **av);
@@ -41,6 +42,7 @@ void				end_n_free(char **array, char *msg, int exit_nb);
 void				print_tab(int *tab);
 void				print_lst(t_list *mylist, char pile);
 void				print_lists(t_list *s_A, t_list *s_B);
+void				p_lsts(t_list *s_A, t_list *s_B);
 
 // pushswap.c
 int					push_swap(t_list **s_a, t_list **s_b);
@@ -64,4 +66,6 @@ void				ra(t_list **a);
 void				rb(t_list **b);
 void				rr(t_list **a, t_list **b);
 
+// five_or_less.c
+void				five_or_less(t_list **a, t_list **b);
 #endif
