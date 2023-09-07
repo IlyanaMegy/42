@@ -47,11 +47,16 @@ int	in_order(t_list *lst)
 
 int	push_swap(t_list **s_a, t_list **s_b)
 {
+	int err;
+
+	err = 0;
 	p_lsts(*s_a, *s_b);
 	if (ft_lstsize(*s_a) <= 3)
-		three_or_less(s_a);
-	else if (ft_lstsize(*s_a) <= 5)
+		err = three_or_less(s_a);
+	else if (ft_lstsize(*s_a) > 3)
 		five_or_less(s_a, s_b);
+	if (err)
+		finish_prog(*s_a, *s_b, "Error\n");
 	p_lsts(*s_a, *s_b);
 	finish_prog(*s_a, *s_b, "");
 	return (1);

@@ -24,13 +24,18 @@ int	sort_three(t_list **a)
 	return (0);
 }
 
-void	three_or_less(t_list **a)
+int	three_or_less(t_list **a)
 {
 	size_t	size;
+	int err;
 
+	err = 0;
 	size = ft_lstsize(*a);
 	if (size == 2 && !in_order(*a))
 		sa(a);
 	else if (size == 3)
-		sort_three(a);
+		err = sort_three(a);
+	if (err)
+		return 1;
+	return 0;
 }

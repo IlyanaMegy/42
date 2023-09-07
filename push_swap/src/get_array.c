@@ -18,6 +18,7 @@ void	create_stack_b(t_list **a, t_list **b)
 			ra(a);
 		j--;
 	}
+	p_lsts(*a, *b);
 	i = 0;
 	size = ft_lstsize(*a);
 	if (size <= 3)

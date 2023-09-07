@@ -70,7 +70,7 @@ void				rb(t_list **b);
 void				rr(t_list **a, t_list **b);
 
 // three_or_less.c
-void				three_or_less(t_list **a);
+int				three_or_less(t_list **a);
 
 // five_or_less.c
 void				five_or_less(t_list **a, t_list **b);
