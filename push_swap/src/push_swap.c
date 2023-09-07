@@ -48,13 +48,11 @@ int	in_order(t_list *lst)
 int	push_swap(t_list **s_a, t_list **s_b)
 {
 	p_lsts(*s_a, *s_b);
-	// ft_printf("len = %d\n", ft_lstsize(*s_a));
-	if (ft_lstsize(*s_a) == 2)
-		finish_prog(*s_a, *s_b, "sa\n");
-	// ft_printf("2nd = %d\n", (*s_a)->next->content->nb);
-	if (ft_lstsize(*s_a) <= 5)
-	{
+	if (ft_lstsize(*s_a) <= 3)
+		three_or_less(s_a);
+	else if (ft_lstsize(*s_a) <= 5)
 		five_or_less(s_a, s_b);
-	}
+	p_lsts(*s_a, *s_b);
+	finish_prog(*s_a, *s_b, "");
 	return (1);
 }

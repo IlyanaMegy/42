@@ -14,6 +14,7 @@
 typedef struct s_stack
 {
 	int				nb;
+	size_t			index;
 }					t_stack;
 typedef struct s_list
 {
@@ -34,6 +35,7 @@ int					*check_args(int ac, char **av, size_t *s);
 // get_array.c
 char				**get_array(int ac, char **av);
 int					*convert_to_int(char **array);
+void				create_stack_b(t_list **a, t_list **b);
 
 // utils.c
 void				free_double_char(char **arr_char);
@@ -47,6 +49,7 @@ void				p_lsts(t_list *s_A, t_list *s_B);
 // pushswap.c
 int					push_swap(t_list **s_a, t_list **s_b);
 int					all_good(t_list *s_a, t_list *s_b);
+int					in_order(t_list *lst);
 
 // pa_pb.c
 void				p_move(t_list **src, t_list **dest, char p);
@@ -65,6 +68,9 @@ void				rrr(t_list **a, t_list **b);
 void				ra(t_list **a);
 void				rb(t_list **b);
 void				rr(t_list **a, t_list **b);
+
+// three_or_less.c
+void				three_or_less(t_list **a);
 
 // five_or_less.c
 void				five_or_less(t_list **a, t_list **b);

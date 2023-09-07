@@ -28,6 +28,7 @@ SRC			= main.c\
 			sa_sb.c\
 			rra_rrb.c\
 			ra_rb.c\
+			three_or_less.c\
 			five_or_less.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 

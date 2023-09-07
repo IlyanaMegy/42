@@ -1,6 +1,34 @@
 #include "../inc/pushswap.h"
 #include "../inc/libft.h"
 
+void	create_stack_b(t_list **a, t_list **b)
+{
+	size_t	size;
+	size_t	i;
+	size_t	j;
+
+	*b = NULL;
+	size = ft_lstsize(*a);
+	j = size;
+	while (j && size > 5)
+	{
+		if ((*a)->content->index > size / 2)
+			p_move(a, b, 'b');
+		else
+			ra(a);
+		j--;
+	}
+	i = 0;
+	size = ft_lstsize(*a);
+	if (size <= 3)
+		return ;
+	while (i < (size - 3))
+	{
+		p_move(a, b, 'b');
+		i++;
+	}
+}
+
 char	**get_array_single_arg(char *av)
 {
 	char	**array;
