@@ -81,8 +81,12 @@ void	five_or_less(t_list **a, t_list **b)
 	// int mid;
 
 	create_stack_b(a, b);
-	three_or_less(a);
-	// while (!all_good(*a, *b) && ft_lstsize(*a) >= 3)
+	if (three_or_less(a, 'a') || three_or_less(b, 'b'))
+		finish_prog(*a, *b, "");
+	while ((*b))
+		p_move(b, a, 'a');
+	// p_lsts(*a, *b);
+	// while (!all_good(*a, *b) && ft_lstsize(*a) > 3)
 	// 	first_sort(a, b);
 	// if (!in_order(*a))
 	// 	sa(a);

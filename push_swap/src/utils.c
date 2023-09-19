@@ -109,7 +109,7 @@ void	p_lsts(t_list *s_A, t_list *s_B)
 	t_list *a;
 	t_list *b;
 
-	ft_printf("\n_________________\n_________________\n\n");
+	ft_printf("\n_________________\n\n");
 	a = s_A;
 	b = s_B;
 	ft_printf("a : ");
@@ -136,5 +136,5 @@ void	p_lsts(t_list *s_A, t_list *s_B)
 	}
 	else
 		ft_printf("\n");
-	ft_printf("_________________\n_________________\n\n");
+	ft_printf("_________________\n\n");
 }

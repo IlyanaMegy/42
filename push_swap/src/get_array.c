@@ -1,33 +1,28 @@
 #include "../inc/pushswap.h"
 #include "../inc/libft.h"
 
+
 void	create_stack_b(t_list **a, t_list **b)
 {
 	size_t	size;
-	size_t	i;
-	size_t	j;
+	size_t first;
+	size_t last;
 
 	*b = NULL;
 	size = ft_lstsize(*a);
-	j = size;
-	while (j && size > 5)
+	while (size > 3)
 	{
-		if ((*a)->content->index > size / 2)
+		first = (*a)->content->index;
+		last = ft_lstlast(*a)->content->index;
+		if ( first <= size / 2)
 			p_move(a, b, 'b');
+		else if (last <= size / 2)
+			rra(a);
 		else
 			ra(a);
-		j--;
+		size = ft_lstsize(*a);
 	}
-	p_lsts(*a, *b);
-	i = 0;
-	size = ft_lstsize(*a);
-	if (size <= 3)
-		return ;
-	while (i < (size - 3))
-	{
-		p_move(a, b, 'b');
-		i++;
-	}
+	// p_lsts(*a, *b);
 }
 
 char	**get_array_single_arg(char *av)
@@ -76,9 +71,9 @@ char	**get_array(int ac, char **av)
 
 int	*convert_to_int(char **array)
 {
-	int				*array_int;
-	unsigned int	i;
-	unsigned int	size;
+	int *array_int;
+	unsigned int i;
+	unsigned int size;
 
 	size = 0;
 	while (array[size])

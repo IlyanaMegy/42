@@ -49,7 +49,7 @@ void				p_lsts(t_list *s_A, t_list *s_B);
 // pushswap.c
 int					push_swap(t_list **s_a, t_list **s_b);
 int					all_good(t_list *s_a, t_list *s_b);
-int					in_order(t_list *lst);
+int					in_order(t_list *lst, char pile);
 
 // pa_pb.c
 void				p_move(t_list **src, t_list **dest, char p);
@@ -70,7 +70,7 @@ void				rb(t_list **b);
 void				rr(t_list **a, t_list **b);
 
 // three_or_less.c
-int				three_or_less(t_list **a);
+int				three_or_less(t_list **lst, char pile);
 
 // five_or_less.c
 void				five_or_less(t_list **a, t_list **b);
