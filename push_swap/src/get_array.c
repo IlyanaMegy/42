@@ -1,32 +1,27 @@
 #include "../inc/pushswap.h"
 #include "../inc/libft.h"
 
-
 void	create_stack_b(t_list **a, t_list **b, t_cmd *cmd)
 {
 	int first;
+	int second;
 	int last;
 
 	*b = NULL;
 	while (ft_lstsize(*a) > 3)
 	{
 		first = (*a)->content->index;
+		second = (*a)->next->content->index;
 		last = ft_lstlast(*a)->content->index;
 		if ( first <= ft_lstsize(*a) / 2)
 		{
-			p_move(a, b);
 			commande(8, &cmd);
+			p_move(a, b);
 		}
-		else if (last <= ft_lstsize(*a) / 2)
-		{
-			commande(5, &cmd);
-			rra(a);
-		}
+		else if (last <= ft_lstsize(*a) / 2 && last < second)
+			print_n_update(5, &cmd, a, rra);
 		else
-		{
-			commande(3, &cmd);
-			ra(a);
-		}
+			print_n_update(3, &cmd, a, ra);
 	}
 }
 

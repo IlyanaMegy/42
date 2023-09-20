@@ -26,6 +26,7 @@ void	commande(int command, t_cmd **cmd)
         (*cmd)->cmd = command;
         return ;
     }
+    // ft_printf("first = %d, cmd = %d\n", first, command);
     if ((first == 1 && command == 2) || (first == 2 && command == 1))
         ft_printf("ss\n");
     else if ((first == 3 && command == 4) || (first == 4 && command == 3))
@@ -34,25 +35,25 @@ void	commande(int command, t_cmd **cmd)
         ft_printf("rrr\n");
     else
         execute_sep(command, *cmd);
-    first = 0;
+    (*cmd)->cmd = -1;
 }
 
 void	execute_sep(int command, t_cmd *cmd)
 {
     if (command == 1 || cmd->cmd == 1)
         ft_printf("sa\n");
-    else if (command == 2 || cmd->cmd == 2)
+    if (command == 2 || cmd->cmd == 2)
         ft_printf("sb\n");
-    else if (command == 3 || cmd->cmd == 3)
+    if (command == 3 || cmd->cmd == 3)
         ft_printf("ra\n");
-    else if (command == 4 || cmd->cmd == 4)
+    if (command == 4 || cmd->cmd == 4)
         ft_printf("rb\n");
-    else if (command == 5 || cmd->cmd == 5)
+    if (command == 5 || cmd->cmd == 5)
         ft_printf("rra\n");
-    else if (command == 6 || cmd->cmd == 6)
+    if (command == 6 || cmd->cmd == 6)
         ft_printf("rrb\n");
-    else if (command == 7 || cmd->cmd == 7)
+    if (command == 7 || cmd->cmd == 7)
         ft_printf("pa\n");
-    else if (command == 8 || cmd->cmd == 8)
+    if (command == 8 || cmd->cmd == 8)
         ft_printf("pb\n");
 }
