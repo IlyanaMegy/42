@@ -26,7 +26,7 @@ void	get_index(t_list *a)
 	while (a)
 	{
 		i = biggest_nb(first_node, a->content->nb);
-		a->content->index = size - i;
+		a->content->index = size - i - 1;
 		a = a->next;
 	}
 }

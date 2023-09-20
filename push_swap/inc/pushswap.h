@@ -86,4 +86,7 @@ void				five_or_less(t_list **a, t_list **b, t_cmd *cmd);
 void				print_n_update(int c, t_cmd **cmd, t_list **l, void move());
 void				commande(int command, t_cmd **cmd);
 void				execute_sep(int command, t_cmd *cmd);
+
+// hundred.c
+void				hundred_or_less(t_list **a, t_list **b, t_cmd *cmd);
 #endif
