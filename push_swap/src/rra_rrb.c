@@ -19,18 +19,15 @@ void	rr_move(t_list **pile)
 void	rra(t_list **a)
 {
 	rr_move(a);
-	ft_printf("rra\n");
 }
 
 void	rrb(t_list **b)
 {
 	rr_move(b);
-	ft_printf("rrb\n");
 }
 
 void	rrr(t_list **a, t_list **b)
 {
 	rr_move(a);
 	rr_move(b);
-	ft_printf("rrr\n");
 }

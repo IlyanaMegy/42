@@ -2,27 +2,32 @@
 #include "../inc/libft.h"
 
 
-void	create_stack_b(t_list **a, t_list **b)
+void	create_stack_b(t_list **a, t_list **b, t_cmd *cmd)
 {
-	size_t	size;
-	size_t first;
-	size_t last;
+	int first;
+	int last;
 
 	*b = NULL;
-	size = ft_lstsize(*a);
-	while (size > 3)
+	while (ft_lstsize(*a) > 3)
 	{
 		first = (*a)->content->index;
 		last = ft_lstlast(*a)->content->index;
-		if ( first <= size / 2)
-			p_move(a, b, 'b');
-		else if (last <= size / 2)
+		if ( first <= ft_lstsize(*a) / 2)
+		{
+			p_move(a, b);
+			commande(8, &cmd);
+		}
+		else if (last <= ft_lstsize(*a) / 2)
+		{
+			commande(5, &cmd);
 			rra(a);
+		}
 		else
+		{
+			commande(3, &cmd);
 			ra(a);
-		size = ft_lstsize(*a);
+		}
 	}
-	// p_lsts(*a, *b);
 }
 
 char	**get_array_single_arg(char *av)

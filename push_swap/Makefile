@@ -6,7 +6,7 @@
 #    By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 11:53:13 by ilymegy           #+#    #+#              #
-#    Updated: 2023/09/07 00:33:46 by ilymegy          ###   ########.fr        #
+#    Updated: 2023/09/20 12:11:11 by ilymegy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC			= main.c\
 			rra_rrb.c\
 			ra_rb.c\
 			three_or_less.c\
-			five_or_less.c
+			five_or_less.c\
+			commands.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/

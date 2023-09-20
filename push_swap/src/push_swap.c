@@ -53,19 +53,16 @@ int	in_order(t_list *lst, char pile)
 	return (1);
 }
 
-int	push_swap(t_list **s_a, t_list **s_b)
+int	push_swap(t_list **s_a, t_list **s_b, t_cmd *cmd)
 {
 	int err;
 
 	err = 0;
-	// p_lsts(*s_a, *s_b);
 	if (ft_lstsize(*s_a) <= 3)
-		err = three_or_less(s_a, 'a');
+		err = three_or_less(s_a, 'a', cmd);
 	else if (ft_lstsize(*s_a) <= 5)
-		five_or_less(s_a, s_b);
+		five_or_less(s_a, s_b, cmd);
 	if (err)
-		finish_prog(*s_a, *s_b, "Error\n");
-	p_lsts(*s_a, *s_b);
-	// finish_prog(*s_a, *s_b, "");
+		finish_prog(*s_a, *s_b, cmd, "Error\n");
 	return (1);
 }

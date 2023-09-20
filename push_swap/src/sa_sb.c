@@ -20,18 +20,15 @@ void	s_move(t_list **pile)
 void	sa(t_list **a)
 {
 	s_move(a);
-	ft_printf("sa\n");
 }
 
 void	sb(t_list **b)
 {
 	s_move(b);
-	ft_printf("sb\n");
 }
 
 void	ss(t_list **a, t_list **b)
 {
 	s_move(a);
 	s_move(b);
-	ft_printf("ss\n");
 }

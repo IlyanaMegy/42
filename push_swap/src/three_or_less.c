@@ -1,41 +1,31 @@
 #include "../inc/pushswap.h"
 #include "../inc/libft.h"
 
-int	sort_three(t_list **lst, char pile)
+void	sort_three(t_list **lst, t_cmd *cmd)
 {
-	t_stack *first;
-	t_stack *second;
-	t_stack *third;
+	t_stack	*second;
+	t_stack	*third;
 
-	if (pile == 'a')
-		while (!in_order(*lst, pile))
+	while (!in_order(*lst, 'a'))
+	{
+		second = (*lst)->next->content;
+		third = (*lst)->next->next->content;
+		if ((*lst)->content->nb > second->nb)
 		{
-			first = (*lst)->content;
-			second = (*lst)->next->content;
-			third = (*lst)->next->next->content;
-			if (first->nb > second->nb)
-			{
-				if (first->nb > third->nb)
-					ra(lst);
-				else
-					sa(lst);
-			}
-			else if (second->nb > first->nb && second->nb > third->nb)
-				rra(lst);
+			if ((*lst)->content->nb > third->nb)
+				print_n_update(3, &cmd, lst, ra);
 			else
-				return (1);
+				print_n_update(1, &cmd, lst, sa);
 		}
-	else
-		return (1);
-	return (0);
+		else if (second->nb > (*lst)->content->nb && second->nb > third->nb)
+			print_n_update(5, &cmd, lst, rra);
+	}
 }
 
-int	three_or_less(t_list **lst, char pile)
+int	three_or_less(t_list **lst, char pile, t_cmd *cmd)
 {
-	size_t	size;
-	int err;
+	size_t size;
 
-	err = 0;
 	size = ft_lstsize(*lst);
 	if (size == 2 && !in_order(*lst, pile))
 	{
@@ -45,8 +35,6 @@ int	three_or_less(t_list **lst, char pile)
 			sb(lst);
 	}
 	else if (size == 3)
-		err = sort_three(lst, pile);
-	if (err)
-		return 1;
-	return 0;
+		sort_three(lst, cmd);
+	return (0);
 }

@@ -16,18 +16,15 @@ void	r_move(t_list **pile)
 void	ra(t_list **a)
 {
 	r_move(a);
-	ft_printf("ra\n");
 }
 
 void	rb(t_list **b)
 {
 	r_move(b);
-	ft_printf("rb\n");
 }
 
 void	rr(t_list **a, t_list **b)
 {
 	r_move(a);
 	r_move(b);
-	ft_printf("rr\n");
 }
