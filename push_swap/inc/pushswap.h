@@ -35,6 +35,7 @@ void				finish_prog(t_list *a, t_list *b, t_cmd *cmd, char *msg);
 
 // init_stack.c
 t_list				*init_stack(int ac, char **av);
+void				get_index(t_list *a);
 
 // check_args.c
 int					*check_args(int ac, char **av, size_t *s);
