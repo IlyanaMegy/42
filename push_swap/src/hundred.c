@@ -10,7 +10,6 @@ int	find_median(t_list *lst)
 	mid = 0;
 	while (lst->next)
 	{
-		ft_printf("%d = %d\n", lst->content->nb, lst->content->index);
 		if (lst->content->index == len / 2)
 		{
 			mid = lst->content->nb;
@@ -29,6 +28,8 @@ int less_than_mid(t_list *lst, int mid)
             return 1;
         lst = lst->next;
     }
+    if (lst->content->nb < mid)
+        return 1;
     return 0;
 }
 
@@ -41,18 +42,26 @@ void	first_sort(t_list **a, t_list **b, t_cmd *cmd, int mid)
 	{
         while (lst->content && less_than_mid(lst, mid))
         {
+            // ft_printf("%d = %d, mid = %d\n", lst->content->nb, lst->content->index, mid);
             if (lst->content->nb < mid)
             {
+                // ft_printf("push %d\n", lst->content->nb);
                 p_move(a, b);
                 commande(7, &cmd);
             }
             else
+            {
                 print_n_update(3, &cmd, a, ra);
+                // ft_printf("ra %d\n", lst->content->nb);
+            }
             lst = *a;
         }
-        get_index(*a);
-        mid = find_median(*a);
+        // p_lsts(*a, *b);
+        lst = *a;
+        get_index(lst);
+        mid = find_median(lst);
     }
+    three_or_less(a, 'a', cmd);
 }
 
 void	hundred_or_less(t_list **a, t_list **b, t_cmd *cmd)

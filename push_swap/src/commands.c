@@ -38,22 +38,29 @@ void	commande(int command, t_cmd **cmd)
     (*cmd)->cmd = -1;
 }
 
+void    execute_command(int command)
+{
+    if (command == 1)
+        ft_printf("sa\n");
+    if (command == 2)
+        ft_printf("sb\n");
+    if (command == 3)
+        ft_printf("ra\n");
+    if (command == 4)
+        ft_printf("rb\n");
+    if (command == 5)
+        ft_printf("rra\n");
+    if (command == 6)
+        ft_printf("rrb\n");
+    if (command == 7)
+        ft_printf("pa\n");
+    if (command == 8)
+        ft_printf("pb\n");
+}
+
 void	execute_sep(int command, t_cmd *cmd)
 {
-    if (command == 1 || cmd->cmd == 1)
-        ft_printf("sa\n");
-    if (command == 2 || cmd->cmd == 2)
-        ft_printf("sb\n");
-    if (command == 3 || cmd->cmd == 3)
-        ft_printf("ra\n");
-    if (command == 4 || cmd->cmd == 4)
-        ft_printf("rb\n");
-    if (command == 5 || cmd->cmd == 5)
-        ft_printf("rra\n");
-    if (command == 6 || cmd->cmd == 6)
-        ft_printf("rrb\n");
-    if (command == 7 || cmd->cmd == 7)
-        ft_printf("pa\n");
-    if (command == 8 || cmd->cmd == 8)
-        ft_printf("pb\n");
+    
+    execute_command(cmd->cmd);
+    execute_command(command);
 }
