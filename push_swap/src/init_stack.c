@@ -43,6 +43,23 @@ void	get_index(t_list *a)
 	}
 }
 
+void	final_index(t_list *a)
+{
+	size_t	size;
+	size_t	i;
+	t_list	*first_node;
+
+	first_node = a;
+	size = ft_lstsize(a);
+	while (a)
+	{
+		i = biggest_nb(first_node, a->content->nb);
+		a->content->final = size - i - 1;
+		a = a->next;
+	}
+}
+
+
 t_list	*create_node(int value)
 {
 	t_stack	*node;
@@ -86,6 +103,7 @@ t_list	*init_stack(int ac, char **av)
 		ft_lstadd_back(&a, node);
 	}
 	get_index(a);
+	final_index(a);
 	free(array);
 	return (a);
 }

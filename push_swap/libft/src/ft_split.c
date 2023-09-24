@@ -61,14 +61,15 @@ char	**ft_split(char *s, char sep)
 	char	**res;
 	int		err;
 
+	ft_printf("HEEERE\n");
 	if (!s)
 		return (NULL);
 	err = 0;
+	ft_printf("words count = %d\n", (words_count(s, sep)));
 	res = (char **)malloc((words_count(s, sep) + 1) * sizeof(char *));
 	if (!res)
 		return (NULL);
 	err = give_to(res, s, sep);
-	free(s);
 	if (err)
 		return (NULL);
 	return (res);

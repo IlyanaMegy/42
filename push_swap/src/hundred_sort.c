@@ -57,7 +57,7 @@ void	first_sort(t_list **a, t_list **b, t_cmd *cmd, int mid)
 			if (lst->content->nb < mid)
 			{
 				p_move(a, b);
-				commande(7, &cmd);
+				commande(8, &cmd);
 			}
 			else
 			{
@@ -72,8 +72,32 @@ void	first_sort(t_list **a, t_list **b, t_cmd *cmd, int mid)
 	three_or_less(a, 'a', cmd);
 }
 
+void	push_back(t_list **s_a, t_list **s_b, t_cmd *cmd)
+{
+	t_list	*a;
+	t_list	*b;
+
+	a = *s_a;
+	b = *s_b;
+	while (b)
+	{
+		if (a->content->nb < b->content->nb)
+			print_n_update(3, &cmd, s_a, ra);
+		p_move(s_b, s_a);
+		commande(7, &cmd);
+		b = *s_b;
+		a = *s_a;
+		if (a->content->final - ft_lstlast(a)->content->final == 1)
+			print_n_update(5, &cmd, s_a, rra);
+		p_lsts(*s_a, *s_b);
+	}
+}
+
 void	hundred_or_less(t_list **a, t_list **b, t_cmd *cmd)
 {
+	p_lsts(*a, *b);
 	first_sort(a, b, cmd, find_median(*a));
+	p_lsts(*a, *b);
+	push_back(a, b, cmd);
 	p_lsts(*a, *b);
 }

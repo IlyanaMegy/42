@@ -15,6 +15,8 @@ typedef struct s_stack
 {
 	int				nb;
 	size_t			index;
+	size_t			final;
+	int				pos;
 }					t_stack;
 
 typedef struct s_list

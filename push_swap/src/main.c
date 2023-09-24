@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 	t_list	*stack_b;
 	t_cmd	*cmd;
 
-	if (ac == 2)
+	if (ac == 1)
 		end_prog("Error", 1);
 	stack_a = init_stack(ac, av);
 	stack_b = NULL;

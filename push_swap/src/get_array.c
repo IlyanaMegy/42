@@ -37,11 +37,13 @@ void	create_stack_b(t_list **a, t_list **b, t_cmd *cmd)
 	}
 }
 
-char	**get_array_single_arg(char *av)
+char	**get_array_single_arg(char *nbrs)
 {
 	char	**array;
 
-	array = ft_split(av, ' ');
+	ft_printf("argv = %s\n", nbrs);
+	array = ft_split(nbrs, 32);
+	ft_printf("HERE\n");
 	return (array);
 }
 
@@ -78,6 +80,7 @@ char	**get_array(int ac, char **av)
 		array = get_array_multiple_args(ac, av);
 	if (array == NULL || *array == NULL)
 		end_prog("Error\n", 1);
+	ft_printf("HERE\n");
 	return (array);
 }
 
