@@ -28,10 +28,9 @@ SRC			= main.c\
 			sa_sb.c\
 			rra_rrb.c\
 			ra_rb.c\
-			three_or_less.c\
-			five_or_less.c\
+			smol_sort.c\
 			commands.c\
-			hundred.c
+			hundred_sort.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/

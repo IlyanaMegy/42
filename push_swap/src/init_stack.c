@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_stack.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/24 11:11:06 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/09/24 11:11:07 by ilymegy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pushswap.h"
 #include "../inc/libft.h"
 
@@ -17,16 +29,16 @@ size_t	biggest_nb(t_list *s, int value)
 
 void	get_index(t_list *a)
 {
-	size_t			size;
+	size_t	size;
 	size_t	i;
-	t_list			*first_node;
+	t_list	*first_node;
 
 	first_node = a;
 	size = ft_lstsize(a);
 	while (a)
 	{
 		i = biggest_nb(first_node, a->content->nb);
-		a->content->index = size - i-1;
+		a->content->index = size - i - 1;
 		a = a->next;
 	}
 }

@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_array.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/24 11:09:06 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/09/24 11:09:07 by ilymegy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pushswap.h"
 #include "../inc/libft.h"
 
 void	create_stack_b(t_list **a, t_list **b, t_cmd *cmd)
 {
-	int first;
-	int second;
-	int last;
+	int	first;
+	int	second;
+	int	last;
 
 	*b = NULL;
 	while (ft_lstsize(*a) > 3)
@@ -13,7 +25,7 @@ void	create_stack_b(t_list **a, t_list **b, t_cmd *cmd)
 		first = (*a)->content->index;
 		second = (*a)->next->content->index;
 		last = ft_lstlast(*a)->content->index;
-		if ( first <= ft_lstsize(*a) / 2)
+		if (first <= ft_lstsize(*a) / 2)
 		{
 			commande(8, &cmd);
 			p_move(a, b);
@@ -71,9 +83,9 @@ char	**get_array(int ac, char **av)
 
 int	*convert_to_int(char **array)
 {
-	int *array_int;
-	unsigned int i;
-	unsigned int size;
+	int				*array_int;
+	unsigned int	i;
+	unsigned int	size;
 
 	size = 0;
 	while (array[size])

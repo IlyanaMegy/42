@@ -54,7 +54,7 @@ void				print_lst(t_list *mylist, char pile);
 void				print_lists(t_list *s_A, t_list *s_B);
 void				p_lsts(t_list *s_A, t_list *s_B);
 
-// pushswap.c
+// push_swap.c
 int					push_swap(t_list **s_a, t_list **s_b, t_cmd *cmd);
 int					all_good(t_list *s_a, t_list *s_b);
 int					in_order(t_list *lst, char pile);
@@ -77,10 +77,8 @@ void				ra(t_list **a);
 void				rb(t_list **b);
 void				rr(t_list **a, t_list **b);
 
-// three_or_less.c
+// smol_sort.c
 int					three_or_less(t_list **lst, char pile, t_cmd *cmd);
-
-// five_or_less.c
 void				five_or_less(t_list **a, t_list **b, t_cmd *cmd);
 
 // commands.c
@@ -88,6 +86,6 @@ void				print_n_update(int c, t_cmd **cmd, t_list **l, void move());
 void				commande(int command, t_cmd **cmd);
 void				execute_sep(int command, t_cmd *cmd);
 
-// hundred.c
+// hundred_sort.c
 void				hundred_or_less(t_list **a, t_list **b, t_cmd *cmd);
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/24 11:16:54 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/09/24 11:16:56 by ilymegy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pushswap.h"
 #include "../inc/libft.h"
 
@@ -32,30 +44,22 @@ int	in_order(t_list *lst, char pile)
 		return (1);
 	max_value = lst->content->nb;
 	lst = lst->next;
-	if (pile == 'a')
-		while (lst)
-		{
-			if (max_value < lst->content->nb)
-				max_value = lst->content->nb;
-			else
-				return (0);
-			lst = lst->next;
-		}
-	else
-		while (lst)
-		{
-			if (max_value > lst->content->nb)
-				max_value = lst->content->nb;
-			else
-				return (0);
-			lst = lst->next;
-		}
+	while (lst)
+	{
+		if (pile == 'a' && max_value < lst->content->nb)
+			max_value = lst->content->nb;
+		else if (pile == 'b' && max_value > lst->content->nb)
+			max_value = lst->content->nb;
+		else
+			return (0);
+		lst = lst->next;
+	}	
 	return (1);
 }
 
 int	push_swap(t_list **s_a, t_list **s_b, t_cmd *cmd)
 {
-	int err;
+	int	err;
 
 	err = 0;
 	if (ft_lstsize(*s_a) <= 3)

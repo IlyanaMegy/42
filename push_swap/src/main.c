@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/24 11:12:02 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/09/24 11:12:03 by ilymegy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pushswap.h"
 #include "../inc/libft.h"
 
@@ -27,10 +39,7 @@ int	main(int ac, char **av)
 	t_cmd	*cmd;
 
 	if (ac == 2)
-	{
 		end_prog("Error", 1);
-		return (1);
-	}
 	stack_a = init_stack(ac, av);
 	stack_b = NULL;
 	cmd = malloc(sizeof(*cmd));
@@ -43,9 +52,7 @@ int	main(int ac, char **av)
 		ft_lstclear(&stack_a, free);
 		free(stack_a);
 		free(cmd);
-		return (0);
 	}
 	push_swap(&stack_a, &stack_b, cmd);
 	finish_prog(stack_a, stack_b, cmd, "");
-	return (0);
 }
