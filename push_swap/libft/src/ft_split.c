@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../inc/pushswap.h"
 #include "libft.h"
 
 int	words_count(const char *s, char sep)
@@ -61,14 +62,12 @@ char	**ft_split(char *s, char sep)
 	char	**res;
 	int		err;
 
-	ft_printf("HEEERE\n");
 	if (!s)
 		return (NULL);
 	err = 0;
-	ft_printf("words count = %d\n", (words_count(s, sep)));
 	res = (char **)malloc((words_count(s, sep) + 1) * sizeof(char *));
 	if (!res)
-		return (NULL);
+		end_prog("Error\n", 1);
 	err = give_to(res, s, sep);
 	if (err)
 		return (NULL);

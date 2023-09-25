@@ -54,5 +54,6 @@ int	main(int ac, char **av)
 		free(cmd);
 	}
 	push_swap(&stack_a, &stack_b, cmd);
+	// p_lsts(stack_a, stack_b);
 	finish_prog(stack_a, stack_b, cmd, "");
 }

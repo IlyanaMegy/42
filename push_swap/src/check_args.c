@@ -97,8 +97,8 @@ int	*check_args(int ac, char **av, size_t *s)
 	int		*array_int;
 
 	arr  = get_array(ac, av);
-	// ft_printf("arr[0] = %s\n", arr[0]);
-	ft_printf("HERE2\n");
+	if (arr == NULL)
+		return (0);
 	check_formats(arr);
 	*s = 0;
 	while (arr[*s])

@@ -13,91 +13,156 @@
 #include "../inc/pushswap.h"
 #include "../inc/libft.h"
 
-int	find_median(t_list *lst)
-{
-	size_t	len;
-	int		mid;
-
-	len = ft_lstsize(lst);
-	mid = 0;
-	while (lst->next)
-	{
-		if (lst->content->index == len / 2)
-		{
-			mid = lst->content->nb;
-			break ;
-		}
-		lst = lst->next;
-	}
-	return (mid);
-}
-
-int	less_than_mid(t_list *lst, int mid)
+int	less_than_mid(t_list *lst, size_t mid)
 {
 	while (lst->next)
 	{
-		if (lst->content->nb < mid)
+		if (lst->content->index < mid)
 			return (1);
 		lst = lst->next;
 	}
-	if (lst->content->nb < mid)
+	if (lst->content->index < mid)
 		return (1);
 	return (0);
 }
 
-void	first_sort(t_list **a, t_list **b, t_cmd *cmd, int mid)
+int	sorted_half(size_t start, size_t end, t_list *lst)
+{
+	while (lst->content->index != start)
+		lst = lst->next;
+	while (lst->next && lst->content->index <= end)
+	{
+		if (lst->next)
+			if (lst->content->index > lst->next->content->index)
+				return 0;
+		lst = lst->next;
+	}
+	if (lst->content->index == end)
+		return 1;
+	return 0;
+}
+
+size_t	get_smoler(t_list *lst)
+{
+	int	smol;
+	size_t	idx;
+
+	smol = lst->content->nb;
+	idx = lst->content->index;
+	while (lst->next)
+	{
+		if (lst->content->nb < smol)
+		{
+			smol = lst->content->nb;
+			idx = lst->content->index;
+		}
+		lst = lst->next;
+	}
+	if (lst->content->nb < smol)
+	{
+		smol = lst->content->nb;
+		idx = lst->content->index;
+	}
+	return (idx);
+}
+
+void	push_to_b(t_list **a, t_list **b, t_cmd *cmd)
 {
 	t_list	*lst;
+	size_t	mid;
 
 	lst = *a;
-	while (ft_lstsize(lst) > 3)
+	mid = ft_lstsize(lst) / 2;
+	while (less_than_mid(lst, mid))
 	{
-		while (lst->content && less_than_mid(lst, mid))
+		if (lst->content->index < mid)
 		{
-			if (lst->content->nb < mid)
-			{
-				p_move(a, b);
-				commande(8, &cmd);
-			}
-			else
-			{
-				print_n_update(3, &cmd, a, ra);
-			}
-			lst = *a;
+			p_move(a, b);
+			commande(8, &cmd);
 		}
+		else
+			print_n_update(3, &cmd, a, ra);
 		lst = *a;
-		get_index(lst);
-		mid = find_median(lst);
 	}
-	three_or_less(a, 'a', cmd);
 }
 
-void	push_back(t_list **s_a, t_list **s_b, t_cmd *cmd)
+void	biggest_push_to_b(t_list **a, t_list **b, t_cmd *cmd)
 {
-	t_list	*a;
-	t_list	*b;
+	t_list	*lst;
+	size_t	mid;
 
-	a = *s_a;
+	lst = *a;
+	mid = ft_lstsize(lst) / 2;
+	while (lst->content->index >= mid)
+	{
+		p_move(a, b);
+		commande(8, &cmd);
+		lst = *a;
+	}
+}
+
+void	sec_push_to_b(t_list **a, t_list **b, t_cmd *cmd)
+{
+	t_list	*lst;
+	size_t	mid;
+
+	lst = *a;
+	mid = ft_lstsize(lst) / 2;
+	while (lst->content->index < mid)
+	{
+		p_move(a, b);
+		commande(8, &cmd);
+		lst = *a;
+	}
+}
+
+void	push_to_a(t_list **s_a, t_list **s_b, t_cmd *cmd)
+{
+	t_list	*b;
+	size_t	smoler_idx;
+	size_t	mid_b;
+
 	b = *s_b;
+	mid_b = ft_lstsize(b) / 2;
+	
+	smoler_idx = get_smoler(*s_b);
 	while (b)
 	{
-		if (a->content->nb < b->content->nb)
-			print_n_update(3, &cmd, s_a, ra);
-		p_move(s_b, s_a);
-		commande(7, &cmd);
+		if (b->content->index == smoler_idx)
+		{
+			smoler_idx ++;
+			p_move(s_b, s_a);
+			commande(7, &cmd);
+			print_n_update(3, &cmd, s_a, ra);			
+		}
+		else if (b->content->index >= mid_b)
+		{
+			p_move(s_b, s_a);
+			commande(7, &cmd);
+		}
+		else
+			print_n_update(4, &cmd, s_b, rb);
 		b = *s_b;
-		a = *s_a;
-		if (a->content->final - ft_lstlast(a)->content->final == 1)
-			print_n_update(5, &cmd, s_a, rra);
-		p_lsts(*s_a, *s_b);
 	}
 }
+
 
 void	hundred_or_less(t_list **a, t_list **b, t_cmd *cmd)
 {
-	p_lsts(*a, *b);
-	first_sort(a, b, cmd, find_median(*a));
-	p_lsts(*a, *b);
-	push_back(a, b, cmd);
-	p_lsts(*a, *b);
+	size_t	mid;
+	mid = ft_lstsize(*a) / 2;
+	push_to_b(a, b, cmd);
+	push_to_a(a, b, cmd);
+	while (!sorted_half(0, mid-1, *a))
+	{
+		sec_push_to_b(a, b, cmd);
+		push_to_a(a, b, cmd);
+	}
+	biggest_push_to_b(a, b, cmd);
+	push_to_a(a, b, cmd);
+	while (!sorted_half(mid, ft_lstsize(*a)-1, *a))
+	{
+		biggest_push_to_b(a, b, cmd);
+		push_to_a(a, b, cmd);
+	}
 }

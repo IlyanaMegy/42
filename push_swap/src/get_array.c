@@ -41,9 +41,7 @@ char	**get_array_single_arg(char *nbrs)
 {
 	char	**array;
 
-	ft_printf("argv = %s\n", nbrs);
 	array = ft_split(nbrs, 32);
-	ft_printf("HERE\n");
 	return (array);
 }
 
@@ -76,11 +74,10 @@ char	**get_array(int ac, char **av)
 
 	if (ac == 2)
 		array = get_array_single_arg(av[1]);
-	else
+	else if (ac > 2)
 		array = get_array_multiple_args(ac, av);
 	if (array == NULL || *array == NULL)
 		end_prog("Error\n", 1);
-	ft_printf("HERE\n");
 	return (array);
 }
 
