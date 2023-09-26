@@ -1,5 +1,6 @@
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
+# include "libft.h"
 # include <fcntl.h>
 # include <limits.h>
 # include <stdarg.h>
@@ -9,85 +10,72 @@
 # include <string.h>
 # include <unistd.h>
 
-# define T_LIST
+// # define T_LIST
+
+// typedef struct s_stack
+// {
+// 	int				nb;
+// 	size_t			index;
+// 	size_t			final;
+// 	int				pos;
+// }					t_stack;
+
+// typedef struct s_list
+// {
+// 	t_stack			*content;
+// 	struct s_list	*next;
+// }					t_list;
+
+// typedef struct s_cmd
+// {
+// 	int				cmd;
+// 	struct s_cmd	*next;
+// }					t_cmd;
 
 typedef struct s_stack
 {
-	int				nb;
-	size_t			index;
-	size_t			final;
-	int				pos;
-}					t_stack;
+	t_ps		*a;
+	t_ps		*b;
+	t_list		*instr;
+}				t_stack;
 
-typedef struct s_list
+typedef struct s_a_utils
 {
-	t_stack			*content;
-	struct s_list	*next;
-}					t_list;
+	int			mid_idx;
+	int			high_idx;
+	int			nxt_idx;
+}				t_a_utils;
 
-typedef struct s_cmd
+typedef struct s_b_utils
 {
-	int				cmd;
-	struct s_cmd	*next;
-}					t_cmd;
+	int			mid_idx;
+	int			high_idx;
+	int			low_idx;
+}				t_b_utils;
 
-// main.c
-void				end_prog(char *msg, int exit_nb);
-void				finish_prog(t_list *a, t_list *b, t_cmd *cmd, char *msg);
+typedef struct s_tools
+{
+	int			*ordered_array;
+	int			total_num;
+	t_a_utils	a;
+	t_b_utils	b;
+}				t_tools;
 
-// init_stack.c
-t_list				*init_stack(int ac, char **av);
-void				get_index(t_list *a);
+// init.c
+void			init(t_stack *stack, t_tools *tools, int ac, char **av);
+// init _stack_a.c
+void			init_stack_a(int argc, char **argv, t_ps **stack_a);
 
-// check_args.c
-int					*check_args(int ac, char **av, size_t *s);
-
-// get_array.c
-char				**get_array(int ac, char **av);
-int					*convert_to_int(char **array);
-void				create_stack_b(t_list **a, t_list **b, t_cmd *cmd);
+// sort_tools.c
+int				mid_idx(int bigger_idx, int smoler_idx);
+void			rewind(t_ps **stack_to_rewind);
 
 // utils.c
-void				free_double_char(char **arr_char);
-void				print_double_array(char **a);
-void				end_n_free(char **array, char *msg, int exit_nb);
-void				print_tab(int *tab);
-void				print_lst(t_list *mylist, char pile);
-void				print_lists(t_list *s_A, t_list *s_B);
-void				p_lsts(t_list *s_A, t_list *s_B);
+void			p_lsts(t_ps *s_A, t_ps *s_B);
+void			end_prog(char *msg, int exit_nb);
+void			print_tab(int *tab, int len);
 
-// push_swap.c
-int					push_swap(t_list **s_a, t_list **s_b, t_cmd *cmd);
-int					all_good(t_list *s_a, t_list *s_b);
-int					in_order(t_list *lst, char pile);
+// quick_sort.c
+void			quick_sort(int *arr, int n);
 
-// pa_pb.c
-void				p_move(t_list **src, t_list **dest);
-
-// sa_sb.c
-void				sa(t_list **a);
-void				sb(t_list **b);
-void				ss(t_list **a, t_list **b);
-
-// rra_rrb.c
-void				rra(t_list **a);
-void				rrb(t_list **b);
-void				rrr(t_list **a, t_list **b);
-
-// ra_rb.c
-void				ra(t_list **a);
-void				rb(t_list **b);
-void				rr(t_list **a, t_list **b);
-
-// smol_sort.c
-int					three_or_less(t_list **lst, char pile, t_cmd *cmd);
-void				five_or_less(t_list **a, t_list **b, t_cmd *cmd);
-
-// commands.c
-void				print_n_update(int c, t_cmd **cmd, t_list **l, void move());
-void				commande(int command, t_cmd **cmd);
-void				execute_sep(int command, t_cmd *cmd);
-
-// hundred_sort.c
-void				hundred_or_less(t_list **a, t_list **b, t_cmd *cmd);
 #endif

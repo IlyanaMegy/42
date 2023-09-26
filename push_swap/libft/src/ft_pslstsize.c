@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pa_pb.c                                            :+:      :+:    :+:   */
+/*   ft_dlstsize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: phemsi-a <phemsi-a@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/24 11:16:05 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/09/24 11:16:07 by ilymegy          ###   ########.fr       */
+/*   Created: 2021/02/11 00:28:03 by phemsi-a          #+#    #+#             */
+/*   Updated: 2021/05/29 11:07:12 by phemsi-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pushswap.h"
-#include "../inc/libft.h"
+#include "libft.h"
 
-void	p_move(t_list **src, t_list **dest)
+int	ft_pslstsize(t_ps *lst)
 {
-	t_list	*node;
+	t_ps	*aux;
+	int		size;
 
-	if (src == NULL)
-		return ;
-	node = *src;
-	*src = (*src)->next;
-	node->next = NULL;
-	ft_lstadd_front(dest, node);
-	return ;
+	aux = lst;
+	size = 0;
+	while (aux != NULL)
+	{
+		size++;
+		aux = aux->next;
+	}
+	return (size);
 }

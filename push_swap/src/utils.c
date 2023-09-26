@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/pushswap.h"
-#include "../inc/libft.h"
 
 void	free_double_char(char **arr_char)
 {
@@ -26,17 +25,10 @@ void	free_double_char(char **arr_char)
 	free(arr_char);
 }
 
-void	print_double_array(char **a)
+void	end_prog(char *msg, int exit_nb)
 {
-	int	i;
-
-	i = 0;
-	while (a[i])
-	{
-		ft_printf("\"%s\" ", a[i]);
-		i++;
-	}
-	ft_printf("\n");
+	ft_printf("%s\n", msg);
+	exit(exit_nb);
 }
 
 void	end_n_free(char **array, char *msg, int exit_nb)
@@ -45,29 +37,10 @@ void	end_n_free(char **array, char *msg, int exit_nb)
 	end_prog(msg, exit_nb);
 }
 
-void	print_lst(t_list *mylist, char pile)
+void	p_lsts(t_ps *s_A, t_ps *s_B)
 {
-	t_list	*lst;
-
-	ft_printf("\n");
-	if (mylist)
-	{
-		lst = mylist;
-		while (lst->next)
-		{
-			ft_printf("%d\n", lst->content->nb);
-			lst = lst->next;
-		}
-		ft_printf("%d\n--------\n%c\n", lst->content->nb, pile);
-		return ;
-	}
-	ft_printf("--------\n%c\n", pile);
-}
-
-void	p_lsts(t_list *s_A, t_list *s_B)
-{
-	t_list *a;
-	t_list *b;
+	t_ps *a;
+	t_ps *b;
 
 	ft_printf("\n_________________\n\n");
 	a = s_A;
@@ -77,10 +50,10 @@ void	p_lsts(t_list *s_A, t_list *s_B)
 	{
 		while (a->next)
 		{
-			ft_printf("%d ", a->content->nb);
+			ft_printf("%d ", a->content);
 			a = a->next;
 		}
-		ft_printf("%d\n", a->content->nb);
+		ft_printf("%d\n", a->content);
 	}
 	else
 		ft_printf("\n");
@@ -89,12 +62,23 @@ void	p_lsts(t_list *s_A, t_list *s_B)
 	{
 		while (b->next)
 		{
-			ft_printf("%d ", b->content->nb);
+			ft_printf("%d ", b->content);
 			b = b->next;
 		}
-		ft_printf("%d\n", b->content->nb);
+		ft_printf("%d\n", b->content);
 	}
 	else
 		ft_printf("\n");
 	ft_printf("_________________\n\n");
+}
+
+void	print_tab(int *tab, int len)
+{
+	int i = 0;
+	while (i < len)
+	{
+		ft_printf("%d ", tab[i]);
+		i++;
+	}
+	ft_printf("\n");	
 }

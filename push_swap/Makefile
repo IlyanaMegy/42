@@ -19,18 +19,11 @@ INC			= -I ./inc/\
 			
 SRC_PATH	= ./src/
 SRC			= main.c\
-			init_stack.c\
-			check_args.c\
-			get_array.c\
-			push_swap.c\
-			utils.c\
-			pa_pb.c\
-			sa_sb.c\
-			rra_rrb.c\
-			ra_rb.c\
-			smol_sort.c\
-			commands.c\
-			hundred_sort.c
+			init.c\
+			init_stack_a.c\
+			sort_tools.c\
+			quick_sort.c\
+			utils.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/

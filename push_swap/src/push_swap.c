@@ -66,7 +66,7 @@ int	push_swap(t_list **s_a, t_list **s_b, t_cmd *cmd)
 		err = three_or_less(s_a, 'a', cmd);
 	else if (ft_lstsize(*s_a) <= 5)
 		five_or_less(s_a, s_b, cmd);
-	else if (ft_lstsize(*s_a) <= 101)
+	else if (ft_lstsize(*s_a) <= 500)
 		hundred_or_less(s_a, s_b, cmd);
 	if (err)
 		finish_prog(*s_a, *s_b, cmd, "Error\n");

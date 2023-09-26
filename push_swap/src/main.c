@@ -11,49 +11,96 @@
 /* ************************************************************************** */
 
 #include "../inc/pushswap.h"
-#include "../inc/libft.h"
 
-void	end_prog(char *msg, int exit_nb)
+
+/*
+** check if arg is an int.
+*/
+void	check_is_int(char **argv, int i)
 {
-	ft_printf("%s\n", msg);
-	exit(exit_nb);
+	int		j;
+	double	number;
+
+	j = 0;
+	if (argv[i][j] == '-')
+	{
+		j++;
+		if (!argv[i][j])
+			end_prog("Error\n", 1);
+	}
+	while (argv[i][j])
+	{
+		if (!(ft_isdigit(argv[i][j])))
+			end_prog("Error\n", 1);
+		j++;
+	}
+	number = ft_atoi(argv[i]);
+	if (number > INT_MAX || number < INT_MIN)
+		end_prog("Error\n", 1);
 }
 
-void	finish_prog(t_list *a, t_list *b, t_cmd *cmd, char *msg)
+/*
+** if argv is a single string, it checks if valid 
+** then split to char**, each number is inside a char*.
+*/
+char	**check_string(int *argc, char **argv)
 {
-	if (cmd->cmd)
-		execute_sep(0, cmd);
-	ft_lstclear(&a, free);
-	ft_lstclear(&b, free);
-	free(a);
-	free(b);
-	free(cmd);
-	ft_printf("%s", msg);
-	exit(0);
+	int	i;
+
+	i = 0;
+	if (!(argv[0][0]))
+		end_prog("", 1);
+	argv = ft_split(argv[0], ' ');
+	if (argv == NULL)
+		end_prog("", 1);
+	while (argv[i] != NULL)
+		i++;
+	*argc = i;
+	return (argv);
 }
 
+/*
+** for each arg, check if it's an int.
+*/
+void	check_args(int argc, char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (i < argc)
+	{
+		check_is_int(argv, i);
+		i++;
+	}
+}
+
+/*
+** init the stacks and instructions to NULL.
+*/
+void	init_stacks(t_stack *stack)
+{
+	stack->a = NULL;
+	stack->b = NULL;
+	stack->instr = NULL;
+}
+
+/*
+** just a main here...
+** gonna check args, then init stacks, filling stack_a and then sort it.
+*/
 int	main(int ac, char **av)
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_cmd	*cmd;
+	t_stack	stack;
+	t_tools	tools;
 
 	if (ac == 1)
 		end_prog("Error", 1);
-	stack_a = init_stack(ac, av);
-	stack_b = NULL;
-	cmd = malloc(sizeof(*cmd));
-	if (cmd == NULL)
-		finish_prog(stack_a, stack_b, cmd, "");
-	cmd->cmd = -1;
-	cmd->next = NULL;
-	if (all_good(stack_a, stack_b))
-	{
-		ft_lstclear(&stack_a, free);
-		free(stack_a);
-		free(cmd);
-	}
-	push_swap(&stack_a, &stack_b, cmd);
-	// p_lsts(stack_a, stack_b);
-	finish_prog(stack_a, stack_b, cmd, "");
+	av = &av[1];
+	ac--;
+	if (ac == 1)
+		av = check_string(&ac, av);
+	check_args(ac, av);
+	init_stacks(&stack);
+	init(&stack, &tools, ac, av);
+	
 }

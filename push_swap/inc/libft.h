@@ -34,6 +34,14 @@ typedef struct s_list
 	struct s_list *next;
 } t_list;
 
+typedef struct s_ps
+{
+	int content;
+	int index;
+	struct s_ps *next;
+	struct s_ps *previous;
+} t_ps;
+
 # endif
 
 // LIBFT
@@ -124,4 +132,15 @@ void	create_line(t_gnl *str, char **line);
 void	free_str(t_gnl *str);
 int	is_newline(t_gnl *s);
 int	ft_len(const char *str);
+
+t_ps	*ft_pslstnew(int content);
+void	ft_pslstadd_front(t_ps **lst, t_ps *new);
+int	ft_pslstsize(t_ps *lst);
+t_ps	*ft_pslstlast(t_ps *lst);
+void	ft_pslstadd_back(t_ps **lst, t_ps *new);
+void	ft_pslstdelone(t_ps *lst, void (*del)(int));
+void	ft_pslstclear(t_ps **lst);
+void	ft_pslstiter(t_ps *lst, void (*f)(int));
+void	ft_pslstiter_reverse(t_ps *lst, void (*f)(int));
+t_ps	*ft_pslstmap(t_ps *lst, int (*f)(int));
 #endif
