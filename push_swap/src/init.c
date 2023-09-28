@@ -51,11 +51,11 @@ void	get_index(t_stack *stack, t_tools *tools)
 {
 	if (stack->a->next == NULL)
 	{
-		stack->a->index = find_index(stack, tools, 0);
+		stack->a->idx = find_index(stack, tools, 0);
 		rewind(&stack->a);
 		return ;
 	}
-	stack->a->index = find_index(stack, tools, 0);
+	stack->a->idx = find_index(stack, tools, 0);
 	stack->a = stack->a->next;
 	get_index(stack, tools);
 }

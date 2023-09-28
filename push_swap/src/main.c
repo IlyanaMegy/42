@@ -102,5 +102,6 @@ int	main(int ac, char **av)
 	check_args(ac, av);
 	init_stacks(&stack);
 	init(&stack, &tools, ac, av);
-	
+	do_sort(&stack, &tools);
+	ft_lstiter(stack.instr, &ft_putstr);
 }

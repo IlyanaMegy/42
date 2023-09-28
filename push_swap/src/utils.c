@@ -31,11 +31,64 @@ void	end_prog(char *msg, int exit_nb)
 	exit(exit_nb);
 }
 
-void	end_n_free(char **array, char *msg, int exit_nb)
+int	all_good(t_ps *s_a, t_ps *s_b)
 {
-	free_double_char(array);
-	end_prog(msg, exit_nb);
+	int		max_value;
+	t_ps	*lst;
+
+	if (s_b != NULL)
+		return (0);
+	if (ft_pslstsize(s_a) == 1)
+		return (1);
+	lst = s_a;
+	max_value = s_a->content;
+	lst = lst->next;
+	while (lst)
+	{
+		if (max_value < lst->content)
+			max_value = lst->content;
+		else
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
 }
+
+int	is_sorted(t_ps *stack)
+{
+	if (stack)
+	{
+		while (stack->next != NULL)
+		{
+			if (stack->content > stack->next->content)
+				return (0);
+			stack = stack->next;
+		}
+	}
+	return (1);
+}
+
+int	is_full(t_ps *stack, int total_numbers)
+{
+	int	numbers_in_stack;
+
+	numbers_in_stack = 0;
+	while (stack->next != NULL)
+	{
+		numbers_in_stack++;
+		stack = stack->next;
+	}
+	numbers_in_stack++;
+	if (numbers_in_stack == total_numbers)
+		return (1);
+	return (0);
+}
+
+// void	end_n_free(char **array, char *msg, int exit_nb)
+// {
+// 	free_double_char(array);
+// 	end_prog(msg, exit_nb);
+// }
 
 void	p_lsts(t_ps *s_A, t_ps *s_B)
 {

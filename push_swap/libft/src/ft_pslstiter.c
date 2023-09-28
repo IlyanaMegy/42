@@ -40,6 +40,6 @@ void	ft_pslstiter_reverse(t_ps *lst, void (*f)(int))
 	{
 		f(s->content);
 		ft_printf("\n");
-		s = s->previous;
+		s = s->prev;
 	}
 }

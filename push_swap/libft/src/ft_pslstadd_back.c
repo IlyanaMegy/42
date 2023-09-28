@@ -25,5 +25,5 @@ void	ft_pslstadd_back(t_ps **lst, t_ps *new)
 	}
 	s = ft_pslstlast(*lst);
 	s->next = new;
-	new->previous = s;
+	new->prev = s;
 }

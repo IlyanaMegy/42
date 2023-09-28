@@ -23,7 +23,10 @@ SRC			= main.c\
 			init_stack_a.c\
 			sort_tools.c\
 			quick_sort.c\
-			utils.c
+			utils.c\
+			push_swap.c\
+			smol_sort.c\
+			moves.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/

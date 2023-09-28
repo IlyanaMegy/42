@@ -42,7 +42,6 @@ $(NAME): $(OBJS)
 			@echo "$(GREEN)My Libft compiled!$(DEF_COLOR)"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJSF)
-			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 			@$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
 
 $(OBJSF):

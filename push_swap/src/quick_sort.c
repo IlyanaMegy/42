@@ -1,6 +1,6 @@
 #include "../inc/pushswap.h"
 
-void	swap(int *xp, int *yp)
+void	swap_it(int *xp, int *yp)
 {
 	int	temp;
 
@@ -29,7 +29,7 @@ void	quick_sort(int *arr, int n)
 				min_idx = j;
 			j++;
 		}			
-		swap(&arr[min_idx], &arr[i]);
+		swap_it(&arr[min_idx], &arr[i]);
 		i++;
 	}
 }

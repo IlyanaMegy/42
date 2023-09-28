@@ -19,5 +19,5 @@ void	ft_pslstadd_front(t_ps **lst, t_ps *new)
 	temp = *lst;
 	*lst = new;
 	new->next = temp;
-	temp->previous = new;
+	temp->prev = new;
 }

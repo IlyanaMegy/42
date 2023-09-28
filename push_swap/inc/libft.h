@@ -37,9 +37,9 @@ typedef struct s_list
 typedef struct s_ps
 {
 	int content;
-	int index;
+	int idx;
 	struct s_ps *next;
-	struct s_ps *previous;
+	struct s_ps *prev;
 } t_ps;
 
 # endif
@@ -69,7 +69,7 @@ void	ft_lstadd_front(t_list **alst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstdelfirst(t_list **lst);
-void	ft_lstiter(t_list *lst, void (*f)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(char *));
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
@@ -86,6 +86,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+void	ft_putstr(char *s);
 char	**ft_split(char *s, char c);
 char	*ft_strcat(char *dest, const char *src);
 char	*ft_strchr(const char *s, int c);

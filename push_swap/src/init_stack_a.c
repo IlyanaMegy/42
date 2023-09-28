@@ -1,6 +1,9 @@
 
 #include "../inc/pushswap.h"
 
+/*
+** check if there's occurences.
+*/
 int	is_repeated(t_ps *lst, int number)
 {
 	t_ps	*s;
@@ -17,6 +20,9 @@ int	is_repeated(t_ps *lst, int number)
 	return (0);
 }
 
+/*
+** init of stack_a.
+*/
 void	init_stack_a(int argc, char **argv, t_ps **stack_a)
 {
 	int number;

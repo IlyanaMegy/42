@@ -17,7 +17,7 @@ void	rewind(t_ps **stack_to_rewind)
 	t_ps	*stack;
 
 	stack = *stack_to_rewind;
-	while (stack->previous != NULL)
-		stack = stack->previous;
+	while (stack->prev != NULL)
+		stack = stack->prev;
 	*stack_to_rewind = stack;
 }
