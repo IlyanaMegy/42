@@ -13,9 +13,9 @@
 #include "../inc/pushswap.h"
 
 /*
-** defining first second and last numbers of the given stack.
+* defining first second and last numbers of the given stack.
 */
-static void	define_numbers(int *first, int *second, int *last, t_ps *s)
+void	define_numbers(int *first, int *second, int *last, t_ps *s)
 {
 	*first = s->content;
 	*second = s->next->content;
@@ -25,7 +25,7 @@ static void	define_numbers(int *first, int *second, int *last, t_ps *s)
 }
 
 /*
-** sorting stack of three numbers.
+* sorting stack of three numbers.
 */
 void	sort_three(t_stack *s, int *first, int *second, int *last)
 {
@@ -71,7 +71,7 @@ void	return_to_a(t_stack *stack)
 }
 
 /*
-** doing smol sort here.
+* doing smol sort here.
 */
 void	smol_sort(t_stack *s, t_tools *tools, int total_nb)
 {
@@ -80,15 +80,13 @@ void	smol_sort(t_stack *s, t_tools *tools, int total_nb)
 	int	last;
 
 	(void)tools;
-	// if (all_good(s->b, s->a))
-	// 	return;
 	if (is_sorted(s->a) && is_full(s->a, total_nb))
 		return ;
 	if (ft_pslstsize(s->a) == 2)
 	{
 		swap(&s->a, &s->instr, 'a');
 		return ;
-	}		
+	}
 	if (ft_pslstsize(s->a) == 3)
 	{
 		define_numbers(&first, &second, &last, s->a);
@@ -97,6 +95,5 @@ void	smol_sort(t_stack *s, t_tools *tools, int total_nb)
 	}
 	else
 		send_to_b(s, tools, total_nb);
-	p_lsts(s->a, s->b);
 	smol_sort(s, tools, total_nb);
 }

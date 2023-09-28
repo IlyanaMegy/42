@@ -1,7 +1,7 @@
 #include "../inc/pushswap.h"
 
 /*
-** swaping the first and second numbers in given stack.
+* swaping the first and second numbers in given stack.
 */
 void	swap(t_ps **s, t_list **cmd, char pile)
 {
@@ -28,7 +28,7 @@ void	swap(t_ps **s, t_list **cmd, char pile)
 }
 
 /*
-** shift_up.
+* shift_up.
 */
 void	rotate(t_ps **s, t_list **cmd, char pile)
 {
@@ -55,7 +55,7 @@ void	rotate(t_ps **s, t_list **cmd, char pile)
 }
 
 /*
-** shift_down.
+* shift_down.
 */
 void	reverse_rotate(t_ps **s, t_list **cmd, char pile)
 {
@@ -80,7 +80,7 @@ void	reverse_rotate(t_ps **s, t_list **cmd, char pile)
 }
 
 /*
-** initializing empty stack.
+* initializing empty stack.
 */
 void	init_empty_s(t_ps *dest, t_list **cmd, t_ps **dest_s, char id)
 {
@@ -94,7 +94,7 @@ void	init_empty_s(t_ps *dest, t_list **cmd, t_ps **dest_s, char id)
 }
 
 /*
-** pushing first nb of stack 1 to stack 2 on top.
+* pushing first nb of stack 1 to stack 2 on top.
 */
 void	push(t_ps **src_s, t_ps **dest_s, t_list **cmd, char pile)
 {

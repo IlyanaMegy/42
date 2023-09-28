@@ -84,12 +84,6 @@ int	is_full(t_ps *stack, int total_numbers)
 	return (0);
 }
 
-// void	end_n_free(char **array, char *msg, int exit_nb)
-// {
-// 	free_double_char(array);
-// 	end_prog(msg, exit_nb);
-// }
-
 void	p_lsts(t_ps *s_A, t_ps *s_B)
 {
 	t_ps *a;
