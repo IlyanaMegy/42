@@ -12,19 +12,6 @@
 
 #include "../inc/pushswap.h"
 
-void	free_double_char(char **arr_char)
-{
-	size_t	i;
-
-	i = 0;
-	while (arr_char[i])
-	{
-		free(arr_char[i]);
-		i++;
-	}
-	free(arr_char);
-}
-
 void	end_prog(char *msg, int exit_nb)
 {
 	ft_printf("%s\n", msg);

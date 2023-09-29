@@ -10,43 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../inc/pushswap.h"
 
-static int	calculate_rotation_steps(t_dlist *stack,
-		int target_number, int steps)
+int	rotate_steps(t_ps *stack, int target_nb, int steps)
 {
 	if (!stack)
 		return (INT_MAX);
-	if (stack->index == target_number)
+	if (stack->idx == target_nb)
 		return (steps);
 	if (!stack->next)
 		return (INT_MAX);
 	stack = stack->next;
-	return (calculate_rotation_steps(stack, target_number, (steps + 1)));
+	return (rotate_steps(stack, target_nb, (steps + 1)));
 }
 
-static int	calculate_rr_steps(t_dlist *stack,
-		int target_number, int steps)
+int	rr_steps(t_ps *stack, int target_nb, int steps)
 {
 	if (!stack)
 		return (INT_MAX);
-	if (stack->index == target_number)
+	if (stack->idx == target_nb)
 		return (steps);
-	if (!stack->previous)
+	if (!stack->prev)
 		return (INT_MAX);
-	stack = stack->previous;
-	return (calculate_rr_steps(stack, target_number, (steps + 1)));
+	stack = stack->prev;
+	return (rr_steps(stack, target_nb, (steps + 1)));
 }
 
-int	reverse_rotation_is_quicker(t_dlist *stack, int target_number)
+int	reverse_rotation_is_quicker(t_ps *stack, int target_nb)
 {
 	int	rotation_steps;
 	int	reverse_rotation_steps;
 
-	rotation_steps = calculate_rotation_steps(stack, target_number, 0);
+	rotation_steps = rotate_steps(stack, target_nb, 0);
 	while (stack->next != NULL)
 		stack = stack->next;
-	reverse_rotation_steps = calculate_rr_steps(stack, target_number, 0);
+	reverse_rotation_steps = rr_steps(stack, target_nb, 0);
 	if (reverse_rotation_steps < rotation_steps)
 		return (1);
 	return (0);

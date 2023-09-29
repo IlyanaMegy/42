@@ -104,4 +104,5 @@ int	main(int ac, char **av)
 	init(&stack, &tools, ac, av);
 	do_sort(&stack, &tools);
 	ft_lstiter(stack.instr, &ft_putstr);
+	// p_lsts(stack.a, stack.b);
 }

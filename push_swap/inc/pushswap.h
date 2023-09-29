@@ -10,28 +10,6 @@
 # include <string.h>
 # include <unistd.h>
 
-// # define T_LIST
-
-// typedef struct s_stack
-// {
-// 	int				nb;
-// 	size_t			index;
-// 	size_t			final;
-// 	int				pos;
-// }					t_stack;
-
-// typedef struct s_list
-// {
-// 	t_stack			*content;
-// 	struct s_list	*next;
-// }					t_list;
-
-// typedef struct s_cmd
-// {
-// 	int				cmd;
-// 	struct s_cmd	*next;
-// }					t_cmd;
-
 typedef struct s_stack
 {
 	t_ps		*a;
@@ -69,6 +47,7 @@ void			init_stack_a(int argc, char **argv, t_ps **stack_a);
 // sort_tools.c
 int				mid_idx(int bigger_idx, int smoler_idx);
 void			rewind(t_ps **stack_to_rewind);
+void			order_a(t_stack *stack, t_tools *t);
 
 // utils.c
 void			p_lsts(t_ps *s_A, t_ps *s_B);
@@ -93,5 +72,18 @@ void			rotate(t_ps **s, t_list **cmd, char pile);
 void			reverse_rotate(t_ps **s, t_list **cmd, char pile);
 void			push(t_ps **src_s, t_ps **dest_s, t_list **cmd, char pile);
 void			init_empty_s(t_ps *dest, t_list **cmd, t_ps **dest_s, char id);
+
+// return_to_a_sorting.c
+void			start_sorting(t_stack *s, t_tools *t);
+void			finish_sorting(t_stack *s, t_tools *t);
+
+// return_to_a.c
+void			return_half_to_a(t_stack *stack, t_tools *t, int lim);
+
+// half_to_b.c
+void			half_to_b(t_stack *stack, t_tools *tools);
+
+// smart_rotate.c
+int				reverse_rotation_is_quicker(t_ps *stack, int target_nb);
 
 #endif
