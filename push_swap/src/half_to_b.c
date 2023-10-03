@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   half_to_b.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 15:24:49 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/10/03 15:24:52 by ilymegy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pushswap.h"
 
 /*
@@ -75,7 +87,7 @@ void	init_b_values(t_stack *s, t_tools *t, int *len_a)
 */
 void	half_to_b(t_stack *stack, t_tools *tools)
 {
-	int len_a;
+	int	len_a;
 
 	init_b_values(stack, tools, &len_a);
 	if (tools->a.high_idx - tools->a.nxt_idx < 1)

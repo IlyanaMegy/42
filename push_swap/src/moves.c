@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moves.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 15:29:18 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/10/03 15:29:21 by ilymegy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pushswap.h"
 
 /*
@@ -98,8 +110,8 @@ void	init_empty_s(t_ps *dest, t_list **cmd, t_ps **dest_s, char id)
 */
 void	push(t_ps **src_s, t_ps **dest_s, t_list **cmd, char pile)
 {
-	t_ps *src;
-	t_ps *dest;
+	t_ps	*src;
+	t_ps	*dest;
 
 	if (!(*src_s))
 		return ;

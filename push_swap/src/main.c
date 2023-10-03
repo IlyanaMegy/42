@@ -17,8 +17,8 @@
 */
 void	check_is_int(char **argv, int i)
 {
-	int		j;
-	double	number;
+	int			j;
+	long int	number;
 
 	j = 0;
 	if (argv[i][j] == '-')
@@ -95,7 +95,7 @@ int	main(int ac, char **av)
 
 	i = 0;
 	if (ac == 1)
-		end_prog("Error", 1);
+		exit(1);
 	av = &av[1];
 	ac--;
 	if (ac == 1)

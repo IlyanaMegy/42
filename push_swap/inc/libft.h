@@ -46,7 +46,7 @@ typedef struct s_ps
 
 // LIBFT
 int	ft_atoi_base(const char *str, const char *base, size_t len_base);
-int	ft_atoi(const char *nptr);
+long int	ft_atoi(const char *nptr);
 long	ft_atol(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);

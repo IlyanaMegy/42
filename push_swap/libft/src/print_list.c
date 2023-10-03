@@ -19,8 +19,8 @@ void	print_list(t_list *mylist)
 	lst = mylist;
 	while (lst->next)
 	{
-		ft_printf("%s --> ",(char *)lst->content);
+		ft_printf("%s --> ", (char *)lst->content);
 		lst = lst->next;
 	}
-	ft_printf("%s\n",(char *)lst->content);
+	ft_printf("%s\n", (char *)lst->content);
 }

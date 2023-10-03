@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reduce_instr.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 15:30:18 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/10/03 15:30:20 by ilymegy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pushswap.h"
 
 static void	replace(t_list **instr, char *content)
@@ -44,13 +56,6 @@ static int	next_is_a_match(char *id, char *id_next)
 	return (0);
 }
 
-// static int	is_reducible(char *id)
-// {
-// 	if ((ft_strnsame(id, "pa", 2)) || (ft_strnsame(id, "pb", 2)))
-// 		return (0);
-// 	return (1);
-// }
-
 void	reduce_instructions(t_list **instructions)
 {
 	t_list	*instr;
@@ -58,7 +63,6 @@ void	reduce_instructions(t_list **instructions)
 	instr = *instructions;
 	while (instr)
 	{
-		// if (is_reducible(instr->content))
 		if (instr->next)
 			if (next_is_a_match(instr->content, instr->next->content))
 				replace_instructions(&instr, instr->content);

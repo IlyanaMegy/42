@@ -35,9 +35,10 @@ void	sort_three(t_stack *stack, int *first, int *second, int *last)
 		|| (*first > *second && *last < *second && *first > *last)
 		|| (*first < *second && *last < *second && *first < *last))
 		swap(&stack->a, &stack->instr, 'a');
-	if (stack->b->next)
-		if (stack->b->idx < stack->b->next->idx)
-			swap(&stack->b, &stack->instr, 'b');
+	if (stack->b)
+		if (stack->b->next)
+			if (stack->b->idx < stack->b->next->idx)
+				swap(&stack->b, &stack->instr, 'b');
 	define_numbers(first, second, last, stack->a);
 	if (*first > *second && *last > *second && *first > *last)
 		rotate(&stack->a, &stack->instr, 'a');

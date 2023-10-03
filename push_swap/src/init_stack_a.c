@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_stack_a.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 15:25:35 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/10/03 15:25:37 by ilymegy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/pushswap.h"
 
@@ -25,8 +36,8 @@ int	is_repeated(t_ps *lst, int number)
 */
 void	init_stack_a(int argc, char **argv, t_ps **stack_a)
 {
-	int number;
-	int i;
+	int	number;
+	int	i;
 
 	i = 0;
 	number = (int)ft_atoi(argv[i]);

@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-t_ps	*ft_pslstmap(t_ps *lst, int(*f)(int))
+t_ps	*ft_pslstmap(t_ps *lst, int (*f)(int))
 {
 	t_ps	*head;
 	t_ps	*tmp;

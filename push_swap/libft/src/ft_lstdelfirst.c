@@ -14,7 +14,8 @@
 
 void	ft_lstdelfirst(t_list **lst)
 {
-	t_list *tmp;
+	t_list	*tmp;
+
 	if (!(*lst))
 		return ;
 	tmp = *lst;
