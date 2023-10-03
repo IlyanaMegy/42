@@ -82,7 +82,6 @@ void	smol_sort(t_stack *s, t_tools *tools, int total_nb)
 	int	last;
 
 	(void)tools;
-	p_lsts(s->a, s->b);
 	if (is_sorted(s->a) && is_full(s->a, total_nb))
 		return ;
 	if (ft_pslstsize(s->a) == 2)

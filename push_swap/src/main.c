@@ -12,7 +12,6 @@
 
 #include "../inc/pushswap.h"
 
-
 /*
 ** check if arg is an int.
 */
@@ -92,17 +91,25 @@ int	main(int ac, char **av)
 {
 	t_stack	stack;
 	t_tools	tools;
+	int		i;
 
+	i = 0;
 	if (ac == 1)
 		end_prog("Error", 1);
 	av = &av[1];
 	ac--;
 	if (ac == 1)
+	{
+		i = ac;
 		av = check_string(&ac, av);
+	}
 	check_args(ac, av);
 	init_stacks(&stack);
 	init(&stack, &tools, ac, av);
 	do_sort(&stack, &tools);
+	reduce_instructions(&stack.instr);
 	ft_lstiter(stack.instr, &ft_putstr);
-	// p_lsts(stack.a, stack.b);
+	clear(&stack, &tools);
+	if (i == 1)
+		free_av(av);
 }

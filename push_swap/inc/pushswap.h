@@ -52,8 +52,8 @@ void			order_a(t_stack *stack, t_tools *t);
 // utils.c
 void			p_lsts(t_ps *s_A, t_ps *s_B);
 void			end_prog(char *msg, int exit_nb);
-void			print_tab(int *tab, int len);
-int				all_good(t_ps *s_a, t_ps *s_b);
+void			clear(t_stack *stack, t_tools *t);
+void			free_av(char **av);
 int				is_sorted(t_ps *stack);
 int				is_full(t_ps *stack, int total_numbers);
 
@@ -85,5 +85,8 @@ void			half_to_b(t_stack *stack, t_tools *tools);
 
 // smart_rotate.c
 int				reverse_rotation_is_quicker(t_ps *stack, int target_nb);
+
+// reduce_instr.c
+void			reduce_instructions(t_list **instructions);
 
 #endif

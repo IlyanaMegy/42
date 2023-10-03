@@ -18,27 +18,26 @@ void	end_prog(char *msg, int exit_nb)
 	exit(exit_nb);
 }
 
-int	all_good(t_ps *s_a, t_ps *s_b)
+void	clear(t_stack *stack, t_tools *t)
 {
-	int		max_value;
-	t_ps	*lst;
+	ft_pslstclear(&stack->a);
+	ft_pslstclear(&stack->b);
+	ft_lstclear(&stack->instr, &free);
+	free(t->ordered_array);
+}
 
-	if (s_b != NULL)
-		return (0);
-	if (ft_pslstsize(s_a) == 1)
-		return (1);
-	lst = s_a;
-	max_value = s_a->content;
-	lst = lst->next;
-	while (lst)
+void	free_av(char **av)
+{
+	int	i;
+
+	i = 0;
+	while (av[i])
 	{
-		if (max_value < lst->content)
-			max_value = lst->content;
-		else
-			return (0);
-		lst = lst->next;
+		free(av[i]);
+		i++;
 	}
-	return (1);
+	free(av[i]);
+	free(av);
 }
 
 int	is_sorted(t_ps *stack)
@@ -73,8 +72,8 @@ int	is_full(t_ps *stack, int total_numbers)
 
 void	p_lsts(t_ps *s_A, t_ps *s_B)
 {
-	t_ps *a;
-	t_ps *b;
+	t_ps	*a;
+	t_ps	*b;
 
 	ft_printf("\n_________________\n\n");
 	a = s_A;
@@ -104,15 +103,4 @@ void	p_lsts(t_ps *s_A, t_ps *s_B)
 	else
 		ft_printf("\n");
 	ft_printf("_________________\n\n");
-}
-
-void	print_tab(int *tab, int len)
-{
-	int i = 0;
-	while (i < len)
-	{
-		ft_printf("%d ", tab[i]);
-		i++;
-	}
-	ft_printf("\n");	
 }

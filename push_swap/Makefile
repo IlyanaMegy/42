@@ -30,7 +30,8 @@ SRC			= main.c\
 			half_to_b.c\
 			return_to_a.c\
 			return_to_a_sorting.c\
-			smart_rotate.c
+			smart_rotate.c\
+			reduce_instr.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= obj/

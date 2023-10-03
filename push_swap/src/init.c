@@ -86,5 +86,4 @@ void	init(t_stack *stack, t_tools *tools, int ac, char **av)
 	init_stack_a(ac, av, &stack->a);
 	init_tools(stack->a, tools, ac);
 	get_index(stack, tools);
-	p_lsts((stack)->a, stack->b);
 }
