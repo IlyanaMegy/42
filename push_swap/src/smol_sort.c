@@ -27,20 +27,22 @@ void	define_numbers(int *first, int *second, int *last, t_ps *s)
 /*
 * sorting stack of three numbers.
 */
-void	sort_three(t_stack *s, int *first, int *second, int *last)
+void	sort_three(t_stack *stack, int *first, int *second, int *last)
 {
-	while (!is_sorted(s->a))
-	{
-		if (*first > *second)
-		{
-			if (*first > *last)
-				rotate(&s->a, &s->instr, 'a');
-			else
-				swap(&s->a, &s->instr, 'a');
-		}
-		else if (*second > *first && *second > *last)
-			reverse_rotate(&s->a, &s->instr, 'a');
-	}
+	if (is_sorted(stack->a))
+		return ;
+	if ((*first > *second && *last > *second && *first < *last)
+		|| (*first > *second && *last < *second && *first > *last)
+		|| (*first < *second && *last < *second && *first < *last))
+		swap(&stack->a, &stack->instr, 'a');
+	if (stack->b->next)
+		if (stack->b->idx < stack->b->next->idx)
+			swap(&stack->b, &stack->instr, 'b');
+	define_numbers(first, second, last, stack->a);
+	if (*first > *second && *last > *second && *first > *last)
+		rotate(&stack->a, &stack->instr, 'a');
+	if (*first < *second && *last < *second && *first > *last)
+		reverse_rotate(&stack->a, &stack->instr, 'a');
 }
 
 void	send_to_b(t_stack *stack, t_tools *tools, int total_nb)
@@ -80,6 +82,7 @@ void	smol_sort(t_stack *s, t_tools *tools, int total_nb)
 	int	last;
 
 	(void)tools;
+	p_lsts(s->a, s->b);
 	if (is_sorted(s->a) && is_full(s->a, total_nb))
 		return ;
 	if (ft_pslstsize(s->a) == 2)

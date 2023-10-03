@@ -39,8 +39,8 @@
 */
 void	do_sort(t_stack *stack, t_tools *tools)
 {
-	if (all_good(stack->b, stack->a))
-		return;
+	if (is_sorted(stack->a) && is_full(stack->a, tools->total_num))
+		return ;
 	if (ft_pslstsize(stack->a) <= 5)
 		smol_sort(stack, tools, ft_pslstsize(stack->a));
 	// else
@@ -48,5 +48,5 @@ void	do_sort(t_stack *stack, t_tools *tools)
 	// 	half_to_b(stack, tools);
 	// 	return_half_to_a(stack, tools, tools->b.high_idx);
 	// }
-	// // do_sort(stack, tools);
+	do_sort(stack, tools);
 }
