@@ -41,23 +41,25 @@ command  | action |
 
 ---
 Scores pour evaluation :
-trier 3 nombres en <= 3 operations
+trier 3 nombres en : <= 3 operations
 
-trier 5 nombres en <= 12 operations
+trier 5 nombres en : <= 12 operations
 
 trier 100 nombres en :
-700 operations max score
-900 operations
-1100 operations
-1300 operations
-1500 operations min score
+
+* 700 operations max score
+* 900 operations
+* 1100 operations
+* 1300 operations
+* 1500 operations min score
 
 trier 500 nombres en :
-5500 operations max score
-7000 operations
-8500 operations
-10000 operations
-11500 operations min score
+
+* 5500 operations max score
+* 7000 operations
+* 8500 operations
+* 10000 operations
+* 11500 operations min score
 
 ## Utilisation
 
@@ -76,12 +78,14 @@ Les nombres peuvent etre passes :
 > rajouter un ` | wc -l` pour avoir le nombre de commandes effectuees lors du tri.
 
 De la meme facon nous pouvons utiliser le checker pour verifier notre programme :
- ` ./checker 5 2 3 1 4`
+
+` ./checker 5 2 3 1 4`
 ` ./checker "-50 -400 -20 -1 -100"`
- ` ./checker "-22" "35" "40" "-15" "75"`
+` ./checker "-22" "35" "40" "-15" "75"`
 
 On peut lancer les deux en meme temps avec cette commande :
-` ARG=`ruby -e "puts (0..100).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker $ARG`
+
+> ARG=`ruby -e "puts (0..100).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker_linux $ARG
 
 Et pour voir le programme en action on utilise le visualizer :
 
