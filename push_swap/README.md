@@ -111,8 +111,12 @@ Afin de trier la pile, j'en ai profité pour pratiquer la récursion dans toutes
 
 ## liens
 Push swap par [anyaschukin](https://github.com/anyaschukin/Push_Swap/tree/master)
+
 Explications du projet [ici](https://medium.com/@msouiyeh/not-your-typical-42network-push-swap-cc583f863a90)
+
 Plus de [ressources](https://push_swap.simple.ink/resources-6af6a8eb190b46e3aad85e9a2d4486c7)...
+
 Github du [Visualizer](https://github.com/o-reo/push_swap_visualizer)
+
 Push swap [tester](https://github.com/laisarena/push_swap_tester)
 
