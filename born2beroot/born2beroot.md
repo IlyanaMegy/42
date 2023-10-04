@@ -21,7 +21,7 @@
   - [Web Server](#web-server)
   <p>&nbsp;</p>
   <p>&nbsp;</p>
-
+sda5_crypt : root
 mdp : 363936Im!!
 
 # I. SSH and Firewall
