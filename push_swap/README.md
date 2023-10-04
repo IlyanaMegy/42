@@ -41,6 +41,7 @@ command  | action |
 
 ---
 Scores pour evaluation :
+
 trier 3 nombres en : <= 3 operations
 
 trier 5 nombres en : <= 12 operations
