@@ -9,6 +9,7 @@
 /*   Updated: 2023/02/13 20:40:53 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../../mandatory/inc/libft.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

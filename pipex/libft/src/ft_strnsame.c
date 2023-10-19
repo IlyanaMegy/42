@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../mandatory/inc/libft.h"
 
 int	ft_strnsame(char const *s1, char const *s2, size_t n)
 {

@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
-#include <stdint.h>
+#include "../../mandatory/inc/libft.h"
 
 int	ptr_len(uintptr_t num)
 {

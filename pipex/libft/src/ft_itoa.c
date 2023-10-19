@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../mandatory/inc/libft.h"
 
 int	len_res(long int n)
 {

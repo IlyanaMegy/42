@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "../../mandatory/inc/libft.h"
 
 void	clean_me(t_gnl **str)
 {

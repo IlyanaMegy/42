@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
-#include <stdio.h>
+#include "../../mandatory/inc/libft.h"
 
 int	err(const char *str)
 {

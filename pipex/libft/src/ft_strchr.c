@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../mandatory/inc/libft.h"
 
 char	*ft_strchr(const char *string, int searchedChar)
 {

@@ -17,7 +17,7 @@
 ** VALEUR RENVOYEE : La fonction memcpy() renvoie un pointeur sur dest.
 */
 
-#include "libft.h"
+#include "../../mandatory/inc/libft.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t size)
 {

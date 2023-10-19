@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "../../mandatory/inc/libft.h"
 
 int	int_len(long int num)
 {

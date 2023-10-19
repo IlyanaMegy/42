@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/libft.h"
+#include "../../mandatory/inc/libft.h"
 
 int	uint_len(unsigned int num, int base)
 {

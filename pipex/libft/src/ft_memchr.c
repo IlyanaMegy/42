@@ -19,7 +19,7 @@
 ** mémoire concernée.
 */
 
-#include "libft.h"
+#include "../../mandatory/inc/libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t size)
 {

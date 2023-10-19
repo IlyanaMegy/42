@@ -19,7 +19,7 @@
 ** égaux ou supérieurs aux n premiers octets de s2.
 */
 
-#include "libft.h"
+#include "../../mandatory/inc/libft.h"
 
 int	ft_memcmp(const void *p1, const void *p2, size_t size)
 {

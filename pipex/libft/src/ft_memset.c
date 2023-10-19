@@ -17,7 +17,7 @@
 ** mémoire b.
 */
 
-#include "libft.h"
+#include "../../mandatory/inc/libft.h"
 
 void	*ft_memset(void *pointer, int value, size_t count)
 {
