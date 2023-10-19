@@ -14,16 +14,16 @@
 
 void	exec(char *cmd, char **env)
 {
-	char	**cmd;
+	char	**s_cmd;
 	char	*path;
 
-	cmd = ft_split(cmd, ' ');
-	path = get_path(cmd[0], env);
-	if (execve(path, cmd, env) == -1)
+	s_cmd = ft_split(cmd, ' ');
+	path = get_path(s_cmd[0], env);
+	if (execve(path, s_cmd, env) == -1)
 	{
 		ft_putstr_fd("pipex: command not found: ", 2);
-		ft_putendl_fd(cmd[0], 2);
-		ft_free_tab(cmd);
+		ft_putendl_fd(s_cmd[0], 2);
+		ft_free_tab(s_cmd);
 		exit(0);
 	}
 }
