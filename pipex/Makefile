@@ -22,7 +22,8 @@ INC_BONUS	= -I ./bonus/inc/\
 			-I ./libft/
 			
 SRC_PATH	= ./mandatory/src/
-SRC			= main.c
+SRC			= main.c\
+			utils.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 SRC_PATH_B	= ./bonus/src/

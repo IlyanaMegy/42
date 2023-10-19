@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../mandatory/inc/libft.h"
+#include "../../mandatory/inc/pipex.h"
 
 int	words_count(const char *s, char sep)
 {
