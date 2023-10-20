@@ -15,6 +15,8 @@ int	open_file(char *file, int in_or_out)
 		ret = open(file, O_RDONLY, 0777);
 	if (in_or_out == 1)
 		ret = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (in_or_out == 2)
+		ret = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (ret == -1)
 		exit(0);
 	return (ret);
@@ -59,17 +61,14 @@ char	*my_getenv(char *name, char **env)
 
 char	*get_path(char *cmd, char **env)
 {
-	int i;
-	char *exec;
-	char **allpath;
-	char *path_part;
-	char **s_cmd;
+	int		i;
+	char	*exec;
+	char	**allpath;
+	char	*path_part;
+	char	**s_cmd;
 
 	i = -1;
-	ft_printf("you get : %s\n", env[1]);
 	allpath = ft_split(my_getenv("PATH", env), ':');
-	if (!allpath)
-		return (NULL);
 	s_cmd = ft_split(cmd, ' ');
 	while (allpath[++i])
 	{

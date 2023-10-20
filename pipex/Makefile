@@ -27,7 +27,8 @@ SRC			= main.c\
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 SRC_PATH_B	= ./bonus/src/
-SRC_B		= main.c
+SRC_B		= main.c\
+			utils.c
 SRCS_B		= $(addprefix $(SRC_PATH_B), $(SRC_B))
 
 OBJ_PATH	= mandatory/obj/
