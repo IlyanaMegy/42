@@ -21,10 +21,10 @@ void	exec(char *cmd, char **env)
 	path = get_path(s_cmd[0], env);
 	if (execve(path, s_cmd, env) == -1)
 	{
-		ft_putstr_fd("pipex: command not found: ", 2);
+		ft_putstr_fd("Pipex: command not found: ", 2);
 		ft_putendl_fd(s_cmd[0], 2);
 		ft_free_tab(s_cmd);
-		exit(0);
+		exit(127);
 	}
 }
 
@@ -56,12 +56,12 @@ int	main(int ac, char **av, char **env)
 	pid_t	pid;
 
 	if (ac != 5)
-		exit_handler(1);
+		exit_handler("__ERROR_ARGS__:\nInvalid number of args.\n");
 	if (pipe(p_fd) == -1)
-		exit(-1);
+		exit_handler("__ERROR_PIPE__:\nError pipe.\n");
 	pid = fork();
 	if (pid == -1)
-		exit(-1);
+		exit_handler("__ERROR_FORK__:\nError fork.\n");
 	if (!pid)
 		child(av, p_fd, env);
 	parent(av, p_fd, env);

@@ -28,6 +28,6 @@ char	*my_getenv(char *name, char **env);
 char	*get_path(char *cmd, char **env);
 void	exec(char *cmd, char **env);
 void	ft_free_tab(char **tab);
-void	exit_handler(int n_exit);
+void	exit_handler(char *msg);
 
 #endif

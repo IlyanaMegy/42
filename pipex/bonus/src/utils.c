@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 11:57:24 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/10/24 11:57:26 by ilymegy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pipex.h"
 
-void	exit_handler(int n_exit)
+void	exit_handler(char *msg)
 {
-	if (n_exit == 1)
-		ft_putstr_fd("./pipex infile cmd cmd outfile\n", 2);
-	exit(0);
+	ft_putstr_fd(msg, 2);
+	exit(1);
 }
 
 int	open_file(char *file, int in_or_out)
@@ -18,7 +29,7 @@ int	open_file(char *file, int in_or_out)
 	if (in_or_out == 2)
 		ret = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (ret == -1)
-		exit(0);
+		exit_handler("__ERROR_FILE__:\nCan't read outfile or infile.\n");
 	return (ret);
 }
 

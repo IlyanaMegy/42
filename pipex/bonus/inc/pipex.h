@@ -19,11 +19,10 @@
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <sys/types.h>
-# include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
 
-void	exit_handler(int n_exit);
+void	exit_handler(char *msg);
 int		open_file(char *file, int n);
 char	*my_getenv(char *name, char **env);
 char	*get_path(char *cmd, char **env);

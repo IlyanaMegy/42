@@ -21,10 +21,10 @@ void	exec(char *cmd, char **env)
 	path = get_path(s_cmd[0], env);
 	if (execve(path, s_cmd, env) == -1)
 	{
-		ft_putstr_fd("pipex: command not found: ", 2);
+		ft_putstr_fd("Pipex: command not found: ", 2);
 		ft_putendl_fd(s_cmd[0], 2);
 		ft_free_tab(s_cmd);
-		exit(0);
+		exit(127);
 	}
 }
 
@@ -52,10 +52,10 @@ void	here_doc(char **av)
 	pid_t	pid;
 
 	if (pipe(p_fd) == -1)
-		exit(0);
+		exit_handler("__ERROR_PIPE__:\nError pipe.\n");
 	pid = fork();
 	if (pid == -1)
-		exit(0);
+		exit_handler("__ERROR_FORK__:\nError fork.\n");
 	if (!pid)
 		here_doc_put_in(av, p_fd);
 	else
@@ -72,10 +72,10 @@ void	do_pipe(char *cmd, char **env)
 	int		p_fd[2];
 
 	if (pipe(p_fd) == -1)
-		exit(0);
+		exit_handler("__ERROR_PIPE__:\nError pipe.\n");
 	pid = fork();
 	if (pid == -1)
-		exit(0);
+		exit_handler("__ERROR_FORK__:\nError fork.\n");
 	if (!pid)
 	{
 		close(p_fd[0]);
@@ -91,16 +91,16 @@ void	do_pipe(char *cmd, char **env)
 
 int	main(int ac, char **av, char **env)
 {
-	int		i;
-	int		fd_in;
-	int		fd_out;
+	int	i;
+	int	fd_in;
+	int	fd_out;
 
 	if (ac < 5)
-		exit_handler(1);
+		exit_handler("__ERROR_ARGS__:\nInvalid number of args.\n");
 	if (ft_strcmp(av[1], "here_doc") == 0)
 	{
 		if (ac < 6)
-			exit_handler(1);
+			exit_handler("__ERROR_ARGS__:\nInvalid number of args.\n");
 		i = 3;
 		fd_out = open_file(av[ac - 1], 2);
 		here_doc(av);

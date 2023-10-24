@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 12:04:45 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/10/24 12:04:46 by ilymegy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/pipex.h"
 
-void	exit_handler(int n_exit)
+void	exit_handler(char *msg)
 {
-	if (n_exit == 1)
-		ft_putstr_fd("./pipex infile cmd cmd outfile\n", 2);
-	exit(0);
+	ft_putstr_fd(msg, 2);
+	exit(1);
 }
 
 int	open_file(char *file, int in_or_out)
@@ -16,7 +27,7 @@ int	open_file(char *file, int in_or_out)
 	if (in_or_out == 1)
 		ret = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (ret == -1)
-		exit(0);
+		exit_handler("__ERROR_FILE__:\nCan't read outfile or infile.\n");
 	return (ret);
 }
 
@@ -59,17 +70,14 @@ char	*my_getenv(char *name, char **env)
 
 char	*get_path(char *cmd, char **env)
 {
-	int i;
-	char *exec;
-	char **allpath;
-	char *path_part;
-	char **s_cmd;
+	int		i;
+	char	*exec;
+	char	**allpath;
+	char	*path_part;
+	char	**s_cmd;
 
 	i = -1;
-	ft_printf("you get : %s\n", env[1]);
 	allpath = ft_split(my_getenv("PATH", env), ':');
-	if (!allpath)
-		return (NULL);
 	s_cmd = ft_split(cmd, ' ');
 	while (allpath[++i])
 	{
