@@ -1,0 +1,130 @@
+==1421186== Memcheck, a memory error detector
+==1421186== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1421186== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1421186== Command: ./pipex /dev/urandom head\ -n\ 10 wc\ -l output/valgrind
+==1421186== Parent PID: 1420892
+==1421186== 
+==1421186== Invalid write of size 8
+==1421186==    at 0x109E89: give_to (ft_split.c:80)
+==1421186==    by 0x109F20: ft_split (ft_split.c:95)
+==1421186==    by 0x109358: exec (main.c:33)
+==1421186==    by 0x1094D1: parent (main.c:63)
+==1421186==    by 0x109577: main (main.c:80)
+==1421186==  Address 0x4aa0058 is 0 bytes after a block of size 24 alloc'd
+==1421186==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1421186==    by 0x109EF7: ft_split (ft_split.c:92)
+==1421186==    by 0x109358: exec (main.c:33)
+==1421186==    by 0x1094D1: parent (main.c:63)
+==1421186==    by 0x109577: main (main.c:80)
+==1421186== 
+==1421187== Invalid write of size 8
+==1421187==    at 0x109E89: give_to (ft_split.c:80)
+==1421187==    by 0x109F20: ft_split (ft_split.c:95)
+==1421187==    by 0x109358: exec (main.c:33)
+==1421187==    by 0x10944F: child (main.c:52)
+==1421187==    by 0x109560: main (main.c:79)
+==1421187==  Address 0x4aa0060 is 0 bytes after a block of size 32 alloc'd
+==1421187==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1421187==    by 0x109EF7: ft_split (ft_split.c:92)
+==1421187==    by 0x109358: exec (main.c:33)
+==1421187==    by 0x10944F: child (main.c:52)
+==1421187==    by 0x109560: main (main.c:79)
+==1421187== 
+==1421186== Invalid write of size 8
+==1421186==    at 0x109E89: give_to (ft_split.c:80)
+==1421186==    by 0x109F20: ft_split (ft_split.c:95)
+==1421186==    by 0x1097F7: get_path (utils.c:80)
+==1421186==    by 0x109372: exec (main.c:34)
+==1421186==    by 0x1094D1: parent (main.c:63)
+==1421186==    by 0x109577: main (main.c:80)
+==1421186==  Address 0x4aa0ea0 is 0 bytes after a block of size 112 alloc'd
+==1421186==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1421186==    by 0x109EF7: ft_split (ft_split.c:92)
+==1421186==    by 0x1097F7: get_path (utils.c:80)
+==1421186==    by 0x109372: exec (main.c:34)
+==1421186==    by 0x1094D1: parent (main.c:63)
+==1421186==    by 0x109577: main (main.c:80)
+==1421186== 
+==1421186== Invalid write of size 8
+==1421186==    at 0x109E89: give_to (ft_split.c:80)
+==1421186==    by 0x109F20: ft_split (ft_split.c:95)
+==1421186==    by 0x10980C: get_path (utils.c:81)
+==1421186==    by 0x109372: exec (main.c:34)
+==1421186==    by 0x1094D1: parent (main.c:63)
+==1421186==    by 0x109577: main (main.c:80)
+==1421186==  Address 0x4aa1370 is 0 bytes after a block of size 16 alloc'd
+==1421186==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1421186==    by 0x109EF7: ft_split (ft_split.c:92)
+==1421186==    by 0x10980C: get_path (utils.c:81)
+==1421186==    by 0x109372: exec (main.c:34)
+==1421186==    by 0x1094D1: parent (main.c:63)
+==1421186==    by 0x109577: main (main.c:80)
+==1421186== 
+==1421187== Invalid write of size 8
+==1421187==    at 0x109E89: give_to (ft_split.c:80)
+==1421187==    by 0x109F20: ft_split (ft_split.c:95)
+==1421187==    by 0x1097F7: get_path (utils.c:80)
+==1421187==    by 0x109372: exec (main.c:34)
+==1421187==    by 0x10944F: child (main.c:52)
+==1421187==    by 0x109560: main (main.c:79)
+==1421187==  Address 0x4aa0ef0 is 0 bytes after a block of size 112 alloc'd
+==1421187==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1421187==    by 0x109EF7: ft_split (ft_split.c:92)
+==1421187==    by 0x1097F7: get_path (utils.c:80)
+==1421187==    by 0x109372: exec (main.c:34)
+==1421187==    by 0x10944F: child (main.c:52)
+==1421187==    by 0x109560: main (main.c:79)
+==1421187== 
+==1421187== Invalid write of size 8
+==1421187==    at 0x109E89: give_to (ft_split.c:80)
+==1421187==    by 0x109F20: ft_split (ft_split.c:95)
+==1421187==    by 0x10980C: get_path (utils.c:81)
+==1421187==    by 0x109372: exec (main.c:34)
+==1421187==    by 0x10944F: child (main.c:52)
+==1421187==    by 0x109560: main (main.c:79)
+==1421187==  Address 0x4aa13c0 is 0 bytes after a block of size 16 alloc'd
+==1421187==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1421187==    by 0x109EF7: ft_split (ft_split.c:92)
+==1421187==    by 0x10980C: get_path (utils.c:81)
+==1421187==    by 0x109372: exec (main.c:34)
+==1421187==    by 0x10944F: child (main.c:52)
+==1421187==    by 0x109560: main (main.c:79)
+==1421187== 
+==1421186== Conditional jump or move depends on uninitialised value(s)
+==1421186==    at 0x109686: ft_free_tab (utils.c:39)
+==1421186==    by 0x109886: get_path (utils.c:89)
+==1421186==    by 0x109372: exec (main.c:34)
+==1421186==    by 0x1094D1: parent (main.c:63)
+==1421186==    by 0x109577: main (main.c:80)
+==1421186== 
+==1421186== Syscall param execve(argv) points to uninitialised byte(s)
+==1421186==    at 0x496008B: execve (syscall-template.S:120)
+==1421186==    by 0x10938D: exec (main.c:35)
+==1421186==    by 0x1094D1: parent (main.c:63)
+==1421186==    by 0x109577: main (main.c:80)
+==1421186==  Address 0x4aa0050 is 16 bytes inside a block of size 24 alloc'd
+==1421186==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1421186==    by 0x109EF7: ft_split (ft_split.c:92)
+==1421186==    by 0x109358: exec (main.c:33)
+==1421186==    by 0x1094D1: parent (main.c:63)
+==1421186==    by 0x109577: main (main.c:80)
+==1421186== 
+==1421187== Conditional jump or move depends on uninitialised value(s)
+==1421187==    at 0x109686: ft_free_tab (utils.c:39)
+==1421187==    by 0x109886: get_path (utils.c:89)
+==1421187==    by 0x109372: exec (main.c:34)
+==1421187==    by 0x10944F: child (main.c:52)
+==1421187==    by 0x109560: main (main.c:79)
+==1421187== 
+==1421187== Syscall param execve(argv) points to uninitialised byte(s)
+==1421187==    at 0x496008B: execve (syscall-template.S:120)
+==1421187==    by 0x10938D: exec (main.c:35)
+==1421187==    by 0x10944F: child (main.c:52)
+==1421187==    by 0x109560: main (main.c:79)
+==1421187==  Address 0x4aa0058 is 24 bytes inside a block of size 32 alloc'd
+==1421187==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1421187==    by 0x109EF7: ft_split (ft_split.c:92)
+==1421187==    by 0x109358: exec (main.c:33)
+==1421187==    by 0x10944F: child (main.c:52)
+==1421187==    by 0x109560: main (main.c:79)
+==1421187== 

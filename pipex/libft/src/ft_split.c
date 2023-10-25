@@ -30,6 +30,33 @@ int	words_count(const char *s, char sep)
 	return (count);
 }
 
+char const	*case_quote(char const *tmp, char const *s, char ***res)
+{
+	tmp = ++s;
+	while (*tmp && *tmp != '\'')
+		++tmp;
+	if (*tmp == '\'' || tmp > s)
+	{
+		**res = ft_substr(s, 0, tmp - s);
+		if (!(**res))
+			return (NULL);
+	}
+	return (tmp);
+}
+
+char const	*case_else(char const *tmp, char const *s, char sep, char ***res)
+{
+	while (*tmp && *tmp != sep)
+		++tmp;
+	if (*tmp == sep || tmp > s)
+	{
+		**res = ft_substr(s, 0, tmp - s);
+		if (!(**res))
+			return (NULL);
+	}
+	return (tmp);
+}
+
 static int	give_to(char **tab, char const *s, char sep)
 {
 	char		**res;
@@ -42,16 +69,13 @@ static int	give_to(char **tab, char const *s, char sep)
 		while (*s == sep)
 			++s;
 		tmp = s;
-		while (*tmp && *tmp != sep)
-			++tmp;
-		if (*tmp == sep || tmp > s)
-		{
-			*res = ft_substr(s, 0, tmp - s);
-			if (!(*res))
-				return (1);
-			s = tmp;
-			++res;
-		}
+		if (*s == '\'')
+			s = case_quote(tmp, s, &res);
+		else
+			s = case_else(tmp, s, sep, &res);
+		if (!s)
+			return (1);
+		res++;
 	}
 	*res = NULL;
 	return (0);
