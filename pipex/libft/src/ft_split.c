@@ -40,6 +40,7 @@ char const	*case_quote(char const *tmp, char const *s, char ***res)
 		**res = ft_substr(s, 0, tmp - s);
 		if (!(**res))
 			return (NULL);
+		++(*res);
 	}
 	return (tmp);
 }
@@ -53,6 +54,7 @@ char const	*case_else(char const *tmp, char const *s, char sep, char ***res)
 		**res = ft_substr(s, 0, tmp - s);
 		if (!(**res))
 			return (NULL);
+		++(*res);
 	}
 	return (tmp);
 }
@@ -75,7 +77,6 @@ static int	give_to(char **tab, char const *s, char sep)
 			s = case_else(tmp, s, sep, &res);
 		if (!s)
 			return (1);
-		res++;
 	}
 	*res = NULL;
 	return (0);

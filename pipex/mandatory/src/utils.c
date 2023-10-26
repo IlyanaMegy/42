@@ -86,6 +86,7 @@ char	*get_path(char *cmd, char **env)
 		free(path_part);
 		if (access(exec, F_OK | X_OK) == 0)
 		{
+			ft_free_tab(allpath);
 			ft_free_tab(s_cmd);
 			return (exec);
 		}
