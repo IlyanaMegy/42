@@ -6,5 +6,5 @@
 </p>
 
 <p align="center">
-  <img src="https://cdn.discordapp.com/attachments/889061317321838627/1167114257528266832/pipex_bonus.png?ex=654cf2da&is=653a7dda&hm=447606fe982e3dfa2001134afde7fa1f0d31acbc2f6f11077839b921f112500b&" alt="bonus"/>
+  <img src="https://cdn.discordapp.com/attachments/889061317321838627/1167116006779539456/pipex_b.drawio.png?ex=654cf47b&is=653a7f7b&hm=c3ef5c6b09ffd5b42bf7f54672de5098ea2c8f9643ed3773abdaaaef98767ea1&" alt="bonus"/>
 </p>
