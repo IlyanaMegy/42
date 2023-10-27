@@ -28,71 +28,41 @@ void	exec(char *cmd, char **env)
 	}
 }
 
-void	child(char **av, int *p_fd, char **env, int i)
+void	child(char **av, int *p_fd, char **env)
 {
 	int	fd;
 
-	if (i == 0)
-	{
-		fd = open_file(av[1], 0);
-		
-		dup2(p_fd[1], 1);
-		dup2(fd, 0);
-		close(p_fd[0]);
-		close(p_fd[1]);
-		close(fd);
-		if (env)
-			exec(av[2], env);
-	}
-	fd = open_file(av[4], 1);
-	
-	dup2(p_fd[0], 0);
-	// close(p_fd[0]);
-	
-	dup2(fd, 1);
+	fd = open_file(av[1], 0);
+	dup2(fd, 0);
+	dup2(p_fd[1], 1);
 	close(p_fd[0]);
-	close(p_fd[1]);
-	close(fd);
-	if (env)
-		exec(av[3], env);
+	exec(av[2], env);
 }
 
-// void	parent(char **av, int *p_fd, char **env)
-// {
-// 	int	fd;
+void	parent(char **av, int *p_fd, char **env)
+{
+	int	fd;
 
-// 	fd = open_file(av[4], 1);
-// 	dup2(fd, 1);
-// 	dup2(p_fd[0], 0);
-// 	close(p_fd[1]);
-// 	exec(av[3], env);
-// }
+	fd = open_file(av[4], 1);
+	dup2(fd, 1);
+	dup2(p_fd[0], 0);
+	close(p_fd[1]);
+	exec(av[3], env);
+}
 
 int	main(int ac, char **av, char **env)
 {
 	int		p_fd[2];
-	pid_t	pid[2];
-	int		i;
-	int		err;
+	pid_t	pid;
 
 	if (ac != 5)
 		exit_handler("__ERROR_ARGS__:\nInvalid number of args.\n");
 	if (pipe(p_fd) == -1)
 		exit_handler("__ERROR_PIPE__:\nError pipe.\n");
-	i = -1;
-	while (++i < 2)
-	{
-		pid[i] = fork();
-		if (pid[i] == -1)
-			exit_handler("__ERROR_FORK__:\nError fork.\n");
-		if (!pid[i])
-			child(av, p_fd, env, i);
-	}
-	i = -1;
-	close(p_fd[0]);
-	close(p_fd[1]);
-	while (++i < 2)
-		waitpid(pid[i], &err, WUNTRACED);
-	return (0);
-	// parent(av, p_fd, env);
+	pid = fork();
+	if (pid == -1)
+		exit_handler("__ERROR_FORK__:\nError fork.\n");
+	if (!pid)
+		child(av, p_fd, env);
+	parent(av, p_fd, env);
 }
