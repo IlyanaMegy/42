@@ -3,33 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: pabeaude <pabeaude@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 17:43:54 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/10/10 17:43:56 by ilymegy          ###   ########.fr       */
+/*   Created: 2023/09/14 12:30:44 by pabeaude          #+#    #+#             */
+/*   Updated: 2023/09/21 17:38:37 by pabeaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "libft.h"
-# include <fcntl.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <sys/stat.h>
-# include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include "../libft/libft.h"
 
-void	exit_handler(char *msg);
-int		open_file(char *file, int n);
-char	*my_getenv(char *name, char **env);
-char	*get_path(char *cmd, char **env);
-void	exec(char *cmd, char **env);
-void	ft_free_tab(char **tab);
-int		open_it(int ac, char **av);
-void	close_it(int ac, char **av);
-void	here_doc(char **av);
+void	ft_free_pipex(char **tab);
+void	make_exec(char *cmd, char **env);
+void	exec_path(char *cmd, char **env);
+char	*find_path(char **env);
+char	*get_exec(char *cmd, char **env);
+int		child(char **argv, int *p_fd, char **env);
+int		child2(char **argv, int *p_fd, char **env);
 
 #endif

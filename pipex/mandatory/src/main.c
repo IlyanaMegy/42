@@ -39,7 +39,6 @@ void	child(char **av, int *p_fd, char **env, int i)
 		dup2(p_fd[1], 1);
 		dup2(fd, 0);
 		close(p_fd[0]);
-		close(p_fd[1]);
 		close(fd);
 		if (env)
 			exec(av[2], env);
@@ -47,26 +46,12 @@ void	child(char **av, int *p_fd, char **env, int i)
 	fd = open_file(av[4], 1);
 	
 	dup2(p_fd[0], 0);
-	// close(p_fd[0]);
-	
 	dup2(fd, 1);
-	close(p_fd[0]);
 	close(p_fd[1]);
 	close(fd);
 	if (env)
 		exec(av[3], env);
 }
-
-// void	parent(char **av, int *p_fd, char **env)
-// {
-// 	int	fd;
-
-// 	fd = open_file(av[4], 1);
-// 	dup2(fd, 1);
-// 	dup2(p_fd[0], 0);
-// 	close(p_fd[1]);
-// 	exec(av[3], env);
-// }
 
 int	main(int ac, char **av, char **env)
 {
@@ -94,5 +79,4 @@ int	main(int ac, char **av, char **env)
 	while (++i < 2)
 		waitpid(pid[i], &err, WUNTRACED);
 	return (0);
-	// parent(av, p_fd, env);
 }

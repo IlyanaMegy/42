@@ -61,7 +61,9 @@ void	here_doc(char **av)
 	else
 	{
 		close(p_fd[1]);
-		dup2(p_fd[0], 0);
+		if (dup2(p_fd[0], 0) == -1)
+			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
+		close(p_fd[0]);
 		wait(NULL);
 	}
 }
@@ -79,41 +81,35 @@ void	do_pipe(char *cmd, char **env)
 	if (!pid)
 	{
 		close(p_fd[0]);
-		dup2(p_fd[1], 1);
+		if (dup2(p_fd[1], 1) == -1)
+			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
+		close(p_fd[1]);
 		exec(cmd, env);
 	}
 	else
 	{
 		close(p_fd[1]);
-		dup2(p_fd[0], 0);
+		if (dup2(p_fd[0], 0) == -1)
+			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
+		close(p_fd[0]);
 	}
 }
 
 int	main(int ac, char **av, char **env)
 {
-	int	i;
-	int	fd_in;
-	int	fd_out;
+	int		i;
+	pid_t	pid;
 
 	if (ac < 5)
 		exit_handler("__ERROR_ARGS__:\nInvalid number of args.\n");
-	if (ft_strcmp(av[1], "here_doc") == 0)
-	{
-		if (ac < 6)
-			exit_handler("__ERROR_ARGS__:\nInvalid number of args.\n");
-		i = 3;
-		fd_out = open_file(av[ac - 1], 2);
-		here_doc(av);
-	}
-	else
-	{
-		i = 2;
-		fd_in = open_file(av[1], 0);
-		fd_out = open_file(av[ac - 1], 1);
-		dup2(fd_in, 0);
-	}
+	i = open_it(ac, av);
 	while (i < ac - 2)
 		do_pipe(av[i++], env);
-	dup2(fd_out, 1);
-	exec(av[ac - 2], env);
+	close_it(ac, av);
+	pid = fork();
+	if (!pid)
+		exec(av[ac - 2], env);
+	while (wait(NULL) > 0)
+		;
+	return (0);
 }
