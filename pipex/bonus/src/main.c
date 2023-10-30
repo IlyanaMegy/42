@@ -68,16 +68,8 @@ void	here_doc(char **av)
 	}
 }
 
-void	do_pipe(char *cmd, char **env)
+void	do_pipe(pid_t pid, int *p_fd, char *cmd, char **env)
 {
-	pid_t	pid;
-	int		p_fd[2];
-
-	if (pipe(p_fd) == -1)
-		exit_handler("__ERROR_PIPE__:\nError pipe.\n");
-	pid = fork();
-	if (pid == -1)
-		exit_handler("__ERROR_FORK__:\nError fork.\n");
 	if (!pid)
 	{
 		close(p_fd[0]);
@@ -99,16 +91,24 @@ int	main(int ac, char **av, char **env)
 {
 	int		i;
 	pid_t	pid;
+	int		p_fd[2];
 
 	if (ac < 5)
 		exit_handler("__ERROR_ARGS__:\nInvalid number of args.\n");
 	i = open_it(ac, av);
 	while (i < ac - 2)
-		do_pipe(av[i++], env);
-	close_it(ac, av);
+	{
+		if (pipe(p_fd) == -1)
+			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
+		pid = fork();
+		if (pid == -1)
+			exit_handler("__ERROR_FORK__:\nError fork.\n");
+		do_pipe(pid, p_fd, av[i++], env);
+	}
 	pid = fork();
 	if (!pid)
 		exec(av[ac - 2], env);
+	close_it(ac, av);
 	while (wait(NULL) > 0)
 		;
 	return (0);
