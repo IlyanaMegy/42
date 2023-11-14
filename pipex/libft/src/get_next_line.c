@@ -12,32 +12,30 @@
 
 #include "../../mandatory/inc/libft.h"
 
-void	clean_me(t_gnl **str)
+void	clean_me(t_gnl **str, t_gnl **clear)
 {
-	t_gnl	*last;
-	t_gnl	*clear;
+	t_gnl	*l;
 	int		i;
 	int		j;
 
-	clear = malloc(sizeof(t_gnl));
-	if (!clear || !str)
+	if (!(*clear) || !str)
 		return ;
-	clear->next = NULL;
-	last = get_last(*str);
+	(*clear)->next = NULL;
+	l = get_last(*str);
 	i = 0;
-	while (last->content[i] && last->content[i] != '\n')
+	while (l->content[i] && l->content[i] != '\n')
 		i++;
-	if (last->content && last->content[i] == '\n')
+	if (l->content && l->content[i] == '\n')
 		i++;
-	clear->content = malloc(sizeof(char) * ((ft_len(last->content) - i) + 1));
-	if (!(clear->content))
+	(*clear)->content = malloc(sizeof(char) * ((ft_len(l->content) - i) + 1));
+	if (!((*clear)->content))
 		return ;
 	j = 0;
-	while (last->content[i])
-		clear->content[j++] = last->content[i++];
-	clear->content[j] = '\0';
+	while (l->content[i])
+		(*clear)->content[j++] = l->content[i++];
+	(*clear)->content[j] = '\0';
 	free_str(*str);
-	*str = clear;
+	*str = (*clear);
 }
 
 void	extract_me(t_gnl *str, char **line)
@@ -118,7 +116,7 @@ void	read_me(int fd, t_gnl **str)
 	}
 }
 
-char	*get_next_line(int fd, int *err)
+char	*get_next_line(int fd, int *err, t_gnl **clear)
 {
 	static t_gnl	*str = NULL;
 	char			*line;
@@ -142,6 +140,6 @@ char	*get_next_line(int fd, int *err)
 		str = NULL;
 		return (NULL);
 	}
-	clean_me(&str);
+	clean_me(&str, clear);
 	return (line);
 }

@@ -31,14 +31,20 @@ void	exec(char *cmd, char **env)
 void	here_doc_put_in(char **av, int *p_fd)
 {
 	char	*ret;
+	t_gnl	*clear;
 
 	close(p_fd[0]);
 	while (1)
 	{
-		ret = get_next_line(0, 0);
+		clear = malloc(sizeof(t_gnl));
+		if (!clear)
+			return ;
+		ret = get_next_line(0, 0, &clear);
 		if (ft_strncmp(ret, av[2], ft_strlen(av[2])) == 0)
 		{
 			free(ret);
+			free(clear->content);
+			free(clear);
 			exit(0);
 		}
 		ft_putstr_fd(ret, p_fd[1]);
@@ -81,8 +87,6 @@ void	do_pipe(pid_t pid, int *p_fd, char *cmd, char **env)
 	else
 	{
 		close(p_fd[1]);
-		if (dup2(p_fd[0], 0) == -1)
-			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
 		close(p_fd[0]);
 	}
 }

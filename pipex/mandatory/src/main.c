@@ -35,7 +35,6 @@ void	child(char **av, int *p_fd, char **env, int i)
 	if (i == 0)
 	{
 		fd = open_file(av[1], 0);
-		
 		dup2(p_fd[1], 1);
 		dup2(fd, 0);
 		close(p_fd[0]);
@@ -44,7 +43,6 @@ void	child(char **av, int *p_fd, char **env, int i)
 			exec(av[2], env);
 	}
 	fd = open_file(av[4], 1);
-	
 	dup2(p_fd[0], 0);
 	dup2(fd, 1);
 	close(p_fd[1]);
