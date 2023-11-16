@@ -33,7 +33,7 @@ void	here_doc_put_in(char **av, int *p_fd)
 	char	*ret;
 	t_gnl	*clear;
 
-	// close(p_fd[0]);
+	close(p_fd[0]);
 	while (1)
 	{
 		clear = malloc(sizeof(t_gnl));
@@ -52,74 +52,77 @@ void	here_doc_put_in(char **av, int *p_fd)
 	}
 }
 
-// void	here_doc(char **av)
-// {
-// 	here_doc_put_in(av, p_fd);
-// 	close(p_fd[1]);
-// 	if (dup2(p_fd[0], 0) == -1)
-// 		exit_handler("__ERROR_PIPE__:\nError pipe.\n");
-// 	close(p_fd[0]);
-// 	wait(NULL);
-// }
-
-void	do_pipe(int *i, int *p_fd, char **av, char **env)
+void	here_doc(char **av)
 {
-	int	j;
-	int fd_in;
+	int		p_fd[2];
+	pid_t	pid;
 
+	if (pipe(p_fd) == -1)
+		exit_handler("__ERROR_PIPE__:\nError pipe.\n");
+	pid = fork();
+	if (pid == -1)
+		exit_handler("__ERROR_FORK__:\nError fork.\n");
+	if (!pid)
+		here_doc_put_in(av, p_fd);
+	else
+	{
+		close(p_fd[1]);
+		if (dup2(p_fd[0], 0) == -1)
+			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
+		close(p_fd[0]);
+		wait(NULL);
+	}
+}
+
+void	do_pipe(int *i, int *p_fd, char *cmd, char **env)
+{
 	if (!i[0])
 	{
-		j = 2;
-		fd_in = open_file(av[1], 0);
-		if (dup2(fd_in, 0) == -1)
-			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
-		close(fd_in);
-		// j = open_it(i[1], av, p_fd);
 		if (dup2(p_fd[1], 1) == -1)
 			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
+		close(p_fd[1]);
+		
 	}
-	else if (i[0] == i[1] - 4)
+	else if ()
 	{
-		close_it(i[1], av);
-		if (dup2(p_fd[2], 0) == -1)
+		if (dup2(p_fd[1], 1) == -1)
 			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
 	}
 	else
 	{
-		dup2(p_fd[2], 0);
-		dup2(p_fd[1], 1);
+		transfert(p_fd);
+		close(p_fd[1]);
+		close(p_fd[0]);
 	}
-	close(p_fd[1]);
-	close(p_fd[0]);
-	close(p_fd[2]);
-	exec(av[i[0] + j], env);
+	exec(cmd, env);
 }
 
 int	main(int ac, char **av, char **env)
 {
-	int		i[3];
+	int		j;
+	int i[3];
 	pid_t	pid[10000];
 	int		p_fd[3];
 
 	if (ac < 5)
 		exit_handler("__ERROR_ARGS__:\nInvalid number of args.\n");
-	i[0] = -1;
-	i[1] = ac;
+	j = open_it(ac, av);
 	p_fd[2] = dup(STDIN_FILENO);
-	while (++i[0] < ac - 3)
+	while (i < ac - 3)
 	{
 		if (pipe(p_fd) == -1)
 			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
 		pid[i[0]] = fork();
 		if (pid[i[0]] == -1)
 			exit_handler("__ERROR_FORK__:\nError fork.\n");
-		if (pid[i[0]] == 0)
-			do_pipe(i, p_fd, av, env);
-		transfert(p_fd);
+		else if (pid[i[0]] == 0)
+			do_pipe(pid, p_fd, av[j++], env);
 	}
-	close(p_fd[2]);
-	i[0] = -1;
-	while (++i[0] < ac - 3)
-		waitpid(pid[i[0]], &i[2], 0);
+	pid = fork();
+	close_it(ac, av);
+	if (!pid)
+		exec(av[ac - 2], env);
+	while (wait(NULL) > 0)
+		;
 	return (0);
 }

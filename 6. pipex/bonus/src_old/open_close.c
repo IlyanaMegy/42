@@ -12,7 +12,7 @@
 
 #include "../inc/pipex.h"
 
-int	open_it(int ac, char **av, int *p_fd)
+int	open_it(int ac, char **av)
 {
 	int	fd_in;
 
@@ -20,12 +20,7 @@ int	open_it(int ac, char **av, int *p_fd)
 	{
 		if (ac < 6)
 			exit_handler("__ERROR_ARGS__:\nInvalid number of args.\n");
-		here_doc_put_in(av, p_fd);
-		// close(p_fd[1]);
-		if (dup2(p_fd[0], 0) == -1)
-			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
-		close(p_fd[0]);
-		// wait(NULL);
+		here_doc(av);
 		return (3);
 	}
 	else
