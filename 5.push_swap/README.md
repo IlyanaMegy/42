@@ -1,8 +1,8 @@
+## Projet PUSH_SWAP
+
 <p align="center">
   <img src="https://cdn.discordapp.com/attachments/889061317321838627/1158799834447355994/push_swap.png?ex=651d8ff1&is=651c3e71&hm=5d3eef9f92b17571391b9615e86aaaca12f31dd71acb491453bdf1d570098219&raw=true" alt="push_swap project"/>
 </p>
-
-## Projet PUSH_SWAP
 
 * [Introduction](#introduction)
 * [Utilisation](#utilisation)
