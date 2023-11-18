@@ -68,7 +68,7 @@ int					check_args(int ac, char **av, t_main *main);
 int					init_philos(t_main *main);
 
 // handle_forks.c
-
+int					init_forks(t_main *main);
 
 // utils.c
 void				exit_handler(char *msg);

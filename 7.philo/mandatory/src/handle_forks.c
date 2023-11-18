@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   handle_forks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/18 11:15:12 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/11/18 11:15:17 by ilymegy          ###   ########.fr       */
+/*   Created: 2023/11/18 19:05:53 by ilymegy           #+#    #+#             */
+/*   Updated: 2023/11/18 19:05:56 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
 
-int	main(int ac, char **av)
+int	init_forks(t_main *main)
 {
-	t_main	main;
+	int i;
 
-	if (check_args(ac, av, &main))
+	main->forks = malloc(sizeof(pthread_mutex_t) * main->input.nb_philo + 1);
+	if (main->forks == NULL)
 		return (1);
-	if (init_philos(&main))
-		return (1);
-	if (init_forks(&main))
-		return (free(main.philo), 1);
+	i = 0;
+	while (i < main->input.nb_philo)
+	{
+		if (pthread_mutex_init(&main->forks[i], NULL) != 0)
+			return (1);
+		i++;
+	}
 	return (0);
 }
