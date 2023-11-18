@@ -20,7 +20,7 @@ SRC_PATH	= ./mandatory/src/
 SRC			= main.c\
 			check_args.c\
 			init_philo_struct.c\
-			init_fork_struct.c\
+			handle_forks.c\
 			utils.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
