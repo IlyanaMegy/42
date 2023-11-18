@@ -1,2 +1,5 @@
 thread et mutex:
 https://franckh.developpez.com/tutoriels/posix/pthreads/
+
+good philo ex:
+https://github.com/anolivei/Philosophers42/blob/master/philo/sources/main.c
