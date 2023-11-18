@@ -70,6 +70,9 @@ int					init_philos(t_main *main);
 // handle_forks.c
 int					init_forks(t_main *main);
 
+// time.c
+long long			get_time(void);
+
 // utils.c
 void				exit_handler(char *msg);
 int					p_atoi(char *str);
