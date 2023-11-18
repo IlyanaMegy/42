@@ -24,11 +24,11 @@
 */
 typedef struct s_input
 {
-	int				num_philo;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				num_of_times_eat;
+	int				nb_philo;
+	int				ttd;
+	int				tte;
+	int				tts;
+	int				nb_of_times_eat;
 }					t_input;
 
 typedef struct s_fork
@@ -40,8 +40,8 @@ typedef struct s_fork
 typedef struct s_philo
 {
 	int				id;
-	int				num_of_times_ate;
-	long long		time_to_die;
+	int				nb_of_times_ate;
+	long long		ttd;
 	t_fork			fork;
 	pthread_t		thread;
 }					t_philo;
@@ -67,7 +67,7 @@ int					check_args(int ac, char **av, t_main *main);
 // init_philo_struct.c
 int					init_philos(t_main *main);
 
-// init_fork_struct.c
+// handle_forks.c
 
 
 // utils.c
