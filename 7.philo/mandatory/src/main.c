@@ -15,9 +15,10 @@
 int	main(int ac, char **av)
 {
 	t_main	main;
-		
-	// printf("nb = %d, av[%d] = %s\n", ac, ac - 1, av[ac - 1]);
-	if (!check_args(ac, av, &main))
+
+	if (check_args(ac, av, &main))
+		return (1);
+	if (init_philos(&main))
 		return (1);
 	return (0);
 }

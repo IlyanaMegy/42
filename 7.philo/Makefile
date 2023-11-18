@@ -19,6 +19,8 @@ INC			= -I ./mandatory/inc/
 SRC_PATH	= ./mandatory/src/
 SRC			= main.c\
 			check_args.c\
+			init_philo_struct.c\
+			init_fork_struct.c\
 			utils.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
