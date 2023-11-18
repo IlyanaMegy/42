@@ -35,3 +35,9 @@ int	p_atoi(char *str)
 		return (0);
 	return (n);
 }
+
+void	philo_free(t_main *main)
+{
+	free(main->philo);
+	free(main->forks);
+}
