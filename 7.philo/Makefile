@@ -21,6 +21,7 @@ SRC			= main.c\
 			check_args.c\
 			init_philo_struct.c\
 			handle_forks.c\
+			life.c\
 			time.c\
 			utils.c\
 			style.c
