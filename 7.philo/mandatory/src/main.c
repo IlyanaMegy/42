@@ -17,6 +17,7 @@ int	alone_philo(t_main *main)
 	if (pthread_mutex_init(&main->write, NULL) != 0)
 		return (1);
 	main->t0 = get_time();
+	main->philo_dead = 0;
 	philo_words(main, 1, main->c.cyan, main->a.fork);
 	do_action(main->input.ttd);
 	philo_words(main, 1, main->c.red, "died sad and alone");
