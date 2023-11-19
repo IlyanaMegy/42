@@ -54,9 +54,8 @@ int	check_args(int ac, char **av, t_main *main)
 	else
 	{
 		print_args_errors(ac, main);
-		if (!main->input.nb_philo || !main->input.ttd
-			|| !main->input.tte || !main->input.tts
-			|| (ac == 6 && !main->input.nb_of_times_eat))
+		if (!main->input.nb_philo || !main->input.ttd || !main->input.tte
+			|| !main->input.tts || (ac == 6 && !main->input.nb_of_times_eat))
 			return (1);
 	}
 	return (0);
