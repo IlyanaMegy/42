@@ -22,7 +22,9 @@ SRC			= main.c\
 			init_philo_struct.c\
 			handle_forks.c\
 			time.c\
+			threads.c\
 			life.c\
+			actions.c\
 			utils.c\
 			style.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))

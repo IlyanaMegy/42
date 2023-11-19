@@ -103,8 +103,15 @@ int					init_philos(t_main *main);
 // handle_forks.c
 int					init_forks(t_main *main);
 
+// threads.c
+int					init_threads(t_main *main);
+int					destroy_threads(t_main *main);
+
 // life.c
 int					philo_words(t_main *main, int id, char *color, char *s);
+void				*life(void *arg);
+int					do_life(t_main *main, int i);
+void				*check_it(void *arg);
 
 // time.c
 long long			get_time(void);
