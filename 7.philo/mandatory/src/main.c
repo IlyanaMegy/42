@@ -18,9 +18,9 @@ int	main(int ac, char **av)
 
 	if (check_args(ac, av, &main))
 		return (1);
-	if (init_philos(&main))
-		return (1);
-	if (init_forks(&main))
-		return (free(main.philo), 1);
+	// if (init_philos(&main))
+	// 	return (1);
+	// if (init_forks(&main))
+	// 	return (free(main.philo), 1);
 	return (0);
 }

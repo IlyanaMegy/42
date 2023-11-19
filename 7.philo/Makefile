@@ -22,7 +22,8 @@ SRC			= main.c\
 			init_philo_struct.c\
 			handle_forks.c\
 			time.c\
-			utils.c
+			utils.c\
+			style.c
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
 OBJ_PATH	= mandatory/obj/

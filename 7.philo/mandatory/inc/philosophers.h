@@ -22,6 +22,36 @@
 /*
 ** Structures
 */
+typedef struct s_colors
+{
+	char			*reset;
+	char			*red;
+	char			*green;
+	char			*blue;
+	char			*purple;
+	char			*pink;
+	char			*cyan;
+}					t_colors;
+
+typedef struct s_errors
+{
+	char			*nb_args;
+	char			*arg1;
+	char			*arg2;
+	char			*arg3;
+	char			*arg4;
+	char			*arg5;
+}					t_errors;
+
+typedef struct s_actions
+{
+	char			*eat;
+	char			*sleep;
+	char			*think;
+	char			*fork;
+	char			*die;
+}					t_actions;
+
 typedef struct s_input
 {
 	int				nb_philo;
@@ -52,6 +82,9 @@ typedef struct s_main
 	int				philo_dead;
 	long long		t0;
 	t_input			input;
+	t_colors		c;
+	t_actions		a;
+	t_errors		err;
 	t_philo			*philo;
 	pthread_t		monitor;
 	pthread_mutex_t	*forks;
@@ -77,5 +110,8 @@ long long			get_time(void);
 void				exit_handler(char *msg);
 int					p_atoi(char *str);
 void				philo_free(t_main *main);
+
+// style.c
+void				set_msg_and_colors(t_main *main);
 
 #endif

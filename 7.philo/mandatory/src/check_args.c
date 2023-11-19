@@ -32,22 +32,23 @@ int	init_struct(int ac, char **av, t_main *main)
 void	print_args_errors(int ac, t_main *main)
 {
 	if (!main->input.nb_philo)
-		printf("__ERROR_ARG__: No philosopher here.\n");
+		printf("%s%s%s\n", main->c.red, main->err.arg1, main->c.reset);
 	if (!main->input.ttd)
-		printf("__ERROR_ARG__: Time to die is null.\n");
+		printf("%s%s%s\n", main->c.red, main->err.arg2, main->c.reset);
 	if (!main->input.tte)
-		printf("__ERROR_ARG__: Time to eat is null.\n");
+		printf("%s%s%s\n", main->c.red, main->err.arg3, main->c.reset);
 	if (!main->input.tts)
-		printf("__ERROR_ARG__: Time to sleep is null.\n");
+		printf("%s%s%s\n", main->c.red, main->err.arg4, main->c.reset);
 	if (ac == 6 && !main->input.nb_of_times_eat)
-		printf("__ERROR_ARG__: Philosophers need to eat at least 1 time.\n");
+		printf("%s%s%s\n", main->c.red, main->err.arg5, main->c.reset);
 }
 
 int	check_args(int ac, char **av, t_main *main)
 {
+	set_msg_and_colors(main);
 	if (init_struct(ac, av, main))
 	{
-		printf("__ERROR_ARGS__: Invalid number of args.\n");
+		printf("%s%s%s\n", main->c.red, main->err.nb_args, main->c.reset);
 		return (1);
 	}
 	else

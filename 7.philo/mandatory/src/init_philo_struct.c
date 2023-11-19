@@ -12,6 +12,15 @@
 
 #include "../inc/philosophers.h"
 
+void	fill_philo_struct(t_main *main, int i, int j)
+{
+	main->philo[i].id = i + 1;
+	main->philo[i].nb_of_times_ate = 0;
+	main->philo[i].ttd = 0;
+	main->philo[i].fork.left = i;
+	main->philo[i].fork.right = j;
+}
+
 int	init_philos(t_main *main)
 {
 	int	i;
@@ -31,13 +40,4 @@ int	init_philos(t_main *main)
 	j = 0;
 	fill_philo_struct(main, i, j);
 	return (0);
-}
-
-void	fill_philo_struct(t_main *main, int i, int j)
-{
-	main->philo[i].id = i + 1;
-	main->philo[i].nb_of_times_ate = 0;
-	main->philo[i].ttd = 0;
-	main->philo[i].fork.left = i;
-	main->philo[i].fork.right = j;
 }
