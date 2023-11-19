@@ -113,6 +113,12 @@ void				*life(void *arg);
 int					do_life(t_main *main, int i);
 void				*check_it(void *arg);
 
+// actions.c
+int					do_eat(t_main *main, int i);
+int					do_sleep(t_main *main, int i);
+int					do_think(t_main *main, int i);
+int					is_dead(t_main *main, int *i);
+
 // time.c
 long long			get_time(void);
 long long			diff_time(long long t);

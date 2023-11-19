@@ -41,7 +41,7 @@ void	*life(void *arg)
 	if (main->input.nb_of_times_eat > 0)
 	{
 		while (main->input.nb_of_times_eat > main->philo[i].nb_of_times_ate
-			&& main->philo_dead == 0)
+			&& !main->philo_dead)
 			do_life(main, i);
 	}
 	else
@@ -50,14 +50,42 @@ void	*life(void *arg)
 			if (do_life(main, i))
 				break ;
 	}
-	return (0);
+	return (NULL);
 }
 
 int	do_life(t_main *main, int i)
 {
-	
+	if (do_eat(main, i))
+		return (1);
+	if (main->input.nb_of_times_eat != main->philo[i].nb_of_times_ate)
+	{
+		if (do_sleep(main, i))
+			return (1);
+		if (do_think(main, i))
+			return (1);
+	}
+	return (0);
 }
 
 void	*check_it(void *arg)
 {
+	t_main *main;
+	int i;
+
+	main = (t_main *)arg;
+	i = 0;
+	if (main->input.nb_of_times_eat > 0)
+	{
+		while (main->input.nb_of_times_eat > main->philo[i].nb_of_times_ate
+			&& !main->philo_dead)
+			if (is_dead(main, &i))
+				break ;
+	}
+	else
+	{
+		while (!main->philo_dead)
+			if (is_dead(main, &i))
+				break ;
+	}
+	return (NULL);
 }
