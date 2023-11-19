@@ -103,8 +103,13 @@ int					init_philos(t_main *main);
 // handle_forks.c
 int					init_forks(t_main *main);
 
+// life.c
+int					philo_words(t_main *main, int id, char *color, char *state);
+
 // time.c
 long long			get_time(void);
+long long			diff_time(long long t);
+void				do_action(long long t);
 
 // utils.c
 void				exit_handler(char *msg);
