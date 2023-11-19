@@ -36,7 +36,7 @@ void	here_doc_put_in(char **av, int *fd)
 	if (dup2(fd[0], 0) == -1)
 		exit_handler("__ERROR_PIPE__:\nError pipe.\n");
 	close(fd[0]);
-	wait(NULL);
+	// wait(NULL);
 }
 
 void	do_pipe(char **av, int *i, int *fd, char **env)
