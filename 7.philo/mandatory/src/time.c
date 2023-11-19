@@ -19,3 +19,15 @@ long long	get_time(void)
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec * 0.001));
 }
+
+long long	diff_time(long long t)
+{
+	if (t > 0)
+		return (get_time() - t);
+	return (0);
+}
+
+void	do_action(long long t)
+{
+	usleep(t * 1000);
+}
