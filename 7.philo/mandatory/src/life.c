@@ -12,7 +12,7 @@
 
 #include "../inc/philosophers.h"
 
-int	philo_words(t_main *main, int id, char *color, char *state)
+int	philo_words(t_main *main, int id, char *color, char *s)
 {
 	long long	now;
 
@@ -26,7 +26,7 @@ int	philo_words(t_main *main, int id, char *color, char *state)
 		return (1);
 	}
 	else
-		printf("%s%-10lld %-3d %-30s%s\n", color, now, id, state, main->c.reset);
+		printf("%s%-10lld %-3d %-30s%s\n", color, now, id, s, main->c.reset);
 	pthread_mutex_unlock(&main->write);
 	return (0);
 }

@@ -104,7 +104,7 @@ int					init_philos(t_main *main);
 int					init_forks(t_main *main);
 
 // life.c
-int					philo_words(t_main *main, int id, char *color, char *state);
+int					philo_words(t_main *main, int id, char *color, char *s);
 
 // time.c
 long long			get_time(void);
