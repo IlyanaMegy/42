@@ -36,19 +36,30 @@ void	here_doc_put_in(char **av, int *fd)
 	if (dup2(fd[0], 0) == -1)
 		exit_handler("__ERROR_PIPE__:\nError pipe.\n");
 	close(fd[0]);
-	// wait(NULL);
 }
 
 void	do_pipe(char **av, int *i, int *fd, char **env)
 {
-	if (i[0] == 0)
-		open_it(i[1], av, fd);
-	else if (i[0] == i[1] - 4)
-		close_it(i[1], av, fd);
-	else
-		ft_dup2(fd[2], fd[1]);
-	ft_close_all(fd);
-	exec(av[i[0] + 2], env);
+	pid_t	pid[4096];
+
+	if (pipe(fd) < 0)
+		exit_handler("__ERROR_PIPE__:\nError pipe.\n");
+	pid[i[0]] = fork();
+	if (pid[i[0]] < 0)
+		exit_handler("__ERROR_FORK__:\nError fork.\n");
+	if (!pid[i[0]])
+	{
+		if (i[0] == 0)
+			open_it(i[1], av, fd);
+		else if (i[0] == i[1] - 4)
+			close_it(i[1], av, fd);
+		else
+			ft_dup2(fd[2], fd[1]);
+		ft_close_all(fd);
+		exec(av[i[0] + 2], env);
+	}
+	if (!ft_strcmp(av[1], "here_doc"))
+		wait(0);
 }
 
 int	main(int ac, char **av, char **env)
@@ -64,13 +75,7 @@ int	main(int ac, char **av, char **env)
 	fd[2] = dup(STDIN_FILENO);
 	while (++i[0] < ac - 3)
 	{
-		if (pipe(fd) < 0)
-			exit_handler("__ERROR_PIPE__:\nError pipe.\n");
-		pid[i[0]] = fork();
-		if (pid[i[0]] < 0)
-			exit_handler("__ERROR_FORK__:\nError fork.\n");
-		if (!pid[i[0]])
-			do_pipe(av, i, fd, env);
+		do_pipe(av, i, fd, env);
 		swap_pipes(fd);
 	}
 	close(fd[2]);
