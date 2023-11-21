@@ -41,9 +41,9 @@ int	main(int ac, char **av)
 		return (philo_free(&main), 0);
 	}
 	if (init_threads(&main))
-		return (1);
+		return (philo_free(&main), 1);
 	if (destroy_threads(&main))
-		return (1);
+		return (philo_free(&main), 1);
 	philo_free(&main);
 	return (0);
 }
