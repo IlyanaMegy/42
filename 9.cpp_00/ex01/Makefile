@@ -1,0 +1,59 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/11/22 14:11:38 by ilymegy           #+#    #+#              #
+#    Updated: 2023/11/22 14:11:41 by ilymegy          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME			=	phonebook
+CC				=	c++
+CCFLAGS			=	-Wall -Werror -Wextra -std=c++98
+
+# directories
+SRC_DIR			=	src/
+OBJ_DIR			=	obj/
+INC_DIR			=	inc/
+
+#source files
+SRC_FILES		=	main.cpp PhoneBook.cpp Contact.cpp
+
+OBJ_FILES		=	$(SRC_FILES:.cpp=.o)
+
+#paths
+SRC				=	$(addprefix $(SRC_DIR), $(SRC_FILES))
+OBJ				=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
+
+#all rule
+all: $(NAME)
+
+#compile the executable
+$(NAME): $(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	
+#compile objects
+$(OBJ_DIR)%.o:$(SRC_DIR)%.cpp
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ -c $<
+	
+#clean rule
+clean:
+	@if [ -d "$(OBJ_DIR)" ]; then \
+	rm -rf $(OBJ_DIR); \
+	fi;
+
+#fclean rule
+fclean: clean
+	@if [ -f "$(NAME)" ]; then \
+	rm -f $(NAME); \
+	fi;
+
+#re rule
+re: fclean all
+
+#phony
+.PHONY: all clean fclean re
