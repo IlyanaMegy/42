@@ -69,8 +69,8 @@ int	do_life(t_main *main, int i)
 
 void	*check_it(void *arg)
 {
-	t_main *main;
-	int i;
+	t_main	*main;
+	int		i;
 
 	main = (t_main *)arg;
 	i = 0;

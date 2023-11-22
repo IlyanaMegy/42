@@ -57,7 +57,8 @@ int	do_think(t_main *main, int i)
 
 int	is_dead(t_main *main, int *i)
 {
-	int t;
+	int	t;
+
 	if (*i == main->input.nb_philo)
 		*i = 0;
 	t = diff_time(main->philo[*i].ttd);

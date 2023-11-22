@@ -14,7 +14,7 @@
 
 int	init_forks(t_main *main)
 {
-	int i;
+	int	i;
 
 	main->forks = malloc(sizeof(pthread_mutex_t) * main->input.nb_philo + 1);
 	if (main->forks == NULL)
