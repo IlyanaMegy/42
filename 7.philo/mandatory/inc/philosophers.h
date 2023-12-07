@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 11:15:43 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/11/18 11:15:46 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/12/07 21:44:53 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int					is_dead(t_main *main, int *i);
 
 // time.c
 long long			get_time(void);
+void				ft_usleep(long int ms);
 long long			diff_time(long long t);
 void				do_action(long long t);
 

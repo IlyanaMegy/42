@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:40:05 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/11/19 14:40:07 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/12/07 22:03:28 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,9 @@ int	philo_words(t_main *main, int id, char *color, char *s)
 		return (0);
 	}
 	else
-		printf("%s%-10lld %-3d %-30s%s\n", color, now, id, s, main->c.reset);
+		if (*color)
+			printf("%lld %d %s\n", now, id, s);
+		// printf("%s%-10lld %-3d %-30s%s\n", color, now, id, s, main->c.reset);
 	pthread_mutex_unlock(&main->write);
 	pthread_mutex_unlock(&main->philo_died);
 	return (1);

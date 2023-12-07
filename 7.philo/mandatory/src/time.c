@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 19:25:22 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/11/18 19:25:25 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/12/07 21:48:16 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ long long	diff_time(long long t)
 	if (t > 0)
 		return (get_time() - t);
 	return (0);
+}
+
+void	ft_usleep(long int ms)
+{
+	long int	start_time;
+
+	start_time = get_time();
+	while ((get_time() - start_time) < ms)
+		usleep(ms / 10);
 }
 
 void	do_action(long long t)

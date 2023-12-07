@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   life.c                                             :+:      :+:    :+:   */
+/*   life_routine.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 13:44:29 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/11/19 13:44:30 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/12/07 21:49:31 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	*life(void *arg)
 	pthread_mutex_lock(&main->n_thr);
 	i = main->n_thread;
 	pthread_mutex_unlock(&main->n_thr);
+	if (main->philo[i].id % 2 == 0)
+		ft_usleep(main->input.tte / 10);
 	if (main->input.nb_of_times_eat > 0)
 	{
 		pthread_mutex_lock(&main->philo_died);
