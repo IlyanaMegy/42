@@ -16,14 +16,20 @@ int	init_forks(t_main *main)
 {
 	int	i;
 
-	main->forks = malloc(sizeof(pthread_mutex_t) * main->input.nb_philo + 1);
-	if (main->forks == NULL)
+	main->forks = malloc(sizeof(pthread_mutex_t) * main->input.nb_philo);
+	main->philo_ttd = malloc(sizeof(pthread_mutex_t) * main->input.nb_philo);
+	main->philo_ate = malloc(sizeof(pthread_mutex_t) * main->input.nb_philo);
+	if (!main->forks || !main->philo_ttd || !main->philo_ate)
 		return (1);
 	i = 0;
 	while (i < main->input.nb_philo)
 	{
 		if (pthread_mutex_init(&main->forks[i], NULL) != 0)
-			return (1);
+			return (free(main->forks), 1);
+		if (pthread_mutex_init(&main->philo_ttd[i], NULL) != 0)
+			return (free(main->forks), free(main->philo_ttd), 1);
+		if (pthread_mutex_init(&main->philo_ate[i], NULL) != 0)
+			return (free(main->forks), free(main->philo_ttd), 1);
 		i++;
 	}
 	return (0);

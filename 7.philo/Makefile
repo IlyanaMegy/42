@@ -12,7 +12,7 @@
 
 NAME 		= philosophers
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror #-g3
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=thread -g -pthread
 
 INC			= -I ./mandatory/inc/
 
@@ -23,7 +23,8 @@ SRC			= main.c\
 			handle_forks.c\
 			time.c\
 			threads.c\
-			life.c\
+			life_routine.c\
+			checker_routine.c\
 			actions.c\
 			utils.c\
 			style.c

@@ -12,12 +12,6 @@
 
 #include "../inc/philosophers.h"
 
-void	exit_handler(char *msg)
-{
-	printf("%s", msg);
-	exit(0);
-}
-
 int	p_atoi(char *str)
 {
 	long int	n;

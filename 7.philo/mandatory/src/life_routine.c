@@ -12,23 +12,20 @@
 
 #include "../inc/philosophers.h"
 
-int	philo_words(t_main *main, int id, char *color, char *s)
+void	life_no_lim_eat(t_main *main, int i)
 {
-	long long	now;
-
-	now = diff_time(main->t0);
-	if (main->philo_dead)
-		return (1);
-	pthread_mutex_lock(&main->write);
-	if (main->philo_dead)
+	pthread_mutex_lock(&main->philo_died);
+	while (!main->philo_dead)
 	{
-		pthread_mutex_unlock(&main->write);
-		return (1);
+		pthread_mutex_unlock(&main->philo_died);
+		if (!do_life(main, i))
+		{
+			pthread_mutex_lock(&main->philo_died);
+			break ;
+		}
+		pthread_mutex_lock(&main->philo_died);
 	}
-	else
-		printf("%s%-10lld %-3d %-30s%s\n", color, now, id, s, main->c.reset);
-	pthread_mutex_unlock(&main->write);
-	return (0);
+	pthread_mutex_unlock(&main->philo_died);
 }
 
 void	*life(void *arg)
@@ -37,55 +34,38 @@ void	*life(void *arg)
 	int		i;
 
 	main = (t_main *)arg;
+	pthread_mutex_lock(&main->n_thr);
 	i = main->n_thread;
+	pthread_mutex_unlock(&main->n_thr);
 	if (main->input.nb_of_times_eat > 0)
 	{
+		pthread_mutex_lock(&main->philo_died);
 		while (main->input.nb_of_times_eat > main->philo[i].nb_of_times_ate
 			&& !main->philo_dead)
+		{
+			pthread_mutex_unlock(&main->philo_died);
 			do_life(main, i);
+			pthread_mutex_lock(&main->philo_died);
+		}
+		pthread_mutex_unlock(&main->philo_died);
 	}
 	else
-	{
-		while (main->philo_dead == 0)
-			if (do_life(main, i))
-				break ;
-	}
+		life_no_lim_eat(main, i);
 	return (NULL);
 }
 
 int	do_life(t_main *main, int i)
 {
-	if (do_eat(main, i))
-		return (1);
+	if (!do_eat(main, i))
+		return (0);
 	if (main->input.nb_of_times_eat != main->philo[i].nb_of_times_ate)
 	{
-		if (do_sleep(main, i))
-			return (1);
-		if (do_think(main, i))
-			return (1);
+		if (!philo_words(main, main->philo[i].id, main->c.purple,
+				main->a.sleep))
+			return (0);
+		do_action(main->input.tts);
+		if (!philo_words(main, main->philo[i].id, main->c.pink, main->a.think))
+			return (0);
 	}
-	return (0);
-}
-
-void	*check_it(void *arg)
-{
-	t_main	*main;
-	int		i;
-
-	main = (t_main *)arg;
-	i = 0;
-	if (main->input.nb_of_times_eat > 0)
-	{
-		while (main->input.nb_of_times_eat > main->philo[i].nb_of_times_ate
-			&& !main->philo_dead)
-			if (is_dead(main, &i))
-				break ;
-	}
-	else
-	{
-		while (!main->philo_dead)
-			if (is_dead(main, &i))
-				break ;
-	}
-	return (NULL);
+	return (1);
 }

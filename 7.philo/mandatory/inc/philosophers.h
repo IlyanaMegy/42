@@ -87,6 +87,10 @@ typedef struct s_main
 	t_errors		err;
 	t_philo			*philo;
 	pthread_t		monitor;
+	pthread_mutex_t	n_thr;
+	pthread_mutex_t	philo_died;
+	pthread_mutex_t	*philo_ttd;
+	pthread_mutex_t	*philo_ate;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write;
 }					t_main;
@@ -114,9 +118,8 @@ int					do_life(t_main *main, int i);
 void				*check_it(void *arg);
 
 // actions.c
+int					drop_forks(t_main *main, int i);
 int					do_eat(t_main *main, int i);
-int					do_sleep(t_main *main, int i);
-int					do_think(t_main *main, int i);
 int					is_dead(t_main *main, int *i);
 
 // time.c
@@ -125,7 +128,6 @@ long long			diff_time(long long t);
 void				do_action(long long t);
 
 // utils.c
-void				exit_handler(char *msg);
 int					p_atoi(char *str);
 void				philo_free(t_main *main);
 
