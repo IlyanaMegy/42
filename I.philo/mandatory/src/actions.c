@@ -83,9 +83,9 @@ int	do_eat(t_main *main, int i)
 	if (!philo_words(main, main->philo[i].id, main->c.blue, main->a.eat))
 		return (0);
 	pthread_mutex_lock(&main->philo_ttd[i]);
-	main->philo[i].ttd = get_time();
+	main->philo[i].ttd = get_time() + main->input.ttd;
 	pthread_mutex_unlock(&main->philo_ttd[i]);
-	do_action(main->input.tte);
+	die_before_end(main, i, main->input.tte, 0);
 	drop_forks(main, i);
 	return (1);
 }
@@ -105,10 +105,7 @@ int	philo_words(t_main *main, int id, char *color, char *s)
 		pthread_mutex_unlock(&main->write);
 		return (0);
 	}
-	else
-		if (*color)
-			printf("%lld %d %s\n", now, id, s);
-		// printf("%s%-10lld %-3d %-30s%s\n", color, now, id, s, main->c.reset);
+	printf("%s%-10lld %-3d %-30s%s\n", color, now, id, s, main->c.reset);
 	pthread_mutex_unlock(&main->write);
 	pthread_mutex_unlock(&main->philo_died);
 	return (1);

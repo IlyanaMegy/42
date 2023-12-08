@@ -35,8 +35,3 @@ void	ft_usleep(long int ms)
 	while ((get_time() - start_time) < ms)
 		usleep(ms / 10);
 }
-
-void	do_action(long long t)
-{
-	usleep(t * 1000);
-}

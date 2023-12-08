@@ -14,13 +14,22 @@
 
 int	alone_philo(t_main *main)
 {
+	long long	now;
+
 	if (pthread_mutex_init(&main->write, NULL) != 0)
 		return (1);
 	main->t0 = get_time();
-	main->philo_dead = 0;
-	philo_words(main, 1, main->c.cyan, main->a.fork);
-	do_action(main->input.ttd);
-	philo_words(main, 1, main->c.red, "died sad and alone");
+	now = diff_time(main->t0);
+	pthread_mutex_lock(&main->write);
+	printf("%s%-10lld %-3d %-30s%s\n", main->c.cyan, now, 1, main->a.fork,
+		main->c.reset);
+	pthread_mutex_unlock(&main->write);
+	usleep(1000 * main->input.ttd);
+	now = diff_time(main->t0);
+	pthread_mutex_lock(&main->write);
+	printf("%s%-10lld %-3d %-30s%s\n", main->c.red, now, 1,
+		"died sad and alone", main->c.reset);
+	pthread_mutex_unlock(&main->write);
 	return (0);
 }
 

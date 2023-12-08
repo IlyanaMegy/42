@@ -65,7 +65,7 @@ int	do_life(t_main *main, int i)
 		if (!philo_words(main, main->philo[i].id, main->c.purple,
 				main->a.sleep))
 			return (0);
-		do_action(main->input.tts);
+		die_before_end(main, i, main->input.tts, main->input.tte);
 		if (!philo_words(main, main->philo[i].id, main->c.pink, main->a.think))
 			return (0);
 	}

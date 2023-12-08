@@ -126,7 +126,6 @@ int					is_dead(t_main *main, int *i);
 long long			get_time(void);
 void				ft_usleep(long int ms);
 long long			diff_time(long long t);
-void				do_action(long long t);
 
 // utils.c
 int					p_atoi(char *str);
@@ -134,5 +133,6 @@ void				philo_free(t_main *main);
 
 // style.c
 void				set_msg_and_colors(t_main *main);
+void				die_before_end(t_main *main, int i, int action, int option);
 
 #endif

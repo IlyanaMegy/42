@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= philosophers
+NAME 		= philo
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -fsanitize=thread -g -pthread
 
@@ -44,7 +44,7 @@ $(OBJ_PATH):
 
 $(NAME):	$(OBJS)
 			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INC) 
-						@echo "philosophers \033[1;32mOK\033[m"
+						@echo "philo \033[1;32mOK\033[m"
 
 clean:
 			@rm -rf $(OBJ_PATH)
