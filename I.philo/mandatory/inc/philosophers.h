@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 11:15:43 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/12/07 21:44:53 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/12/09 21:46:34 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,6 @@ void				philo_free(t_main *main);
 
 // style.c
 void				set_msg_and_colors(t_main *main);
-void				die_before_end(t_main *main, int i, int action, int option);
+int					die_before_end(t_main *main, int i, int action, int option);
 
 #endif

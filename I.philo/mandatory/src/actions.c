@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:40:05 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/12/07 22:03:28 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/12/09 21:51:06 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,10 @@ int	do_eat(t_main *main, int i)
 	if (!philo_words(main, main->philo[i].id, main->c.blue, main->a.eat))
 		return (0);
 	pthread_mutex_lock(&main->philo_ttd[i]);
-	main->philo[i].ttd = get_time() + main->input.ttd;
+	main->philo[i].ttd = get_time();
 	pthread_mutex_unlock(&main->philo_ttd[i]);
-	die_before_end(main, i, main->input.tte, 0);
+	if (die_before_end(main, i, main->input.tte, 0))
+		return (drop_forks(main, i), 1);
 	drop_forks(main, i);
 	return (1);
 }
@@ -105,8 +106,10 @@ int	philo_words(t_main *main, int id, char *color, char *s)
 		pthread_mutex_unlock(&main->write);
 		return (0);
 	}
-	printf("%s%-10lld %-3d %-30s%s\n", color, now, id, s, main->c.reset);
-	pthread_mutex_unlock(&main->write);
 	pthread_mutex_unlock(&main->philo_died);
+	if (*color)
+		printf("%lld %d %s\n", now, id, s);
+	// printf("%s%-10lld %-3d %-30s%s\n", color, now, id, s, main->c.reset);
+	pthread_mutex_unlock(&main->write);
 	return (1);
 }

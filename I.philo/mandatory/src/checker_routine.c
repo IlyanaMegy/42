@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 17:16:34 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/12/07 17:16:36 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/12/09 21:48:09 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,17 @@ int	is_dead(t_main *main, int *i)
 	return (0);
 }
 
-void	die_before_end(t_main *main, int i, int action, int option)
+int	die_before_end(t_main *main, int i, int action, int option)
 {
-	if (get_time() + action > main->philo[i].ttd)
+	if (get_time() + action > get_time() + main->input.ttd - option)
 	{
 		usleep(1000 * (main->input.ttd - option));
 		philo_words(main, main->philo[i].id, main->c.red, main->a.die);
 		pthread_mutex_lock(&main->philo_died);
 		main->philo_dead = 1;
 		pthread_mutex_unlock(&main->philo_died);
+		return (1);
 	}
-	else
-		usleep(action * 1000);
+	usleep(action * 1000);
+	return (0);
 }

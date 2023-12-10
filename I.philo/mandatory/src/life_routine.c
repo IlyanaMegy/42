@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 13:44:29 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/12/07 21:49:31 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/12/09 21:47:42 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int	do_life(t_main *main, int i)
 		if (!philo_words(main, main->philo[i].id, main->c.purple,
 				main->a.sleep))
 			return (0);
-		die_before_end(main, i, main->input.tts, main->input.tte);
+		if (die_before_end(main, i, main->input.tts, main->input.tte))
+			return (0);
 		if (!philo_words(main, main->philo[i].id, main->c.pink, main->a.think))
 			return (0);
 	}
