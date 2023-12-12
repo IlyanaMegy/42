@@ -86,7 +86,7 @@ int	do_eat(t_main *main, int i)
 	main->philo[i].ttd = get_time();
 	pthread_mutex_unlock(&main->philo_ttd[i]);
 	if (die_before_end(main, i, main->input.tte, 0))
-		return (drop_forks(main, i), 1);
+		return (drop_forks(main, i), 0);
 	drop_forks(main, i);
 	return (1);
 }
