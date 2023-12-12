@@ -37,8 +37,6 @@ void	*life(void *arg)
 	pthread_mutex_lock(&main->n_thr);
 	i = main->n_thread;
 	pthread_mutex_unlock(&main->n_thr);
-	if (main->philo[i].id % 2 == 0)
-		ft_usleep(main->input.tte / 10);
 	if (main->input.nb_of_times_eat > 0)
 	{
 		pthread_mutex_lock(&main->philo_died);

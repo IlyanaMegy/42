@@ -107,9 +107,7 @@ int	philo_words(t_main *main, int id, char *color, char *s)
 		return (0);
 	}
 	pthread_mutex_unlock(&main->philo_died);
-	if (*color)
-		printf("%lld %d %s\n", now, id, s);
-	// printf("%s%-10lld %-3d %-30s%s\n", color, now, id, s, main->c.reset);
+	printf("%s%-10lld %-3d %-30s%s\n", color, now, id, s, main->c.reset);
 	pthread_mutex_unlock(&main->write);
 	return (1);
 }

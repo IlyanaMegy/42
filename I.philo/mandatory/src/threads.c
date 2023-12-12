@@ -57,11 +57,11 @@ int	init_threads(t_main *main)
 				(void *)main) != 0)
 			return (1);
 		i++;
-		usleep(1000);
+		usleep(100);
 	}
 	if (pthread_create(&main->monitor, NULL, &check_it, (void *)main) != 0)
 		return (1);
-	usleep(1000);
+	usleep(100);
 	if (join_threads(main))
 		return (1);
 	return (0);
