@@ -34,4 +34,6 @@ void	philo_free(t_main *main)
 {
 	free(main->philo);
 	free(main->forks);
+	free(main->philo_ttd);
+	free(main->philo_ate);
 }
