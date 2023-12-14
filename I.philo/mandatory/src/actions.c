@@ -97,8 +97,6 @@ int	philo_words(t_main *main, int id, char *color, char *s)
 
 	now = diff_time(main->t0);
 	pthread_mutex_lock(&main->philo_died);
-	if (main->philo_dead)
-		return (pthread_mutex_unlock(&main->philo_died), 0);
 	pthread_mutex_lock(&main->write);
 	if (main->philo_dead)
 	{
@@ -106,8 +104,11 @@ int	philo_words(t_main *main, int id, char *color, char *s)
 		pthread_mutex_unlock(&main->write);
 		return (0);
 	}
-	pthread_mutex_unlock(&main->philo_died);
-	printf("%s%-10lld %-3d %-30s%s\n", color, now, id, s, main->c.reset);
+	if (*color)
+	{
+		printf("%lld %d %s\n", now, id, s);
+	}
 	pthread_mutex_unlock(&main->write);
+	pthread_mutex_unlock(&main->philo_died);
 	return (1);
 }
