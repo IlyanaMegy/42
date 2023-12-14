@@ -12,9 +12,10 @@
 
 NAME 		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -fsanitize=thread -g -pthread
+CFLAGS		= -Wall -Wextra -Werror #-fsanitize=thread -g -pthread
 
 INC			= -I ./mandatory/inc/
+INCS		= ./mandatory/inc/*.h
 
 SRC_PATH	= ./mandatory/src/
 SRC			= main.c\
@@ -37,19 +38,16 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 all:		$(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c 
-				@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
-$(OBJS): 	$(OBJ_PATH)
-$(OBJ_PATH): 
-			@mkdir $(OBJ_PATH)
+				$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
-$(NAME):	$(OBJS)
-			@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INC) 
-						@echo "philo \033[1;32mOK\033[m"
+$(NAME):	$(OBJS) $(SRCS) $(INCS)
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INC) 
+			echo "philo \033[1;32mOK\033[m"
 
 clean:
-			@rm -rf $(OBJ_PATH)
+			rm -rf $(OBJS)
 
 fclean:		clean
-			@rm -rf $(NAME)
+			rm -rf $(NAME)
 
 re:			fclean all
