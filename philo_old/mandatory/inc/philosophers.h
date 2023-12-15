@@ -87,6 +87,7 @@ typedef struct s_main
 	t_actions		a;
 	t_errors		err;
 	t_philo			*philo;
+	pthread_t		monitor;
 	pthread_mutex_t	n_thr;
 	pthread_mutex_t	philo_died;
 	pthread_mutex_t	*philo_ttd;
@@ -112,7 +113,7 @@ int					init_threads(t_main *main);
 int					destroy_threads(t_main *main);
 
 // life.c
-int					philo_words(t_main *main, int id, char *s);
+int					philo_words(t_main *main, int id, char *color, char *s);
 void				*life(void *arg);
 int					do_life(t_main *main, int i);
 void				*check_it(void *arg);
@@ -120,7 +121,7 @@ void				*check_it(void *arg);
 // actions.c
 int					drop_forks(t_main *main, int i);
 int					do_eat(t_main *main, int i);
-int					is_dead(t_main *main, int i);
+int					is_dead(t_main *main, int *i);
 
 // time.c
 long long			get_time(void);

@@ -12,7 +12,7 @@
 
 NAME 		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror #-fsanitize=thread -g -pthread
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=thread -g -pthread
 
 INC			= -I ./mandatory/inc/
 INCS		= ./mandatory/inc/*.h
@@ -42,7 +42,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 
 $(NAME):	$(OBJS) $(SRCS) $(INCS)
 			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INC) 
-			echo "philo \033[1;32mOK\033[m"
+			@echo "philo \033[1;32mOK\033[m"
 
 clean:
 			rm -rf $(OBJS)

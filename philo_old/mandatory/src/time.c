@@ -38,7 +38,7 @@ int	ft_usleep(t_main *main, int time_action)
 		usleep(5000);
 		time_action -= 5;
 	}
-	if (time_action < 5)
+	if (time_action)
 	{
 		pthread_mutex_lock(&main->philo_died);
 		if (main->philo_dead)
