@@ -18,6 +18,8 @@ void	life_no_lim_eat(t_main *main, int i)
 	while (!main->philo_dead)
 	{
 		pthread_mutex_unlock(&main->philo_died);
+		if (is_dead(main, i))
+			return ;
 		if (!do_life(main, i))
 		{
 			pthread_mutex_lock(&main->philo_died);
@@ -44,6 +46,8 @@ void	*life(void *arg)
 			&& !main->philo_dead)
 		{
 			pthread_mutex_unlock(&main->philo_died);
+			if (is_dead(main, i))
+				return (NULL);
 			do_life(main, i);
 			pthread_mutex_lock(&main->philo_died);
 		}
@@ -56,16 +60,24 @@ void	*life(void *arg)
 
 int	do_life(t_main *main, int i)
 {
+	if (is_dead(main, i))
+		return (0);
 	if (!do_eat(main, i))
 		return (0);
 	if (main->input.nb_of_times_eat != main->philo[i].nb_of_times_ate)
 	{
-		if (!philo_words(main, main->philo[i].id, main->c.purple,
-				main->a.sleep))
+		if (is_dead(main, i))
+			return (0);
+		if (!philo_words(main, main->philo[i].id, main->a.sleep))
 			return (0);
 		if (die_before_end(main, i, main->input.tts, main->input.tte))
 			return (0);
-		if (!philo_words(main, main->philo[i].id, main->c.pink, main->a.think))
+		if (is_dead(main, i))
+			return (0);
+		if (!philo_words(main, main->philo[i].id, main->a.think))
+			return (0);
+		if (die_before_end(main, i, main->input.ttt, main->input.tte
+				+ main->input.tts))
 			return (0);
 	}
 	return (1);

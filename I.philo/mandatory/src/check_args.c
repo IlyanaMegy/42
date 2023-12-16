@@ -43,6 +43,25 @@ void	print_args_errors(int ac, t_main *main)
 		printf("%s%s%s\n", main->c.red, main->err.arg5, main->c.reset);
 }
 
+void	set_think_time(t_main *main)
+{
+	long int	res;
+
+	res = 0;
+	if (main->input.tts < main->input.tte)
+	{
+		res = main->input.tte - main->input.tts;
+		if ((main->input.tte + main->input.tts + res) > main->input.ttd)
+		{
+			res = main->input.ttd;
+			res = res - (main->input.tte + main->input.tts);
+			if (res < 0)
+				res = 0;
+		}
+	}
+	main->input.ttt = res;
+}
+
 int	check_args(int ac, char **av, t_main *main)
 {
 	set_msg_and_colors(main);
@@ -51,12 +70,11 @@ int	check_args(int ac, char **av, t_main *main)
 		printf("%s%s%s\n", main->c.red, main->err.nb_args, main->c.reset);
 		return (1);
 	}
-	else
-	{
-		print_args_errors(ac, main);
-		if (!main->input.nb_philo || !main->input.ttd || !main->input.tte
-			|| !main->input.tts || (ac == 6 && !main->input.nb_of_times_eat))
-			return (1);
-	}
+	print_args_errors(ac, main);
+	if (!main->input.nb_philo || !main->input.ttd || !main->input.tte
+		|| !main->input.tts || (ac == 6 && !main->input.nb_of_times_eat))
+		return (1);
+	set_think_time(main);
+	printf("ttt = %d\n", main->input.ttt);
 	return (0);
 }

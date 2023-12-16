@@ -27,11 +27,24 @@ long long	diff_time(long long t)
 	return (0);
 }
 
-void	ft_usleep(long int ms)
+int	ft_usleep(t_main *main, int time_action)
 {
-	long int	start_time;
-
-	start_time = get_time();
-	while ((get_time() - start_time) < ms)
-		usleep(ms / 10);
+	while (time_action >= 9)
+	{
+		pthread_mutex_lock(&main->philo_died);
+		if (main->philo_dead)
+			return (pthread_mutex_unlock(&main->philo_died), 1);
+		pthread_mutex_unlock(&main->philo_died);
+		usleep(9000);
+		time_action -= 9;
+	}
+	if (time_action < 9)
+	{
+		pthread_mutex_lock(&main->philo_died);
+		if (main->philo_dead)
+			return (pthread_mutex_unlock(&main->philo_died), 1);
+		pthread_mutex_unlock(&main->philo_died);
+		usleep(time_action * 1000);
+	}
+	return (0);
 }

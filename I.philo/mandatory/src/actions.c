@@ -72,15 +72,15 @@ int	do_eat(t_main *main, int i)
 		return (0);
 	if (someone_dead(main, first_fork))
 		return (0);
-	if (!philo_words(main, main->philo[i].id, main->c.cyan, main->a.fork))
+	if (!philo_words(main, main->philo[i].id, main->a.fork))
 		return (0);
 	if (pthread_mutex_lock(sec_fork) != 0)
 		return (0);
 	if (someone_dead(main, first_fork))
 		return (pthread_mutex_unlock(sec_fork), 0);
-	if (!philo_words(main, main->philo[i].id, main->c.cyan, main->a.fork))
+	if (!philo_words(main, main->philo[i].id, main->a.fork))
 		return (0);
-	if (!philo_words(main, main->philo[i].id, main->c.blue, main->a.eat))
+	if (!philo_words(main, main->philo[i].id, main->a.eat))
 		return (0);
 	pthread_mutex_lock(&main->philo_ttd[i]);
 	main->philo[i].ttd = get_time();
@@ -91,7 +91,7 @@ int	do_eat(t_main *main, int i)
 	return (1);
 }
 
-int	philo_words(t_main *main, int id, char *color, char *s)
+int	philo_words(t_main *main, int id, char *s)
 {
 	long long	now;
 
@@ -104,10 +104,7 @@ int	philo_words(t_main *main, int id, char *color, char *s)
 		pthread_mutex_unlock(&main->write);
 		return (0);
 	}
-	if (*color)
-	{
-		printf("%lld %d %s\n", now, id, s);
-	}
+	printf("%lld %d %s\n", now, id, s);
 	pthread_mutex_unlock(&main->write);
 	pthread_mutex_unlock(&main->philo_died);
 	return (1);
