@@ -75,6 +75,5 @@ int	check_args(int ac, char **av, t_main *main)
 		|| !main->input.tts || (ac == 6 && !main->input.nb_of_times_eat))
 		return (1);
 	set_think_time(main);
-	printf("ttt = %d\n", main->input.ttt);
 	return (0);
 }
