@@ -37,7 +37,8 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 
 all:		$(NAME)
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c 
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+				@mkdir -p $(OBJ_PATH)
 				$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(NAME):	$(OBJS) $(SRCS) $(INCS)
