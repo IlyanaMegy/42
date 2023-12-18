@@ -1,0 +1,19 @@
+thread et mutex:
+https://franckh.developpez.com/tutoriels/posix/pthreads/
+
+good philo ex:
+https://github.com/anolivei/Philosophers42/blob/master/philo/sources/main.c
+
+steps:
+https://github.com/TommyJD93/Philosophers#step1
+
+visualizer:
+https://nafuka11.github.io/philosophers-visualizer/
+
+tester:
+https://github.com/MichelleJiam/LazyPhilosophersTester
+
+
+5 599 200 200 die
+199 800 300 100 suppose to die
+199 610 200 200 10 data races

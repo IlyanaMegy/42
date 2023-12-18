@@ -1,0 +1,22 @@
+ttt = 0
+0 1 has taken a fork
+0 1 has taken a fork
+0 1 is eating
+0 2 has taken a fork
+0 4 has taken a fork
+0 4 has taken a fork
+0 4 is eating
+60 1 is sleeping
+60 2 has taken a fork
+60 2 is eating
+61 4 is sleeping
+61 5 has taken a fork
+61 5 has taken a fork
+61 5 is eating
+121 2 is sleeping
+121 3 has taken a fork
+121 3 has taken a fork
+121 3 is eating
+121 5 is sleeping
+181 3 is sleeping
+302 1 died

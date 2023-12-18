@@ -6,7 +6,7 @@
 /*   By: ilymegy <ilyanamegy@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:40:05 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/12/18 00:45:42 by ilymegy          ###   ########.fr       */
+/*   Updated: 2023/12/09 21:51:06 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,20 @@ int	do_eat(t_main *main, int i)
 	pthread_mutex_t	*sec_fork;
 
 	left_or_right_fork(main, i, &first_fork, &sec_fork);
-	pthread_mutex_lock(first_fork);
+	if (pthread_mutex_lock(first_fork) != 0)
+		return (0);
 	if (someone_dead(main, first_fork))
 		return (0);
 	if (!philo_words(main, main->philo[i].id, main->a.fork))
-		return (pthread_mutex_unlock(first_fork), 0);
-	pthread_mutex_lock(sec_fork);
+		return (0);
+	if (pthread_mutex_lock(sec_fork) != 0)
+		return (0);
 	if (someone_dead(main, first_fork))
 		return (pthread_mutex_unlock(sec_fork), 0);
 	if (!philo_words(main, main->philo[i].id, main->a.fork))
-		return (drop_forks(main, i), 0);
+		return (0);
 	if (!philo_words(main, main->philo[i].id, main->a.eat))
-		return (drop_forks(main, i), 0);
+		return (0);
 	pthread_mutex_lock(&main->philo_ttd[i]);
 	main->philo[i].ttd = get_time();
 	pthread_mutex_unlock(&main->philo_ttd[i]);
