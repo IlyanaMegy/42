@@ -42,7 +42,7 @@ void	*life(void *arg)
 	if (main->input.nb_of_times_eat > 0)
 	{
 		pthread_mutex_lock(&main->philo_died);
-		while (main->input.nb_of_times_eat > main->philo[i].nb_of_times_ate
+		while (main->input.nb_of_times_eat != main->philo[i].nb_of_times_ate
 			&& !main->philo_dead)
 		{
 			pthread_mutex_unlock(&main->philo_died);

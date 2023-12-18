@@ -55,7 +55,7 @@ int	init_threads(t_main *main)
 				(void *)main) != 0)
 			return (1);
 		i++;
-		usleep(100);
+		usleep(1000);
 	}
 	if (join_threads(main))
 		return (1);
