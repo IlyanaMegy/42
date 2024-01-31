@@ -22,7 +22,7 @@
   <p>&nbsp;</p>
   <p>&nbsp;</p>
 sda5_crypt : root
-mdp : mdpStrong363936
+mdp : 363936Im!!
 
 # I. SSH and Firewall
 
