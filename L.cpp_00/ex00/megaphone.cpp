@@ -24,8 +24,6 @@ int	main(int ac, char **av)
 			for (j = 0; av[i][j] != '\0'; j++)
 				av[i][j] = (char)toupper(av[i][j]);
 			std::cout << av[i];
-			if (av[i] != NULL)
-				std::cout << " ";
 		}
 		std::cout << std::endl;
 		return (0);
