@@ -5,44 +5,29 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/04 17:36:35 by ilymegy           #+#    #+#              #
-#    Updated: 2024/03/04 17:36:38 by ilymegy          ###   ########.fr        #
+#    Created: 2024/03/08 13:24:33 by ilymegy           #+#    #+#              #
+#    Updated: 2024/03/08 13:24:35 by ilymegy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	phonebook
+NAME		=	account
+SRC			=	tests.cpp Account.cpp
+OBJ			=	$(SRC:.cpp=.o)
 CXX			=	c++
-CXXFLAGS	=	-Wall -Werror -Wextra -std=c++98
-
-SRC_DIR		=	src/
-OBJ_DIR		=	obj/
-INC_DIR		=	inc/
-
-SRC_FILES	=	main.cpp PhoneBook.cpp Contact.cpp
-OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
-
-SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
-OBJ			=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
+RM			=	rm -f
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
 all:	$(NAME)
 
-$(NAME):$(OBJ)
-	@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
-
-$(OBJ_DIR)%.o:$(SRC_DIR)%.cpp
-	@mkdir -p $(OBJ_DIR)
-	@$(CXX) $(CXXFLAGS) -I $(INC_DIR) -o $@ -c $<
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
-	@if [ -d "$(OBJ_DIR)" ]; then \
-	rm -rf $(OBJ_DIR); \
-	fi;
+	$(RM) $(OBJ)
 
 fclean: clean
-	@if [ -f "$(NAME)" ]; then \
-	rm -rf $(NAME); \
-	fi;
+	$(RM) $(NAME)
 
-re: fclean all
+re: fclean $(NAME)
 
 .PHONY: all clean fclean re

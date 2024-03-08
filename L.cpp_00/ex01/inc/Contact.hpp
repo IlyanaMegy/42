@@ -5,18 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 14:19:52 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/11/22 14:19:54 by ilymegy          ###   ########.fr       */
+/*   Created: 2024/03/04 17:48:42 by ilymegy           #+#    #+#             */
+/*   Updated: 2024/03/04 17:48:43 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
-
-# include <cstdlib>
-# include <iomanip>
 # include <iostream>
-# include <string>
+# include <iomanip>
+# include <cstdlib>
 
 class Contact
 {
@@ -27,7 +25,7 @@ class Contact
 	{
 		FirstName = 0,
 		LastName,
-		NickName,
+		Nickname,
 		PhoneNumber,
 		DarkestSecret
 	};
@@ -35,8 +33,7 @@ class Contact
   public:
 	Contact(void);
 	~Contact(void);
+	void get_contact(int i) const;
 	bool set_contact(void);
-	void get_contact(int idx) const;
 };
-
 #endif

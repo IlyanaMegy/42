@@ -5,30 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 14:14:46 by ilymegy           #+#    #+#             */
-/*   Updated: 2023/11/22 14:14:48 by ilymegy          ###   ########.fr       */
+/*   Created: 2024/03/04 17:48:57 by ilymegy           #+#    #+#             */
+/*   Updated: 2024/03/04 17:48:59 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/PhoneBook.hpp"
 
-PhoneBook::PhoneBook()
+PhoneBook::PhoneBook(void)
 {
 	_full = false;
 	_index = 0;
+	return ;
 }
 
-PhoneBook::~PhoneBook()
+PhoneBook::~PhoneBook(void)
 {
 	return ;
 }
 
-void PhoneBook::show_instruction()
+void PhoneBook::show_instruction(void)
 {
 	std::cout << "Enter an instruction [ADD, SEARCH, EXIT]:" << std::endl;
 }
 
-void PhoneBook::get_information() const
+void PhoneBook::get_infos(void) const
 {
 	int i;
 	if (this->_index == 0)
@@ -36,8 +37,8 @@ void PhoneBook::get_information() const
 	else
 	{
 		std::string input;
-		std::cout << "What is the index of that \"friend\" you want informations from ? (or press 0 to quit.)" << std::endl;
-		while (!std::getline(std::cin, input) || input.length() > 1 || input.compare("0") < 0 || input.compare("8") > 0 || (std::atoi(input.c_str()) -1 >= this->_index && this->_full == false))
+		std::cout << "What is the index of that \"friend\" you want infos from ? (or press 0 to quit)\nIndex: ";
+		while (!(std::getline(std::cin, input)) || input.length() > 1 || input.compare("0") < 0 || input.compare("8") > 0 || (std::atoi(input.c_str()) - 1 >= this->_index && this->_full == false))
 		{
 			if (std::cin.eof() == true)
 			{
@@ -71,17 +72,19 @@ void PhoneBook::get_information() const
 	}
 }
 
-void PhoneBook::set_information()
+void PhoneBook::set_infos(void)
 {
 	std::string input;
 	if (this->_full == false)
 	{
 		std::cout << "Inventing friend #" << this->_index + 1 << std::endl;
 		if (this->_contacts[this->_index].set_contact() == true)
+		{
 			if (this->_index == 7)
-				this->_full == true;
+				this->_full = true;
 			else
 				this->_index++;
+		}
 	}
 	else
 	{

@@ -1,2 +1,0 @@
-https://github.com/madebypixel02/CPP-Module-00/blob/main/ex01/Contact.cpp
-https://github.com/tblaase/CPP-Module-00/blob/main/ex01/src/PhoneBook.cpp
