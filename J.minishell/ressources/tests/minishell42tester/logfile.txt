@@ -1,0 +1,31 @@
+[0;31m/// TEST 37  KO  (echo nb 37)///[0m
+37: Expected [$HOME] output but found [\/mnt/nfs/homes/ilymegy]
+37: Expected [$HOME] output but found [\/mnt/nfs/homes/ilymegy]
+[0;31m/// TEST 40  KO  (echo nb 40)///[0m
+40: Expected [my shit terminal is []] output but found [my shit terminal is []
+40: Expected [my shit terminal is []] output but found [my shit terminal is []
+[0;31m/// TEST 41  KO  (echo nb 41)///[0m
+41: Expected [1000] output but found []
+41: Expected [104809] output but found []
+[0;31m/// TEST 45  KO  (echo nb 45)///[0m
+45: Expected [1000/mnt/nfs/homes/ilymegy%] output but found [/mnt/nfs/homes/ilymegy]
+45: Expected [104809/mnt/nfs/homes/ilymegy] output but found [/mnt/nfs/homes/ilymegy]
+[0;31m/// TEST 47  KO  (echo nb 47)///[0m
+47: Expected [ilymegy$USERilymegy$USERtestilymegy] output but found [ilymegy\ilymegyilymegy\ilymegy]
+47: Expected [ilymegy$USERilymegy$USERtestilymegy] output but found [ilymegy\ilymegyilymegy\ilymegy]
+[0;31m/// TEST 59  KO  (echo nb 59)///[0m
+59: Expected [minitester.sh] output but found [*]
+59: Expected [bashstash bonjour\ bonjour hello examples gen hola hola1 hola2 ignore_rl_leaks.supp img logfile.txt logs logs1 minishell minitester.sh README.md stash testfile] output but found [*]
+[0;31m/// TEST 61  KO  (echo nb 61)///[0m
+61: Expected [minitester.sh] output but found [minit*]
+61: Expected [minitester.sh] output but found [minit*]
+[0;31m/// TEST 63  KO  (echo nb 63)///[0m
+63: Expected [minitester.sh hola] output but found [*h hola]
+63: Expected [bashstash minitester.sh stash hola] output but found [*h hola]
+[0;31m/// TEST 64  KO  (echo nb 64)///[0m
+64: Expected [minitester.sh] output but found [*h]
+64: Expected [bashstash minitester.sh stash] output but found [*h]
+[0;31m/// TEST 67  KO  (echo nb 67)///[0m
+67: Expected [minitester.sh] output but found []
+67: Expected [bashstash bonjour\ bonjour hello examples gen hola hola1 hola2 ignore_rl_leaks.supp img logfile.txt logs logs1 minishell minitester.sh README.md stash testfile] output but found []
+
