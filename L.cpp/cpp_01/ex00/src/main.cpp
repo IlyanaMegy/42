@@ -17,5 +17,5 @@ int main(void)
 	Zombie *zombie = newZombie("normal zombie");
 	randomChump("random zombie");
 	delete zombie;
-	return (EXIT_SUCCESS);
+	return (0);
 }
