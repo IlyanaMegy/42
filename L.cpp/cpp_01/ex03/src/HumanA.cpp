@@ -12,9 +12,8 @@
 
 #include "../inc/HumanA.hpp"
 
-HumanA::HumanA(std::string name, Weapon &weapon):_weapon(weapon)
+HumanA::HumanA(std::string name, Weapon &weapon):_name(name),_weapon(weapon)
 {
-	this->_name = name;
 	std::cout << this->_name << " is ready to fight with a " << this->_weapon.getType() << std::endl;
 }
 

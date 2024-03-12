@@ -12,10 +12,8 @@
 
 #include "../inc/HumanB.hpp"
 
-HumanB::HumanB(std::string name)
+HumanB::HumanB(std::string name):_name(name),_armed(false)
 {
-	this->_name = name;
-	this->_armed = false;
 	std::cout << this->_name << " is ready to fight" << std::endl;
 }
 
