@@ -14,8 +14,8 @@
 # define HARL_HPP
 # include <iomanip>
 # include <iostream>
-# include <string>
 # include <map>
+# include <string>
 
 class Harl
 {
@@ -24,16 +24,12 @@ class Harl
 	void info(void);
 	void warning(void);
 	void error(void);
-	using DicoPtr = void (Harl::*)();
-	DicoPtr functions[4] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-	std::map<std::string, int> levelDico = {
-		{"debug", 0},
-		{"info", 1},
-		{"warning", 2},
-		{"error", 3}};
+	typedef void (Harl::*DicoPtr)();
+	DicoPtr functions[4];
+	std::map<std::string, int> levelMap;
 
   public:
-	Harl(void);
+	Harl();
 	~Harl(void);
 	void complain(std::string level);
 };

@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	harl
+NAME		=	Harl
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
@@ -19,7 +19,7 @@ OBJ_DIR		=	obj/
 INC_DIR		=	inc/
 
 SRC_FILES	=	main.cpp Harl.cpp
-OBJ_FILES	=	$(SRC_FILES:.cpp)
+OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ			=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))

@@ -16,12 +16,10 @@ int	main(void)
 {
 	Harl harl;
 
-	// Test en utilisant différents niveaux de plaintes
 	harl.complain("debug");
 	harl.complain("info");
 	harl.complain("warning");
 	harl.complain("error");
-	harl.complain("critical"); // Test pour un niveau non reconnu
-
+	harl.complain("critical");
 	return (0);
 }
