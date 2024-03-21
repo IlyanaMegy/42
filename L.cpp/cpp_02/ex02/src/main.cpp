@@ -49,7 +49,8 @@ int	main(void)
 	if (a <= c)
 		std::cout << "a == c" << std::endl;
 	std::cout << std::endl;
-
+	std::cout << Fixed::max(a, b) << " is bigger than " << Fixed::min(a, b) << std::endl;
+	std::cout << std::endl;
 	// Fixed	a;
 	// Fixed const b(Fixed(5.05f) * Fixed(2));
 	// std::cout << a << std::endl;
