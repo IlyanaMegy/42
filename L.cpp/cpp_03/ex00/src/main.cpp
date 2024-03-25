@@ -15,18 +15,18 @@
 int	main(void)
 {
 	ClapTrap a("Main");
-	ClapTrap b("Cody");
-	a.attack("some other robot");
+	ClapTrap b("Second");
+	a.attack("some robot");
 	a.takeDamage(1);
 	a.takeDamage(10);
 	a.beRepaired(5);
 	a.showStats();
 	b.showStats();
-	a.attack("some other other robot");
+	a.attack("some other robot");
 	b.beRepaired(3);
 	b.showStats();
 	for (int i = 0; i < 12; i++)
-		b.attack("Cody-clone");
+		b.attack("Second-clone");
 	b.beRepaired(3);
 	return (0);
 }
