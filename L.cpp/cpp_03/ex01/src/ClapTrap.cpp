@@ -12,7 +12,7 @@
 
 #include "../inc/ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name): _name(name), _health(100), _energy(50), _attackDamage(20)
+ClapTrap::ClapTrap(std::string name): _name(name), _health(10), _energy(10), _attackDamage(0)
 {
 	std::cout << YELLOW << "ClapTrap " << this->_name << " appeared." << RESET << std::endl;
 	return ;
@@ -32,6 +32,7 @@ ClapTrap::ClapTrap(ClapTrap const &copy)
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &assign)
 {
+	std::cout << "ClapTrap Assignation operator called" << std::endl;
 	if (this != &assign)
 		this->_name = assign._name;
 	return (*this);
@@ -42,29 +43,31 @@ void ClapTrap::attack(const std::string &target)
 	if (!_energy || !_health)
 	{
 		if (!_energy )
-			std::cout << RED << "ClapTrap " << _name << " is out of energy!" << RESET << std::endl;
+			std::cout << RED << "ClapTrap " << _name << " is out of energy!\n" << RESET << std::endl;
 		if (!_health )
-			std::cout << RED << "ClapTrap " << _name << " health is too low!" << RESET << std::endl;
+			std::cout << RED << "ClapTrap " << _name << " health is too low!\n" << RESET << std::endl;
 		return ;
 	}
-	std::cout << CYAN << "ClapTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage !" << RESET << std::endl;
+	std::cout << CYAN << "ClapTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage !\n" << RESET << std::endl;
 	_energy -= 1;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
+	std::cout << BLUE << "ClapTrap " << _name << " is being attacked and takes " << amount << " damage!" << std::endl;
 	if (!_health)
 	{
-		std::cout << MAGENTA << "ClapTrap " << _name << " is already dead." << RESET << std::endl;
+		std::cout << "but hopefully is" << MAGENTA << " already dead.\n" << RESET << std::endl;
 		return;
 	}
 	if (amount >= _health)
 	{
-		std::cout << RED << "ClapTrap " << _name << " has been beaten to death." << RESET << std::endl;
+		std::cout << "and has been" << RED << " beaten to death.\n" << RESET << std::endl;
 		_health = 0;
 		return;
 	}
-	std::cout << BLUE << "ClapTrap " << _name << " takes " << amount << " damage!" << RESET << std::endl;
+	else
+		std::cout << std::endl;
 	_health -= amount;
 }
 
@@ -72,10 +75,10 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (!_energy)
 	{
-		std::cout << RED << "ClapTrap " << _name << " is out of energy!" << RESET << std::endl;
+		std::cout << RED << "ClapTrap " << _name << " is out of energy!\n" << RESET << std::endl;
 		return ;
 	}
-	std::cout << GREEN << "ClapTrap " << _name << " heals itself for " << amount << " hit points!" << RESET << std::endl;
+	std::cout << GREEN << "ClapTrap " << _name << " heals itself for " << amount << " hit points!\n" << RESET << std::endl;
 	_health += amount;
 	_energy -= 1;
 }

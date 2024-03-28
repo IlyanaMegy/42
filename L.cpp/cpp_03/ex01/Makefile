@@ -18,7 +18,7 @@ SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 INC			=	inc/
 
-SRC_FILES	=	main.cpp ClavTrap.cpp ScavTrap.cpp
+SRC_FILES	=	main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -39,7 +39,7 @@ clean:
 	fi;
 
 fclean: clean
-	@if [-f "$(NAME)" ]; then \
+	@if [ -f "$(NAME)" ]; then \
 	rm $(NAME); \
 	fi;
 
