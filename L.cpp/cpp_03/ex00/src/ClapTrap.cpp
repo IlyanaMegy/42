@@ -32,8 +32,14 @@ ClapTrap::ClapTrap(ClapTrap const &copy)
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &assign)
 {
+	std::cout << "ClapTrap Assignation operator called" << std::endl;
 	if (this != &assign)
+	{
 		this->_name = assign._name;
+		this->_attackDamage = assign._attackDamage;
+		this->_health = assign._health;
+		this->_energy = assign._energy;
+	}
 	return (*this);
 }
 
