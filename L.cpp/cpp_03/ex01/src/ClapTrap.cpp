@@ -34,7 +34,12 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &assign)
 {
 	std::cout << "ClapTrap Assignation operator called" << std::endl;
 	if (this != &assign)
+	{
 		this->_name = assign._name;
+		this->_attackDamage = assign._attackDamage;
+		this->_health = assign._health;
+		this->_energy = assign._energy;
+	}
 	return (*this);
 }
 
@@ -42,9 +47,9 @@ void ClapTrap::attack(const std::string &target)
 {
 	if (!_energy || !_health)
 	{
-		if (!_energy )
+		if (!_energy)
 			std::cout << RED << "ClapTrap " << _name << " is out of energy!\n" << RESET << std::endl;
-		if (!_health )
+		if (!_health)
 			std::cout << RED << "ClapTrap " << _name << " health is too low!\n" << RESET << std::endl;
 		return ;
 	}
@@ -58,16 +63,15 @@ void ClapTrap::takeDamage(unsigned int amount)
 	if (!_health)
 	{
 		std::cout << "but hopefully is" << MAGENTA << " already dead.\n" << RESET << std::endl;
-		return;
+		return ;
 	}
 	if (amount >= _health)
 	{
 		std::cout << "and has been" << RED << " beaten to death.\n" << RESET << std::endl;
 		_health = 0;
-		return;
+		return ;
 	}
-	else
-		std::cout << std::endl;
+	std::cout << std::endl;
 	_health -= amount;
 }
 
