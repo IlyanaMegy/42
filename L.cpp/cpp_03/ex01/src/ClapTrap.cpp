@@ -17,6 +17,7 @@ ClapTrap::ClapTrap(std::string name): _name(name), _health(10), _energy(10), _at
 	std::cout << YELLOW << "ClapTrap " << this->_name << " appeared." << RESET << std::endl;
 	return ;
 }
+
 ClapTrap::~ClapTrap()
 {
 	std::cout << YELLOW << "ClapTrap " << this->_name << " disappeared." << RESET << std::endl;
