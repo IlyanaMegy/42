@@ -33,7 +33,7 @@ FragTrap::FragTrap(FragTrap const &copy): ClapTrap(copy)
 FragTrap &FragTrap::operator=(FragTrap const &assign)
 {
 	std::cout << YELLOW << "FragTrap Assignation operator called" << RESET << std::endl;
-	if (this != assign)
+	if (this != &assign)
 	{
 		this->_name = assign._name;
 		this->_health = assign._health;
@@ -46,4 +46,14 @@ FragTrap &FragTrap::operator=(FragTrap const &assign)
 FragTrap::~FragTrap()
 {
 	std::cout << YELLOW << "FragTrap " << this->_name << " disappeared." << RESET << std::endl;
+}
+
+void FragTrap::highFivesGuys()
+{
+	if (!this->_energy)
+		std::cout << RED << "FragTrap " << _name << " is out of energy!\n" << RESET << std::endl;
+	else{
+		this->_energy -=1;
+		std::cout << GREEN << "FragTrap " << _name << " high fives his friends <3." << RESET << std::endl;
+	}
 }

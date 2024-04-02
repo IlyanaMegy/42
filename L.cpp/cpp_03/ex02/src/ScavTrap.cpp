@@ -29,7 +29,7 @@ ScavTrap::ScavTrap(ScavTrap const &copy): ClapTrap(copy)
 ScavTrap &ScavTrap::operator=(ScavTrap const &assign)
 {
 	std::cout << YELLOW << "ScavTrap Assignation operator called" << RESET << std::endl;
-	if (this != assign)
+	if (this != &assign)
 	{
 		this->_name = assign._name;
 		this->_health = assign._health;

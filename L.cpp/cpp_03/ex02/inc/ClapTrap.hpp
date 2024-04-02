@@ -32,8 +32,8 @@ class ClapTrap
   protected:
 	std::string _name;
 	unsigned int _health;
-	unsigned int _attackDamage;
 	unsigned int _energy;
+	unsigned int _attackDamage;
 
   public:
 	ClapTrap(std::string name);
