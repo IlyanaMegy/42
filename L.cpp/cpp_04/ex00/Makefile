@@ -18,7 +18,7 @@ SRC_DIR			=	src/
 OBJ_DIR			=	obj/
 INC				=	inc/
 
-SRC_FILES		=	main.cpp Animal.cpp Dog.cpp Cat.cpp
+SRC_FILES		=	main.cpp Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp WrongAnimal.cpp
 OBJ_FILES		=	$(SRC_FILES:.cpp=.o)
 
 SRC				=	$(addprefix $(SRC_DIR), $(SRC_FILES))

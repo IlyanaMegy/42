@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 13:41:16 by ilymegy           #+#    #+#             */
-/*   Updated: 2024/04/04 13:41:20 by ilymegy          ###   ########.fr       */
+/*   Created: 2024/04/09 14:17:00 by ilymegy           #+#    #+#             */
+/*   Updated: 2024/04/09 14:17:02 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
 # include <iomanip>
 # include <iostream>
@@ -28,19 +28,19 @@
 # define UNDERLINE "\033[4m"
 # define RESET "\033[0m"
 
-class Animal
+class WrongAnimal
 {
   protected:
 	std::string _type;
 
   public:
-	Animal();
-	Animal(Animal const &copy);
-	Animal &operator=(Animal const &assign);
-	virtual ~Animal();
+	WrongAnimal(void);
+	WrongAnimal(WrongAnimal const &copy);
+	WrongAnimal &operator=(WrongAnimal const &assign);
+	~WrongAnimal(void);
 
-	std::string getType() const;
-	virtual void makeSound() const;
+	std::string getType(void) const;
+	void makeSound(void) const;
 };
 
 #endif

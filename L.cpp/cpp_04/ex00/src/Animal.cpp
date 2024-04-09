@@ -43,5 +43,5 @@ std::string Animal::getType() const
 
 void Animal::makeSound() const
 {
-	std::cout << BLUE << "This animal doesn't make any sound." << RESET << std::endl;
+	std::cout << YELLOW << "This animal doesn't make any sound." << RESET << std::endl;
 }
