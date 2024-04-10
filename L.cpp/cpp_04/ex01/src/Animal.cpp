@@ -36,12 +36,12 @@ Animal::~Animal(void)
 	std::cout << YELLOW << this->getType() << " Animal has been killed." << RESET << std::endl;
 }
 
-std::string Animal::getType(void)const
+std::string Animal::getType(void) const
 {
 	return (this->_type);
 }
 
-void Animal::makeSound(void)const
+void Animal::makeSound(void) const
 {
 	std::cout << YELLOW << this->getType() << " Animal doesn't make any sound." << RESET << std::endl;
 }

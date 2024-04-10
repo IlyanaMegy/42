@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 14:47:25 by ilymegy           #+#    #+#             */
-/*   Updated: 2024/04/09 14:47:26 by ilymegy          ###   ########.fr       */
+/*   Created: 2024/04/10 10:42:44 by ilymegy           #+#    #+#             */
+/*   Updated: 2024/04/10 10:42:46 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-# include "Animal.hpp"
 # include "Brain.hpp"
+# include "WrongAnimal.hpp"
 
-class Dog : public Animal
+class WrongCat : public WrongAnimal
 {
   private:
 	Brain *_brain;
 
   public:
-	Dog(void);
-	Dog(Dog const &copy);
-	Dog &operator=(Dog const &assign);
-	~Dog(void);
+	WrongCat(void);
+	WrongCat(WrongCat const &copy);
+	WrongCat &operator=(WrongCat const &assign);
+	~WrongCat(void);
 
 	void makeSound(void) const;
-	void addIdea(std::string idea);
+	void addIdeas(std::string idea);
 	void expressIdeas(void) const;
 };
 

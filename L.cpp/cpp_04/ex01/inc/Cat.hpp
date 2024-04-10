@@ -28,6 +28,8 @@ class Cat : public Animal
 	~Cat(void);
 
 	void makeSound(void) const;
+	void addIdeas(std::string idea);
+	void expressIdeas(void) const;
 };
 
 #endif

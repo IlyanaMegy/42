@@ -13,13 +13,14 @@
 #ifndef BRAIN_HPP
 # define BRAIN_HPP
 
+# include "Animal.hpp"
 # include <iomanip>
 # include <iostream>
 
 class Brain
 {
   private:
-	std::string _idead[100];
+	std::string _ideas[100];
 
   public:
 	Brain(void);
