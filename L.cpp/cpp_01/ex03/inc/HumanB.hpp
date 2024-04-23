@@ -18,7 +18,6 @@ class HumanB
 {
   private:
 	std::string _name;
-	bool _armed;
 	Weapon *_weapon;
 
   public:
