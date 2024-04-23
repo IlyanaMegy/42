@@ -15,44 +15,55 @@
 #include <iostream>
 #include <string>
 
+void	replaceStrings(std::ofstream &fileOut, std::string s1, std::string s2,
+		std::string input)
+{
+	size_t	pos;
+	size_t	toSkip;
+
+	pos = input.find(s1);
+	if (pos == std::string::npos)
+	{
+		fileOut << input;
+		return ;
+	}
+	else
+	{
+		fileOut << input.substr(0, pos);
+		fileOut << s2;
+		toSkip = pos + s1.length();
+		replaceStrings(fileOut, s1, s2, input.substr(toSkip));
+	}
+}
+
 int	main(int ac, char **av)
 {
-	std::string word;
+	std::ifstream myfile;
+	std::ofstream outfile;
+	std::string buffer;
 	if (ac != 4)
 	{
 		std::cout << "invalid number of arguments." << std::endl;
 		return (1);
 	}
-	std::ifstream myfile(av[1]);
+	std::string file = av[1];
+	std::string s1 = av[2];
+	std::string s2 = av[3];
+	myfile.open(av[1]);
 	if (myfile.is_open())
 	{
-		std::string file = av[1];
-		std::string s1 = av[2];
-		std::string s2 = av[3];
-		std::ofstream outfile((file + ".replace").c_str());
+		outfile.open((file + ".replace").c_str());
 		if (outfile.is_open())
 		{
-			while (myfile.good() && myfile >> word)
-			{
-				if (word.compare(s1) == 0)
-					outfile << s2;
-				else
-					outfile << word;
-				if (myfile.peek() == '\n')
-					outfile << std::endl;
-				else if (myfile.peek() == ' ')
-					outfile << " ";
-			}
-			outfile.close();
-		}
-		else
-		{
-			std::cout << "could not open outfile." << std::endl;
+			while (getline(myfile, buffer))
+				replaceStrings(outfile, s1, s2, buffer + '\n');
 			myfile.close();
-			return (1);
+			outfile.close();
+			return (0);
 		}
+		std::cout << "could not open outfile." << std::endl;
 		myfile.close();
-		return (0);
+		return (1);
 	}
 	std::cout << "could not open infile." << std::endl;
 	return (1);
