@@ -14,14 +14,6 @@
 
 Harl::Harl(void)
 {
-	functions[0] = &Harl::debug;
-	functions[1] = &Harl::info;
-	functions[2] = &Harl::warning;
-	functions[3] = &Harl::error;
-	levelMap["debug"] = 0;
-	levelMap["info"] = 1;
-	levelMap["warning"] = 2;
-	levelMap["error"] = 3;
 	std::cout << "Harl is about to open his mouth." << std::endl;
 }
 
@@ -32,37 +24,38 @@ Harl::~Harl(void)
 
 void Harl::complain(std::string level)
 {
-	int	idx = -1;
-
-	std::map<std::string, int>::iterator i = levelMap.find(level);
-	if (i != levelMap.end())
+	void (Harl::*functions[4])() = {&Harl::debug, &Harl::info, &Harl::warning,
+		&Harl::error};
+	std::string states[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	
+	int i;
+	for (i = 0; i < 4; i++)
 	{
-		idx = i->second;
-		if (idx >=0 && idx <= 3)
-			(this->*functions[idx])();
-		else
-            std::cout << "Invalid index:\t" << idx << std::endl;
+		if (level == states[i])
+		{
+			(this->*functions[i])();
+			return ;
+		}
 	}
-	else
+	if (i == 4)
 		std::cout << "Unknown level:\t" << level << std::endl;
 }
 void Harl::debug(void)
 {
-	std::cout << "DEBUG:\t\tI love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do !" << std::endl;
+	std::cout << "DEBUG:\t\tor don't idc..." << std::endl;
 }
 
 void Harl::info(void)
 {
-	std::cout << "INFO:\t\tI cannot believe adding extra bacon costs more money. You did not put\
-enough bacon in my burger ! If you did, I would not be asking for more !" << std::endl;
+	std::cout << "INFO:\t\tit's only informative information." << std::endl;
 }
 
 void Harl::warning(void)
 {
-	std::cout << "WARNING:\tI think I deserve to have some extra bacon for free. I have been coming for years whereas you started working here since last month." << std::endl;
+	std::cout << "WARNING:\t/!\\" << std::endl;
 }
 
 void Harl::error(void)
 {
-	std::cout << "ERROR:\t\tThis is unacceptable ! I want to speak to the manager now." << std::endl;
+	std::cout << "ERROR:\t\t404" << std::endl;
 }
