@@ -24,9 +24,6 @@ class Harl
 	void info(void);
 	void warning(void);
 	void error(void);
-	typedef void (Harl::*DicoPtr)();
-	DicoPtr functions[4];
-	std::map<std::string, int> levelMap;
 
   public:
 	Harl();

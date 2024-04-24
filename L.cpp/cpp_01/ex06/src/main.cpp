@@ -12,23 +12,12 @@
 
 #include "../inc/Harl.hpp"
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	Harl harl;
-
-	harl.complain("debug");
-	std::cout << std::endl;
-
-	harl.complain("info");
-	std::cout << std::endl;
-	
-	harl.complain("warning");
-	std::cout << std::endl;
-	
-	harl.complain("error");
-	std::cout << std::endl;
-	
-	harl.complain("critical");
-	std::cout << std::endl;
+	(void)ac;
+	if (!av[1])
+		return (1);
+	Harl	harl;
+	harl.complain(av[1]);
 	return (0);
 }

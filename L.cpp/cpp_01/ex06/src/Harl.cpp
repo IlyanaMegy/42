@@ -14,14 +14,6 @@
 
 Harl::Harl(void)
 {
-	functions[0] = &Harl::debug;
-	functions[1] = &Harl::info;
-	functions[2] = &Harl::warning;
-	functions[3] = &Harl::error;
-	levelMap["debug"] = 0;
-	levelMap["info"] = 1;
-	levelMap["warning"] = 2;
-	levelMap["error"] = 3;
 	std::cout << "Harl is about to open his mouth." << std::endl;
 }
 
@@ -32,25 +24,29 @@ Harl::~Harl(void)
 
 void Harl::complain(std::string level)
 {
-	std::map<std::string, int>::iterator i = levelMap.find(level);
-	if (i == levelMap.end())
+	int	i;
+
+	std::string states[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	for (i = 0; i < 4; i++)
+		if (level == states[i])
+			break ;
+	switch (i)
+	{
+	case 0:
+		debug();
+	case 1:
+		info();
+	case 2:
+		warning();
+	case 3:
+		error();
+		break ;
+	default:
 		std::cout << "Unknown level:\t" << level << std::endl;
-	else
-		switch (i->second)
-		{
-		case 0:
-			(this->*functions[0])();
-		case 1:
-			(this->*functions[1])();
-		case 2:
-			(this->*functions[2])();
-		case 3:
-			(this->*functions[3])();
-			break ;
-		default:
-			break ;
-		}
+		break ;
+	}
 }
+
 void Harl::debug(void)
 {
 	std::cout << "DEBUG" << std::endl;
