@@ -21,10 +21,14 @@ HumanB::~HumanB(void)
 {
 	std::cout << this->_name << " just died, bye" << std::endl;
 }
+
 void HumanB::setWeapon(Weapon &weapon)
 {
 	this->_weapon = &weapon;
-	std::cout << this->_name << " grabbed a " << this->_weapon->getType() << " to fight with" << std::endl;
+	if (!this->_weapon)
+		std::cout << this->_name << " couldn't equip with a weapon." << std::endl;
+	else
+		std::cout << this->_name << " grabbed a " << this->_weapon->getType() << " to fight with" << std::endl;
 }
 
 void HumanB::attack(void)
