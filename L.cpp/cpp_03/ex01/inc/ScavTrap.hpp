@@ -20,7 +20,6 @@ class ScavTrap : public ClapTrap
 	bool _gate;
 
   public:
-	ScavTrap();
 	ScavTrap(std::string name);
 	ScavTrap(ScavTrap const &copy);
 	ScavTrap &operator=(ScavTrap const &assign);
