@@ -12,8 +12,7 @@
 
 #include "../inc/Fixed.hpp"
 
-Fixed::Fixed(void)
-	: _fixed(0)
+Fixed::Fixed(void): _fixed(0)
 {
 	return ;
 }
