@@ -12,6 +12,20 @@
 
 #include "../inc/ScavTrap.hpp"
 
+ScavTrap::ScavTrap(void): ClapTrap("no_name"), _gate(false)
+{
+	std::cout << YELLOW << "ScavTrap " << this->_name << " appeared." << RESET << std::endl;
+	this->showStats();
+	std::cout << YELLOW << "||                   ||" << std::endl;
+	std::cout << "\\/                   \\/" << RESET << std::endl;
+	this->_attackDamage = 20;
+	this->_health = 100;
+	this->_energy = 50;
+	this->showStats();
+	std::cout << "\n\n" << std::endl;
+	return ;
+}
+
 ScavTrap::ScavTrap(const std::string name): ClapTrap(name), _gate(false)
 {
 	this->_health = 100;

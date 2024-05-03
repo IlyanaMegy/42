@@ -12,11 +12,18 @@
 
 #include "../inc/ClapTrap.hpp"
 
+ClapTrap::ClapTrap(void): _name("no_name"), _health(10), _energy(10), _attackDamage(0)
+{
+	std::cout << YELLOW << "ClapTrap " << this->_name << " appeared." << RESET << std::endl;
+	return ;
+}
+
 ClapTrap::ClapTrap(std::string name): _name(name), _health(10), _energy(10), _attackDamage(0)
 {
 	std::cout << YELLOW << "ClapTrap " << this->_name << " appeared." << RESET << std::endl;
 	return ;
 }
+
 ClapTrap::~ClapTrap()
 {
 	std::cout << YELLOW << "ClapTrap " << this->_name << " disappeared." << RESET << std::endl;
@@ -47,9 +54,9 @@ void ClapTrap::attack(const std::string &target)
 {
 	if (!_energy || !_health)
 	{
-		if (!_energy )
+		if (!_energy)
 			std::cout << RED << "ClapTrap " << _name << " is out of energy!" << RESET << std::endl;
-		if (!_health )
+		if (!_health)
 			std::cout << RED << "ClapTrap " << _name << " health is too low!" << RESET << std::endl;
 		return ;
 	}
@@ -62,13 +69,13 @@ void ClapTrap::takeDamage(unsigned int amount)
 	if (!_health)
 	{
 		std::cout << MAGENTA << "ClapTrap " << _name << " is already dead." << RESET << std::endl;
-		return;
+		return ;
 	}
 	if (amount >= _health)
 	{
 		std::cout << RED << "ClapTrap " << _name << " has been beaten to death." << RESET << std::endl;
 		_health = 0;
-		return;
+		return ;
 	}
 	std::cout << BLUE << "ClapTrap " << _name << " takes " << amount << " damage!" << RESET << std::endl;
 	_health -= amount;
@@ -81,9 +88,20 @@ void ClapTrap::beRepaired(unsigned int amount)
 		std::cout << RED << "ClapTrap " << _name << " is out of energy!" << RESET << std::endl;
 		return ;
 	}
+	if (_health == UINT_MAX)
+	{
+		std::cout << RED << "ClapTrap " << _name << " is already full of energy!" << RESET << std::endl;
+		return ;
+	}
+	_energy -= 1;
+	if (_health > UINT_MAX - amount)
+	{
+		std::cout << GREEN << "ClapTrap " << _name << " heals itself for " << amount - _health << " hit points!" << RESET << std::endl;
+		_health = UINT_MAX;
+		return;
+	}
 	std::cout << GREEN << "ClapTrap " << _name << " heals itself for " << amount << " hit points!" << RESET << std::endl;
 	_health += amount;
-	_energy -= 1;
 }
 
 void ClapTrap::showStats(void)

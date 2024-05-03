@@ -21,6 +21,7 @@ class ScavTrap : public ClapTrap
 	bool _gate;
 
   public:
+  	ScavTrap(void);
 	ScavTrap(const std::string name);
 	ScavTrap(ScavTrap const &copy);
 	ScavTrap &operator=(ScavTrap const &assign);

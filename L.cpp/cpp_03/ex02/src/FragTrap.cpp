@@ -12,6 +12,19 @@
 
 #include "../inc/FragTrap.hpp"
 
+FragTrap::FragTrap(void): ClapTrap("no_name")
+{
+	std::cout << YELLOW << "FragTrap " << this->_name << " appeared." << RESET << std::endl;
+	this->showStats();
+	std::cout << YELLOW << "||                   ||" << std::endl;
+	std::cout << "\\/                   \\/" << RESET << std::endl;
+	this->_health = 100;
+	this->_energy = 100;
+	this->_attackDamage = 30;
+	this->showStats();
+	std::cout << "\n\n" << std::endl;
+}
+
 FragTrap::FragTrap(const std::string name): ClapTrap(name)
 {
 	std::cout << YELLOW << "FragTrap " << this->_name << " appeared." << RESET << std::endl;

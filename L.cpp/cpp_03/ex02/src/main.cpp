@@ -59,6 +59,7 @@ int	main(void)
 	std::cout << "\n\n### TESTING FRAGTRAP ###\n" << std::endl;
 	{
 		std::cout << "Constructing" << std::endl;
+		FragTrap no_name;
 		FragTrap e("Robot E");
 		FragTrap f("Robot F");
 		std::cout << "\nTesting" << std::endl;

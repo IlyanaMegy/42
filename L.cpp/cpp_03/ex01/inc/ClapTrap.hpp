@@ -14,6 +14,7 @@
 # define CLAPTRAP_HPP
 # include <iomanip>
 # include <iostream>
+# include <climits>
 
 # define BLACK "\033[30m"
 # define RED "\033[31m"
@@ -35,6 +36,7 @@ class ClapTrap
 	unsigned int _attackDamage;
 
   public:
+  	ClapTrap(void);
 	ClapTrap(std::string name);
 	ClapTrap(ClapTrap const &copy);
 	ClapTrap &operator=(ClapTrap const &assign);

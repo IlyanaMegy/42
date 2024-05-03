@@ -34,6 +34,7 @@ int	main(void)
 	std::cout << "\n\n### TESTING SCAVTRAP ###\n" << std::endl;
 	{
 		std::cout << "Constructing" << std::endl;
+		ScavTrap no_name;
 		ScavTrap c("Robot C");
 		ScavTrap d("Robot D");
 		std::cout << "\nTesting" << std::endl;

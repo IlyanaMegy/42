@@ -12,6 +12,12 @@
 
 #include "../inc/ClapTrap.hpp"
 
+ClapTrap::ClapTrap(void): _name("no_name"), _health(10), _energy(10), _attackDamage(0)
+{
+	std::cout << YELLOW << "ClapTrap " << this->_name << " appeared." << RESET << std::endl;
+	return ;
+}
+
 ClapTrap::ClapTrap(std::string name): _name(name), _health(10), _energy(10), _attackDamage(0)
 {
 	std::cout << YELLOW << "ClapTrap " << this->_name << " appeared." << RESET << std::endl;
@@ -80,12 +86,23 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (!_energy)
 	{
-		std::cout << RED << "ClapTrap " << _name << " is out of energy!\n" << RESET << std::endl;
+		std::cout << RED << "ClapTrap " << _name << " is out of energy!" << RESET << std::endl;
 		return ;
 	}
-	std::cout << GREEN << "ClapTrap " << _name << " heals itself for " << amount << " hit points!\n" << RESET << std::endl;
-	_health += amount;
+	if (_health == UINT_MAX)
+	{
+		std::cout << RED << "ClapTrap " << _name << " is already full of energy!" << RESET << std::endl;
+		return ;
+	}
 	_energy -= 1;
+	if (_health > UINT_MAX - amount)
+	{
+		std::cout << GREEN << "ClapTrap " << _name << " heals itself for " << amount - _health << " hit points!" << RESET << std::endl;
+		_health = UINT_MAX;
+		return;
+	}
+	std::cout << GREEN << "ClapTrap " << _name << " heals itself for " << amount << " hit points!" << RESET << std::endl;
+	_health += amount;
 }
 
 void ClapTrap::showStats(void)

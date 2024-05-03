@@ -14,12 +14,15 @@
 
 int	main(void)
 {
+	ClapTrap no_name;
 	ClapTrap a("Main");
 	ClapTrap b("Second");
+	no_name.attack("someone");
+	no_name.beRepaired(UINT_MAX);
 	a.attack("some robot");
 	a.takeDamage(1);
 	a.takeDamage(10);
-	a.beRepaired(5);
+	a.beRepaired(UINT_MAX);
 	a.showStats();
 	b.showStats();
 	a.attack("some other robot");

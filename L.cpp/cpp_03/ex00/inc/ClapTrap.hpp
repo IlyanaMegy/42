@@ -12,6 +12,7 @@
 
 #ifndef CLAPTRAP_HPP
 # define CLAPTRAP_HPP
+# include <climits>
 # include <iomanip>
 # include <iostream>
 
@@ -35,6 +36,7 @@ class ClapTrap
 	unsigned int _attackDamage;
 
   public:
+	ClapTrap(void);
 	ClapTrap(std::string name);
 	ClapTrap(ClapTrap const &copy);
 	ClapTrap &operator=(ClapTrap const &assign);
