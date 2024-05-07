@@ -12,6 +12,7 @@
 
 #include "../inc/Cat.hpp"
 #include "../inc/Dog.hpp"
+#include "../inc/WrongCat.hpp"
 
 int	main(void)
 {
@@ -95,5 +96,15 @@ int	main(void)
 	delete cat2;
 	delete cat3;
 	delete cat4;
+
+	WrongCat *wrongcat = new WrongCat;
+	std::cout << wrongcat->getType() << std::endl;
+	delete wrongcat;
+
+	std::cout << std::endl;
+
+	WrongAnimal *wronganimal = new WrongAnimal;
+	std::cout << wronganimal->getType() << std::endl;
+	delete wronganimal;
 	return (0);
 }

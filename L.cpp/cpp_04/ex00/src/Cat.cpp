@@ -20,8 +20,8 @@ Cat::Cat() : Animal()
 
 Cat::Cat(Cat const &copy) : Animal()
 {
-	*this = copy;
 	std::cout << ORANGE << "Cat Copy constructor has been called." << RESET << std::endl;
+	*this = copy;
 }
 
 Cat &Cat::operator=(Cat const &assign)

@@ -27,7 +27,13 @@ Dog::Dog(void): AAnimal()
 Dog::Dog(Dog const &copy): AAnimal()
 {
 	std::cout << CYAN << "Dog Copy constructor has been called" << RESET << std::endl;
-	*this = copy;
+	this->_type = copy._type;
+	this->_brain = new Brain(*copy._brain);
+	if (this->_brain == NULL)
+	{
+		std::cerr << "Cat Brain allocation failed. Exiting the process now." << std::endl;
+		exit(1);
+	}
 }
 
 Dog &Dog::operator=(Dog const &assign)
@@ -35,6 +41,8 @@ Dog &Dog::operator=(Dog const &assign)
 	std::cout << CYAN << "Dog Assignation copy constructor has been called" << RESET << std::endl;
 	if (this != &assign)
 	{
+		if (this->_brain != NULL)
+			delete this->_brain;
 		this->_type = assign._type;
 		this->_brain = new Brain();
 		if (this->_brain == NULL)

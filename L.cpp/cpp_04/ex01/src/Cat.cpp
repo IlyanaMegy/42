@@ -27,7 +27,13 @@ Cat::Cat(void): Animal()
 Cat::Cat(Cat const &copy): Animal()
 {
 	std::cout << ORANGE << "Cat Copy constructor has been called" << RESET << std::endl;
-	*this = copy;
+	this->_type = copy._type;
+	this->_brain = new Brain(*copy._brain);
+	if (this->_brain == NULL)
+	{
+		std::cerr << "Cat Brain allocation failed. Exiting the process now." << std::endl;
+		exit(1);
+	}
 }
 
 Cat &Cat::operator=(Cat const &assign)
@@ -35,6 +41,8 @@ Cat &Cat::operator=(Cat const &assign)
 	std::cout << ORANGE << "Cat Assignation copy constructor has been called" << RESET << std::endl;
 	if (this != &assign)
 	{
+		if (this->_brain != NULL)
+			delete this->_brain;
 		this->_type = assign._type;
 		this->_brain = new Brain(*assign._brain);
 		if (this->_brain == NULL)

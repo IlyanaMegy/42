@@ -20,8 +20,8 @@ Dog::Dog(void): Animal()
 
 Dog::Dog(Dog const &copy): Animal()
 {
-	*this = copy;
 	std::cout << RED << "Dog Copy constructor has been called." << RESET << std::endl;
+	*this = copy;
 }
 
 Dog &Dog::operator=(Dog const &assign)

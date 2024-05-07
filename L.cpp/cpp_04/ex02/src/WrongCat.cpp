@@ -27,7 +27,13 @@ WrongCat::WrongCat(void): WrongAnimal()
 WrongCat::WrongCat(WrongCat const &copy): WrongAnimal()
 {
 	std::cout << PINK << "Broken Cat Copy constructor has been called." << RESET << std::endl;
-	*this = copy;
+	this->_type = copy._type;
+	this->_brain = new Brain(*copy._brain);
+	if (this->_brain == NULL)
+	{
+		std::cerr << "Cat Brain allocation failed. Exiting the process now." << std::endl;
+		exit(1);
+	}
 }
 
 WrongCat &WrongCat::operator=(WrongCat const &assign)
@@ -35,6 +41,8 @@ WrongCat &WrongCat::operator=(WrongCat const &assign)
 	std::cout << PINK << "Broken Cat Assignation copy has been called." << RESET << std::endl;
 	if (this != &assign)
 	{
+		if (this->_brain != NULL)
+			delete this->_brain;
 		this->_type = assign._type;
 		this->_brain = new Brain();
 		if (!this->_brain)
