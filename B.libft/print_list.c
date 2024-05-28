@@ -7,8 +7,8 @@ void	print_list(t_list *mylist)
 	lst = mylist;
 	while (lst->next)
 	{
-		printf("%s --> ",(char *)lst->content);
+		printf("%s --> ", (char *)lst->content);
 		lst = lst->next;
 	}
-	printf("%s\n",(char *)lst->content);
+	printf("%s\n", (char *)lst->content);
 }

@@ -9,7 +9,6 @@
 /*   Updated: 2023/05/02 13:01:08 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
@@ -34,5 +33,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		len_d = size;
 	return (len_d + len_s);
 }
-
-// https://github.com/0x050f/libft-war-machine

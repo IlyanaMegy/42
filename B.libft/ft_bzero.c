@@ -9,7 +9,6 @@
 /*   Updated: 2023/05/02 13:15:12 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void	ft_bzero(void *s, size_t size)
@@ -20,8 +19,5 @@ void	ft_bzero(void *s, size_t size)
 	i = 0;
 	data = (char *)s;
 	while (i < size)
-	{
-		data[i] = 0;
-		i++;
-	}
+		data[i++] = 0;
 }

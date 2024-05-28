@@ -9,7 +9,6 @@
 /*   Updated: 2023/05/02 13:10:46 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 int	ft_strncmp(char *str1, char *str2, size_t n)
@@ -19,10 +18,10 @@ int	ft_strncmp(char *str1, char *str2, size_t n)
 	unsigned char	*s2;
 
 	i = 0;
-	s1 = (unsigned char *)str1;
-	s2 = (unsigned char *)str2;
 	if (!n)
 		return (0);
+	s1 = (unsigned char *)str1;
+	s2 = (unsigned char *)str2;
 	if (s1[i] && s2[i])
 	{
 		while ((s1[i] || s2[i]) && (n > 1))
@@ -32,7 +31,6 @@ int	ft_strncmp(char *str1, char *str2, size_t n)
 			++i;
 			--n;
 		}
-		return (s1[i] - s2[i]);
 	}
 	return (s1[i] - s2[i]);
 }

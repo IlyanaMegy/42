@@ -9,7 +9,6 @@
 /*   Updated: 2023/02/27 19:55:27 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 int	words_count(const char *s, char sep)

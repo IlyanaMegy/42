@@ -9,6 +9,8 @@
 /*   Updated: 2023/05/02 12:59:35 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
+
 /*
 ** DESCRIPTION : La fonction memcmp() compare les n premiers octets des zones
 ** mémoire s1 et s2. Elle renvoie un entier inférieur, égal, ou supérieur à
@@ -18,9 +20,6 @@
 ** positif si les n premiers octets de s1 sont respectivement inférieurs,
 ** égaux ou supérieurs aux n premiers octets de s2.
 */
-
-#include "libft.h"
-
 int	ft_memcmp(const void *p1, const void *p2, size_t size)
 {
 	char	*s1;

@@ -9,10 +9,13 @@
 /*   Updated: 2023/05/03 18:44:55 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	ft_putstr_fd(ft_itoa(n), fd);
+	char	*str;
+
+	str = ft_itoa(n);
+	ft_putstr_fd(str, fd);
+	free(str);
 }

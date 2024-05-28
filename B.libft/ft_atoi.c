@@ -9,13 +9,12 @@
 /*   Updated: 2023/05/02 13:18:17 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
+
 /*
 ** Transforme une chaine de caracteres en entier.
 ** Convert a string to integer.
 */
-
-#include "libft.h"
-
 int	ft_atoi(const char *str)
 {
 	int			minus;

@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft
+NAME = libft.a
 CC = gcc -Wall -Wextra -Werror
 SRC = $(shell find . -name 'ft_*' '!' -iname 'ft_lst*')
 SRC_BONUS = $(shell find . -name 'ft_lst*')
@@ -20,7 +20,7 @@ OBJS_BONUS = $(SRC_BONUS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar -rcs $(NAME).a $(OBJS)
+	ar -rcs $(NAME) $(OBJS)
 
 %.o: %.c
 	$(CC) -c $< -o $@

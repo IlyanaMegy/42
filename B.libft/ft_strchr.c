@@ -9,7 +9,6 @@
 /*   Updated: 2023/05/02 13:00:40 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 char	*ft_strchr(const char *string, int searchedChar)
