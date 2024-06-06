@@ -9,9 +9,7 @@
 /*   Updated: 2023/05/16 15:56:40 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "printf.h"
-#include <stdint.h>
+#include "../include/printf.h"
 
 int	ptr_len(uintptr_t num)
 {

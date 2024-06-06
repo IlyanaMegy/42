@@ -9,10 +9,7 @@
 /*   Updated: 2023/05/16 15:52:02 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
-#include "printf.h"
-#include <stdio.h>
+#include "../include/printf.h"
 
 int	err(const char *str)
 {

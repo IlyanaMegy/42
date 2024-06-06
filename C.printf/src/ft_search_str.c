@@ -9,8 +9,7 @@
 /*   Updated: 2023/05/18 12:30:02 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "printf.h"
+#include "../include/printf.h"
 
 int	search_str(const char *string, int searchedChar)
 {

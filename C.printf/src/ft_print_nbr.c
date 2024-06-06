@@ -9,9 +9,7 @@
 /*   Updated: 2023/05/16 15:56:08 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "printf.h"
-#include "../include/libft.h"
+#include "../include/printf.h"
 
 int	int_len(long int num)
 {

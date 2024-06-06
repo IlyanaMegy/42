@@ -9,9 +9,7 @@
 /*   Updated: 2023/05/16 15:57:05 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "printf.h"
-#include "libft.h"
+#include "../include/printf.h"
 
 int	uint_len(unsigned int num, int base)
 {
