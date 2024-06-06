@@ -16,7 +16,6 @@ CFLAGS		=	-Wall -Wextra -Werror
 INCLUDE		=	-I includes\
 				-I libft
 
-
 OBJS_DIR	=	obj/
 OBJ			=	$(SRC_FILES:.c=.o)
 OBJS        =	$(addprefix $(OBJS_DIR), $(OBJ))

@@ -16,10 +16,8 @@ int	err(const char *str)
 	while (*str)
 	{
 		if (*str == '%' && (*(str + 1) != '%' && *(str - 1) != '%'))
-		{
 			if (search_str("csdiupxX", *(str + 1)) == -1)
 				return (1);
-		}
 		str += 2;
 	}
 	return (0);

@@ -44,9 +44,7 @@ char	*p_nbr(int nbr)
 		n = -n;
 	}
 	else if (n == 0)
-	{
 		res[0] = 0 + 48;
-	}
 	while (n > 0)
 	{
 		res[--len] = n % 10 + 48;
