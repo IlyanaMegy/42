@@ -1,7 +1,7 @@
 ## Projet PUSH_SWAP
 
 <p align="center">
-  <img src="https://cdn.discordapp.com/attachments/889061317321838627/1158799834447355994/push_swap.png?ex=651d8ff1&is=651c3e71&hm=5d3eef9f92b17571391b9615e86aaaca12f31dd71acb491453bdf1d570098219&raw=true" alt="push_swap project"/>
+  <img src="./ressources/push_swap.png" alt="push_swap project"/>
 </p>
 
 * [Introduction](#introduction)
@@ -20,7 +20,7 @@ la sortie standard le plus petit programme, fait d’instructions du  langage Pu
 permettant de trier les entiers passés en paramètres.
 
 <p align="center">
-  <img src="https://cdn.discordapp.com/attachments/889061317321838627/1158799849832063008/method.png?ex=651d8ff5&is=651c3e75&hm=49459e883d91b2573b49bd653b546b9ee5b395e5648dbe372c521a2f1c873b3e&raw=true" alt="method"/>
+  <img src="./ressources/method.png" alt="method"/>
 </p>
 
 ---
@@ -93,7 +93,7 @@ Et pour voir le programme en action on utilise le visualizer :
     python3 pyviz.py `ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
 
 <p align="center">
-  <img src="https://cdn.discordapp.com/attachments/889061317321838627/1158801495840534599/push_swap_visualizer.gif?ex=651d917e&is=651c3ffe&hm=07ad4d8013395af60e7ee9c77ffbcde60932716d028c8449357a1a7740f62b99&raw=true" alt="visualizer"/>
+  <img src="./ressources/push_swap_visualizer.gif" alt="visualizer"/>
 </p>
 
 ## Methode
