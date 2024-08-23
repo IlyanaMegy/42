@@ -1,5 +1,5 @@
 ## Projet PHILOSOPHERS
 
 <p align="center">
-  <img src="./ressources/philo.png" alt="mandatory"/>
+  <img src="./ressources/p.png" alt="mandatory"/>
 </p>
