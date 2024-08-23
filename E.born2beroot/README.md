@@ -21,16 +21,14 @@
   - [Web Server](#web-server)
   <p>&nbsp;</p>
   <p>&nbsp;</p>
-sda5_crypt : root
-mdp : 363936Im!!
 
 # I. SSH and Firewall
 
 Port forwarding :
 
-![VM settings](https://cdn.discordapp.com/attachments/889061317321838627/1113024346739458068/Screenshot_from_2023-05-30_10-40-28.png)
+![VM settings](./ressources/1_vm_settings.png)
 
-![port forwarding rules](https://media.discordapp.net/attachments/889061317321838627/1113024346999488532/Screenshot_from_2023-05-30_10-41-17.png?width=940&height=588)
+![port forwarding rules](./ressources/2_ports_rules.png)
 
     sudo apt-get update
     sudo apt install openssh-server
@@ -44,7 +42,7 @@ Port forwarding :
 
 **☀️ On ne devra pas pouvoir se connecter par SSH avec l’utilisateur root.**
 
-![ssh config](https://cdn.discordapp.com/attachments/889061317321838627/1113028977192345643/Screenshot_from_2023-05-30_10-59-33.png)
+![ssh config](./ressources/3_sshd_config.png)
 
 `sudo systemctl restart ssh`
 
@@ -69,16 +67,13 @@ Add ssh to firewall :
     sudo ufw reload
     sudo ufw status
 
-![ufw status](https://cdn.discordapp.com/attachments/889061317321838627/1113039743370924082/Screenshot_from_2023-05-30_11-42-23.png)
-
 <p>&nbsp;</p>
 
 # II. Hostname
 
 **☀️ hostname votre login suivi de 42 (exemple : wil42)**
 
-![in /etc/hostname](https://cdn.discordapp.com/attachments/889061317321838627/1113046965236805663/Screenshot_from_2023-05-30_12-11-00.png)
-![in /etc/hosts](https://cdn.discordapp.com/attachments/889061317321838627/1113046965014503494/Screenshot_from_2023-05-30_12-10-19.png)
+![in /etc/hostname](./ressources/5_hostname.png)
 
     hostname
 
@@ -283,7 +278,7 @@ sudo crontab -u root -e
 
 `lsblk`
 
-![lsblk](https://cdn.discordapp.com/attachments/889061317321838627/1118153531040477234/Screenshot_from_2023-06-13_14-22-14.png)
+![lsblk](./ressources/6_lsblk.png)
 
 <p>&nbsp;</p>
 
@@ -314,7 +309,7 @@ To                         Action      From
 
 Port forwarding :
 
-![add port 80](https://cdn.discordapp.com/attachments/889061317321838627/1118198827334242324/Screenshot_from_2023-06-13_17-22-36.png)
+![add port 80](./ressources/7_add_port_80.png)
 
 <p>&nbsp;</p>
 
@@ -408,7 +403,7 @@ cd /var/www/html
 cp wp-config-sample.php wp-config.php
 nano wp-config.php
 ```
-![wp-config](https://cdn.discordapp.com/attachments/889061317321838627/1118199538352652418/Screenshot_from_2023-06-13_17-25-33.png)
+![wp-config](./ressources/8_wp-config.png)
 
 Enabled the fastcgi-php and fastcgi-php modules :
 
@@ -419,4 +414,4 @@ sudo service lighttpd force-reload
 ```
 > We enabled the fastcgi-php module to improve the performance and speed of web applications on the server and the fastcgi-php module to improve the performance and speed of PHP-based web applications on the server.
 
-![wp-admin](https://cdn.discordapp.com/attachments/889061317321838627/1118201366062563359/Screenshot_from_2023-06-13_17-32-51.png)
+![wp-admin](./ressources/9_wp-admin.png)
