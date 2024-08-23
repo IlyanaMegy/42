@@ -1,6 +1,6 @@
 ## Projet SO_LONG
 
-![game_screen](https://cdn.discordapp.com/attachments/889061317321838627/1142052289499107368/game_screen.png)
+![game_screen](./ressources/game_screen.png)
 
 * [Introduction](#introduction)
 * [Utilisation](#utilisation)
@@ -37,17 +37,17 @@ Voici quelques exemples de maps :
 
 
 <p align="center">
-  <img src="https://cdn.discordapp.com/attachments/889061317321838627/1159163505677709362/42ber.png?ex=651ee2a3&is=651d9123&hm=4498556cc22015b8398048df30313632ecdb7d05f81ba8ae04d4ada73572ed5d raw=true" alt="method"/>
+  <img src="./ressources/42ber.png" alt="method"/>
 </p>
 
 
 <p align="center">
-  <img src="https://cdn.discordapp.com/attachments/889061317321838627/1159163494655078430/bigber.png?ex=651ee2a1&is=651d9121&hm=29374a7df67c3b8dc82825e2bca04e45054afd91737dfb2af7a7c6ac3bf58a14&raw=true" alt="method"/>
+  <img src="./ressources/bigber.png" alt="method"/>
 </p>
 
 
 <p align="center">
-  <img src="https://cdn.discordapp.com/attachments/889061317321838627/1159163477206773890/quickber.png?ex=651ee29d&is=651d911d&hm=2abf76f50bec0fd9732f12461faefb9a749de46bd2b32328cfb9cec1dedfcb7f&raw=true" alt="method"/>
+  <img src="./ressources/quickber.png" alt="method"/>
 </p>
 
 ## liens
