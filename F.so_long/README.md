@@ -58,4 +58,6 @@ https://harm-smits.github.io/42docs/libs/minilibx/images.html
 
 https://github.com/42Paris/minilibx-linux
 
+https://opengameart.org/content/lpc-collection
 
+https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/#?body=Body_color_light&head=Human_male_light&sex=male
