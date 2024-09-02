@@ -1,5 +1,11 @@
 # Projet WEBSERV
 
+<p>&nbsp;</p>
+
+<p align="center">
+  <img src="./ressources/CGI-and-Web-Server-connection-with-Database.png" alt="webserv_schema"/>
+</p>
+
 ## Sommaire :
 - [I. Objectif](#i-objectif)
 - [II. Parties principales](#ii-parties-principales)
