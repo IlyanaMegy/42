@@ -19,6 +19,7 @@
 	- **Exemple de flux CGI**
 	- **Importance et Utilisation**
 	- **Limites**
+- [VI. HTTP](#vi-http)
 
 <p>&nbsp;</p>
 
@@ -151,6 +152,7 @@ if (pid == 0) {
 <p>&nbsp;</p>
 
 # V. CGI
+
 Le **CGI** (Common Gateway Interface) est un standard qui permet à un serveur web d'interagir avec des programmes externes pour générer du contenu dynamique. Voici comment cela fonctionne et son rôle dans un serveur HTTP :
 
 ### Fonctionnement de CGI
@@ -190,3 +192,65 @@ Le **CGI** (Common Gateway Interface) est un standard qui permet à un serveur w
 -   **Sécurité** : Si le programme CGI n'est pas bien sécurisé, il peut être vulnérable aux attaques, comme l'injection de commandes.
 
 En résumé, CGI permet à un serveur web d'exécuter des programmes externes pour générer des réponses dynamiques, ce qui est crucial pour les applications web interactives.
+
+<p>&nbsp;</p>
+
+# VI. HTTP
+
+HTTP/1.1 (Hypertext Transfer Protocol version 1.1) est une version améliorée du protocole HTTP, utilisée pour la communication sur le World Wide Web. Il a été introduit en 1997 pour améliorer les performances et la fiabilité par rapport à la version précédente, HTTP/1.0. Voici les concepts clés et les fonctionnalités de HTTP/1.1 :
+
+### Communication Client-Serveur
+
+-   **Client** : Généralement, un navigateur web qui envoie des requêtes HTTP pour accéder à des ressources (pages HTML, images, fichiers, etc.).
+-   **Serveur** : Un serveur web qui reçoit les requêtes HTTP et envoie les réponses appropriées.
+
+### Méthodes HTTP
+
+HTTP/1.1 supporte plusieurs méthodes pour indiquer l'action que le client souhaite effectuer :
+
+-   **GET** : Récupère une ressource depuis le serveur.
+-   **POST** : Envoie des données au serveur, souvent pour soumettre des formulaires ou télécharger des fichiers.
+-   **PUT** : Remplace une ressource existante ou en crée une nouvelle sur le serveur.
+-   **DELETE** : Supprime une ressource sur le serveur.
+-   **HEAD** : Similaire à GET, mais ne récupère que les en-têtes HTTP sans le corps de la réponse.
+-   **OPTIONS** : Interroge le serveur pour savoir quelles méthodes HTTP sont supportées pour une ressource spécifique.
+-   **TRACE** : Suit le chemin d'une requête à travers les différents serveurs pour déboguer.
+-   **CONNECT** : Utilisé pour établir des tunnels, souvent pour HTTPS via un proxy.
+
+### En-têtes HTTP
+
+-   **En-têtes de requête** : Envoyés par le client pour fournir des informations supplémentaires avec la requête, comme `Host`, `User-Agent`, `Accept`, etc.
+-   **En-têtes de réponse** : Envoyés par le serveur pour fournir des informations supplémentaires avec la réponse, comme `Content-Type`, `Content-Length`, `Set-Cookie`, etc.
+
+### Connections Persistantes (Keep-Alive)
+
+-   HTTP/1.1 permet de garder les connexions ouvertes entre les requêtes pour éviter de devoir établir une nouvelle connexion TCP pour chaque requête. Cela améliore les performances en réduisant la latence.
+-   Par défaut, la connexion est maintenue ouverte après une réponse, sauf indication contraire par l'en-tête `Connection: close`.
+
+### Pipelining
+
+-   HTTP/1.1 introduit le pipelining, qui permet d'envoyer plusieurs requêtes sur une seule connexion TCP sans attendre la réponse de la requête précédente. Cela améliore l'efficacité, bien que certains serveurs et navigateurs ne le supportent pas bien.
+
+### Gestion des Codes de Statut
+
+-   Les codes de statut HTTP indiquent le résultat de la requête :
+    -   **2xx Success** : Indique que la requête a été traitée avec succès (ex : 200 OK).
+    -   **3xx Redirection** : Indique que le client doit prendre une action supplémentaire pour compléter la requête (ex : 301 Moved Permanently).
+    -   **4xx Client Error** : Indique une erreur du côté du client (ex : 404 Not Found).
+    -   **5xx Server Error** : Indique une erreur du côté du serveur (ex : 500 Internal Server Error).
+
+### Prise en Charge de Cache
+
+-   HTTP/1.1 améliore la gestion du cache avec des en-têtes comme `Cache-Control`, `ETag`, et `If-Modified-Since` pour optimiser le chargement des pages en évitant de télécharger à nouveau des ressources inchangées.
+
+### Contrôle de Flux et Limitation
+
+-   HTTP/1.1 permet le contrôle de flux avec des en-têtes comme `Content-Length` pour indiquer la taille du corps de la réponse, et `Transfer-Encoding: chunked` pour envoyer des données en morceaux lorsque la taille totale est inconnue au début.
+
+### Gestion des Erreurs
+
+-   HTTP/1.1 précise la manière dont les erreurs doivent être gérées et renvoyées au client, en permettant une gestion plus fine des cas comme les erreurs 404 (ressource non trouvée) ou 500 (erreur interne du serveur).
+
+### Extensions et Personnalisation
+
+-   HTTP/1.1 permet également l'utilisation d'en-têtes personnalisés et l'extension du protocole pour répondre à des besoins spécifiques, ce qui en fait une version flexible et extensible.
