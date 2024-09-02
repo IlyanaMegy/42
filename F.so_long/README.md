@@ -2,14 +2,19 @@
 
 ![game_screen](./ressources/game_screen.png)
 
+## Sommaire :
 * [Introduction](#introduction)
 * [Utilisation](#utilisation)
 * [liens](#liens)
 
+<p>&nbsp;</p>
+
 ## Introduction
 
-Le [projet](./resources/fr.subject.pdf) est de créer un jeu 2D en utilisant la bibliothèque graphique [MinilibX](https://harm-smits.github.io/42docs/libs/minilibx/images.html) et le langage C.
+Le [projet](./ressources/fr.subject.pdf) est de créer un jeu 2D en utilisant la bibliothèque graphique [MinilibX](https://harm-smits.github.io/42docs/libs/minilibx/images.html) et le langage C.
 Ce projet est un jeu simple où le joueur doit collecter tous les objets de la carte et atteindre la sortie, le joueur ne peut se déplacer que horizontalement et verticalement, la carte est composée de murs, d'espaces vides, d'objets à collectionner et la sortie, le joueur perd s'il entre en collision avec un ennemi.
+
+<p>&nbsp;</p>
 
 ## Utilisation
 
@@ -35,7 +40,6 @@ Libre a vous de créer vos propres maps du moment qu'elles respectent les règle
 
 Voici quelques exemples de maps :
 
-
 <p align="center">
   <img src="./ressources/42ber.png" alt="method"/>
 </p>
@@ -49,6 +53,8 @@ Voici quelques exemples de maps :
 <p align="center">
   <img src="./ressources/quickber.png" alt="method"/>
 </p>
+
+<p>&nbsp;</p>
 
 ## liens
 
