@@ -1,18 +1,18 @@
 # Projet WEBSERV
 
 ## Sommaire :
-- [I. Objectif](#i-goal)
-- [II. Parties principales](#ii-mandatory)
+- [I. Objectif](#i-objectif)
+- [II. Parties principales](#ii-parties-principales)
   - **☀️ Partie obligatoire**
   - **☀️ Prérequis techniques**
   - **Bonus**
-- [III. Critères de réussite](#iii-success)
+- [III. Criteres de reussite](#iii-criteres-de-reussite)
 - [IV. CGI](#iv-cgi)
 	- **Fonctionnement de CGI**
 	- **Exemple de flux CGI**
 	- **Importance et Utilisation**
 	- **Limites**
-- [V. Fil d'Ariane](#v-steps)
+- [V. Grandes Etapes](#v-grandes-etapes)
 
 <p>&nbsp;</p>
 
@@ -43,7 +43,7 @@ Le but du projet [Webserv](./ressources/fr.subject.pdf) est de créer un serveur
 
 <p>&nbsp;</p>
 
-# III. Critères de réussite
+# III. Criteres de reussite
 
 -   Le serveur doit être capable de fonctionner sans interruption et être compatible avec un navigateur web. En cas de plantage ou de comportement inattendu, le projet sera invalidé.
 -   La partie bonus n’est prise en compte que si toutes les fonctionnalités obligatoires sont parfaitement réalisées.
@@ -95,7 +95,7 @@ En résumé, CGI permet à un serveur web d'exécuter des programmes externes po
 
 <p>&nbsp;</p>
 
-# V. Fil d'Ariane
+# V. Grandes Etapes
 Pour réaliser un projet comme **Webserv** (un serveur HTTP en C++98), il faut suivre plusieurs étapes structurées, allant de la conception initiale à l'implémentation et aux tests. Voici les grandes étapes de code pour ce projet :
 
 ### Compréhension des Spécifications
