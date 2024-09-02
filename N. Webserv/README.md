@@ -7,12 +7,12 @@
   - **☀️ Prérequis techniques**
   - **Bonus**
 - [III. Criteres de reussite](#iii-criteres-de-reussite)
-- [IV. CGI](#iv-cgi)
+- [IV. Grandes Etapes](#iv-grandes-etapes)
+- [V. CGI](#v-cgi)
 	- **Fonctionnement de CGI**
 	- **Exemple de flux CGI**
 	- **Importance et Utilisation**
 	- **Limites**
-- [V. Grandes Etapes](#v-grandes-etapes)
 
 <p>&nbsp;</p>
 
@@ -52,50 +52,7 @@ Ce projet nécessite une bonne compréhension des protocoles réseau, de la gest
 
 <p>&nbsp;</p>
 
-# IV. CGI
-Le **CGI** (Common Gateway Interface) est un standard qui permet à un serveur web d'interagir avec des programmes externes pour générer du contenu dynamique. Voici comment cela fonctionne et son rôle dans un serveur HTTP :
-
-### Fonctionnement de CGI
-
-1.  **Demande HTTP** :
-    
-    -   Lorsqu'un utilisateur envoie une requête HTTP pour une page web qui nécessite du contenu dynamique (par exemple, un formulaire de contact ou un script PHP), le serveur web ne peut pas simplement retourner un fichier statique comme il le ferait pour une image ou une page HTML. Il doit exécuter un programme ou un script pour générer ce contenu.
-2.  **Exécution du programme CGI** :
-    
-    -   Le serveur web utilise CGI pour appeler un programme externe ou un script (comme un script Python, PHP, Perl, etc.). Ce programme est généralement situé sur le serveur lui-même.
-    -   Le serveur passe les informations de la requête (telles que les données du formulaire, les variables d'environnement, etc.) au programme CGI via des variables d'environnement ou en utilisant l'entrée standard (stdin).
-3.  **Réponse du programme** :
-    
-    -   Le programme CGI traite les données, effectue les calculs ou accède à une base de données si nécessaire, puis génère un contenu, généralement sous la forme de HTML.
-    -   Ce contenu est renvoyé au serveur web via la sortie standard (stdout).
-4.  **Transmission au client** :
-    
-    -   Le serveur web reçoit la sortie du programme CGI, qui inclut généralement des en-têtes HTTP suivis du contenu généré.
-    -   Ce contenu est ensuite envoyé au navigateur de l'utilisateur comme réponse à la requête HTTP.
-
-### Exemple de flux CGI
-
-1.  L'utilisateur soumet un formulaire web.
-2.  Le serveur reçoit la requête et la transmet à un script CGI, par exemple, `process_form.cgi`.
-3.  `process_form.cgi` récupère les données du formulaire, traite les informations (comme stocker des données dans une base de données), et génère une page HTML de confirmation.
-4.  Le serveur web envoie cette page générée au navigateur de l'utilisateur.
-
-### Importance et Utilisation
-
--   **Simplicité** : CGI est l'un des moyens les plus simples d'ajouter du contenu dynamique à un site web.
--   **Portabilité** : Étant donné que CGI peut exécuter tout programme qui fonctionne en ligne de commande, il est très flexible et peut être utilisé dans différents environnements.
--   **Historique** : CGI est l'une des premières méthodes utilisées pour créer des pages web dynamiques, mais il a été largement remplacé par des technologies plus modernes comme les servlets, PHP, et les frameworks web.
-
-### Limites
-
--   **Performance** : Chaque requête CGI implique le lancement d'un nouveau processus, ce qui peut être coûteux en termes de ressources système, particulièrement pour des serveurs à haute charge.
--   **Sécurité** : Si le programme CGI n'est pas bien sécurisé, il peut être vulnérable aux attaques, comme l'injection de commandes.
-
-En résumé, CGI permet à un serveur web d'exécuter des programmes externes pour générer des réponses dynamiques, ce qui est crucial pour les applications web interactives.
-
-<p>&nbsp;</p>
-
-# V. Grandes Etapes
+# IV. Grandes Etapes
 Pour réaliser un projet comme **Webserv** (un serveur HTTP en C++98), il faut suivre plusieurs étapes structurées, allant de la conception initiale à l'implémentation et aux tests. Voici les grandes étapes de code pour ce projet :
 
 ### Compréhension des Spécifications
@@ -184,3 +141,46 @@ if (pid == 0) {
 
 -   **Optimisation des performances** : Améliorer la gestion des ressources et la rapidité du serveur.
 -   **Implémentation des fonctionnalités bonus** : Ajouter la gestion des sessions, des cookies, ou d'autres fonctionnalités avancées.
+
+<p>&nbsp;</p>
+
+# V. CGI
+Le **CGI** (Common Gateway Interface) est un standard qui permet à un serveur web d'interagir avec des programmes externes pour générer du contenu dynamique. Voici comment cela fonctionne et son rôle dans un serveur HTTP :
+
+### Fonctionnement de CGI
+
+1.  **Demande HTTP** :
+    
+    -   Lorsqu'un utilisateur envoie une requête HTTP pour une page web qui nécessite du contenu dynamique (par exemple, un formulaire de contact ou un script PHP), le serveur web ne peut pas simplement retourner un fichier statique comme il le ferait pour une image ou une page HTML. Il doit exécuter un programme ou un script pour générer ce contenu.
+2.  **Exécution du programme CGI** :
+    
+    -   Le serveur web utilise CGI pour appeler un programme externe ou un script (comme un script Python, PHP, Perl, etc.). Ce programme est généralement situé sur le serveur lui-même.
+    -   Le serveur passe les informations de la requête (telles que les données du formulaire, les variables d'environnement, etc.) au programme CGI via des variables d'environnement ou en utilisant l'entrée standard (stdin).
+3.  **Réponse du programme** :
+    
+    -   Le programme CGI traite les données, effectue les calculs ou accède à une base de données si nécessaire, puis génère un contenu, généralement sous la forme de HTML.
+    -   Ce contenu est renvoyé au serveur web via la sortie standard (stdout).
+4.  **Transmission au client** :
+    
+    -   Le serveur web reçoit la sortie du programme CGI, qui inclut généralement des en-têtes HTTP suivis du contenu généré.
+    -   Ce contenu est ensuite envoyé au navigateur de l'utilisateur comme réponse à la requête HTTP.
+
+### Exemple de flux CGI
+
+1.  L'utilisateur soumet un formulaire web.
+2.  Le serveur reçoit la requête et la transmet à un script CGI, par exemple, `process_form.cgi`.
+3.  `process_form.cgi` récupère les données du formulaire, traite les informations (comme stocker des données dans une base de données), et génère une page HTML de confirmation.
+4.  Le serveur web envoie cette page générée au navigateur de l'utilisateur.
+
+### Importance et Utilisation
+
+-   **Simplicité** : CGI est l'un des moyens les plus simples d'ajouter du contenu dynamique à un site web.
+-   **Portabilité** : Étant donné que CGI peut exécuter tout programme qui fonctionne en ligne de commande, il est très flexible et peut être utilisé dans différents environnements.
+-   **Historique** : CGI est l'une des premières méthodes utilisées pour créer des pages web dynamiques, mais il a été largement remplacé par des technologies plus modernes comme les servlets, PHP, et les frameworks web.
+
+### Limites
+
+-   **Performance** : Chaque requête CGI implique le lancement d'un nouveau processus, ce qui peut être coûteux en termes de ressources système, particulièrement pour des serveurs à haute charge.
+-   **Sécurité** : Si le programme CGI n'est pas bien sécurisé, il peut être vulnérable aux attaques, comme l'injection de commandes.
+
+En résumé, CGI permet à un serveur web d'exécuter des programmes externes pour générer des réponses dynamiques, ce qui est crucial pour les applications web interactives.
