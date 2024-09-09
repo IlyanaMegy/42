@@ -150,6 +150,102 @@ if (pid == 0) {
 -   **Optimisation des performances** : Améliorer la gestion des ressources et la rapidité du serveur.
 -   **Implémentation des fonctionnalités bonus** : Ajouter la gestion des sessions, des cookies, ou d'autres fonctionnalités avancées.
 
+Pour réussir un projet complexe comme **Webserv**, il est essentiel de diviser les tâches de manière efficace afin que les trois personnes puissent travailler en parallèle tout en minimisant les chevauchements. Voici une suggestion de découpage des tâches en trois rôles principaux, chacun ayant des responsabilités claires :
+
+### 1. Personne 1 : Gestion du Réseau et Sockets
+
+Cette personne sera responsable de l'infrastructure réseau, de la gestion des sockets, et de la coordination des connexions entre le serveur et les clients.
+
+**Responsabilités :**
+
+-   **Implémentation des sockets :**
+    -   Création du socket serveur, configuration des adresses, liaison (bind) à un port, mise en écoute (listen).
+    -   Gérer l'acceptation des connexions (accept).
+-   **Gestion des connexions avec poll() ou équivalent :**
+    -   Implémentation des E/S non bloquantes pour gérer plusieurs connexions simultanément.
+    -   Surveillance des descripteurs de fichiers pour les opérations de lecture et d'écriture.
+-   **Gestion des timeouts** et détection des connexions inactives.
+-   **Clôture des connexions** après traitement (clean-up).
+
+**Interfaces :**
+
+-   Collaboration avec la personne 2 pour obtenir des informations sur le traitement des requêtes.
+-   Interagir avec la personne 3 pour la gestion des réponses HTTP et l'intégration avec CGI.
+
+### 2. Personne 2 : Analyse des Requêtes HTTP et Fichier de Configuration
+
+Cette personne sera chargée de la gestion des requêtes HTTP, ainsi que de la lecture et du parsing des fichiers de configuration.
+
+**Responsabilités :**
+
+-   **Parsing des requêtes HTTP :**
+    -   Analyser les requêtes reçues via les sockets (GET, POST, DELETE).
+    -   Extraire les en-têtes, la méthode, le chemin demandé, les paramètres, etc.
+-   **Validation des requêtes :**
+    -   Vérifier la validité des requêtes HTTP et gérer les erreurs de requêtes malformées.
+    -   Implémenter les codes d’erreurs HTTP (404, 500, etc.).
+-   **Gestion des sessions et des cookies** (si bonus).
+-   **Lecture et parsing du fichier de configuration :**
+    -   Lire les paramètres du fichier de configuration (ports, routes, hôtes, etc.).
+    -   Configurer dynamiquement le serveur en fonction du fichier de configuration.
+    -   Gérer la configuration des pages d'erreurs, limites de body, et redirections.
+
+**Interfaces :**
+
+-   Communiquer avec la personne 1 pour fournir des requêtes HTTP formatées.
+-   Travailler avec la personne 3 pour s'assurer que les requêtes sont correctement traitées et que les réponses sont envoyées en conséquence.
+
+### 3. Personne 3 : Génération des Réponses HTTP et Gestion des CGI
+
+Cette personne sera responsable de la génération des réponses HTTP, de l’intégration avec CGI, et de la gestion des fichiers dynamiques.
+
+**Responsabilités :**
+
+-   **Génération des réponses HTTP :**
+    -   Créer les réponses HTTP basées sur les requêtes traitées.
+    -   Gérer les types de contenu (HTML, JSON, fichiers) et les en-têtes (Content-Type, Content-Length, etc.).
+    -   Implémenter les pages d’erreur par défaut (404, 500, etc.).
+-   **Support des méthodes HTTP :**
+    -   Gérer les réponses aux méthodes GET, POST, DELETE.
+    -   Implémenter les fonctionnalités de téléversement de fichiers pour POST.
+-   **Implémentation des CGI :**
+    -   Gérer l'exécution des scripts CGI (ex : PHP, Python).
+    -   Intégrer les réponses des scripts CGI dans les réponses HTTP.
+-   **Gestion des fichiers statiques** : Servir les fichiers (HTML, images, CSS) depuis le serveur.
+
+**Interfaces :**
+
+-   Collaborer avec la personne 2 pour obtenir les informations nécessaires à la construction des réponses basées sur les requêtes.
+-   Travailler avec la personne 1 pour envoyer les réponses HTTP aux clients via les sockets.
+
+### Synchronisation et Collaboration
+
+-   **Réunions régulières** : Il est important que l’équipe se réunisse régulièrement pour discuter des progrès, vérifier les intégrations, et résoudre les problèmes.
+-   **Dépôt Git commun** : Utilisez un dépôt Git avec des branches pour que chacun puisse travailler sur son module de manière indépendante avant de fusionner les changements.
+-   **Tests unitaires et d'intégration** : Chaque personne doit écrire des tests pour valider ses propres parties, et des tests d'intégration doivent être créés pour s'assurer que les modules communiquent correctement.
+
+### Planification par étapes
+
+1.  **Semaine 1** :
+    
+    -   Personne 1 : Implémenter les sockets de base, `bind()`, `listen()`, et gestion des connexions.
+    -   Personne 2 : Commencer l'analyse des requêtes HTTP (GET, POST).
+    -   Personne 3 : Créer les premières réponses HTTP statiques (200 OK, 404 Not Found).
+2.  **Semaine 2** :
+    
+    -   Personne 1 : Implémenter `poll()` pour gérer plusieurs connexions simultanées.
+    -   Personne 2 : Terminer l'analyse des requêtes, ajouter le support des en-têtes HTTP.
+    -   Personne 3 : Implémenter la gestion des CGI.
+3.  **Semaine 3** :
+    
+    -   Personne 1 : Optimiser la gestion des connexions et des timeouts.
+    -   Personne 2 : Ajouter le support pour le fichier de configuration.
+    -   Personne 3 : Terminer la gestion des réponses dynamiques et des fichiers.
+
+### Résultat Final
+
+Ce découpage permet à chaque membre de l’équipe de se concentrer sur une partie spécifique du projet tout en assurant une bonne communication et intégration entre les différents modules. Cela vous aidera à travailler de manière efficace et collaborative pour terminer le projet dans les délais.
+
 <p>&nbsp;</p>
 
 # V. CGI
