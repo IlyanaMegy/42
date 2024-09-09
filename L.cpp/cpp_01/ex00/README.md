@@ -7,7 +7,7 @@ L'objectif de cet exercice est de vous apprendre à utiliser des objets alloués
 
 1.  **Zombie.hpp** : Ce fichier contient la déclaration de la classe `Zombie`.
 
-```
+```cpp
 class Zombie {
     private:
         std::string _name;
@@ -23,7 +23,7 @@ class Zombie {
 
 2.  **Zombie.cpp** : Ce fichier contient l'implémentation de la classe `Zombie`.
 
-```
+```cpp
 Zombie::Zombie(std::string name) : _name(name) {
         // Constructor code
     }
@@ -39,7 +39,7 @@ Zombie::Zombie(std::string name) : _name(name) {
    -   Le constructeur initialise le nom du zombie, et le destructeur affiche un message quand un zombie est détruit.
    -   `announce()` permet au zombie d'afficher son nom suivi de "BraiiiiiiinnnzzzZ...".
 3.  **newZombie.cpp** : Ce fichier implémente une fonction qui crée un zombie sur le tas.
-```
+```cpp
 Zombie* newZombie(std::string name) {
         return new Zombie(name);
     }
@@ -47,7 +47,7 @@ Zombie* newZombie(std::string name) {
     
    -   Cette fonction alloue dynamiquement un zombie avec `new` et le retourne sous forme de pointeur.
 4.  **randomChump.cpp** : Cette fonction crée un zombie sur la pile et le fait immédiatement s'annoncer.
-```
+```cpp
 void randomChump(std::string name) {
         Zombie zombie(name);
         zombie.announce();
@@ -57,7 +57,7 @@ void randomChump(std::string name) {
    
 5.  **main.cpp** : Ce fichier contient la fonction principale qui teste les zombies créés à la fois sur la pile et sur le tas.
 
-```
+```cpp
 int main() {
         Zombie* heapZombie = newZombie("HeapZombie");
         heapZombie->announce();
