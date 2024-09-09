@@ -82,7 +82,7 @@ Pour réaliser un projet comme **Webserv** (un serveur HTTP en C++98), il faut s
 
 -   **Socket et Liaison** : Créer un socket, le lier à une adresse IP et un port spécifiques (définis dans le fichier de configuration), et mettre le socket en mode écoute.
     
-```
+```cpp
 int server_fd = socket(AF_INET, SOCK_STREAM, 0);
 bind(server_fd, (struct sockaddr*)&address, sizeof(address));
 listen(server_fd, SOMAXCONN);
@@ -94,20 +94,20 @@ listen(server_fd, SOMAXCONN);
 
 -   **Accepter les connexions** : Lorsque `poll()` détecte une nouvelle connexion, l'accepter et ajouter le descripteur de fichier au set de descripteurs surveillés.
     
-```
+```cpp
  int new_socket = accept(server_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
 ```
     
 -   **Lire les requêtes** : Lire la requête entrante via le socket, analyser les en-têtes et le corps de la requête.
 
-```
+```cpp
 char buffer[1024] = {0};
 read(new_socket, buffer, 1024);
 ```
     
 -   **Créer une réponse** : En fonction de la requête, générer une réponse HTTP appropriée (200 OK, 404 Not Found, etc.). Cela inclut la gestion des méthodes GET, POST, DELETE, et l'exécution des scripts CGI si nécessaire.
 
-```
+```cpp
 std::string http_response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html>...</html>";
 write(new_socket, http_response.c_str(), http_response.length());
 ```
@@ -126,7 +126,7 @@ write(new_socket, http_response.c_str(), http_response.length());
 
 -   **Exécution des scripts** : Lorsqu'une requête nécessite l'exécution d'un CGI (ex : script PHP), forker un nouveau processus pour exécuter le script et capturer sa sortie.
 
-```
+```cpp
 pid_t pid = fork();
 if (pid == 0) {
 	// Code enfant: exécuter le CGI
@@ -432,7 +432,7 @@ Dans le cadre du projet **Webserv**, le serveur doit gérer plusieurs connexions
 
 Voici un exemple simple pour illustrer le fonctionnement des sockets dans un serveur HTTP basique :
 
-```
+```cpp
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
