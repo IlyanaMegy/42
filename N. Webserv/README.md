@@ -20,6 +20,7 @@
 	- **Importance et Utilisation**
 	- **Limites**
 - [VI. HTTP](#vi-http)
+- [VII. Sockets](#vii-sockets)
 
 <p>&nbsp;</p>
 
@@ -254,3 +255,134 @@ HTTP/1.1 supporte plusieurs méthodes pour indiquer l'action que le client souha
 ### Extensions et Personnalisation
 
 -   HTTP/1.1 permet également l'utilisation d'en-têtes personnalisés et l'extension du protocole pour répondre à des besoins spécifiques, ce qui en fait une version flexible et extensible.
+
+<p>&nbsp;</p>
+
+# VII. Sockets
+
+### Qu'est-ce qu'un Socket ?
+
+Un **socket** est une interface de programmation réseau permettant la communication entre deux machines. Il représente un point de connexion qui permet l'envoi et la réception de données sur un réseau. Les sockets sont largement utilisés pour implémenter des serveurs et des clients qui communiquent via des protocoles comme **TCP/IP** (Transmission Control Protocol/Internet Protocol).
+
+Dans votre projet **Webserv**, un socket est utilisé pour :
+
+-   Accepter les connexions entrantes des clients (comme les navigateurs web).
+-   Recevoir les requêtes HTTP des clients.
+-   Envoyer des réponses HTTP aux clients.
+
+### Principe de Fonctionnement des Sockets dans un Serveur Web
+
+Voici comment un serveur HTTP utilise des sockets pour gérer les connexions et les requêtes :
+
+#### a) **Création du Socket Serveur**
+
+Le serveur doit d'abord créer un socket pour écouter les connexions entrantes. Ce socket est lié à une adresse IP et un port spécifiques sur la machine hôte.
+
+`int server_fd = socket(AF_INET, SOCK_STREAM, 0);` 
+
+-   **AF_INET** : Spécifie que le serveur utilise le protocole IPv4.
+-   **SOCK_STREAM** : Indique l'utilisation de TCP (protocole orienté connexion et fiable).
+
+#### b) **Bind (Liaison du Socket à une Adresse IP et un Port)**
+
+Une fois le socket créé, il doit être lié à une adresse IP et un numéro de port afin d'écouter les connexions sur le réseau.
+
+`bind(server_fd, (struct sockaddr*)&address, sizeof(address));` 
+
+-   **address** : Structure qui contient l'adresse IP et le port sur lesquels le serveur écoute.
+
+#### c) **Listen (Écoute des Connexions)**
+
+Le serveur entre ensuite en mode d'écoute, où il attend les connexions des clients. Il est possible de spécifier combien de connexions en attente le serveur peut supporter.
+
+`listen(server_fd, SOMAXCONN);` 
+
+-   **SOMAXCONN** : Définit le nombre maximum de connexions en attente.
+
+#### d) **Accept (Accepter une Connexion Entrante)**
+
+Lorsque le client (comme un navigateur web) essaie de se connecter au serveur, ce dernier doit accepter la connexion. Cela crée un nouveau socket pour gérer la communication avec ce client spécifique.
+
+`int new_socket = accept(server_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen);` 
+
+-   **new_socket** : Nouveau socket dédié à la connexion avec ce client.
+
+#### e) **Lecture et Écriture de Données**
+
+Une fois la connexion établie, le serveur peut utiliser des fonctions de lecture et d’écriture pour recevoir la requête HTTP du client et lui envoyer une réponse HTTP. Par exemple, pour lire les données envoyées par le client :
+
+`read(new_socket, buffer, 1024);` 
+
+-   **buffer** : Espace mémoire où les données reçues sont stockées.
+
+Pour envoyer une réponse au client :
+
+`write(new_socket, response, response_length);` 
+
+#### f) **Clôture de la Connexion**
+
+Une fois que la communication est terminée, le serveur doit fermer le socket dédié à cette connexion spécifique :
+
+`close(new_socket);` 
+
+### Gestion des Entrées/Sorties Non Bloquantes avec poll()
+
+Dans le cadre du projet **Webserv**, le serveur doit gérer plusieurs connexions simultanément sans bloquer le processus principal. C’est là que les **sockets non bloquants** et la fonction **poll()** (ou équivalents comme `select()`, `epoll()`, `kqueue()`) sont utilisés pour surveiller plusieurs sockets à la fois.
+
+-   **poll()** permet de vérifier si un socket est prêt à lire ou à écrire sans bloquer le serveur. Cela signifie que le serveur peut continuer à accepter de nouvelles connexions tout en attendant des données sur d'autres connexions déjà ouvertes.
+-   Le socket est configuré en mode non-bloquant, ce qui signifie que les appels à `read()` et `write()` n’attendent pas que des données soient prêtes ou envoyées. Si aucune donnée n’est disponible, ils retournent immédiatement, permettant au serveur de gérer d'autres tâches en parallèle.
+
+### Exemple Simplifié de Code de Serveur avec Sockets
+
+Voici un exemple simple pour illustrer le fonctionnement des sockets dans un serveur HTTP basique :
+
+```
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include <iostream>
+
+int main() {
+    int server_fd, new_socket;
+    struct sockaddr_in address;
+    int addrlen = sizeof(address);
+
+    // 1. Création du socket
+    server_fd = socket(AF_INET, SOCK_STREAM, 0);
+    
+    // 2. Lier le socket à un port et une adresse IP
+    address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_port = htons(8080);  // Écouter sur le port 8080
+    
+    bind(server_fd, (struct sockaddr *)&address, sizeof(address));
+    
+    // 3. Mettre le serveur en mode écoute
+    listen(server_fd, 3);
+
+    // 4. Attendre et accepter les connexions
+    new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen);
+
+    // 5. Lire la requête du client
+    char buffer[1024] = {0};
+    read(new_socket, buffer, 1024);
+    std::cout << "Requête : " << buffer << std::endl;
+
+    // 6. Envoyer une réponse HTTP au client
+    const char* response = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nHello, World!";
+    write(new_socket, response, strlen(response));
+
+    // 7. Fermer la connexion
+    close(new_socket);
+    close(server_fd);
+
+    return 0;
+}
+```
+
+### Résumé de l'Utilisation des Sockets dans le Projet Webserv
+
+-   **Socket serveur** : Crée et écoute les connexions entrantes des clients.
+-   **Socket client** : Gère la communication avec chaque client après qu'une connexion est acceptée.
+-   **poll()** : Utilisé pour surveiller plusieurs connexions simultanément de manière non bloquante, ce qui est essentiel pour un serveur performant.
+-   **Gestion des requêtes HTTP** : Le serveur lit les requêtes entrantes via les sockets, traite ces requêtes, puis envoie des réponses HTTP aux clients via ces mêmes sockets.
