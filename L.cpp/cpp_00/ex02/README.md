@@ -19,7 +19,7 @@ Le fichier **Account.cpp** que vous avez fourni met en œuvre plusieurs concepts
 
 ### Déclarations des variables membres statiques
 
-```
+```cpp
 int Account::_nbAccounts = 0;
 int Account::_totalNbWithdrawals = 0;
 int Account::_totalNbDeposits = 0;
@@ -30,7 +30,7 @@ Ces variables statiques appartiennent à la classe `Account`, et non aux instanc
 
 ### Constructeur
 
-```
+```cpp
 Account::Account(int initial_deposit)
 {
     this->_nbDeposits = 0;
@@ -48,7 +48,7 @@ Le constructeur initialise les attributs d'un compte. Chaque nouveau compte est 
 
 ### Fonction d'affichage de l'horodatage
 
-```
+```cpp
 void Account::_displayTimestamp(void)
 {
     time_t now = time(NULL);
@@ -66,7 +66,8 @@ void Account::_displayTimestamp(void)
 Cette fonction statique affiche l'heure actuelle sous un format personnalisé. Cela est utile pour afficher des horodatages dans les journaux ou les actions des comptes.
 
 ### Affichage des informations sur les comptes
-```
+
+```cpp
 void Account::displayAccountsInfos(void) {
     Account::_displayTimestamp();
     std::cout << "accounts:" << Account::_nbAccounts << ";total:" << Account::_totalAmount << ";deposits:" << Account::_totalNbDeposits << ";withdrawals:" << Account::_totalNbWithdrawals << std::endl;
@@ -77,7 +78,7 @@ Cette fonction statique affiche des informations sur l'état global de la banque
 
 ### Fonction `makeDeposit`
 
-```
+```cpp
 void Account::makeDeposit(int deposit) {
     this->_nbDeposits++;
     Account::_displayTimestamp();
@@ -92,7 +93,7 @@ Cette fonction permet de faire un dépôt. Elle met à jour les informations sur
 
 ### Fonction `makeWithdrawal`
 
-```
+```cpp
 bool Account::makeWithdrawal(int withdrawal) {
     Account::_displayTimestamp();
     std::cout << "index:" << this->_accountIndex << ";p_amount:" << this->_amount << ";withdrawal:";
@@ -114,7 +115,7 @@ Cette fonction permet de faire un retrait. Elle vérifie si le compte dispose de
 
 ### Destructeur
 
-```
+```cpp
 Account::~Account(void)
 {
     Account::_displayTimestamp();
