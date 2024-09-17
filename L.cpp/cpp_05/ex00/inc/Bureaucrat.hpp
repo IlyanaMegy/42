@@ -38,7 +38,7 @@ class Bureaucrat
 	void setGrade(int grade);
 
   public:
-	//Constructor
+	//Constructors
 	Bureaucrat(void);
 	Bureaucrat(Bureaucrat const &copy);
 	Bureaucrat(int grade);
