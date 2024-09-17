@@ -58,15 +58,6 @@ void Bureaucrat::incrementGrade(void)
 		throw GradeTooHighException();
 	else
 		this->_grade--;
-	// try
-	// {
-	// 	std::cout << "Trying to increment grade of " << this->getName() << std::endl;
-	// 	this->setGrade(this->_grade - 1);
-	// }
-	// catch(Bureaucrat::GradeTooHighException &e)
-	// {
-	// 	std::cerr << RED << "Incrementing grade of " << this->getName() << " failed: " << e.what() << RESET << '\n';
-	// }
 }
 
 void Bureaucrat::decrementGrade(void)
@@ -75,15 +66,6 @@ void Bureaucrat::decrementGrade(void)
 		throw GradeTooLowException();
 	else
 		this->_grade++;
-	// try
-	// {
-	// 	std::cout << "Trying to decrement grade of " << this->getName() << std::endl;
-	// 	this->setGrade(this->_grade + 1);
-	// }
-	// catch(Bureaucrat::GradeTooHighException &e)
-	// {
-	// 	std::cerr << RED << "Decrementing grade of " << this->getName() << " failed: " << e.what() << RESET << '\n';
-	// }
 }
 
 const std::string Bureaucrat::getName(void)const
@@ -116,7 +98,6 @@ const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 	return ("Grade is too high /!\\");
 };
 
-// ostream Overload
 std::ostream	&operator<<(std::ostream &o, Bureaucrat const &a)
 {
 	o << "Bureaucrat " << a.getName() << ":\n\tgrade: " << a.getGrade() << std::endl;
