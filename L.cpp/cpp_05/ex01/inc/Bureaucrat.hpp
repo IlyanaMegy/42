@@ -17,6 +17,7 @@
 # include <cstdlib>
 # include <iomanip>
 # include <iostream>
+# include "Form.hpp"
 
 # define BLACK "\033[30m"
 # define RED "\033[31m"
@@ -29,7 +30,10 @@
 # define WHITE "\033[37m"
 # define UNDERLINE "\033[4m"
 # define RESET "\033[0m"
+# define FALSE_EMOJI "❌"
+# define TRUE_EMOJI "✅"
 
+class Form;
 class Bureaucrat
 {
   private:
@@ -54,6 +58,7 @@ class Bureaucrat
 	// Public Methods
 	void incrementGrade(void);
 	void decrementGrade(void);
+	void signForm(Form &form);
 
 	// Getters
 	const std::string getName(void) const;
@@ -74,5 +79,5 @@ class Bureaucrat
 };
 
 // ostream Overload
-std::ostream &operator<<(std::ostream &o, Bureaucrat const &a);
+std::ostream &operator<<(std::ostream &o, Bureaucrat const *a);
 #endif

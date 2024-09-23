@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* *************************************************************************\n* */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
@@ -11,45 +11,46 @@
 /* ************************************************************************** */
 
 #include "../inc/Bureaucrat.hpp"
+#include "../inc/Form.hpp"
 
 Bureaucrat::Bureaucrat(void): _name("default"), _grade(150)
 {
-	std::cout << "Bureaucrat Default Constructor just created " << this->getName() << " with grade of " << this->getGrade() << std::endl;
+	std::cout << "\n* Bureaucrat Default Constructor just created " << this->getName() << " with grade of " << this->getGrade() << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &copy): _name(copy.getName() + "_copy"), _grade(copy._grade)
 {
-	std::cout << "Bureaucrat Copy Constructor copied " << copy.getName() << " into " << this->getName() << std::endl;
+	std::cout << "\n* Bureaucrat Copy Constructor copied " << copy.getName() << " into " << this->getName() << std::endl;
 }
 
 Bureaucrat::Bureaucrat(int grade): _name("default")
 {
-	std::cout << "Bureaucrat Constructor just created " << this->getName() << " with grade of " << grade << std::endl;
+	std::cout << "\n* Bureaucrat Constructor just created " << this->getName() << " with grade of " << grade << std::endl;
 	this->setGrade(grade);
 }
 
 Bureaucrat::Bureaucrat(const std::string name): _name(name), _grade(150)
 {
-	std::cout << "Bureaucrat Constructor just created " << this->getName() << " with grade of " << this->getGrade() << std::endl;
+	std::cout << "\n* Bureaucrat Constructor just created " << this->getName() << " with grade of " << this->getGrade() << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string name, int grade): _name(name)
 {
-	std::cout << "Bureaucrat Constructor just created " << this->getName() << " with grade of " << grade << std::endl;
+	std::cout << "\n* Bureaucrat Constructor just created " << this->getName() << " with grade of " << grade << std::endl;
 	this->setGrade(grade);
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &assign)
 {
-	std::cout << "Bureaucrat Assignation operator called" << std::endl;
-	if (this != assign)
+	std::cout << "\n* Bureaucrat Assignation operator called" << std::endl;
+	if (this != &assign)
 		this->_grade = assign.getGrade();
 	return *this;
 }
 
 Bureaucrat::~Bureaucrat(void)
 {
-	std::cout << "Bureaucrat Deconstructor for " << this->getName() << " called" << std::endl;
+	std::cout << RED << "* Bureaucrat Deconstructor for " << this->getName() << " called" << RESET << std::endl;
 }
 
 void Bureaucrat::incrementGrade(void)
@@ -66,6 +67,11 @@ void Bureaucrat::decrementGrade(void)
 		throw GradeTooLowException();
 	else
 		this->_grade++;
+}
+
+void	Bureaucrat::signForm(Form &form)
+{
+	form.doSign(*this);
 }
 
 const std::string Bureaucrat::getName(void)const
@@ -98,8 +104,8 @@ const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 	return ("Grade is too high /!\\");
 }
 
-std::ostream	&operator<<(std::ostream &o, Bureaucrat const &a)
+std::ostream	&operator<<(std::ostream &o, Bureaucrat const *a)
 {
-	o << "Bureaucrat " << a.getName() << ":\n\tgrade: " << a.getGrade() << std::endl;
+	o << BLACK << "\n* Bureaucrat --> " << a->getName() << "\ngrade : " << a->getGrade() << RESET << std::endl;
 	return (o);
 }
