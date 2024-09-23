@@ -15,7 +15,7 @@
 int main(void)
 {
 	{
-		std::cout << RED << std::endl << "* Test 1:\n--> Expecting too high and too low grades errors during creation\n" << RESET << std::endl;
+		std::cout << RED << std::endl << "* Test 1:\n--> Expecting too high and too low grades errors during creation" << RESET << std::endl;
 		try
 		{
 			Bureaucrat Sleeper1("A", 1500);
@@ -37,9 +37,9 @@ int main(void)
 
 	std::cout << YELLOW << "-------------------------------------------------------" << RESET << std::endl;
 	{
-		std::cout << CYAN << std::endl << "* Test 2:\n--> Increasing grade\n" << RESET << std::endl;
+		std::cout << CYAN << std::endl << "* Test 2:\n--> Increasing grade" << RESET << std::endl;
 		Bureaucrat bob("Bob", 2);
-		std::cout << bob;
+		std::cout << &bob;
 		try
 		{
 			bob.incrementGrade();
@@ -48,7 +48,7 @@ int main(void)
 		{
 			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
 		}
-		std::cout << bob;
+		std::cout << &bob;
 		
 		try
 		{
@@ -58,14 +58,14 @@ int main(void)
 		{
 			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
 		}
-		std::cout << bob;
+		std::cout << &bob;
 	}
 
 	std::cout << YELLOW << "-------------------------------------------------------" << RESET << std::endl;
 	{	
-		std::cout << GREEN << std::endl << "* Test 3:\n--> Decreasing grade\n" << RESET << std::endl;
+		std::cout << GREEN << std::endl << "* Test 3:\n--> Decreasing grade" << RESET << std::endl;
 		Bureaucrat tim("Tim", 149);
-		std::cout << tim;
+		std::cout << &tim;
 		try
 		{
 			tim.decrementGrade();
@@ -74,7 +74,7 @@ int main(void)
 		{
 			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
 		}
-		std::cout << tim;
+		std::cout << &tim;
 		
 		try
 		{
@@ -84,14 +84,14 @@ int main(void)
 		{
 			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
 		}
-		std::cout << tim;
+		std::cout << &tim;
 	}
 
 	std::cout << YELLOW << "-------------------------------------------------------" << RESET << std::endl;
 	{
-		std::cout << BLUE << std::endl << "* Test 4:\n--> Increasing and Decreasing grade\n" << RESET << std::endl;
+		std::cout << BLUE << std::endl << "* Test 4:\n--> Increasing and Decreasing grade" << RESET << std::endl;
 		Bureaucrat *a = new Bureaucrat(1);
-		std::cout << *a;
+		std::cout << a;
 		try
 		{
 			a->decrementGrade();
@@ -100,7 +100,7 @@ int main(void)
 		{
 			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
 		}
-		std::cout << *a;
+		std::cout << a;
 
 		try
 		{
@@ -110,7 +110,7 @@ int main(void)
 		{
 			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
 		}
-		std::cout << *a;
+		std::cout << a;
 
 		try
 		{
@@ -120,7 +120,7 @@ int main(void)
 		{
 			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
 		}
-		std::cout << *a;
+		std::cout << a;
 		std::cout << std::endl;
 
 		std::cout << RED << "Destroying a" << RESET << std::endl;
@@ -129,7 +129,7 @@ int main(void)
 	
 	std::cout << YELLOW << "-------------------------------------------------------" << RESET << std::endl;
 	{
-		std::cout << MAGENTA << std::endl << "* Test 5:\n--> Too high grade error\n" << RESET << std::endl;
+		std::cout << MAGENTA << std::endl << "* Test 5:\n--> Too high grade error" << RESET << std::endl;
 		Bureaucrat *a = NULL;
 		try
 		{
@@ -149,23 +149,22 @@ int main(void)
 
 	std::cout << YELLOW << "-------------------------------------------------------" << RESET << std::endl;
 	{
-		std::cout << CYAN << std::endl << "* Test 6:\n--> Copying a into b\n" << RESET << std::endl;
+		std::cout << CYAN << std::endl << "* Test 6:\n--> Copying a into b" << RESET << std::endl;
 		Bureaucrat *a = new Bureaucrat("Peter", 120);
-		std::cout << *a;
+		std::cout << a;
 
 		a->decrementGrade();
-		std::cout << *a;
+		std::cout << a;
 		std::cout << std::endl;
 
 		Bureaucrat *b = new Bureaucrat(*a);
 
 		std::cout << RED << "Destroying a" << RESET << std::endl;
 		delete a;
-		std::cout << std::endl;
 
-		std::cout << *b;
+		std::cout << b;
 		b->decrementGrade();
-		std::cout << *b;
+		std::cout << b;
 		std::cout << std::endl;
 
 		std::cout << RED << "Destroying b" << RESET << std::endl;
