@@ -14,7 +14,7 @@
 # define GODMODE_HPP
 # include "Bureaucrat.hpp"
 
-class Bureaucrat;
+class	Bureaucrat;
 
 class GodMode
 {
@@ -26,7 +26,7 @@ class GodMode
   public:
 	GodMode(void);
 	~GodMode(void);
-	void greetings(void);
+	void greetings(const std::string greetings);
 	// void new_human(void);
 	// void show_humans(void);
 	void show_cmds(void);

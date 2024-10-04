@@ -18,6 +18,7 @@
 # include <cstdlib>
 # include <iomanip>
 # include <iostream>
+# include <string.h>
 # include <unistd.h>
 
 # define BLACK "\033[30m"

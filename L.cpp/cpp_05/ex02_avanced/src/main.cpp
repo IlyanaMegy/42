@@ -42,7 +42,7 @@ int main(void)
 		{
 			godmode = true;
 			GodMode.show_cmds();
-			GodMode.greetings();
+			GodMode.greetings("Hi");
 			run = false;
 		}
 		else
@@ -65,6 +65,8 @@ int main(void)
 			}
 			else if (!cmd.compare("help") || !cmd.compare("h"))
 				GodMode.show_cmds();
+			else if (!cmd.compare("hello") || !cmd.compare("hey") || !cmd.compare("hi") || !cmd.compare("Hello") || !cmd.compare("Hey") || !cmd.compare("Hi"))
+				GodMode.greetings(cmd);
 			else if (!cmd.compare("exit"))
 			{
 				std::cout << "Bye <3" << std::endl;
@@ -80,7 +82,7 @@ int main(void)
 			// else if (!cmd.compare("show") || !cmd.compare("s"))
 			// 	GodMode.show_humans();
 			if (cmd[0] == '\n')
-				GodMode.greetings();
+				GodMode.greetings("Hi");
 			cmd.clear();
 			
 			std::cout << ran_color() << "> " << RESET << std::flush;
