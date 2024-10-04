@@ -32,10 +32,10 @@ class Form
 	Form(const std::string name);
 	Form(const std::string name, int sign_grade, int exec_grade);
 
-	// Overloeaded Operators
+	// Overloaded Operators
 	Form &operator=(Form const &assign);
 
-	// Deconsructor
+	// Deconstructor
 	~Form(void);
 
 	// Public Methods
