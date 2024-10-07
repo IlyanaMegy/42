@@ -33,8 +33,7 @@
 # define FALSE_EMOJI "❌"
 # define TRUE_EMOJI "✅"
 
-// class	AForm;
-
+class	AForm;
 class Bureaucrat
 {
   private:
@@ -59,7 +58,8 @@ class Bureaucrat
 	// Public Methods
 	void incrementGrade(void);
 	void decrementGrade(void);
-	// void signForm(Form &form);
+	void signForm(Form &form);
+	void executeForm(Form &form) const;
 
 	// Getters
 	const std::string getName(void) const;

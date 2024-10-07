@@ -35,6 +35,38 @@ class AForm
 
 	// Deconstructor
 	virtual ~AForm(void);
+
+	// Public Methods
+	void doSign(Bureaucrat &human);
+	virtual void execute(Bureaucrat const &executor) const = 0;
+
+	// Getters
+	const std::string getName(void) const;
+	const std::string getSigned(void) const;
+	bool getSignedBool(void) const;
+	int getSignGrade(void) const;
+	int getExecGrade(void) const;
+
+	// Exceptions
+	class GradeTooLowException : public std::exception
+	{
+		public:
+		virtual const char *what() const throw();
+	};
+
+	class GradeTooHighException : public std::exception
+	{
+		public:
+		virtual const char *what() const throw();
+	};
+
+	class FormNotSignedException : public std::exception
+	{
+		public:
+		virtual const char *what() const throw();
+	};
 };
 
+// ostream Overload
+std::ostream &operator<<(std::ostream &o, Form *a);
 #endif

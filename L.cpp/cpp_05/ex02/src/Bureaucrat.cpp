@@ -33,7 +33,24 @@ Bureaucrat::Bureaucrat(const Bureaucrat &copy): _name(copy.getName() + "_copy"),
 Bureaucrat::Bureaucrat(int grade): _name("default")
 {
 	print_infos(this->getName(), grade);
-	this->setGrade(grade);
+	try
+	{
+		this->setGrade(grade);
+	}
+	catch(Bureaucrat::GradeTooHighException &e)
+	{
+		std::cerr << "\033[33mConstructing " << this->getName() <<
+		" failed: " << e.what() << std::endl <<
+		"Grade now set to 1" << "\033[0m" << std::endl;
+		this->setGrade(1);
+	}
+	catch(Bureaucrat::GradeTooLowException &e)
+	{
+		std::cerr << "\033[33mConstructing " << this->getName() <<
+		" failed: " << e.what() << std::endl <<
+		"Grade now set to 150" << "\033[0m" << std::endl;
+		this->setGrade(150);
+	}
 }
 
 Bureaucrat::Bureaucrat(const std::string name): _name(name), _grade(150)
@@ -44,7 +61,24 @@ Bureaucrat::Bureaucrat(const std::string name): _name(name), _grade(150)
 Bureaucrat::Bureaucrat(const std::string name, int grade): _name(name)
 {
 	print_infos(this->getName(), grade);
-	this->setGrade(grade);
+	try
+	{
+		this->setGrade(grade);
+	}
+	catch(Bureaucrat::GradeTooHighException &e)
+	{
+		std::cerr << "\033[33mConstructing " << this->getName() <<
+		" failed: " << e.what() << std::endl <<
+		"Grade now set to 1" << "\033[0m" << std::endl;
+		this->setGrade(1);
+	}
+	catch(Bureaucrat::GradeTooLowException &e)
+	{
+		std::cerr << "\033[33mConstructing " << this->getName() <<
+		" failed: " << e.what() << std::endl <<
+		"Grade now set to 150" << "\033[0m" << std::endl;
+		this->setGrade(150);
+	}
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &assign)
@@ -82,10 +116,18 @@ void Bureaucrat::decrementGrade(void)
 		std::cout << ORANGE << "* Bureaucrat " << this->getName() << " just became the toilet paper of whole the company 😎" << RESET << std::endl;
 }
 
-// void Bureaucrat::signForm(Form &form)
-// {
-// 	form.doSign(*this);
-// }
+void Bureaucrat::signForm(Form &form)
+{
+	form.doSign(*this);
+}
+
+void	Bureaucrat::executeForm(Form &form)const
+{
+	// if ((int)this->getGrade() > form.getExecGrade())
+	// 	throw (Bureaucrat::GradeTooLowException());
+	// else
+		form.execute(*this);
+}
 
 const std::string Bureaucrat::getName(void) const
 {
@@ -109,12 +151,12 @@ void Bureaucrat::setGrade(int grade)
 const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 {
 	return ("/!\\ Grade is too low /!\\");
-}
+};
 
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
 	return ("/!\\ Grade is too high /!\\");
-}
+};
 
 std::ostream	&operator<<(std::ostream &o, Bureaucrat const *a)
 {
