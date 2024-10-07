@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/Bureaucrat.hpp"
-#include "../inc/Form.hpp"
 
 Bureaucrat::Bureaucrat(void): _name("default"), _grade(150)
 {
@@ -56,7 +55,7 @@ Bureaucrat::~Bureaucrat(void)
 void Bureaucrat::incrementGrade(void)
 {
 	if (this->_grade == 1)
-		throw GradeTooHighException();
+		throw (Bureaucrat::GradeTooHighException());
 	else
 		this->_grade--;
 }
@@ -64,7 +63,7 @@ void Bureaucrat::incrementGrade(void)
 void Bureaucrat::decrementGrade(void)
 {
 	if (this->_grade == 150)
-		throw GradeTooLowException();
+		throw (Bureaucrat::GradeTooLowException());
 	else
 		this->_grade++;
 }
@@ -87,9 +86,9 @@ size_t Bureaucrat::getGrade(void)const
 void Bureaucrat::setGrade(int grade)
 {
 	if (grade > 150)
-		throw Bureaucrat::GradeTooLowException();
+		throw (Bureaucrat::GradeTooLowException());
 	else if (grade < 1)
-		throw Bureaucrat::GradeTooHighException();
+		throw (Bureaucrat::GradeTooHighException());
 	else
 		this->_grade = grade;	
 }
@@ -97,12 +96,12 @@ void Bureaucrat::setGrade(int grade)
 const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 {
 	return ("Grade is too low /!\\");
-}
+};
 
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
 	return ("Grade is too high /!\\");
-}
+};
 
 std::ostream	&operator<<(std::ostream &o, Bureaucrat const *a)
 {

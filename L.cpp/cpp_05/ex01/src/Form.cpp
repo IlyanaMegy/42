@@ -24,13 +24,6 @@ Form::Form(void): _name("default"), _signed(false), _sign_grade(150), _exec_grad
 {
 	std::cout << "\n* Form Default Constructor called for " << std::endl;
 	print_infos(this->getName(), YELLOW, this->getSignGrade(), YELLOW, this->getExecGrade(), YELLOW, FALSE_EMOJI);
-	
-	// std::string signed_state = FALSE_EMOJI;
-
-	// std::cout << "Form Default Constructor called for " << YELLOW << this->getName() << RESET <<
-	// ":\nsign grade : " << YELLOW << this->getSignGrade() << RESET <<
-	// "\nexecution grede : " << YELLOW << this->getExecGrade() << RESET <<
-	// "\nsigned : " << FALSE_EMOJI << std::endl;
 }
 
 Form::Form(Form const &copy): _name(copy.getName() + "_copy"), _signed(false), _sign_grade(copy.getSignGrade()), _exec_grade(copy.getExecGrade())
@@ -44,29 +37,18 @@ Form::Form(int sign_grade, int exec_grade): _name("default"), _signed(false), _s
 {
 	std::cout << "\n* Form Constructor called for " << std::endl;
 	print_infos(this->getName(), YELLOW, this->getSignGrade(), BLUE, this->getExecGrade(), BLUE, FALSE_EMOJI);
-
-	// << YELLOW << this->getName() << RESET <<
-	// ":\nsign grade : " << BLUE << this->getSignGrade() << RESET <<
-	// "\nexecution grede : " << BLUE << this->getExecGrade() << RESET <<
-	// "\nsigned : " << this->getSignedBool() << std::endl;
-	
 	const int i = this->getSignGrade();
 	const int j = this->getExecGrade();
 	if (i > 150 || j > 150)
-		throw(Form::GradeTooLowException());
+		throw (Form::GradeTooLowException());
 	else if (i < 1 || j < 1)
-		throw(Form::GradeTooHighException());
+		throw (Form::GradeTooHighException());
 }
 
 Form::Form(const std::string name): _name(name), _signed(false), _sign_grade(150), _exec_grade(150)
 {
 	std::cout << "\n* Form Constructor called for " << std::endl;
 	print_infos(this->getName(), BLUE, this->getSignGrade(), YELLOW, this->getExecGrade(), YELLOW, FALSE_EMOJI);
-	
-	// std::cout << "Form Constructor called for " << BLUE << this->getName() << RESET << 
-	// ":\nsign grade : " << YELLOW << this->getSignGrade() << RESET <<
-	// "\nexecution grade : " << YELLOW << this->getExecGrade() << RESET <<
-	// "\nsigned : " << this->getSignedBool() << std::endl;
 }
 
 Form::Form(const std::string name, int sign_grade, int exec_grade): _name(name), _signed(false), _sign_grade(sign_grade), _exec_grade(exec_grade)
@@ -74,19 +56,12 @@ Form::Form(const std::string name, int sign_grade, int exec_grade): _name(name),
 	std::cout << "\n* Form Constructor called for " << std::endl;
 	print_infos(this->getName(), BLUE, this->getSignGrade(), BLUE, this->getExecGrade(), BLUE, FALSE_EMOJI);
 
-	// std::cout << "Form Constructor called for " << YELLOW << this->getName() << RESET <<
-	// ":\nsign grade : " << BLUE << this->getSignGrade() << RESET <<
-	// "\nexecution grede : " << BLUE << this->getExecGrade() << RESET <<
-	// "\nsigned : " << this->getSignedBool() << std::endl;
-	// const int i = this->getSignGrade();
-	// const int j = this->getExecGrade();
-
 	const int i = this->getSignGrade();
 	const int j = this->getExecGrade();
 	if (i > 150 || j > 150)
-		throw(Form::GradeTooLowException());
+		throw (Form::GradeTooLowException());
 	else if (i < 1 || j < 1)
-		throw(Form::GradeTooHighException());
+		throw (Form::GradeTooHighException());
 }
 
 Form &Form::operator=(const Form &assign)
@@ -94,7 +69,6 @@ Form &Form::operator=(const Form &assign)
 	std::cout << ORANGE << "\n* Form Assignation operator called" << RESET << std::endl;
 	if (this != &assign)
 		return *this;
-		// do nothing
 	return *this;
 }
 
@@ -106,7 +80,7 @@ Form::~Form(void)
 void Form::doSign(Bureaucrat &human)
 {
 	if ((int)human.getGrade() > this->getSignGrade())
-		throw(Bureaucrat::GradeTooLowException());
+		throw (Bureaucrat::GradeTooLowException());
 	else if (this->getSigned() == FALSE_EMOJI)
 	{
 		this->_signed = true;
@@ -147,12 +121,12 @@ int Form::getExecGrade(void) const
 const char *Form::GradeTooLowException::what(void) const throw()
 {
 	return ("Grade is too low /!\\");
-}
+};
 
 const char *Form::GradeTooHighException::what(void) const throw()
 {
 	return ("Grade is too high /!\\");
-}
+};
 
 std::ostream &operator<<(std::ostream &o, Form *a)
 {
