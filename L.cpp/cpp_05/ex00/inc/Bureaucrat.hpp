@@ -35,7 +35,6 @@ class Bureaucrat
   private:
 	const std::string _name;
 	size_t _grade;
-	int _event;
 	size_t setGrade(int grade);
 
   public:
