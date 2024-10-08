@@ -52,7 +52,6 @@ class Bureaucrat
 	~Bureaucrat();
 
 	// Public Methods
-	int life(const std::string name, int lifeStatus);
 	void incrementGrade();
 	void decrementGrade();
 
