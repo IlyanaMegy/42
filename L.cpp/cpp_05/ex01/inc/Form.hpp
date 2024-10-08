@@ -20,33 +20,34 @@ class Form
 {
   private:
 	const std::string _name;
-	bool _signed;
-	const int _sign_grade;
-	const int _exec_grade;
+	bool _isSigned;
+	const size_t _sign_grade;
+	const size_t _exec_grade;
+	size_t setGrade(int grade);
 
   public:
 	// Constructors
-	Form(void);
-	Form(Form const &copy);
-	Form(int sign_grade, int exce_grade);
+	Form();
+	Form(Form const &src);
+	Form(int sign_grade, int exec_grade);
 	Form(const std::string name);
 	Form(const std::string name, int sign_grade, int exec_grade);
 
 	// Overloaded Operators
-	Form &operator=(Form const &assign);
+	Form &operator=(Form const &src);
 
 	// Deconstructor
-	~Form(void);
+	~Form();
 
 	// Public Methods
 	void doSign(Bureaucrat &human);
 
 	// Getters
-	const std::string getName(void) const;
-	const std::string getSigned(void) const;
-	bool getSignedBool(void) const;
-	int getSignGrade(void) const;
-	int getExecGrade(void) const;
+	const std::string getName() const;
+	const std::string getIsSigned() const;
+	bool getIsSignedBool() const;
+	size_t getSignGrade() const;
+	size_t getExecGrade() const;
 
 	// Execeptions
 	class GradeTooLowException : public std::exception

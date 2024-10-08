@@ -32,7 +32,7 @@ int main(void)
 		}
 		catch(Bureaucrat::GradeTooLowException &e)
 		{
-			std::cerr << a->getName() << " was not able to sign " << b->getName() << ": " << e.what() << std::endl;
+			std::cerr << "\n" << a->getName() << " was not able to sign " << b->getName() << ": " << e.what() << std::endl;
 		}
 
 		std::cout << b;
@@ -61,12 +61,12 @@ int main(void)
 		// Assistant signs the Form
 		try
 		{
-			// c->doSign(*a);
-			a->signForm(*c);
+			c->doSign(*a);
+			// a->signForm(*c);
 		}
 		catch(Bureaucrat::GradeTooLowException &e)
 		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
+			std::cerr << "\033[33m" << "\n" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
 
 		// CEO signs the Form
@@ -78,7 +78,7 @@ int main(void)
 		}
 		catch(Bureaucrat::GradeTooLowException &e)
 		{
-			std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
+			std::cerr << "\033[33m" << "\n" <<  b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
 		std::cout << c;
 

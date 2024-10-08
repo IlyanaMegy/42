@@ -39,30 +39,30 @@ class Bureaucrat
   private:
 	const std::string _name;
 	size_t _grade;
-	void setGrade(int grade);
+	size_t setGrade(int grade);
 
   public:
 	// Constructors
-	Bureaucrat(void);
-	Bureaucrat(Bureaucrat const &copy);
+	Bureaucrat();
+	Bureaucrat(Bureaucrat const &src);
 	Bureaucrat(int grade);
 	Bureaucrat(const std::string name);
 	Bureaucrat(const std::string name, int grade);
 
 	// Overloaded Operators
-	Bureaucrat &operator=(Bureaucrat const &assign);
+	Bureaucrat &operator=(Bureaucrat const &src);
 
 	// Deconstructor
-	~Bureaucrat(void);
+	~Bureaucrat();
 
 	// Public Methods
-	void incrementGrade(void);
-	void decrementGrade(void);
+	void incrementGrade();
+	void decrementGrade();
 	void signForm(Form &form);
 
 	// Getters
-	const std::string getName(void) const;
-	size_t getGrade(void) const;
+	const std::string getName() const;
+	size_t getGrade() const;
 
 	// Exceptions
 	class GradeTooLowException : public std::exception
@@ -75,6 +75,12 @@ class Bureaucrat
 	{
 		public:
 		virtual const char *what() const throw();
+	};
+
+	class InvalidNameException : public std::exception
+	{
+		public:
+		const char *what() const throw();
 	};
 };
 
