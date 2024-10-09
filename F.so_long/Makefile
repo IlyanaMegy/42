@@ -57,7 +57,7 @@ clean:
 			@make clean -C $(MLX_PATH) --no-print-directory
 			@make clean -C $(LIBFT_PATH) --no-print-directory
 
-fclean:
+fclean: clean
 			@rm -rf $(NAME)
 			@rm -rf $(LIBFT_PATH)$(LIBFT_NAME)
 
