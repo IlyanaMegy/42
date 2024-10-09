@@ -85,7 +85,6 @@ size_t Form::setGrade(int grade)
 		throw (Form::GradeTooHighException());
 	else
 		return grade;
-	
 }
 
 const char *Form::GradeTooLowException::what() const throw()
