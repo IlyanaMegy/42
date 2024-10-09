@@ -13,7 +13,6 @@
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-# include "AForm.hpp"
 # include <cstdio>
 # include <cstdlib>
 # include <iomanip>
@@ -33,37 +32,42 @@
 # define FALSE_EMOJI "❌"
 # define TRUE_EMOJI "✅"
 
+# include "AForm.hpp"
+# include "PPForm.hpp"
+# include "RRForm.hpp"
+# include "SCForm.hpp"
+
 class	AForm;
 class Bureaucrat
 {
   private:
 	const std::string _name;
-	int _grade;
-	void setGrade(int grade);
+	size_t _grade;
+	size_t setGrade(int grade);
 
   public:
 	// Constructors
-	Bureaucrat(void);
-	Bureaucrat(const Bureaucrat &copy);
+	Bureaucrat();
+	Bureaucrat(Bureaucrat const &src);
 	Bureaucrat(int grade);
 	Bureaucrat(const std::string name);
 	Bureaucrat(const std::string name, int grade);
 
 	// Overloaded Operators
-	Bureaucrat &operator=(Bureaucrat const &assign);
+	Bureaucrat &operator=(Bureaucrat const &src);
 
 	// Deconstructor
-	~Bureaucrat(void);
+	~Bureaucrat();
 
 	// Public Methods
-	void incrementGrade(void);
-	void decrementGrade(void);
-	void signForm(Form &form);
-	void executeForm(Form &form) const;
+	void incrementGrade();
+	void decrementGrade();
+	void signForm(AForm &form);
+	void executeForm(AForm &form) const;
 
 	// Getters
-	const std::string getName(void) const;
-	size_t getGrade(void) const;
+	const std::string getName() const;
+	size_t getGrade() const;
 
 	class GradeTooLowException : public std::exception
 	{
@@ -75,6 +79,12 @@ class Bureaucrat
 	{
 		public:
 		virtual const char *what() const throw();
+	};
+
+	class InvalidNameException : public std::exception
+	{
+		public:
+		const char *what() const throw();
 	};
 };
 

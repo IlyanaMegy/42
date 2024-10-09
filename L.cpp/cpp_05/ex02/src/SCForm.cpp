@@ -19,22 +19,31 @@ SCForm::SCForm(void): AForm("ShrubberyCreationForm", 145, 137), _target("default
 
 SCForm::SCForm(std::string target): AForm("ShrubberyCreationForm", 145, 137), _target(target)
 {
+	if (this->_target.empty())
+    {
+        std::cout << "Error: Target must be specified '" << this->_target << "' is not recognized." << std::endl;
+        throw std::invalid_argument("Target must be specified");
+    }
 	std::cout << "ShrubberyCreationForm for target " << CYAN << this->getTarget() << RESET << " called" << std::endl;
 }
 
-SCForm::SCForm(SCForm const &copy): AForm("ShrubberyCreationForm", 145, 137), _target(copy.getTarget())
+SCForm::SCForm(SCForm const &src): AForm("ShrubberyCreationForm", 145, 137), _target(src.getTarget())
 {
+	if (this->_target.empty())
+    {
+        std::cout << "Error: Target must be specified '" << this->_target << "' is not recognized." << std::endl;
+        throw std::invalid_argument("Target must be specified");
+    }
 	std::cout << ORANGE << "ShrubberyCreationForm Copy Constructor called to copy " << copy.getName() <<
 	" into " << this->getName() << RESET << std::endl;
-	*this = copy;
 }
 
-SCForm::~SCForm(void)
+SCForm::~SCForm()
 {
 	std::cout << RED << "RobotomyRequestForm Destructor called" << std::endl;
 }
 
-SCForm &SCForm::operator=(SCForm const &assign)
+SCForm &SCForm::operator=(SCForm const &src)
 {
 	std::cout << "ShrubberyCreationForm Assignation operator called" << std::endl;
 	if (this != &src)
@@ -77,14 +86,14 @@ void SCForm::execute(Bureaucrat const &executor)const
 	}
 }
 
-std::string	ShrubberyCreationForm::getTarget(void)const
+std::string	ShrubberyCreationForm::getTarget()const
 {
 	return (this->_target);
 }
 
 std::ostream &operator<<(std::ostream &o, Form *a)
 {
-	o << MAGENTA << "\n* Form --> " << a->getName() << "\nsign grade : " << a->getSignGrade() <<
-	"\nexecution grade : " << a->getExecGrade() << "\nsigned : " << a->getSigned() << RESET << std::endl;
+	o << MAGENTA << "\n* Form " << a->getName() << "\n  sign grade : " << a->getSignGrade() <<
+	"\n  execution grade : " << a->getExecGrade() << "\n  signed : " << a->getSigned() << RESET << std::endl;
 	return (o);
 }

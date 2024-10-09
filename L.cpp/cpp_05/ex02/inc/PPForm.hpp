@@ -12,7 +12,7 @@
 
 #ifndef PPFORM_HPP
 # define PPFORM_HPP
-
+# include "AForm.hpp"
 # include "Bureaucrat.hpp"
 
 class	Bureaucrat;
@@ -21,21 +21,21 @@ class PPForm : public AForm
 {
   private:
 	const std::string _target;
-	PPForm(void);
+
+  protected:
+	void execute(Bureaucrat const &executor) const;
 
   public:
 	// Constructors
+	PPForm();
 	PPForm(std::string target);
-	PPForm(PPForm &copy);
-
-	// Deconstructor
-	~PPForm(void);
+	PPForm(PPForm &src);
 
 	// Overloaded Operators
 	PPForm &operator=(PPForm const &assign);
 
-	// Public Methods
-	void execute(Bureaucrat const &executor) const;
+	// Deconstructor
+	virtual ~PPForm();
 
 	// Getter
 	std::string getTarget(void) const;

@@ -12,7 +12,6 @@
 
 #ifndef RRFORM_HPP
 # define RRFORM_HPP
-
 # include "Bureaucrat.hpp"
 
 class	Bureaucrat;
@@ -21,21 +20,21 @@ class RRForm : public AForm
 {
   private:
 	const std::string _target;
-	RRForm(void);
+
+  protected:
+	void execute(Bureaucrat const &executor) const;
 
   public:
 	// Constructors
+	RRForm();
 	RRForm(std::string target);
-	RRForm(RRForm &copy);
+	RRForm(RRForm &src);
 
 	// Overloaded Operators
-	RRForm &operator=(RRForm const &assign);
+	RRForm &operator=(RRForm const &src);
 
 	// Deconstructor
-	~RRForm(void);
-
-	// Public Methods
-	void execute(Bureaucrat const &executor) const;
+	virtual ~RRForm();
 
 	// Getter
 	std::string getTarget(void) const;

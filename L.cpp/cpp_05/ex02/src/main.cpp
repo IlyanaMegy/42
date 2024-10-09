@@ -15,155 +15,181 @@
 int main(void)
 {
 	{
-		std::cout << YELLOW << std::endl << "-------------------------------------------------------* Test 1\n// Expecting too high and too low grades errors during creation" << RESET << std::endl;
-		try
-		{
-			Bureaucrat Sleeper1("A", 1500);
-		}
-		catch(const std::exception &e)
-		{
-			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
-		}
-
-		try
-		{
-			Bureaucrat Sleeper2("B", -10);
-		}
-		catch(const std::exception &e)
-		{
-			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
-		}
-	}
-
-	std::cout << YELLOW << std::endl << "-------------------------------------------------------* Test 2\n// Increasing grade" << RESET << std::endl;
-	{
-		Bureaucrat bob("Bob", 2);
-		std::cout << &bob;
-		try
-		{
-			bob.incrementGrade();
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
-		}
-		std::cout << &bob;
-		
-		try
-		{
-			bob.incrementGrade();
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
-		}
-		std::cout << &bob;
-	}
-
-	std::cout << YELLOW << std::endl << "-------------------------------------------------------* Test 3\n// Decreasing grade" << RESET << std::endl;
-	{
-		Bureaucrat tim("Tim", 149);
-		std::cout << &tim;
-		try
-		{
-			tim.decrementGrade();
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
-		}
-		std::cout << &tim;
-		
-		try
-		{
-			tim.decrementGrade();
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
-		}
-		std::cout << &tim;
-	}
-
-	std::cout << YELLOW << std::endl << "-------------------------------------------------------* Test 4\n// Increasing and Decreasing grade" << RESET << std::endl;
-	{
-		Bureaucrat *a = new Bureaucrat(10);
-		std::cout << a;
-		try
-		{
-			a->decrementGrade();
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
-		}
-		std::cout << a;
-
-		try
-		{
-			a->incrementGrade();
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
-		}
-		std::cout << a;
-
-		try
-		{
-			a->incrementGrade();
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
-		}
-		std::cout << a;
+		std::cout << "\033[34mConstructing\033[0m" << std::endl;
+		Bureaucrat *a = new Bureaucrat();
+		AForm *b = new PPForm("default");
+		// Form *c = new RobotomyRequestForm();
+		// Form *d = new ShrubberyCreationForm();
 		std::cout << std::endl;
 
-		std::cout << RED << "Destroying a" << RESET << std::endl;
-		delete a;
-	}
-	
-	std::cout << YELLOW << std::endl << "-------------------------------------------------------* Test 5\n// Too high grade error" << RESET << std::endl;
-	{
-		Bureaucrat *a = NULL;
-		try
-		{
-			a = new Bureaucrat(0);
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << "Exception caught: " << RED << e.what() << RESET << std::endl;
-		}
-
-		if (a != NULL)
-		{
-			std::cout << RED << "Destroying a" << RESET << std::endl;
-			delete a;
-		}
-	}
-
-	std::cout << YELLOW << std::endl << "-------------------------------------------------------* Test 6\n// Copying a into b" << RESET << std::endl;
-	{
-		Bureaucrat *a = new Bureaucrat("Peter", 120);
+		std::cout << "\033[34mTesting\033[0m" << std::endl;
 		std::cout << a;
-
-		a->decrementGrade();
-		std::cout << a;
-		std::cout << std::endl;
-
-		Bureaucrat *b = new Bureaucrat(*a);
-
-		std::cout << RED << "Destroying a" << RESET << std::endl;
-		delete a;
-
 		std::cout << b;
-		b->decrementGrade();
+
+		try
+		{
+			b->doSign(*a);
+			// b->execute(*a);
+		}
+		catch(Bureaucrat::GradeTooLowException &e)
+		{
+			std::cerr << "\033[33m" << a->getName() << " was not able to sign " << b->getName() << ": " << e.what() << "\033[0m" << std::endl;
+		}
+
 		std::cout << b;
 		std::cout << std::endl;
 
-		std::cout << RED << "Destroying b" << RESET << std::endl;
+		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
+		delete a;
 		delete b;
+		std::cout << std::endl;
 	}
+	// std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
+	// {
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "\033[34mConstructing\033[0m" << std::endl;
+	// 	Bureaucrat *a = new Bureaucrat("Assistant", 145);
+	// 	Bureaucrat *b = new Bureaucrat("CEO", 1);
+	// 	Form *c = new PresidentialPardonForm("some dude");
+	// 	// Form *d = new Form(*c);
+	// 	// Form *d = new Form("Rent Contract", 140, 100); // you are not able to construct an abstract class here
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "\033[34mTesting\033[0m" << std::endl;
+	// 	std::cout << a;
+	// 	std::cout << b;
+	// 	std::cout << c;
+	// 	std::cout << std::endl;
+
+	// 	// Try to execute before signing
+	// 	try
+	// 	{
+	// 		c->execute(*b);
+	// 	}
+	// 	catch (Form::FormNotSignedException &e)
+	// 	{
+	// 		std::cerr << "\033[33m" << a->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
+	// 	}
+	// 	std::cout << std::endl;
+	// 	// Assistant signs the Form
+	// 	try
+	// 	{
+	// 		c->beSigned(*a);
+	// 		// a->signForm(*c);
+	// 	}
+	// 	catch(Bureaucrat::GradeTooLowException &e)
+	// 	{
+	// 		std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
+	// 	}
+
+	// 	// CEO signs the Form
+	// 	std::cout << std::endl;
+	// 	std::cout << c;
+	// 	std::cout << std::endl;
+	// 	try
+	// 	{
+	// 		c->beSigned(*b);
+	// 		// b->signForm(*c);
+	// 	}
+	// 	// catch(Form::GradeTooLowException &e)
+	// 	catch(Bureaucrat::GradeTooLowException &e)
+	// 	{
+	// 		std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
+	// 	}
+	// 	std::cout << std::endl;
+	// 	std::cout << c;
+	// 	std::cout << std::endl;
+
+	// 	// try signing the from again
+	// 	std::cout << std::endl;
+	// 	b->signForm(*c);
+	// 	std::cout << std::endl;
+
+	// 	// execute the Form from assistant
+	// 	try
+	// 	{
+	// 		c->execute(*a);
+	// 		// a.executeForm(*c);
+	// 	}
+	// 	catch(Bureaucrat::GradeTooLowException &e)
+	// 	{
+	// 		std::cerr << "\033[33m" << a->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
+	// 	}
+	// 	std::cout << std::endl;
+
+	// 	// execute Form from CEO
+	// 	try
+	// 	{
+	// 		c->execute(*b);
+	// 		// b.executeForm(*c);
+	// 	}
+	// 	catch(Bureaucrat::GradeTooLowException &e)
+	// 	{
+	// 		std::cerr << "\033[33m" << b->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
+	// 	}
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
+	// 	delete a;
+	// 	delete b;
+	// 	delete c;
+	// 	std::cout << std::endl;
+	// }
+	// std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
+	// {
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "\033[34mConstructing\033[0m" << std::endl;
+	// 	Bureaucrat *a = new Bureaucrat("Emperor", 1);
+	// 	PresidentialPardonForm *b = new PresidentialPardonForm("this other dude");
+	// 	PresidentialPardonForm *c = new PresidentialPardonForm(*b);
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "\033[34mTesting\033[0m" << std::endl;
+	// 	std::cout << a;
+	// 	std::cout << b;
+	// 	std::cout << c;
+	// 	b->beSigned(*a);
+	// 	a->signForm(*c);
+	// 	b->execute(*a);
+	// 	a->executeForm(*c);
+	// 	// c->execute(*a);
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
+	// 	delete a;
+	// 	delete b;
+	// 	delete c;
+	// 	std::cout << std::endl;
+	// }
+	// std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
+	// {
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "\033[34mConstructing\033[0m" << std::endl;
+	// 	Bureaucrat *a = new Bureaucrat("Emperor", 1);
+	// 	RobotomyRequestForm *b = new RobotomyRequestForm("Bender");
+	// 	ShrubberyCreationForm *c = new ShrubberyCreationForm("christmas");
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "\033[34mTesting\033[0m" << std::endl;
+	// 	std::cout << a;
+	// 	std::cout << b;
+	// 	std::cout << c;
+	// 	b->beSigned(*a);
+	// 	a->signForm(*c);
+	// 	for (int i= 0; i < 10; i++)
+	// 		b->execute(*a);
+	// 	// a->executeForm(*c);
+	// 	c->execute(*a);
+	// 	std::cout << std::endl;
+
+	// 	std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
+	// 	delete a;
+	// 	delete b;
+	// 	delete c;
+	// 	std::cout << std::endl;
+	// }
 	return (0);
 }

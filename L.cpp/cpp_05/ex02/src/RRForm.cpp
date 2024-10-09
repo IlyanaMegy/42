@@ -12,48 +12,61 @@
 
 #include "../inc/RRForm.hpp"
 
-RRForm::RRForm(void): AForm("RobotomyRequestForm", 72, 45), _target("default")
+RRForm::RRForm(): AForm("RobotomyRequestForm", 72, 45), _target("")
 {
-	std::cout << "RobotomyRequestForm Default Constructor called" << std::endl;
+	std::cout << "Error: Target must be specified '" << _target << "' is not recognized." << std::endl;
+	throw std::invalid_argument("Target must be specified");
 }
 
 RRForm::RRForm(std::string target): AForm("RobotomyRequestForm", 72, 45), _target(target)
 {
-	std::cout << "RobotomyRequestForm for target " << CYAN << this->getTarget() << RESET << " called" << std::endl;
+	if (_target.empty())
+	{
+		std::cout << "Error: Target must be specified '" << _target << "' is not recognized." << std::endl;
+		throw std::invalid_argument("Target must be specified");
+	}
 }
 
-RRForm::RRForm(RRForm const &copy): AForm("RobotomyRequestForm", 72, 45), _target(copy.getTarget())
+RRForm::RRForm(RRForm const &src): AForm(src), _target(src._target)
 {
-	std::cout << ORANGE << "RobotomyRequestForm Copy Constructor called to copy " << copy.getName() <<
-	" into " << this->getName() << RESET << std::endl;
-	*this = copy;
+	if (_target.empty())
+	{
+		std::cout << "Error: Target must be specified '" << _target << "' is not recognized." << std::endl;
+		throw std::invalid_argument("Target must be specified");
+	}
 }
 
-RRForm::~RRForm(void)
+RRForm::~RRForm()
 {
 	std::cout << RED << "RobotomyRequestForm Destructor called" << std::endl;
 }
 
-RRForm &RRForm::operator=(RRForm const &assign)
+RRForm &RRForm::operator=(RRForm const &src)
 {
 	std::cout << "RobotomyRequestForm Assignation operator called" << std::endl;
-	if (this != &assign)
-		return *this;
+	if (this != &src)
+	{
+		AForm::operator = (src);
+		if (other._target.empty())
+		{
+			std::cout << "Error: Target must be specified '" << _target << " is not recognized." << std::endl;
+			throw std::invalid_argument("Target must be specified");
+		}
+        _target = other._target;
+	}
 	return *this;
 }
 
-static int bot_fail = 0;
-
 void RRForm::execute(Bureaucrat const &executor) const
 {
-	if ((int)executor.getGrade() > this->getExecGrade())
+	if (executor.getGrade() > this->getExecGrade())
 		throw (Bureaucrat::GradeTooLowException());
-	else if (!this->getSignedBool())
+	else if (!this->getIsSignedBool())
 		throw (AForm::FormNotSignedException());
-	else if (bot_fail++ % 2)
+	if (rand() % 2)
 		std::cout << "BRRRRRRRRRRRRRR\n" << this->getTarget() << " was robotomized" << std::endl;
 	else
-		std::cout << "Robotomy failed" << std::endl;
+		std::cout << "Robotomy of " << this->getTarget() << "failed" << std::endl;
 }
 
 std::string RRForm::getTarget(void)const
@@ -63,7 +76,7 @@ std::string RRForm::getTarget(void)const
 
 std::ostream &operator<<(std::ostream &o, Form *a)
 {
-	o << MAGENTA << "\n* Form --> " << a->getName() << "\nsign grade : " << a->getSignGrade() <<
-	"\nexecution grade : " << a->getExecGrade() << "\nsigned : " << a->getSigned() << RESET << std::endl;
+	o << MAGENTA << "\n* Form " << a->getName() << "\n  sign grade : " << a->getSignGrade() <<
+	"\n  execution grade : " << a->getExecGrade() << "\n  signed : " << a->getSigned() << RESET << std::endl;
 	return (o);
 }

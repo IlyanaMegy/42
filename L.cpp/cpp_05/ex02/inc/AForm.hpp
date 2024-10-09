@@ -14,27 +14,29 @@
 # define AFORM_HPP
 # include "Bureaucrat.hpp"
 
+class	Bureaucrat;
 class AForm
 {
   private:
 	const std::string _name;
-	bool _signed;
-	const int _sign_grade;
-	const int _exec_grade;
+	bool _isSigned;
+	const size_t _sign_grade;
+	const size_t _exec_grade;
+	size_t setGrade(int grade);
 
   public:
 	// Constructors
-	AForm(void);
-	AForm(AForm const &copy);
+	AForm();
+	AForm(AForm const &src);
 	AForm(int sign_grade, int exec_grade);
 	AForm(const std::string name);
 	AForm(const std::string name, int sign_grade, int exec_grade);
 
 	// Overloaded Operators
-	AForm &operator=(AForm const &assign);
+	AForm &operator=(AForm const &src);
 
 	// Deconstructor
-	virtual ~AForm(void);
+	virtual ~AForm();
 
 	// Public Methods
 	void doSign(Bureaucrat &human);
@@ -43,9 +45,9 @@ class AForm
 	// Getters
 	const std::string getName(void) const;
 	const std::string getSigned(void) const;
-	bool getSignedBool(void) const;
-	int getSignGrade(void) const;
-	int getExecGrade(void) const;
+	bool getIsSignedBool() const;
+	size_t getSignGrade() const;
+	size_t getExecGrade() const;
 
 	// Exceptions
 	class GradeTooLowException : public std::exception
@@ -68,5 +70,5 @@ class AForm
 };
 
 // ostream Overload
-std::ostream &operator<<(std::ostream &o, Form *a);
+std::ostream &operator<<(std::ostream &o, AForm *a);
 #endif
