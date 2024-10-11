@@ -22,19 +22,19 @@ class RRForm : public AForm
 	const std::string _target;
 
   protected:
-	void execute(Bureaucrat const &executor) const;
+	void executeAction() const;
 
   public:
 	// Constructors
 	RRForm();
 	RRForm(std::string target);
-	RRForm(RRForm &src);
+	RRForm(RRForm const &src);
 
 	// Overloaded Operators
 	RRForm &operator=(RRForm const &src);
 
 	// Deconstructor
-	virtual ~RRForm();
+	~RRForm();
 
 	// Getter
 	std::string getTarget(void) const;

@@ -24,6 +24,10 @@ class AForm
 	const size_t _exec_grade;
 	size_t setGrade(int grade);
 
+  protected:
+	/* Méthode virtuelle pure pour exécuter l'action du formulaire */
+	virtual void executeAction() const = 0;
+
   public:
 	// Constructors
 	AForm();
@@ -40,11 +44,11 @@ class AForm
 
 	// Public Methods
 	void doSign(Bureaucrat &human);
-	virtual void execute(Bureaucrat const &executor) const = 0;
+	void execute(Bureaucrat const &executor) const;
 
 	// Getters
 	const std::string getName(void) const;
-	const std::string getSigned(void) const;
+	const std::string getIsSigned(void) const;
 	bool getIsSignedBool() const;
 	size_t getSignGrade() const;
 	size_t getExecGrade() const;

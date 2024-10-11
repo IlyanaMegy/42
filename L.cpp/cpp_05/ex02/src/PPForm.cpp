@@ -48,7 +48,6 @@ PPForm &PPForm::operator=(PPForm const &src)
 	std::cout << "PresidentialPardonForm assignation operator called" << std::endl;
 	if (this != &src)
 	{
-        AForm::operator = (src);
 		if (src._target.empty())
 		{
 			std::cout << "Error: Target must be specified '" << this->_target << "' is not recognized." << std::endl;
@@ -59,14 +58,9 @@ PPForm &PPForm::operator=(PPForm const &src)
 	return *this;
 }
 
-void PPForm::execute(Bureaucrat const &executor)const
+void PPForm::executeAction() const
 {
-	if (executor.getGrade() > this->getExecGrade())
-		throw (Bureaucrat::GradeTooLowException());
-	else if (!this->getIsSignedBool())
-		throw (AForm::FormNotSignedException());
-	else
-		std::cout << BLUE << this->getTarget() << " has been pardoned by Zaphod Beeblebrox" << RESET << std::endl;
+	std::cout << BLUE << this->getTarget() << " has been pardoned by Zaphod Beeblebrox" << RESET << std::endl;
 }
 
 std::string PPForm::getTarget(void)const
@@ -74,9 +68,9 @@ std::string PPForm::getTarget(void)const
 	return (this->_target);
 }
 
-std::ostream &operator<<(std::ostream &o, Form *a)
+std::ostream &operator<<(std::ostream &o, PPForm *a)
 {
 	o << MAGENTA << "\n* Form " << a->getName() << "\n  sign grade : " << a->getSignGrade() <<
-	"\n  execution grade : " << a->getExecGrade() << "\n  signed : " << a->getSigned() << RESET << std::endl;
+	"\n  execution grade : " << a->getExecGrade() << "\n  signed : " << a->getIsSigned() << RESET << std::endl;
 	return (o);
 }

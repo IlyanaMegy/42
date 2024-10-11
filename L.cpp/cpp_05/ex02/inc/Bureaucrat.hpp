@@ -33,9 +33,6 @@
 # define TRUE_EMOJI "✅"
 
 # include "AForm.hpp"
-# include "PPForm.hpp"
-# include "RRForm.hpp"
-# include "SCForm.hpp"
 
 class	AForm;
 class Bureaucrat

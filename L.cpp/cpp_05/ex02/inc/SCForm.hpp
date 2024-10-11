@@ -13,6 +13,8 @@
 #ifndef SCFORM_HPP
 # define SCFORM_HPP
 # include "Bureaucrat.hpp"
+# include <fstream>
+# include <typeinfo>
 
 class	Bureaucrat;
 class	AForm;
@@ -22,13 +24,13 @@ class SCForm : public AForm
 	const std::string _target;
 
   protected:
-	void execute(Bureaucrat const &executor) const;
+	void executeAction() const;
 
   public:
 	// Constructors
 	SCForm();
-	SCForm(std::string target);
-	SCForm(SCForm &src);
+	SCForm(const std::string target);
+	SCForm(SCForm const &src);
 
 	// Overloaded Operators
 	SCForm &operator=(SCForm const &src);

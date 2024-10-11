@@ -50,13 +50,13 @@ void AForm::doSign(Bureaucrat &human)
 	std::cout << RED << "\nForm " << this->_name << " has already been signed by " << this->getName() << RESET << std::endl;
 }
 
-virtual void AForm::execute(Bureaucrat const &executor) const
+void AForm::execute(Bureaucrat const &executor) const
 {
 	if (!_isSigned)
         throw FormNotSignedException();
-    if (executor.getGrade() > _gradeRequiredToExecute)
+    if (executor.getGrade() > _exec_grade)
         throw GradeTooLowException();
-    execute(executor);
+    executeAction();
 }
 
 const std::string AForm::getName() const
@@ -73,7 +73,7 @@ const std::string AForm::getIsSigned() const
 
 bool AForm::getIsSignedBool() const
 {
-	return (this->_signed);
+	return (this->_isSigned);
 }
 
 size_t AForm::getSignGrade() const
@@ -89,9 +89,9 @@ size_t AForm::getExecGrade() const
 size_t AForm::setGrade(int grade)
 {
 	if (grade > 150)
-		throw (Form::GradeTooLowException());
+		throw (AForm::GradeTooLowException());
 	else if (grade < 1)
-		throw (Form::GradeTooHighException());
+		throw (AForm::GradeTooHighException());
 	else
 		return grade;
 }
@@ -111,7 +111,7 @@ const char *AForm::FormNotSignedException::what() const throw()
 	return ("Form needs to be signed before executing");
 };
 
-std::ostream &operator<<(std::ostream &o, Form *a)
+std::ostream &operator<<(std::ostream &o, AForm *a)
 {
 	o << MAGENTA << "\n* Form " << a->getName() << "\n  sign grade : " << a->getSignGrade() <<
 	"\n  execution grade : " << a->getExecGrade() << "\n  signed : " <<

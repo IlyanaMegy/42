@@ -13,23 +13,26 @@
 #ifndef PPFORM_HPP
 # define PPFORM_HPP
 # include "AForm.hpp"
-# include "Bureaucrat.hpp"
+# include <cstdio>
+# include <cstdlib>
+# include <iomanip>
+# include <iostream>
 
 class	Bureaucrat;
 class	AForm;
-class PPForm : public AForm
+class PPForm: public AForm
 {
   private:
-	const std::string _target;
+	std::string _target;
 
   protected:
-	void execute(Bureaucrat const &executor) const;
+	void executeAction() const;
 
   public:
 	// Constructors
 	PPForm();
 	PPForm(std::string target);
-	PPForm(PPForm &src);
+	PPForm(PPForm const &src);
 
 	// Overloaded Operators
 	PPForm &operator=(PPForm const &assign);

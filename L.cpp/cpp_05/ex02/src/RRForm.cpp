@@ -43,26 +43,30 @@ RRForm::~RRForm()
 
 RRForm &RRForm::operator=(RRForm const &src)
 {
-	std::cout << "RobotomyRequestForm Assignation operator called" << std::endl;
+	// std::cout << "RobotomyRequestForm Assignation operator called" << std::endl;
+	// if (this != &src)
+	// {
+	// 	// AForm::operator = (src);
+	// 	if (src._target.empty())
+	// 	{
+	// 		std::cout << "Error: Target must be specified '" << _target << " is not recognized." << std::endl;
+	// 		throw std::invalid_argument("Target must be specified");
+	// 	}
+    //     this->_target = src._target;
+	// }
+	// return *this;
+	std::cout << "ShrubberyCreationForm Assignation operator called" << std::endl;
 	if (this != &src)
-	{
-		AForm::operator = (src);
-		if (other._target.empty())
-		{
-			std::cout << "Error: Target must be specified '" << _target << " is not recognized." << std::endl;
-			throw std::invalid_argument("Target must be specified");
-		}
-        _target = other._target;
-	}
+		return *this;
 	return *this;
 }
 
-void RRForm::execute(Bureaucrat const &executor) const
+void RRForm::executeAction() const
 {
-	if (executor.getGrade() > this->getExecGrade())
-		throw (Bureaucrat::GradeTooLowException());
-	else if (!this->getIsSignedBool())
-		throw (AForm::FormNotSignedException());
+	// if (executor.getGrade() > this->getExecGrade())
+	// 	throw (Bureaucrat::GradeTooLowException());
+	// else if (!this->getIsSignedBool())
+	// 	throw (AForm::FormNotSignedException());
 	if (rand() % 2)
 		std::cout << "BRRRRRRRRRRRRRR\n" << this->getTarget() << " was robotomized" << std::endl;
 	else
@@ -74,9 +78,9 @@ std::string RRForm::getTarget(void)const
 	return (this->_target);
 }
 
-std::ostream &operator<<(std::ostream &o, Form *a)
+std::ostream &operator<<(std::ostream &o, RRForm *a)
 {
 	o << MAGENTA << "\n* Form " << a->getName() << "\n  sign grade : " << a->getSignGrade() <<
-	"\n  execution grade : " << a->getExecGrade() << "\n  signed : " << a->getSigned() << RESET << std::endl;
+	"\n  execution grade : " << a->getExecGrade() << "\n  signed : " << a->getIsSigned() << RESET << std::endl;
 	return (o);
 }
