@@ -126,7 +126,7 @@ int main(void)
 		copy = new Bureaucrat(*original);
 		std::cout << "Copy " << copy;
 
-		ASSERT_TEST(copy->getName() == original->getName(), "Copy have the same name.");
+		ASSERT_TEST(copy->getName() == original->getName() + "_copy", "Copy have the same name.");
 		ASSERT_TEST(copy->getGrade() == original->getGrade(), "Copy have the same grade.");
 
 		copy->incrementGrade();
@@ -158,7 +158,7 @@ int main(void)
 		/**
 		* Using assignment operator
 		*/
-		copy = original;
+		*copy = *original;
 		std::cout << BLUE << "After assignment:" << RESET << std::endl;
 		std::cout << original << copy;
 		ASSERT_TEST(copy->getName() == "Second", "Name of copy unchanged.");
@@ -190,20 +190,20 @@ int main(void)
         RRForm robot("Alice");
         PPForm pardon("Charlie");
 
-        // bob.signForm(shrub);
-        // bob.executeForm(shrub);
-        // ASSERT_TEST(shrub.getIsSignedBool(), "SCForm signed.");
-        // ASSERT_TEST(shrub.getIsSignedBool() && shrub.getExecGrade() >= bob.getGrade(), "SCForm executed.");
+        bob.signForm(shrub);
+        bob.executeForm(shrub);
+        ASSERT_TEST(shrub.getIsSignedBool(), "SCForm signed.");
+        ASSERT_TEST(shrub.getIsSignedBool() && shrub.getExecGrade() >= bob.getGrade(), "SCForm executed.");
 
-        // bob.signForm(robot);
-        // bob.executeForm(robot);
-        // ASSERT_TEST(robot.getIsSignedBool(), "RRForm signed.");
-        // ASSERT_TEST(robot.getIsSignedBool() && robot.getExecGrade() >= bob.getGrade(), "RRForm executed.");
+        bob.signForm(robot);
+        bob.executeForm(robot);
+        ASSERT_TEST(robot.getIsSignedBool(), "RRForm signed.");
+        ASSERT_TEST(robot.getIsSignedBool() && robot.getExecGrade() >= bob.getGrade(), "RRForm executed.");
 
-        // bob.signForm(pardon);
-        // bob.executeForm(pardon);
-        // ASSERT_TEST(pardon.getIsSignedBool(), "PPForm signed.");
-        // ASSERT_TEST(pardon.getIsSignedBool() && pardon.getExecGrade() >= bob.getGrade(), "PPForm executed.");
+        bob.signForm(pardon);
+        bob.executeForm(pardon);
+        ASSERT_TEST(pardon.getIsSignedBool(), "PPForm signed.");
+        ASSERT_TEST(pardon.getIsSignedBool() && pardon.getExecGrade() >= bob.getGrade(), "PPForm executed.");
     }
 	catch (std::exception &e)
 	{
@@ -218,7 +218,7 @@ int main(void)
     try
 	{
         SCForm shrub("test");
-        ASSERT_TEST(shrub.getName() == "SCForm", "getName() works correctly.");
+        ASSERT_TEST(shrub.getName() == "ShrubberyCreationForm", "getName() works correctly.");
         ASSERT_TEST(!shrub.getIsSignedBool(), "getIsSigned() works correctly.");
         ASSERT_TEST(shrub.getSignGrade() == 145, "getSignGrade() works correctly.");
         ASSERT_TEST(shrub.getExecGrade() == 137, "getExecGrade() works correctly.");
@@ -311,18 +311,5 @@ int main(void)
 	{
         ASSERT_TEST(false, "PPForm constructor threw an exception.");
     }
-
-    // Note: Le test suivant est là pour illustrer qu'AForm est abstraite.
-    // Cette partie du code ne peut pas être exécutée car AForm ne peut pas être instanciée directement.
-    // /*
-    // std::cout << CYAN << "\nTEST AForm CANNOT BE INSTANTIATED:" << RESET << std::endl;
-    // try {
-    //     // Cette ligne devrait échouer car AForm est une classe abstraite.
-    //     AForm *form = new AForm("TestForm", 50, 25);
-    //     ASSERT_TEST(false, "AForm should not be instantiable directly.");
-    // } catch (std::exception& e) {
-    //     ASSERT_TEST(true, "Correctly caught exception for AForm instantiation.");
-    // }
-    // */
-    return 0;
+	return 0;
 }
