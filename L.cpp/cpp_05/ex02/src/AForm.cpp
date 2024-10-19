@@ -47,7 +47,7 @@ void AForm::doSign(Bureaucrat &human)
 		std::cout << BLACK << "\nForm " << this->_name << " has been signed by " << human.getName() << RESET << std::endl;
 		return;
 	}
-	std::cout << RED << "\nForm " << this->_name << " has already been signed by " << this->getName() << RESET << std::endl;
+	std::cout << RED << "\nForm " << this->_name << " has already been signed" << RESET << std::endl;
 }
 
 void AForm::execute(Bureaucrat const &executor) const
