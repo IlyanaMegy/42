@@ -38,6 +38,7 @@ void	child(char **av, int *p_fd, char **env, int i)
 		dup2(p_fd[1], 1);
 		dup2(fd, 0);
 		close(p_fd[0]);
+		close(p_fd[1]);
 		close(fd);
 		if (env)
 			exec(av[2], env);
@@ -46,6 +47,7 @@ void	child(char **av, int *p_fd, char **env, int i)
 	dup2(p_fd[0], 0);
 	dup2(fd, 1);
 	close(p_fd[1]);
+	close(p_fd[0]);
 	close(fd);
 	if (env)
 		exec(av[3], env);
