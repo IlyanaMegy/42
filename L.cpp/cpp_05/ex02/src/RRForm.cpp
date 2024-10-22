@@ -43,18 +43,6 @@ RRForm::~RRForm()
 
 RRForm &RRForm::operator=(RRForm const &src)
 {
-	// std::cout << "RobotomyRequestForm Assignation operator called" << std::endl;
-	// if (this != &src)
-	// {
-	// 	// AForm::operator = (src);
-	// 	if (src._target.empty())
-	// 	{
-	// 		std::cout << "Error: Target must be specified '" << _target << " is not recognized." << std::endl;
-	// 		throw std::invalid_argument("Target must be specified");
-	// 	}
-    //     this->_target = src._target;
-	// }
-	// return *this;
 	std::cout << "ShrubberyCreationForm Assignation operator called" << std::endl;
 	if (this != &src)
 		return *this;
@@ -63,10 +51,6 @@ RRForm &RRForm::operator=(RRForm const &src)
 
 void RRForm::executeAction() const
 {
-	// if (executor.getGrade() > this->getExecGrade())
-	// 	throw (Bureaucrat::GradeTooLowException());
-	// else if (!this->getIsSignedBool())
-	// 	throw (AForm::FormNotSignedException());
 	if (rand() % 2)
 		std::cout << "BRRRRRRRRRRRRRR\n" << this->getTarget() << " was robotomized" << std::endl;
 	else
