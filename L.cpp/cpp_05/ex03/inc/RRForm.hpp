@@ -10,4 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RRFORM_HPP
+# define RRFORM_HPP
 
+# include "AForm.hpp"
+
+class	Bureaucrat;
+class	AForm;
+class RRForm
+{
+  private:
+	std::string _target;
+
+  protected:
+	void executeAction() const;
+
+  public:
+	RRForm();
+	RRForm(RRForm const &src);
+	RRForm(std::string target);
+	RRForm &operator=(RRForm const &src);
+	~RRForm();
+
+	std::string getTarget() const;
+};
+
+std::ostream &operator<<(std::ostream &o, RRForm *a);
+#endif
