@@ -12,8 +12,9 @@
 
 #ifndef SCFORM_HPP
 # define SCFORM_HPP
-
 # include "AForm.hpp"
+# include <fstream>
+# include <typeinfo>
 
 class	Bureaucrat;
 class	AForm;

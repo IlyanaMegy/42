@@ -21,26 +21,25 @@ int main(void)
 {
 	{
 		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat();
+		Bureaucrat *a = new Bureaucrat(100);
 		Intern *z = new Intern();
 		AForm *b = z->makeForm("SomeRandomForm", "Clown");
 		b = z->makeForm("PresidentialPardonForm", "Clown");
-		// AForm *b = new PresidentialPardonForm("Clown");
-		// AForm *c = new RobotomyRequestForm("Bender");
-		// AForm *d = new ShrubberyCreationForm("Christmas");
+		// AForm *b = new PPForm("Clown");
+		// AForm *c = new RRForm("Bender");
+		// AForm *d = new SCForm("Christmas");
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
 		std::cout << a;
 		std::cout << b;
 		std::cout << std::endl;
-
 		try
 		{
-			b->beSigned(*a);
+			b->doSign(*a);
 			// b->execute(*a);
 		}
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch(std::exception& e)
 		{
 			std::cerr << "\033[33m" << a->getName() << " was not able to sign " << b->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
@@ -55,14 +54,14 @@ int main(void)
 		delete z;
 		std::cout << std::endl;
 	}
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
+	std::cout << "---------------------------------------------------------------------" << std::endl;
 	{
 		std::cout << std::endl;
 
 		std::cout << "\033[34mConstructing\033[0m" << std::endl;
 		Bureaucrat *a = new Bureaucrat("Assistant", 145);
 		Bureaucrat *b = new Bureaucrat("CEO", 1);
-		AForm *c = new PresidentialPardonForm("some dude");
+		AForm *c = new PPForm("some dude");
 		// AForm *d = new AForm(*c);
 		// AForm *d = new AForm("Rent Contract", 140, 100); // you are not able to construct an abstract class here
 		std::cout << std::endl;
@@ -78,7 +77,7 @@ int main(void)
 		{
 			c->execute(*b);
 		}
-		catch (AForm::FormNotSignedException &e)
+		catch(std::exception& e)
 		{
 			std::cerr << "\033[33m" << a->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
@@ -86,10 +85,10 @@ int main(void)
 		// Assistant signs the AForm
 		try
 		{
-			c->beSigned(*a);
+			c->doSign(*a);
 			// a->signForm(*c);
 		}
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch(std::exception& e)
 		{
 			std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
@@ -100,11 +99,11 @@ int main(void)
 		std::cout << std::endl;
 		try
 		{
-			c->beSigned(*b);
+			c->doSign(*b);
 			// b->signForm(*c);
 		}
 		// catch(AForm::GradeTooLowException &e)
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch(std::exception& e)
 		{
 			std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
@@ -123,7 +122,7 @@ int main(void)
 			c->execute(*a);
 			// a.executeForm(*c);
 		}
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch(std::exception& e)
 		{
 			std::cerr << "\033[33m" << a->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
@@ -135,7 +134,7 @@ int main(void)
 			c->execute(*b);
 			// b.executeForm(*c);
 		}
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch(std::exception& e)
 		{
 			std::cerr << "\033[33m" << b->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
@@ -147,7 +146,7 @@ int main(void)
 		delete c;
 		std::cout << std::endl;
 	}
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
+	std::cout << "---------------------------------------------------------------------" << std::endl;
 	{
 		std::cout << std::endl;
 
@@ -155,8 +154,8 @@ int main(void)
 		Bureaucrat *a = new Bureaucrat("Emperor", 1);
 		Intern *z = new Intern();
 		AForm *b = z->makeForm("RobotomyRequestForm", "Bender");
-		AForm *c = z->makeForm("ShrubberyCreationForm", "Cristmas");
-		// AForm *c = new ShrubberyCreationForm("christmas");
+		AForm *c = z->makeForm("ShrubberyCreationForm", "Christmas");
+		// AForm *c = new SCForm("christmas");
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
@@ -165,7 +164,7 @@ int main(void)
 		std::cout << c;
 		std::cout << std::endl;
 
-		b->beSigned(*a);
+		b->doSign(*a);
 		a->signForm(*c);
 		std::cout << std::endl;
 		std::cout << b;

@@ -12,12 +12,12 @@
 
 #ifndef RRFORM_HPP
 # define RRFORM_HPP
-
+# include "Bureaucrat.hpp"
 # include "AForm.hpp"
 
 class	Bureaucrat;
 class	AForm;
-class RRForm
+class RRForm : public AForm
 {
   private:
 	std::string _target;

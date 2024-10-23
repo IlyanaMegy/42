@@ -46,7 +46,7 @@ static AForm *makeRRForm(const std::string target)
 	return (new RRForm(target));
 }
 
-static AForm *makeSCForm(cont std::string target)
+static AForm *makeSCForm(const std::string target)
 {
 	return (new SCForm(target));
 }
@@ -57,8 +57,8 @@ AForm *Intern::makeForm(const std::string form, const std::string target)
 	std::string forms[] = {"PresidentialPardonForm", "RobotomyRequestForm", "ShrubberyCreationForm"};
 
 	for (int i = 0; i < 3; i++)
-		if (form == form[i])
+		if (form == forms[i])
 			return (all_forms[i](target));
-	std::cout << "\033[33mIntern can not create a form called " << form_to_create << "\033[0m" << std::endl;
+	std::cout << "\033[33mIntern can not create a form called " << form << "\033[0m" << std::endl;
 	return (NULL);
 }

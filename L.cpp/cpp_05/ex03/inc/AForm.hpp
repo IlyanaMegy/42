@@ -23,7 +23,7 @@ class AForm
 	bool _isSigned;
 	const size_t _sign_grade;
 	const size_t _exec_grade;
-	size_t setGrade(int grade);
+	size_t setGrade(size_t grade);
 
   protected:
 	virtual void executeAction() const = 0;

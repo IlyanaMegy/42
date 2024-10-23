@@ -12,11 +12,11 @@
 
 #include "../inc/RRForm.hpp"
 
-std::string verifTarget(std::string t)
+static std::string verifTarget(std::string t)
 {
 	if (t.empty())
 	{
-		std::cout << "Error: Target must be specified '" << _target << "' is not recognized." << std::endl;
+		std::cout << "Error: Target must be specified '" << t << "' is not recognized." << std::endl;
 		throw std::invalid_argument("Target must be specified");
 	}
 	return (t);

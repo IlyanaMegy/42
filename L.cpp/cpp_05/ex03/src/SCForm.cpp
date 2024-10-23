@@ -12,11 +12,11 @@
 
 #include "../inc/SCForm.hpp"
 
-std::string verifTarget(std::string t)
+static std::string verifTarget(std::string t)
 {
 	if (t.empty())
 	{
-		std::cout << "Error: Target must be specified '" << this->_target << "' is not recognized." << std::endl;
+		std::cout << "Error: Target must be specified '" << t << "' is not recognized." << std::endl;
         throw std::invalid_argument("Target must be specified");
 	}
 	return (t);	
@@ -48,7 +48,7 @@ std::string SCForm::getTarget() const
 
 void SCForm::executeAction() const
 {
-	 std::string filename = _target + "_shrubbery";
+    std::string filename = _target + "_shrubbery";
     std::ofstream outfile (this->getTarget().append("_shrubbery").c_str());
     if (outfile.is_open())
     {
@@ -72,7 +72,7 @@ void SCForm::executeAction() const
             "        ###" << std::endl <<
             "        ###" << std::endl <<
             "        ###" << std::endl <<
-        std::endl;
+            std::endl;
         }
     outfile.close();
     }

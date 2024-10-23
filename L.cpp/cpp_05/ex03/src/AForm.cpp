@@ -50,7 +50,7 @@ void AForm::doSign(Bureaucrat &b)
 	std::cout << RED << "\nForm " << this->getName() << " has already been signed" << RESET << std::endl;
 }
 
-void AForm::execute(Bureaucrat cont &executor) const
+void AForm::execute(Bureaucrat const &executor) const
 {
 	if (!this->_isSigned)
 		throw (FormNotSignedException());
@@ -86,12 +86,12 @@ size_t AForm::getExecGrade() const
 	return  (this->_exec_grade);
 }
 
-size_t AForm::setGrade(int grade)
+size_t AForm::setGrade(size_t grade)
 {
 	if (grade > 150)
-		throw (AForm::GradeTooLowException())
+		throw (AForm::GradeTooLowException());
 	else if (grade < 1)
-		throw (AForm::GradeTooHighException())
+		throw (AForm::GradeTooHighException());
 	return (grade);
 }
 

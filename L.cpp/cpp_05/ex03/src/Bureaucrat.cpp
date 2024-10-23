@@ -16,7 +16,7 @@ const std::string validName(const std::string& name)
 {
 	if (name.empty())
 		throw (Bureaucrat::InvalidNameException());
-	for (int i = 0; i < name.length(); i++)
+	for (size_t i = 0; i < name.length(); i++)
 		if (!(std::isalpha(name[i]) || name[i] != '-' || name[i] != ' '))
 			throw (Bureaucrat::InvalidNameException());
 	return (name);
@@ -91,7 +91,7 @@ size_t Bureaucrat::getGrade() const
 	return (this->_grade);
 }
 
-size_t Bureaucrat::setGrade(int grade)
+size_t Bureaucrat::setGrade(size_t grade)
 {
 	if (grade > 150)
 		throw (Bureaucrat::GradeTooLowException());
