@@ -30,13 +30,13 @@ Bureaucrat::Bureaucrat(): _name("default"), _grade(150)
 Bureaucrat::Bureaucrat(const Bureaucrat &copy): _name(copy.getName() + "_copy"), _grade(copy._grade)
 {}
 
-Bureaucrat::Bureaucrat(int grade): _name("default"), _grade(setGrade(grade))
+Bureaucrat::Bureaucrat(size_t grade): _name("default"), _grade(setGrade(grade))
 {}
 
 Bureaucrat::Bureaucrat(const std::string name): _name(validName(name)), _grade(150)
 {}
 
-Bureaucrat::Bureaucrat(const std::string name, int grade): _name(validName(name)), _grade(setGrade(grade))
+Bureaucrat::Bureaucrat(const std::string name, size_t grade): _name(validName(name)), _grade(setGrade(grade))
 {}
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &src)
@@ -75,7 +75,7 @@ size_t Bureaucrat::getGrade()const
 	return (this->_grade);
 }
 
-size_t Bureaucrat::setGrade(int grade)
+size_t Bureaucrat::setGrade(size_t grade)
 {
 	if (grade > 150)
 		throw (Bureaucrat::GradeTooLowException());
