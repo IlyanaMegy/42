@@ -27,7 +27,7 @@ const std::string validName(const std::string& name)
 Bureaucrat::Bureaucrat(): _name("default"), _grade(150)
 {}
 
-Bureaucrat::Bureaucrat(const Bureaucrat &copy): _name(copy.getName() + "_copy"), _grade(copy._grade)
+Bureaucrat::Bureaucrat(const Bureaucrat &copy): _name(copy.getName()), _grade(copy._grade)
 {}
 
 Bureaucrat::Bureaucrat(int grade): _name("default"), _grade(setGrade(grade))

@@ -15,7 +15,7 @@
 AForm::AForm(): _name("default"), _isSigned(false), _sign_grade(150), _exec_grade(150)
 {}
 
-AForm::AForm(AForm const &src): _name(src.getName() + "_copy"), _isSigned(src.getIsSignedBool()), _sign_grade(src.getSignGrade()), _exec_grade(src.getExecGrade())
+AForm::AForm(AForm const &src): _name(src.getName()), _isSigned(src.getIsSignedBool()), _sign_grade(src.getSignGrade()), _exec_grade(src.getExecGrade())
 {}
 
 AForm::AForm(int sign_grade, int exec_grade): _name("default"), _isSigned(false), _sign_grade(setGrade(sign_grade)), _exec_grade(setGrade(exec_grade))
@@ -30,17 +30,17 @@ AForm::AForm(const std::string name, int sign_grade, int exec_grade): _name(name
 AForm &AForm::operator=(const AForm &src)
 {
 	if (this != &src)
-		this->_isSigned = src._isSigned;
+		return *this;
 	return *this;
 }
 
 AForm::~AForm()
 {}
 
-void AForm::doSign(Bureaucrat &human)
+void AForm::beSigned(Bureaucrat &human)
 {
 	if (human.getGrade() > this->getSignGrade())
-		throw (GradeTooLowException());
+		throw (Bureaucrat::GradeTooLowException());
 	if (!this->getIsSignedBool())
 	{
 		this->_isSigned = true;
@@ -53,9 +53,9 @@ void AForm::doSign(Bureaucrat &human)
 void AForm::execute(Bureaucrat const &executor) const
 {
 	if (!_isSigned)
-        throw FormNotSignedException();
+        throw AForm::FormNotSignedException();
     if (executor.getGrade() > _exec_grade)
-        throw GradeTooLowException();
+        throw AForm::GradeTooLowException();
     executeAction();
 }
 

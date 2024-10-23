@@ -16,7 +16,7 @@
 # include <fstream>
 # include <typeinfo>
 
-class	Bureaucrat;
+class	Bureaucrat; 
 class	AForm;
 class SCForm : public AForm
 {

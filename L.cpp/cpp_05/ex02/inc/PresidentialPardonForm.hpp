@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RRForm.hpp                                         :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 14:33:39 by ilymegy           #+#    #+#             */
-/*   Updated: 2024/10/07 14:33:40 by ilymegy          ###   ########.fr       */
+/*   Created: 2024/10/07 14:32:59 by ilymegy           #+#    #+#             */
+/*   Updated: 2024/10/07 14:33:04 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RRFORM_HPP
-# define RRFORM_HPP
-# include "Bureaucrat.hpp"
+#ifndef PRESIDENTIALPARDONFORM_HPP
+# define PRESIDENTIALPARDONFORM_HPP
+# include "AForm.hpp"
+# include <cstdio>
+# include <cstdlib>
+# include <iomanip>
+# include <iostream>
 
 class	Bureaucrat;
 class	AForm;
-class RRForm : public AForm
+class PresidentialPardonForm : public AForm
 {
   private:
 	const std::string _target;
@@ -26,20 +30,20 @@ class RRForm : public AForm
 
   public:
 	// Constructors
-	RRForm();
-	RRForm(std::string target);
-	RRForm(RRForm const &src);
+	PresidentialPardonForm();
+	PresidentialPardonForm(std::string target);
+	PresidentialPardonForm(PresidentialPardonForm const &src);
 
 	// Overloaded Operators
-	RRForm &operator=(RRForm const &src);
+	PresidentialPardonForm &operator=(PresidentialPardonForm const &src);
 
 	// Deconstructor
-	~RRForm();
+	virtual ~PresidentialPardonForm();
 
 	// Getter
-	std::string getTarget(void) const;
+	std::string getTarget() const;
 };
 
 // ostream Overload
-std::ostream &operator<<(std::ostream &o, RRForm *a);
+std::ostream &operator<<(std::ostream &o, PresidentialPardonForm *a);
 #endif

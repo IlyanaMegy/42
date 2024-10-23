@@ -1,49 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PPForm.hpp                                         :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 14:32:59 by ilymegy           #+#    #+#             */
-/*   Updated: 2024/10/07 14:33:04 by ilymegy          ###   ########.fr       */
+/*   Created: 2024/10/07 14:33:39 by ilymegy           #+#    #+#             */
+/*   Updated: 2024/10/07 14:33:40 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PPFORM_HPP
-# define PPFORM_HPP
-# include "AForm.hpp"
-# include <cstdio>
-# include <cstdlib>
-# include <iomanip>
-# include <iostream>
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
+# include "Bureaucrat.hpp"
 
 class	Bureaucrat;
 class	AForm;
-class PPForm: public AForm
+class RobotomyRequestForm : public AForm
 {
   private:
-	std::string _target;
+	const std::string _target;
 
   protected:
 	void executeAction() const;
 
   public:
 	// Constructors
-	PPForm();
-	PPForm(std::string target);
-	PPForm(PPForm const &src);
+	RobotomyRequestForm();
+	RobotomyRequestForm(std::string target);
+	RobotomyRequestForm(RobotomyRequestForm const &src);
 
 	// Overloaded Operators
-	PPForm &operator=(PPForm const &assign);
+	RobotomyRequestForm &operator=(RobotomyRequestForm const &src);
 
 	// Deconstructor
-	virtual ~PPForm();
+	~RobotomyRequestForm();
 
 	// Getter
 	std::string getTarget(void) const;
 };
 
 // ostream Overload
-std::ostream &operator<<(std::ostream &o, PPForm *a);
+std::ostream &operator<<(std::ostream &o, RobotomyRequestForm *a);
 #endif

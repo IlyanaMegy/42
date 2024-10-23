@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RRForm.cpp                                         :+:      :+:    :+:   */
+/*   RobotomyRequestForm.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RRForm.hpp"
+#include "../inc/RobotomyRequestForm.hpp"
 
-RRForm::RRForm(): AForm("RobotomyRequestForm", 72, 45), _target("")
+RobotomyRequestForm::RobotomyRequestForm(): AForm("RobotomyRequestForm", 72, 45), _target("")
 {
 	std::cout << "Error: Target must be specified '" << _target << "' is not recognized." << std::endl;
 	throw std::invalid_argument("Target must be specified");
 }
 
-RRForm::RRForm(std::string target): AForm("RobotomyRequestForm", 72, 45), _target(target)
+RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm("RobotomyRequestForm", 72, 45), _target(target)
 {
 	if (_target.empty())
 	{
@@ -27,7 +27,7 @@ RRForm::RRForm(std::string target): AForm("RobotomyRequestForm", 72, 45), _targe
 	}
 }
 
-RRForm::RRForm(RRForm const &src): AForm(src), _target(src._target)
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &src): AForm(src), _target(src._target)
 {
 	if (_target.empty())
 	{
@@ -36,12 +36,12 @@ RRForm::RRForm(RRForm const &src): AForm(src), _target(src._target)
 	}
 }
 
-RRForm::~RRForm()
+RobotomyRequestForm::~RobotomyRequestForm()
 {
 	std::cout << RED << "RobotomyRequestForm Destructor called" << std::endl;
 }
 
-RRForm &RRForm::operator=(RRForm const &src)
+RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &src)
 {
 	std::cout << "ShrubberyCreationForm Assignation operator called" << std::endl;
 	if (this != &src)
@@ -49,7 +49,7 @@ RRForm &RRForm::operator=(RRForm const &src)
 	return *this;
 }
 
-void RRForm::executeAction() const
+void RobotomyRequestForm::executeAction() const
 {
 	if (rand() % 2)
 		std::cout << "BRRRRRRRRRRRRRR\n" << this->getTarget() << " was robotomized" << std::endl;
@@ -57,12 +57,12 @@ void RRForm::executeAction() const
 		std::cout << "Robotomy of " << this->getTarget() << "failed" << std::endl;
 }
 
-std::string RRForm::getTarget(void)const
+std::string RobotomyRequestForm::getTarget(void)const
 {
 	return (this->_target);
 }
 
-std::ostream &operator<<(std::ostream &o, RRForm *a)
+std::ostream &operator<<(std::ostream &o, RobotomyRequestForm *a)
 {
 	o << MAGENTA << "\n* Form " << a->getName() << "\n  sign grade : " << a->getSignGrade() <<
 	"\n  execution grade : " << a->getExecGrade() << "\n  signed : " << a->getIsSigned() << RESET << std::endl;

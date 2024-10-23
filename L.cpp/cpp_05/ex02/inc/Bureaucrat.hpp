@@ -40,7 +40,6 @@ class Bureaucrat
   private:
 	const std::string _name;
 	size_t _grade;
-	size_t setGrade(int grade);
 
   public:
 	// Constructors
@@ -65,6 +64,7 @@ class Bureaucrat
 	// Getters
 	const std::string getName() const;
 	size_t getGrade() const;
+	size_t setGrade(int grade);
 
 	class GradeTooLowException : public std::exception
 	{

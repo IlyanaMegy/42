@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PPForm.cpp                                         :+:      :+:    :+:   */
+/*   PresidentialPardonForm.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/PPForm.hpp"
+#include "../inc/PresidentialPardonForm.hpp"
 
-PPForm::PPForm(void): AForm("PresidentialPardonForm", 25, 5), _target("default")
+PresidentialPardonForm::PresidentialPardonForm(): AForm("PresidentialPardonForm", 25, 5), _target("default")
 {
 	std::cout << "PresidentialPardonForm Default Constructor called" << std::endl;
 }
 
-PPForm::PPForm(std::string target): AForm("PresidentialPardonForm", 25, 5), _target(target)
+PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("PresidentialPardonForm", 25, 5), _target(target)
 {
 	if (this->_target.empty())
     {
@@ -27,7 +27,7 @@ PPForm::PPForm(std::string target): AForm("PresidentialPardonForm", 25, 5), _tar
 	std::cout << "PresidentialPardonForm Constructor for target " << CYAN << this->getTarget() << RESET << " called" << std::endl;
 }
 
-PPForm::PPForm(PPForm const &src): AForm("PresidentialPardonForm", 25, 5), _target(src.getTarget())
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &src): AForm("PresidentialPardonForm", 25, 5), _target(src.getTarget())
 {
 	if (this->_target.empty())
     {
@@ -38,12 +38,12 @@ PPForm::PPForm(PPForm const &src): AForm("PresidentialPardonForm", 25, 5), _targ
 	" into " << this->getName() << RESET << std::endl;
 }
 
-PPForm::~PPForm()
+PresidentialPardonForm::~PresidentialPardonForm()
 {
 	std::cout << RED << "PresidentialPardonForm Destructor " << this->getName() << " called" << std::endl;
 }
 
-PPForm &PPForm::operator=(PPForm const &src)
+PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm const &src)
 {
 	std::cout << "PresidentialPardonForm assignation operator called" << std::endl;
 	if (this != &src)
@@ -58,17 +58,17 @@ PPForm &PPForm::operator=(PPForm const &src)
 	return *this;
 }
 
-void PPForm::executeAction() const
+void PresidentialPardonForm::executeAction() const
 {
 	std::cout << BLUE << this->getTarget() << " has been pardoned by Zaphod Beeblebrox" << RESET << std::endl;
 }
 
-std::string PPForm::getTarget(void)const
+std::string PresidentialPardonForm::getTarget(void)const
 {
 	return (this->_target);
 }
 
-std::ostream &operator<<(std::ostream &o, PPForm *a)
+std::ostream &operator<<(std::ostream &o, PresidentialPardonForm *a)
 {
 	o << MAGENTA << "\n* Form " << a->getName() << "\n  sign grade : " << a->getSignGrade() <<
 	"\n  execution grade : " << a->getExecGrade() << "\n  signed : " << a->getIsSigned() << RESET << std::endl;
