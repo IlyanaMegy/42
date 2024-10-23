@@ -35,15 +35,14 @@ class Bureaucrat
   private:
 	const std::string _name;
 	size_t _grade;
-	size_t setGrade(size_t grade);
 
   public:
 	// Constructors
 	Bureaucrat();
 	Bureaucrat(Bureaucrat const &src);
-	Bureaucrat(size_t grade);
+	Bureaucrat(int grade);
 	Bureaucrat(const std::string name);
-	Bureaucrat(const std::string name, size_t grade);
+	Bureaucrat(const std::string name, int grade);
 
 	// Overloaded Operators
 	Bureaucrat &operator=(Bureaucrat const &src);
@@ -58,6 +57,7 @@ class Bureaucrat
 	// Getters
 	const std::string getName() const;
 	size_t getGrade() const;
+	size_t setGrade(int grade);
 
 	//Exceptions
 	class GradeTooLowException : public std::exception
