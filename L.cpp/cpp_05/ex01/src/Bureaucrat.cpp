@@ -67,15 +67,15 @@ void Bureaucrat::decrementGrade()
 
 void	Bureaucrat::signForm(Form &form)
 {
-	form.doSign(*this);
+	form.beSigned(*this);
 }
 
-const std::string Bureaucrat::getName(void)const
+const std::string Bureaucrat::getName()const
 {
 	return (this->_name);
 }
 
-size_t Bureaucrat::getGrade(void)const
+size_t Bureaucrat::getGrade()const
 {
 	return (this->_grade);
 }
@@ -91,12 +91,12 @@ size_t Bureaucrat::setGrade(int grade)
 	return this->_grade;
 }
 
-const char *Bureaucrat::GradeTooLowException::what(void) const throw()
+const char *Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return ("Grade is too low /!\\");
 };
 
-const char *Bureaucrat::GradeTooHighException::what(void) const throw()
+const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return ("Grade is too high /!\\");
 };

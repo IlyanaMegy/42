@@ -15,7 +15,7 @@
 
 # include "Bureaucrat.hpp"
 
-class Bureaucrat;
+class	Bureaucrat;
 class Form
 {
   private:
@@ -23,7 +23,6 @@ class Form
 	bool _isSigned;
 	const size_t _sign_grade;
 	const size_t _exec_grade;
-	size_t setGrade(int grade);
 
   public:
 	// Constructors
@@ -40,10 +39,11 @@ class Form
 	~Form();
 
 	// Public Methods
-	void doSign(Bureaucrat &human);
+	void beSigned(Bureaucrat &human);
 
 	// Getters
 	const std::string getName() const;
+	size_t setGrade(int grade);
 	const std::string getIsSigned() const;
 	bool getIsSignedBool() const;
 	size_t getSignGrade() const;

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 
-#include "Bureaucrat.hpp"
 #include "Form.hpp"
 
 int main(void)
@@ -28,7 +27,7 @@ int main(void)
 
 		try
 		{
-			b->doSign(*a);
+			b->beSigned(*a);
 		}
 		catch(Bureaucrat::GradeTooLowException &e)
 		{
@@ -61,7 +60,7 @@ int main(void)
 		// Assistant signs the Form
 		try
 		{
-			c->doSign(*a);
+			c->beSigned(*a);
 			// a->signForm(*c);
 		}
 		catch(Bureaucrat::GradeTooLowException &e)
@@ -73,7 +72,7 @@ int main(void)
 		std::cout << c;
 		try
 		{
-			c->doSign(*b);
+			c->beSigned(*b);
 			// b->signForm(*c);
 		}
 		catch(Bureaucrat::GradeTooLowException &e)

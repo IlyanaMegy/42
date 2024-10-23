@@ -15,7 +15,7 @@
 Form::Form(): _name("default"), _isSigned(false), _sign_grade(150), _exec_grade(150)
 {}
 
-Form::Form(Form const &src): _name(src.getName() + "_copy"), _isSigned(src.getIsSignedBool()), _sign_grade(src.getSignGrade()), _exec_grade(src.getExecGrade())
+Form::Form(Form const &src): _name(src.getName()), _isSigned(src.getIsSignedBool()), _sign_grade(src.getSignGrade()), _exec_grade(src.getExecGrade())
 {}
 
 Form::Form(int sign_grade, int exec_grade): _name("default"), _isSigned(false), _sign_grade(setGrade(sign_grade)), _exec_grade(setGrade(exec_grade))
@@ -30,14 +30,14 @@ Form::Form(const std::string name, int sign_grade, int exec_grade): _name(name),
 Form &Form::operator=(const Form &src)
 {
 	if (this != &src)
-		this->_isSigned = src._isSigned;
+		return *this;
 	return *this;
 }
 
 Form::~Form()
 {}
 
-void Form::doSign(Bureaucrat &human)
+void Form::beSigned(Bureaucrat &human)
 {
 	if (human.getGrade() > this->getSignGrade())
 		throw (Bureaucrat::GradeTooLowException());

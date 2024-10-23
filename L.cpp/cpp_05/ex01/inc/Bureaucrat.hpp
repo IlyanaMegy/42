@@ -33,13 +33,12 @@
 # define FALSE_EMOJI "❌"
 # define TRUE_EMOJI "✅"
 
-class Form;
+class	Form;
 class Bureaucrat
 {
   private:
 	const std::string _name;
 	size_t _grade;
-	size_t setGrade(int grade);
 
   public:
 	// Constructors
@@ -60,9 +59,10 @@ class Bureaucrat
 	void decrementGrade();
 	void signForm(Form &form);
 
-	// Getters
+	// Setters && Getters
 	const std::string getName() const;
 	size_t getGrade() const;
+	size_t setGrade(int grade);
 
 	// Exceptions
 	class GradeTooLowException : public std::exception
