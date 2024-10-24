@@ -30,7 +30,7 @@ Form::Form(const std::string name, int sign_grade, int exec_grade): _name(name),
 Form &Form::operator=(const Form &src)
 {
 	if (this != &src)
-		return *this;
+		this->_isSigned = src.getIsSignedBool();
 	return *this;
 }
 
