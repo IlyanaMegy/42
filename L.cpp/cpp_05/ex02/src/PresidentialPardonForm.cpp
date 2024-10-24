@@ -12,6 +12,16 @@
 
 #include "../inc/PresidentialPardonForm.hpp"
 
+static std::string verifTarget(std::string t)
+{
+	if (t.empty())
+	{
+		std::cout << "Error: Target must be specified '" << t << "' is not recognized." << std::endl;
+        throw std::invalid_argument("Target must be specified");
+	}
+	return (t);
+}
+
 PresidentialPardonForm::PresidentialPardonForm(): AForm("PresidentialPardonForm", 25, 5), _target("default")
 {
 	std::cout << "PresidentialPardonForm Default Constructor called" << std::endl;
@@ -45,16 +55,9 @@ PresidentialPardonForm::~PresidentialPardonForm()
 
 PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm const &src)
 {
-	std::cout << "PresidentialPardonForm assignation operator called" << std::endl;
+	std::cout << "PresidentialPardonForm Assignation operator called" << std::endl;
 	if (this != &src)
-	{
-		if (src._target.empty())
-		{
-			std::cout << "Error: Target must be specified '" << this->_target << "' is not recognized." << std::endl;
-			throw std::invalid_argument("Target must be specified");
-		}
-        this->_target = src._target;
-    }
+		this->_target = verifTarget(src._target);
 	return *this;
 }
 
@@ -63,7 +66,7 @@ void PresidentialPardonForm::executeAction() const
 	std::cout << BLUE << this->getTarget() << " has been pardoned by Zaphod Beeblebrox" << RESET << std::endl;
 }
 
-std::string PresidentialPardonForm::getTarget(void)const
+std::string PresidentialPardonForm::getTarget()const
 {
 	return (this->_target);
 }

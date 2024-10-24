@@ -12,6 +12,16 @@
 
 #include "../inc/RobotomyRequestForm.hpp"
 
+static std::string verifTarget(std::string t)
+{
+	if (t.empty())
+	{
+		std::cout << "Error: Target must be specified '" << t << "' is not recognized." << std::endl;
+        throw std::invalid_argument("Target must be specified");
+	}
+	return (t);
+}
+
 RobotomyRequestForm::RobotomyRequestForm(): AForm("RobotomyRequestForm", 72, 45), _target("")
 {
 	std::cout << "Error: Target must be specified '" << _target << "' is not recognized." << std::endl;
@@ -43,9 +53,9 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &src)
 {
-	std::cout << "ShrubberyCreationForm Assignation operator called" << std::endl;
+	std::cout << "RobotomyRequestForm Assignation operator called" << std::endl;
 	if (this != &src)
-		return *this;
+		this->_target = verifTarget(src._target);
 	return *this;
 }
 

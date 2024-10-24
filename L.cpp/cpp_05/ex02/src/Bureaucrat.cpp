@@ -67,7 +67,7 @@ void Bureaucrat::decrementGrade()
 
 void	Bureaucrat::signForm(AForm &form)
 {
-	form.doSign(*this);
+	form.beSigned(*this);
 }
 
 void	Bureaucrat::executeForm(AForm &form)const

@@ -19,7 +19,7 @@ class	AForm;
 class RobotomyRequestForm : public AForm
 {
   private:
-	const std::string _target;
+	std::string _target;
 
   protected:
 	void executeAction() const;
@@ -37,7 +37,7 @@ class RobotomyRequestForm : public AForm
 	~RobotomyRequestForm();
 
 	// Getter
-	std::string getTarget(void) const;
+	std::string getTarget() const;
 };
 
 // ostream Overload

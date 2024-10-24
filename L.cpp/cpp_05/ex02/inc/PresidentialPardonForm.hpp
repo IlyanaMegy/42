@@ -23,7 +23,7 @@ class	AForm;
 class PresidentialPardonForm : public AForm
 {
   private:
-	const std::string _target;
+	std::string _target;
 
   protected:
 	void executeAction() const;

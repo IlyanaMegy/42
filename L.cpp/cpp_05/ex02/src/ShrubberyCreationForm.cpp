@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   SCForm.cpp                                         :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,14 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/SCForm.hpp"
+#include "../inc/ShrubberyCreationForm.hpp"
 
-SCForm::SCForm(void): AForm("ShrubberyCreationForm", 145, 137), _target("default")
+static std::string verifTarget(std::string t)
+{
+	if (t.empty())
+	{
+		std::cout << "Error: Target must be specified '" << t << "' is not recognized." << std::endl;
+        throw std::invalid_argument("Target must be specified");
+	}
+	return (t);
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(void): AForm("ShrubberyCreationForm", 145, 137), _target("default")
 {
 	std::cout << "ShrubberyCreationForm Default Constructor called" << std::endl;
 }
 
-SCForm::SCForm(std::string target): AForm("ShrubberyCreationForm", 145, 137), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm("ShrubberyCreationForm", 145, 137), _target(target)
 {
 	if (this->_target.empty())
     {
@@ -27,7 +37,7 @@ SCForm::SCForm(std::string target): AForm("ShrubberyCreationForm", 145, 137), _t
 	std::cout << "ShrubberyCreationForm for target " << CYAN << this->getTarget() << RESET << " called" << std::endl;
 }
 
-SCForm::SCForm(SCForm const &src): AForm("ShrubberyCreationForm", 145, 137), _target(src.getTarget())
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src): AForm("ShrubberyCreationForm", 145, 137), _target(src.getTarget())
 {
 	if (this->_target.empty())
     {
@@ -38,20 +48,20 @@ SCForm::SCForm(SCForm const &src): AForm("ShrubberyCreationForm", 145, 137), _ta
 	" into " << this->getName() << RESET << std::endl;
 }
 
-SCForm::~SCForm()
+ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 	std::cout << RED << "RobotomyRequestForm Destructor called" << std::endl;
 }
 
-SCForm &SCForm::operator=(SCForm const &src)
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const &src)
 {
-	std::cout << "ShrubberyCreationForm Assignation operator called" << std::endl;
+    std::cout << "ShrubberyCreationForm Assignation operator called" << std::endl;
 	if (this != &src)
-		return *this;
+		this->_target = verifTarget(src._target);
 	return *this;
 }
 
-void SCForm::executeAction() const
+void ShrubberyCreationForm::executeAction() const
 {
     std::string filename = _target + "_shrubbery";
     std::ofstream outfile (this->getTarget().append("_shrubbery").c_str());
@@ -85,12 +95,12 @@ void SCForm::executeAction() const
         std::cerr << "Failed to open file: " << filename << "\n";
 }
 
-std::string	SCForm::getTarget()const
+std::string	ShrubberyCreationForm::getTarget()const
 {
 	return (this->_target);
 }
 
-std::ostream &operator<<(std::ostream &o, SCForm *a)
+std::ostream &operator<<(std::ostream &o, ShrubberyCreationForm *a)
 {
 	o << MAGENTA << "\n* Form " << a->getName() << "\n  sign grade : " << a->getSignGrade() <<
 	"\n  execution grade : " << a->getExecGrade() << "\n  signed : " << a->getIsSigned() << RESET << std::endl;

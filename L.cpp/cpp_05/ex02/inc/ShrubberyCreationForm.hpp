@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   SCForm.hpp                                         :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,38 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCFORM_HPP
-# define SCFORM_HPP
+#ifndef SHRUBBERYCREATIONFORM_HPP
+# define SHRUBBERYCREATIONFORM_HPP
 # include "Bureaucrat.hpp"
 # include <fstream>
 # include <typeinfo>
 
 class	Bureaucrat; 
 class	AForm;
-class SCForm : public AForm
+class ShrubberyCreationForm : public AForm
 {
   private:
-	const std::string _target;
+	std::string _target;
 
   protected:
 	void executeAction() const;
 
   public:
 	// Constructors
-	SCForm();
-	SCForm(const std::string target);
-	SCForm(SCForm const &src);
+	ShrubberyCreationForm();
+	ShrubberyCreationForm(const std::string target);
+	ShrubberyCreationForm(ShrubberyCreationForm const &src);
 
 	// Overloaded Operators
-	SCForm &operator=(SCForm const &src);
+	ShrubberyCreationForm &operator=(ShrubberyCreationForm const &src);
 
 	// Deconstructor
-	~SCForm();
+	~ShrubberyCreationForm();
 
 	// Getter
 	std::string getTarget() const;
 };
 
 // ostream Overload
-std::ostream &operator<<(std::ostream &o, SCForm *a);
+std::ostream &operator<<(std::ostream &o, ShrubberyCreationForm *a);
 #endif

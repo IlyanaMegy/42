@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "../inc/Bureaucrat.hpp"
-#include "../inc/PPForm.hpp"
-#include "../inc/RRForm.hpp"
-#include "../inc/SCForm.hpp"
+#include "../inc/PresidentialPardonForm.hpp"
+#include "../inc/RobotomyRequestForm.hpp"
+#include "../inc/ShrubberyCreationForm.hpp"
 
 #define ASSERT_TEST(expression, message) \
     if (expression) { std::cout << "\033[32m[TEST PASSED]\033[0m " << message << std::endl; } \
@@ -186,24 +186,24 @@ int main(void)
     try
 	{
         Bureaucrat bob("Bob", 1);
-		SCForm shrub("home");
-        RRForm robot("Alice");
-        PPForm pardon("Charlie");
+		ShrubberyCreationForm shrub("home");
+        RobotomyRequestForm robot("Alice");
+        PresidentialPardonForm pardon("Charlie");
 
         bob.signForm(shrub);
         bob.executeForm(shrub);
-        ASSERT_TEST(shrub.getIsSignedBool(), "SCForm signed.");
-        ASSERT_TEST(shrub.getIsSignedBool() && shrub.getExecGrade() >= bob.getGrade(), "SCForm executed.");
+        ASSERT_TEST(shrub.getIsSignedBool(), "ShrubberyCreationForm signed.");
+        ASSERT_TEST(shrub.getIsSignedBool() && shrub.getExecGrade() >= bob.getGrade(), "ShrubberyCreationForm executed.");
 
         bob.signForm(robot);
         bob.executeForm(robot);
-        ASSERT_TEST(robot.getIsSignedBool(), "RRForm signed.");
-        ASSERT_TEST(robot.getIsSignedBool() && robot.getExecGrade() >= bob.getGrade(), "RRForm executed.");
+        ASSERT_TEST(robot.getIsSignedBool(), "RobotomyRequestForm signed.");
+        ASSERT_TEST(robot.getIsSignedBool() && robot.getExecGrade() >= bob.getGrade(), "RobotomyRequestForm executed.");
 
         bob.signForm(pardon);
         bob.executeForm(pardon);
-        ASSERT_TEST(pardon.getIsSignedBool(), "PPForm signed.");
-        ASSERT_TEST(pardon.getIsSignedBool() && pardon.getExecGrade() >= bob.getGrade(), "PPForm executed.");
+        ASSERT_TEST(pardon.getIsSignedBool(), "PresidentialPardonForm signed.");
+        ASSERT_TEST(pardon.getIsSignedBool() && pardon.getExecGrade() >= bob.getGrade(), "PresidentialPardonForm executed.");
     }
 	catch (std::exception &e)
 	{
@@ -217,7 +217,7 @@ int main(void)
     std::cout << CYAN << "\nTEST GETTERS IN AForm:" << RESET << std::endl;
     try
 	{
-        SCForm shrub("test");
+        ShrubberyCreationForm shrub("test");
         ASSERT_TEST(shrub.getName() == "ShrubberyCreationForm", "getName() works correctly.");
         ASSERT_TEST(!shrub.getIsSignedBool(), "getIsSigned() works correctly.");
         ASSERT_TEST(shrub.getSignGrade() == 145, "getSignGrade() works correctly.");
@@ -235,28 +235,28 @@ int main(void)
     ASSERT_TEST(std::string(typeid(AForm).name()) == "5AForm", "AForm class name is correct.");
 
     /**
-    * TEST SCForm REQUIREMENTS
+    * TEST ShrubberyCreationForm REQUIREMENTS
     */
-    std::cout << CYAN << "\nTEST SCForm REQUIREMENTS:" << RESET << std::endl;
+    std::cout << CYAN << "\nTEST ShrubberyCreationForm REQUIREMENTS:" << RESET << std::endl;
     try
 	{
-        SCForm shrub("home");
-        ASSERT_TEST(shrub.getSignGrade() == 145, "SCForm sign grade is 145.");
-        ASSERT_TEST(shrub.getExecGrade() == 137, "SCForm execute grade is 137.");
+        ShrubberyCreationForm shrub("home");
+        ASSERT_TEST(shrub.getSignGrade() == 145, "ShrubberyCreationForm sign grade is 145.");
+        ASSERT_TEST(shrub.getExecGrade() == 137, "ShrubberyCreationForm execute grade is 137.");
     }
 	catch (std::exception &e)
 	{
-        ASSERT_TEST(false, "SCForm constructor threw an exception.");
+        ASSERT_TEST(false, "ShrubberyCreationForm constructor threw an exception.");
     }
 
     /**
-    * TEST SCForm FILE CREATION
+    * TEST ShrubberyCreationForm FILE CREATION
     */
-    std::cout << CYAN << "\nTEST SCForm:" << RESET << std::endl;
+    std::cout << CYAN << "\nTEST ShrubberyCreationForm:" << RESET << std::endl;
     try
 	{
         Bureaucrat bob("Bob", 1);
-        SCForm shrub("test_target");
+        ShrubberyCreationForm shrub("test_target");
         bob.signForm(shrub);
 
         /**
@@ -283,33 +283,33 @@ int main(void)
     }
 
     /**
-    * TEST RRForm REQUIREMENTS
+    * TEST RobotomyRequestForm REQUIREMENTS
     */
-    std::cout << CYAN << "\nTEST RRForm REQUIREMENTS:" << RESET << std::endl;
+    std::cout << CYAN << "\nTEST RobotomyRequestForm REQUIREMENTS:" << RESET << std::endl;
     try
 	{
-        RRForm robot("Alice");
-        ASSERT_TEST(robot.getSignGrade() == 72, "RRForm sign grade is 72.");
-        ASSERT_TEST(robot.getExecGrade() == 45, "RRForm execute grade is 45.");
+        RobotomyRequestForm robot("Alice");
+        ASSERT_TEST(robot.getSignGrade() == 72, "RobotomyRequestForm sign grade is 72.");
+        ASSERT_TEST(robot.getExecGrade() == 45, "RobotomyRequestForm execute grade is 45.");
     }
 	catch (std::exception &e)
 	{
-        ASSERT_TEST(false, "RRForm constructor threw an exception.");
+        ASSERT_TEST(false, "RobotomyRequestForm constructor threw an exception.");
     }
 
     /**
-    * TEST PPForm REQUIREMENTS
+    * TEST PresidentialPardonForm REQUIREMENTS
     */
-    std::cout << CYAN << "\nTEST PPForm REQUIREMENTS:" << RESET << std::endl;
+    std::cout << CYAN << "\nTEST PresidentialPardonForm REQUIREMENTS:" << RESET << std::endl;
     try
 	{
-        PPForm pardon("Charlie");
-        ASSERT_TEST(pardon.getSignGrade() == 25, "PPForm sign grade is 25.");
-        ASSERT_TEST(pardon.getExecGrade() == 5, "PPForm execute grade is 5.");
+        PresidentialPardonForm pardon("Charlie");
+        ASSERT_TEST(pardon.getSignGrade() == 25, "PresidentialPardonForm sign grade is 25.");
+        ASSERT_TEST(pardon.getExecGrade() == 5, "PresidentialPardonForm execute grade is 5.");
     }
 	catch (std::exception &e)
 	{
-        ASSERT_TEST(false, "PPForm constructor threw an exception.");
+        ASSERT_TEST(false, "PresidentialPardonForm constructor threw an exception.");
     }
 	return 0;
 }
