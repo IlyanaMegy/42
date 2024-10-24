@@ -40,14 +40,13 @@ class Bureaucrat
   private:
 	const std::string _name;
 	size_t _grade;
-	size_t setGrade(size_t grade);
 
   public:
 	Bureaucrat();
 	Bureaucrat(Bureaucrat const &src);
-	Bureaucrat(const std::string name, int grade);
-	Bureaucrat(const std::string name);
 	Bureaucrat(int grade);
+	Bureaucrat(const std::string name);
+	Bureaucrat(const std::string name, int grade);
 
 	Bureaucrat &operator=(Bureaucrat const &src);
 
@@ -60,6 +59,7 @@ class Bureaucrat
 
 	const std::string getName() const;
 	size_t getGrade() const;
+	size_t setGrade(int grade);
 
 	class GradeTooLowException : public std::exception
 	{

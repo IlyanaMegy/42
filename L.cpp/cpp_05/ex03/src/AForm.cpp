@@ -12,51 +12,51 @@
 
 #include "../inc/AForm.hpp"
 
-AForm::AForm() : _name("defaultF"), _isSigned(false), _sign_grade(150), _exec_grade(150)
+AForm::AForm(): _name("default"), _isSigned(false), _sign_grade(150), _exec_grade(150)
 {}
 
-AForm::AForm(AForm const &src) : _name(src._name + "_copy"), _isSigned(src.getIsSignedBool()), _sign_grade(src.getSignGrade()), _exec_grade(src.getExecGrade())
+AForm::AForm(AForm const &src): _name(src.getName()), _isSigned(src.getIsSignedBool()), _sign_grade(src.getSignGrade()), _exec_grade(src.getExecGrade())
 {}
 
-AForm::AForm(const std::string name) : _name(name), _isSigned(false), _sign_grade(150), _exec_grade(150)
+AForm::AForm(int sign_grade, int exec_grade): _name("default"), _isSigned(false), _sign_grade(setGrade(sign_grade)), _exec_grade(setGrade(exec_grade))
 {}
 
-AForm::AForm(int sign_grade, int exec_grade) : _name("defaultF"), _isSigned(false), _sign_grade(setGrade(sign_grade)), _exec_grade(setGrade(exec_grade))
+AForm::AForm(const std::string name): _name(name), _isSigned(false), _sign_grade(150), _exec_grade(150)
 {}
 
-AForm::AForm(const std::string name, int sign_grade, int exec_grade) : _name(name), _isSigned(false), _sign_grade(setGrade(sign_grade)), _exec_grade(setGrade(exec_grade))
+AForm::AForm(const std::string name, int sign_grade, int exec_grade): _name(name), _isSigned(false), _sign_grade(setGrade(sign_grade)), _exec_grade(setGrade(exec_grade))
 {}
 
-AForm &AForm::operator=(AForm const &src)
+AForm &AForm::operator=(const AForm &src)
 {
 	if (this != &src)
-		this->_isSigned = src._isSigned;
+		this->_isSigned = src.getIsSignedBool();
 	return *this;
 }
 
 AForm::~AForm()
 {}
 
-void AForm::doSign(Bureaucrat &b)
+void AForm::beSigned(Bureaucrat &human)
 {
-	if (b.getGrade() > this->getSignGrade())
-		throw (GradeTooLowException());
+	if (human.getGrade() > this->getSignGrade())
+		throw (Bureaucrat::GradeTooLowException());
 	if (!this->getIsSignedBool())
 	{
 		this->_isSigned = true;
-		std::cout << BLACK << "\nForm " << this->_name << " has been signed by " << b.getName() << RESET << std::endl;
+		std::cout << BLACK << "\nForm " << this->_name << " has been signed by " << human.getName() << RESET << std::endl;
 		return;
 	}
-	std::cout << RED << "\nForm " << this->getName() << " has already been signed" << RESET << std::endl;
+	std::cout << RED << "\nForm " << this->_name << " has already been signed" << RESET << std::endl;
 }
 
 void AForm::execute(Bureaucrat const &executor) const
 {
-	if (!this->_isSigned)
-		throw (FormNotSignedException());
-	if (executor.getGrade() > this->_exec_grade)
-		throw (GradeTooLowException());
-	executeAction();
+	if (!_isSigned)
+        throw AForm::FormNotSignedException();
+    if (executor.getGrade() > _exec_grade)
+        throw AForm::GradeTooLowException();
+    executeAction();
 }
 
 const std::string AForm::getName() const
@@ -83,10 +83,10 @@ size_t AForm::getSignGrade() const
 
 size_t AForm::getExecGrade() const
 {
-	return  (this->_exec_grade);
+	return (this->_exec_grade);
 }
 
-size_t AForm::setGrade(size_t grade)
+size_t AForm::setGrade(int grade)
 {
 	if (grade > 150)
 		throw (AForm::GradeTooLowException());

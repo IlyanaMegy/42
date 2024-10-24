@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   SCForm.hpp                                         :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 20:59:47 by ilymegy           #+#    #+#             */
-/*   Updated: 2024/10/17 20:59:49 by ilymegy          ###   ########.fr       */
+/*   Created: 2024/10/07 14:34:12 by ilymegy           #+#    #+#             */
+/*   Updated: 2024/10/07 14:34:14 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCFORM_HPP
-# define SCFORM_HPP
-# include "AForm.hpp"
+#ifndef SHRUBBERYCREATIONFORM_HPP
+# define SHRUBBERYCREATIONFORM_HPP
+# include "Bureaucrat.hpp"
 # include <fstream>
 # include <typeinfo>
 
-class	Bureaucrat;
+class	Bureaucrat; 
 class	AForm;
-class SCForm : public AForm
+class ShrubberyCreationForm : public AForm
 {
   private:
 	std::string _target;
@@ -27,14 +27,21 @@ class SCForm : public AForm
 	void executeAction() const;
 
   public:
-	SCForm();
-	SCForm(SCForm const &src);
-	SCForm(std::string target);
-	SCForm &operator=(SCForm const &src);
-	~SCForm();
+	// Constructors
+	ShrubberyCreationForm();
+	ShrubberyCreationForm(const std::string target);
+	ShrubberyCreationForm(ShrubberyCreationForm const &src);
 
+	// Overloaded Operators
+	ShrubberyCreationForm &operator=(ShrubberyCreationForm const &src);
+
+	// Deconstructor
+	~ShrubberyCreationForm();
+
+	// Getter
 	std::string getTarget() const;
 };
 
-std::ostream &operator<<(std::ostream &o, SCForm *a);
+// ostream Overload
+std::ostream &operator<<(std::ostream &o, ShrubberyCreationForm *a);
 #endif

@@ -15,7 +15,6 @@
 # include "Bureaucrat.hpp"
 
 class	Bureaucrat;
-
 class AForm
 {
   private:
@@ -23,7 +22,6 @@ class AForm
 	bool _isSigned;
 	const size_t _sign_grade;
 	const size_t _exec_grade;
-	size_t setGrade(size_t grade);
 
   protected:
 	virtual void executeAction() const = 0;
@@ -31,19 +29,20 @@ class AForm
   public:
 	AForm();
 	AForm(AForm const &src);
-	AForm(const std::string name);
 	AForm(int sign_grade, int exec_grade);
+	AForm(const std::string name);
 	AForm(const std::string name, int sign_grade, int exec_grade);
 
 	AForm &operator=(AForm const &src);
 
 	virtual ~AForm();
 
-	void doSign(Bureaucrat &b);
+	void beSigned(Bureaucrat &human);
 	void execute(Bureaucrat const &executor) const;
 
-	const std::string getName() const;
-	const std::string getIsSigned() const;
+	const std::string getName(void) const;
+	size_t setGrade(int grade);
+	const std::string getIsSigned(void) const;
 	bool getIsSignedBool() const;
 	size_t getSignGrade() const;
 	size_t getExecGrade() const;

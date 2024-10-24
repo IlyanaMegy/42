@@ -22,22 +22,22 @@ const std::string validName(const std::string& name)
 	return (name);
 }
 
-Bureaucrat::Bureaucrat() : _name("default"), _grade(150)
+Bureaucrat::Bureaucrat(): _name("default"), _grade(150)
 {}
 
-Bureaucrat::Bureaucrat(Bureaucrat const &src) : _name(src._name + "_copy"), _grade(setGrade(src._grade))
+Bureaucrat::Bureaucrat(const Bureaucrat &copy): _name(copy.getName()), _grade(copy._grade)
 {}
 
-Bureaucrat::Bureaucrat(const std::string name) : _name(validName(name)), _grade(150)
+Bureaucrat::Bureaucrat(int grade): _name("default"), _grade(setGrade(grade))
 {}
 
-Bureaucrat::Bureaucrat(int grade) : _name("default"), _grade(setGrade(grade))
+Bureaucrat::Bureaucrat(const std::string name): _name(validName(name)), _grade(150)
 {}
 
-Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(validName(name)), _grade(setGrade(grade))
+Bureaucrat::Bureaucrat(const std::string name, int grade): _name(validName(name)), _grade(setGrade(grade))
 {}
 
-Bureaucrat &Bureaucrat::operator=(Bureaucrat const &src)
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &src)
 {
 	if (this != &src && validName(src._name)[0])
 		setGrade(src._grade);
@@ -63,9 +63,9 @@ void Bureaucrat::decrementGrade()
 		this->_grade++;
 }
 
-void Bureaucrat::signForm(AForm &form)
+void	Bureaucrat::signForm(AForm &form)
 {
-	form.doSign(*this);
+	form.beSigned(*this);
 }
 
 void Bureaucrat::executeForm(AForm &form) const
@@ -91,7 +91,7 @@ size_t Bureaucrat::getGrade() const
 	return (this->_grade);
 }
 
-size_t Bureaucrat::setGrade(size_t grade)
+size_t Bureaucrat::setGrade(int grade)
 {
 	if (grade > 150)
 		throw (Bureaucrat::GradeTooLowException());

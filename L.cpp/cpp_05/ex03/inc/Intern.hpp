@@ -14,19 +14,17 @@
 # define INTERN_HPP
 
 # include "AForm.hpp"
-# include "PPForm.hpp"
-# include "RRForm.hpp"
-# include "SCForm.hpp"
+# include "PresidentialPardonForm.hpp"
+# include "RobotomyRequestForm.hpp"
+# include "ShrubberyCreationForm.hpp"
 
-class AForm;
-class PPForm;
-class RRForm;
-class SCForm;
+class	AForm;
+class	PresidentialPardonForm;
+class	RobotomyRequestForm;
+class	ShrubberyCreationForm;
 class Intern
 {
-private:
-	/* data */
-public:
+  public:
 	Intern();
 	Intern(Intern const &src);
 	Intern &operator=(Intern const &src);
@@ -34,6 +32,5 @@ public:
 
 	AForm *makeForm(const std::string form, const std::string target);
 };
-
 
 #endif

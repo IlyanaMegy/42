@@ -38,17 +38,17 @@ Intern::~Intern()
 
 static AForm *makePPForm(const std::string target)
 {
-	return (new PPForm(target));
+	return (new PresidentialPardonForm(target));
 }
 
 static AForm *makeRRForm(const std::string target)
 {
-	return (new RRForm(target));
+	return (new RobotomyRequestForm(target));
 }
 
 static AForm *makeSCForm(const std::string target)
 {
-	return (new SCForm(target));
+	return (new ShrubberyCreationForm(target));
 }
 
 AForm *Intern::makeForm(const std::string form, const std::string target)

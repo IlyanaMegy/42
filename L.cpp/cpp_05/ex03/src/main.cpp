@@ -12,9 +12,9 @@
 
 #include "../inc/Bureaucrat.hpp"
 #include "../inc/AForm.hpp"
-#include "../inc/PPForm.hpp"
-#include "../inc/RRForm.hpp"
-#include "../inc/SCForm.hpp"
+#include "../inc/PresidentialPardonForm.hpp"
+#include "../inc/RobotomyRequestForm.hpp"
+#include "../inc/ShrubberyCreationForm.hpp"
 #include "../inc/Intern.hpp"
 
 int main(void)
@@ -25,9 +25,9 @@ int main(void)
 		Intern *z = new Intern();
 		AForm *b = z->makeForm("SomeRandomForm", "Clown");
 		b = z->makeForm("PresidentialPardonForm", "Clown");
-		// AForm *b = new PPForm("Clown");
-		// AForm *c = new RRForm("Bender");
-		// AForm *d = new SCForm("Christmas");
+		// AForm *b = new PresidentialPardonForm("Clown");
+		// AForm *c = new RobotomyRequestForm("Bender");
+		// AForm *d = new ShrubberyCreationForm("Christmas");
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
@@ -36,7 +36,7 @@ int main(void)
 		std::cout << std::endl;
 		try
 		{
-			b->doSign(*a);
+			b->beSigned(*a);
 			// b->execute(*a);
 		}
 		catch(std::exception& e)
@@ -61,7 +61,7 @@ int main(void)
 		std::cout << "\033[34mConstructing\033[0m" << std::endl;
 		Bureaucrat *a = new Bureaucrat("Assistant", 145);
 		Bureaucrat *b = new Bureaucrat("CEO", 1);
-		AForm *c = new PPForm("some dude");
+		AForm *c = new PresidentialPardonForm("some dude");
 		// AForm *d = new AForm(*c);
 		// AForm *d = new AForm("Rent Contract", 140, 100); // you are not able to construct an abstract class here
 		std::cout << std::endl;
@@ -85,7 +85,7 @@ int main(void)
 		// Assistant signs the AForm
 		try
 		{
-			c->doSign(*a);
+			c->beSigned(*a);
 			// a->signForm(*c);
 		}
 		catch(std::exception& e)
@@ -99,7 +99,7 @@ int main(void)
 		std::cout << std::endl;
 		try
 		{
-			c->doSign(*b);
+			c->beSigned(*b);
 			// b->signForm(*c);
 		}
 		// catch(AForm::GradeTooLowException &e)
@@ -155,7 +155,7 @@ int main(void)
 		Intern *z = new Intern();
 		AForm *b = z->makeForm("RobotomyRequestForm", "Bender");
 		AForm *c = z->makeForm("ShrubberyCreationForm", "Christmas");
-		// AForm *c = new SCForm("christmas");
+		// AForm *c = new ShrubberyCreationForm("christmas");
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
@@ -164,7 +164,7 @@ int main(void)
 		std::cout << c;
 		std::cout << std::endl;
 
-		b->doSign(*a);
+		b->beSigned(*a);
 		a->signForm(*c);
 		std::cout << std::endl;
 		std::cout << b;

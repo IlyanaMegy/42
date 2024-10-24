@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   SCForm.cpp                                         :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 21:00:33 by ilymegy           #+#    #+#             */
-/*   Updated: 2024/10/17 21:00:34 by ilymegy          ###   ########.fr       */
+/*   Created: 2024/10/07 14:33:59 by ilymegy           #+#    #+#             */
+/*   Updated: 2024/10/07 14:34:03 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/SCForm.hpp"
+#include "../inc/ShrubberyCreationForm.hpp"
 
 static std::string verifTarget(std::string t)
 {
@@ -19,34 +19,39 @@ static std::string verifTarget(std::string t)
 		std::cout << "Error: Target must be specified '" << t << "' is not recognized." << std::endl;
         throw std::invalid_argument("Target must be specified");
 	}
-	return (t);	
+	return (t);
 }
 
-SCForm::SCForm() : AForm("ShrubberyCreationForm", 145, 137), _target("defaultS")
-{}
-
-SCForm::SCForm(SCForm const &src) : AForm("ShrubberyCreationForm", 145, 137), _target(verifTarget(src.getTarget()))
-{}
-
-SCForm::SCForm(std::string target) : AForm("ShrubberyCreationForm", 145, 137), _target(verifTarget(target))
-{}
-
-SCForm &SCForm::operator=(SCForm const &src)
+ShrubberyCreationForm::ShrubberyCreationForm(void): AForm("ShrubberyCreationForm", 145, 137), _target("default")
 {
+	std::cout << "ShrubberyCreationForm Default Constructor called" << std::endl;
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm("ShrubberyCreationForm", 145, 137), _target(verifTarget(target))
+{
+	std::cout << "ShrubberyCreationForm for target " << CYAN << this->getTarget() << RESET << " called" << std::endl;
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src): AForm("ShrubberyCreationForm", 145, 137), _target(verifTarget(src.getTarget()))
+{
+	std::cout << ORANGE << "ShrubberyCreationForm Copy Constructor called to copy " << src.getName() <<
+	" into " << this->getName() << RESET << std::endl;
+}
+
+ShrubberyCreationForm::~ShrubberyCreationForm()
+{
+	std::cout << RED << "ShrubberyCreationForm Destructor called" << std::endl;
+}
+
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const &src)
+{
+    std::cout << "ShrubberyCreationForm Assignation operator called" << std::endl;
 	if (this != &src)
-		this->_target = verifTarget(src.getTarget());
-	return (*this);
+		this->_target = verifTarget(src._target);
+	return *this;
 }
 
-SCForm::~SCForm()
-{}
-
-std::string SCForm::getTarget() const
-{
-	return (this->_target);
-}
-
-void SCForm::executeAction() const
+void ShrubberyCreationForm::executeAction() const
 {
     std::string filename = _target + "_shrubbery";
     std::ofstream outfile (this->getTarget().append("_shrubbery").c_str());
@@ -72,7 +77,7 @@ void SCForm::executeAction() const
             "        ###" << std::endl <<
             "        ###" << std::endl <<
             "        ###" << std::endl <<
-            std::endl;
+        std::endl;
         }
     outfile.close();
     }
@@ -80,7 +85,12 @@ void SCForm::executeAction() const
         std::cerr << "Failed to open file: " << filename << "\n";
 }
 
-std::ostream &operator<<(std::ostream &o, SCForm *a)
+std::string	ShrubberyCreationForm::getTarget()const
+{
+	return (this->_target);
+}
+
+std::ostream &operator<<(std::ostream &o, ShrubberyCreationForm *a)
 {
 	o << MAGENTA << "\n* Form " << a->getName() << "\n  sign grade : " << a->getSignGrade() <<
 	"\n  execution grade : " << a->getExecGrade() << "\n  signed : " << a->getIsSigned() << RESET << std::endl;

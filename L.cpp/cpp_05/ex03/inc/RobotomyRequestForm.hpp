@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RRForm.hpp                                         :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 21:00:06 by ilymegy           #+#    #+#             */
-/*   Updated: 2024/10/17 21:00:08 by ilymegy          ###   ########.fr       */
+/*   Created: 2024/10/07 14:33:39 by ilymegy           #+#    #+#             */
+/*   Updated: 2024/10/07 14:33:40 by ilymegy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RRFORM_HPP
-# define RRFORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 # include "Bureaucrat.hpp"
-# include "AForm.hpp"
 
 class	Bureaucrat;
 class	AForm;
-class RRForm : public AForm
+class RobotomyRequestForm : public AForm
 {
   private:
 	std::string _target;
@@ -26,14 +25,21 @@ class RRForm : public AForm
 	void executeAction() const;
 
   public:
-	RRForm();
-	RRForm(RRForm const &src);
-	RRForm(std::string target);
-	RRForm &operator=(RRForm const &src);
-	~RRForm();
+	// Constructors
+	RobotomyRequestForm();
+	RobotomyRequestForm(std::string target);
+	RobotomyRequestForm(RobotomyRequestForm const &src);
 
+	// Overloaded Operators
+	RobotomyRequestForm &operator=(RobotomyRequestForm const &src);
+
+	// Deconstructor
+	~RobotomyRequestForm();
+
+	// Getter
 	std::string getTarget() const;
 };
 
-std::ostream &operator<<(std::ostream &o, RRForm *a);
+// ostream Overload
+std::ostream &operator<<(std::ostream &o, RobotomyRequestForm *a);
 #endif
