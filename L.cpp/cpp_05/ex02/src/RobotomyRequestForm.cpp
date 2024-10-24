@@ -28,22 +28,15 @@ RobotomyRequestForm::RobotomyRequestForm(): AForm("RobotomyRequestForm", 72, 45)
 	throw std::invalid_argument("Target must be specified");
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm("RobotomyRequestForm", 72, 45), _target(target)
+RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm("RobotomyRequestForm", 72, 45), _target(verifTarget(target))
 {
-	if (_target.empty())
-	{
-		std::cout << "Error: Target must be specified '" << _target << "' is not recognized." << std::endl;
-		throw std::invalid_argument("Target must be specified");
-	}
+	std::cout << ORANGE << "RobotomyRequestForm Constructor called" << RESET << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &src): AForm(src), _target(src._target)
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &src): AForm(src), _target(verifTarget(src.getTarget()))
 {
-	if (_target.empty())
-	{
-		std::cout << "Error: Target must be specified '" << _target << "' is not recognized." << std::endl;
-		throw std::invalid_argument("Target must be specified");
-	}
+	std::cout << ORANGE << "RobotomyRequestForm Copy Constructor called to copy " << src.getName() <<
+	" into " << this->getName() << RESET << std::endl;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()

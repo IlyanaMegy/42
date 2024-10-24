@@ -27,30 +27,20 @@ ShrubberyCreationForm::ShrubberyCreationForm(void): AForm("ShrubberyCreationForm
 	std::cout << "ShrubberyCreationForm Default Constructor called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm("ShrubberyCreationForm", 145, 137), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm("ShrubberyCreationForm", 145, 137), _target(verifTarget(target))
 {
-	if (this->_target.empty())
-    {
-        std::cout << "Error: Target must be specified '" << this->_target << "' is not recognized." << std::endl;
-        throw std::invalid_argument("Target must be specified");
-    }
 	std::cout << "ShrubberyCreationForm for target " << CYAN << this->getTarget() << RESET << " called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src): AForm("ShrubberyCreationForm", 145, 137), _target(src.getTarget())
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &src): AForm("ShrubberyCreationForm", 145, 137), _target(verifTarget(src.getTarget()))
 {
-	if (this->_target.empty())
-    {
-        std::cout << "Error: Target must be specified '" << this->_target << "' is not recognized." << std::endl;
-        throw std::invalid_argument("Target must be specified");
-    }
 	std::cout << ORANGE << "ShrubberyCreationForm Copy Constructor called to copy " << src.getName() <<
 	" into " << this->getName() << RESET << std::endl;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
-	std::cout << RED << "RobotomyRequestForm Destructor called" << std::endl;
+	std::cout << RED << "ShrubberyCreationForm Destructor called" << std::endl;
 }
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const &src)
