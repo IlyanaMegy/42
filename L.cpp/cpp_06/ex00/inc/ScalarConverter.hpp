@@ -14,10 +14,11 @@
 # define SCALARCONVERTER_HPP
 
 # include "style.hpp"
-# include <cstdio>
-# include <cstdlib>
+# include <climits>
 # include <iomanip>
 # include <iostream>
+# include <limits>
+# include <string>
 
 class ScalarConverter
 {
@@ -34,13 +35,13 @@ class ScalarConverter
 	static bool isInt(const std::string &input);
 	static bool isFloat(const std::string &input);
 	static bool isDouble(const std::string &input);
-	static bool isOther(const std::string &input);
+	static bool isInf(const std::string &input);
 
 	static void toChar(const std::string &input);
 	static void toInt(const std::string &input);
 	static void toFloat(const std::string &input);
 	static void toDouble(const std::string &input);
-	static void toOther(const std::string &input);
+	static void handleInf(const std::string &input);
 };
 
 #endif
