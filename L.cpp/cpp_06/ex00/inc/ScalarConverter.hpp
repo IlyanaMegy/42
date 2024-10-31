@@ -15,6 +15,7 @@
 
 # include "style.hpp"
 # include <climits>
+# include <stdlib.h>
 # include <iomanip>
 # include <iostream>
 # include <limits>

@@ -78,7 +78,8 @@ bool ScalarConverter::isInt(const std::string &input)
 			return false;
 	try
 	{
-		long long int res = std::stoll(input);
+		char *p_input;
+		long long int res = strtoll(input.c_str(),&p_input, 10);
 		if (res < INT_MIN || res > INT_MAX)
 			return false;
 	}
@@ -91,7 +92,7 @@ bool ScalarConverter::isInt(const std::string &input)
 void ScalarConverter::toInt(const std::string &input)
 {
 	char c;
-	int i = std::stoi(input);
+	int i = atoi(input.c_str());
 	float f;
 	double d;
 
@@ -145,7 +146,7 @@ void ScalarConverter::toFloat(const std::string &input)
 {
 	char c;
 	int i;
-	float f = stof(input);
+	float f = strtof(input.c_str(), 0);
 	double d;
 
 	if (f >= std::numeric_limits<char>::min() && f <= std::numeric_limits<char>::max())
@@ -213,7 +214,8 @@ void	ScalarConverter::toDouble(const std::string &input)
 	char c;
 	int i;
 	float f;
-	double d = std::stod(input);
+	double d = strtod(input.c_str(), 0);
+	// double d = std::stod(input);
 
 	if (d >= std::numeric_limits<char>::min() && d <= std::numeric_limits<char>::max())
 	{

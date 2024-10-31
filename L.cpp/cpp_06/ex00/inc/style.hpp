@@ -14,7 +14,7 @@
 # define RED "\033[31m"
 # define GREEN "\033[32m"
 # define YELLOW "\033[33m"
-# define BLUE "\033[34m"
+// # define BLUE "\033[34m"
 # define ORANGE "\033[38;5;208m"
 # define MAGENTA "\033[35m"
 # define CYAN "\033[36m"
@@ -31,7 +31,7 @@
 # define YLLW "\033[0;38;2;255;255;0m"     // Jaune
 # define GRNN "\033[0;38;2;0;128;0m"       // Vert foncé
 # define LIME "\033[0;38;2;0;255;0m"       // Vert clair
-# define CYAN "\033[0;38;2;0;255;255m"     // Cyan
+// # define CYAN "\033[0;38;2;0;255;255m"     // Cyan
 # define BLUE "\033[0;38;2;80;80;220m"     // Bleu
 # define INDI "\033[0;38;2;75;0;130m"      // Indigo
 # define PURP "\033[0;38;2;238;130;238m"   // Violet
