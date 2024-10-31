@@ -151,18 +151,20 @@ void ScalarConverter::toFloat(const std::string &input)
 	if (f >= std::numeric_limits<char>::min() && f <= std::numeric_limits<char>::max())
 	{
 		c = static_cast<char>(f);
-		i = static_cast<int>(f);
 		if (isprint(c))
 			std::cout << GOLD "char:   \t'" << c << "'" RESET << std::endl;
 		else
 			std::cout << RED1 "char:   \t" << "non displayable" RESET << std::endl;
+	}
+	else
+		std::cout << REDD "char:   \t" << "impossible" RESET << std::endl;
+	if (f >= std::numeric_limits<int>::min() && f <= std::numeric_limits<int>::max())
+	{
+		i = static_cast<int>(f);
 		std::cout << LIME "int:    \t" << i << RESET << std::endl;
 	}
 	else
-	{
-		std::cout << REDD "char:   \t" << "impossible" RESET << std::endl;
 		std::cout << REDD "int:    \t" << "impossible" RESET << std::endl;
-	}
 	std::cout << CYAN "float:  \t" << std::fixed << std::setprecision(1) << f << "f" RESET << std::endl;
 	d = static_cast<double>(f);
 	std::cout << ORNG "double: \t" << d << RESET << std::endl;
@@ -204,4 +206,60 @@ bool	ScalarConverter::isDouble(const std::string &input)
 	if (i < input.size() && foundDecimal && (digitBefore || digitAfter) && (!foundExp || (foundExp && digitAfterExp)))
 		return true;
 	return false;
+}
+
+void	ScalarConverter::toDouble(const std::string &input)
+{
+	char c;
+	int i;
+	float f;
+	double d = std::stod(input);
+
+	if (d >= std::numeric_limits<char>::min() && d <= std::numeric_limits<char>::max())
+	{
+		c = static_cast<char>(d);
+		if (isprint(c))
+			std::cout << GOLD "char:   \t'" << c << "'" RESET << std::endl;
+		else
+			std::cout << RED1 "char:   \t" << "non displayable" RESET << std::endl;
+	}
+	else
+		std::cout << REDD "char:   \t" << "impossible" RESET << std::endl;
+	if (d >= std::numeric_limits<int>::min() && d <= std::numeric_limits<int>::max())
+	{
+		i = static_cast<int>(d);
+		std::cout << LIME "int:    \t" << i << RESET << std::endl;
+	}
+	else
+		std::cout << RED1 "int:    \t" << "impossible" RESET << std::endl;
+	f = static_cast<float>(d);
+	std::cout << CYAN "float:  \t" << std::fixed << std::setprecision(1) << f << "f" RESET << std::endl;
+	std::cout << ORNG "double: \t" << d << RESET << std::endl;
+}
+
+//	------------------------------------	INFINITY ----------------------------------------------------
+bool ScalarConverter::isInf(const std::string &input)
+{
+	const std::string specials[] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
+	for (int i = 0; i < 6; i++)
+		if (input == specials[i])
+			return true;
+	return false;
+}
+
+void ScalarConverter::handleInf(const std::string &input)
+{
+	std::cout << RED1 "char:   \t" << "impossible" RESET << std::endl;
+	std::cout << RED1 "int:    \t" << "impossible" RESET << std::endl;
+	if (input == "-inff" || input == "+inff" || input == "nanf")
+	{
+		std::cout << CYAN "float:  \t" << input << RESET << std::endl;
+		std::string inputFixed = input.substr(0, input.size() - 1);
+		std::cout << ORNG "double: \t" << inputFixed << RESET << std::endl;
+	}
+	else
+	{
+		std::cout << CYAN << "float:  \t" << input << "f" RESET << std::endl;
+		std::cout << ORNG "double: \t" << input << RESET << std::endl;
+	}
 }
