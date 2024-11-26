@@ -10,10 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
+#ifndef SERIALIZER_HPP
+# define SERIALIZER_HPP
+
+# include <stdint.h>
 // #include <cstdint>
-#include <iostream>
-#include <string>
+# include <iostream>
+# include <string>
 
 typedef struct Data
 {
@@ -34,3 +37,4 @@ class Serializer
 	static uintptr_t serialize(Data *ptr);
 	static Data *deserialize(uintptr_t raw);
 };
+#endif
