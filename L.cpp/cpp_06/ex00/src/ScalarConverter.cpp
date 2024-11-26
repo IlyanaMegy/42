@@ -19,6 +19,7 @@ ScalarConverter::~ScalarConverter(){};
 
 void ScalarConverter::convert(const std::string &input)
 {
+	
 	if (isChar(input))
 		toChar(input);
 	else if (isInt(input))
@@ -96,7 +97,6 @@ void ScalarConverter::toInt(const std::string &input)
 	float f;
 	double d;
 
-	std::cout << "\n\n" << std::numeric_limits<char>::min() << "\n\n" << std::endl;
 	if (i >= std::numeric_limits<char>::min() && i <= std::numeric_limits<char>::max())
 	{
 		c = static_cast<char>(i);

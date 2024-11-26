@@ -24,8 +24,8 @@ int	main(int argc, char **argv)
 	while (argv[i])
 	{
 		std::cout << GRY1 "############## OUTPUT " << i << " ##############" RESET << std::endl;
-		std::cout << ITAL GRY1 "user input:\t\"" << argv[i] << "\"" RESET << std::endl;
-		
+		std::cout << ITAL GRY1 "user input:\t\"" << argv[i] << "\"\n" RESET << std::endl;
+
 		if (argv[i][0])
 			ScalarConverter::convert(argv[i++]);
 		else
