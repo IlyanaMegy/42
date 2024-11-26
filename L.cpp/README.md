@@ -56,3 +56,12 @@ Pour resumer :
 - **public** est accessible partout,
 - **protected** est accessible seulement dans la classe et les classes dérivées,
 - **private** est limité uniquement à la classe elle-même.
+
+---
+
+**ex00** : Converter
+
+**ex01** : Serializing (avoid initializing by any user)
+
+**ex02** :
+
