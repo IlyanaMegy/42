@@ -63,5 +63,4 @@ Pour resumer :
 
 **ex01** : Serializing (avoid initializing by any user)
 
-**ex02** :
-
+**ex02** :  Base class that has a public virtual destructor only
