@@ -58,9 +58,3 @@ Pour resumer :
 - **private** est limité uniquement à la classe elle-même.
 
 ---
-
-**ex00** : Converter
-
-**ex01** : Serializing (avoid initializing by any user)
-
-**ex02** :  Base class that has a public virtual destructor only
