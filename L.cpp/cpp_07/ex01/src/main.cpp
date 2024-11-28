@@ -34,27 +34,27 @@ int	main(void)
 
 	std::cout << GRY1 "  ITER WITH INT ARRAY" << std::endl;
 	std::cout << "****************************************" CYAN << std::endl << "|  ";
-	iter(intArray, 4, printer);
+	iter(intArray, sizeof(intArray) / sizeof(int) , printer);
 	std::cout << RESET << std::endl << std::endl;
 
 	std::cout << GRY1 "  ITER WITH DOUBLE ARRAY" << std::endl;
 	std::cout << "****************************************" LIME << std::endl << "|  ";
-	iter(dblArray, 4, printer);
+	iter(dblArray, sizeof(dblArray) / sizeof(double) , printer);
 	std::cout << RESET << std::endl << std::endl;
 
 	std::cout << GRY1 "  ITER WITH BOOL ARRAY" << std::endl;
 	std::cout << "****************************************" GOLD << std::endl << "|  ";
-	iter(bolArray, 2, printer);
+	iter(bolArray, sizeof(bolArray) / sizeof(bool) , printer);
 	std::cout << RESET << std::endl << std::endl;
 
 	std::cout << GRY1 "  ITER WITH CHAR ARRAY" << std::endl;
 	std::cout << "****************************************" RED1 << std::endl << "|  ";
-	iter(chrArray, 5, printer);
+	iter(chrArray, sizeof(chrArray) / sizeof(char) , printer);
 	std::cout << RESET << std::endl << std::endl;
 
 	std::cout << GRY1 "  ITER WITH STRING ARRAY" << std::endl;
 	std::cout << "****************************************" PURP << std::endl << "|  ";
-	iter(strArray, 3, printer);
+	iter(strArray, 3 , printer);
 	std::cout << RESET << std::endl << std::endl;
 
 	std::cout << GRY1 "  ITER WITH VECTOR ARRAY" << std::endl;
