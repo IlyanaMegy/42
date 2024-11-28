@@ -61,12 +61,11 @@ T const &Array<T>::operator[](unsigned int i) const
 }
 
 template <typename T>
-unsigned int Array<T>::size() const{return (_size);}
+unsigned int Array<T>::its_size() const{return (_size);}
 
 template <typename T>
 const char *Array<T>::OutOfBoundsException::what() const throw()
 {
 	return ("Index out of bounds");
 }
-
 #endif

@@ -33,7 +33,7 @@ class Array
 	T &operator[](unsigned int i);
 	T const &operator[](unsigned int i) const;
 
-	unsigned int size() const;
+	unsigned int its_size() const;
 
 	class OutOfBoundsException : public std::exception
 	{
