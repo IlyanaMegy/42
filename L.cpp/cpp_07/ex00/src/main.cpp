@@ -29,8 +29,8 @@ int	main(void)
 	std::cout << GRY1 "// after swap()" CYAN << RESET << std::endl;
 	std::cout << GRY1 "a  : " CYAN << int_a << RESET << std::endl;
 	std::cout << GRY1 "b  : " CYAN << int_b << RESET << std::endl;
-	std::cout << GRY1 "min: " CYAN << min(int_a, int_b) << RESET << std::endl;
-	std::cout << GRY1 "max: " CYAN << max(int_a, int_b) << RESET << std::endl;
+	std::cout << GRY1 "min: " CYAN << minus<int>(int_a, int_b) << RESET << std::endl;
+	std::cout << GRY1 "max: " CYAN << maxi(int_a, int_b) << RESET << std::endl;
 
 	std::cout << std::endl;
 	std::cout << BLUE "## WITH FLOATS ##" RESET << std::endl;
@@ -42,8 +42,8 @@ int	main(void)
 	std::cout << GRY1 "// after swap()" GOLD << RESET << std::endl;
 	std::cout << GRY1 "a  : " GOLD << fl_a << RESET << std::endl;
 	std::cout << GRY1 "b  : " GOLD << fl_b << RESET << std::endl;
-	std::cout << GRY1 "min: " GOLD << min(fl_a, fl_b) << RESET << std::endl;
-	std::cout << GRY1 "max: " GOLD << max(fl_a, fl_b) << RESET << std::endl;
+	std::cout << GRY1 "min: " GOLD << minus(fl_a, fl_b) << RESET << std::endl;
+	std::cout << GRY1 "max: " GOLD << maxi(fl_a, fl_b) << RESET << std::endl;
 
 
 	std::cout << std::endl;
@@ -56,8 +56,8 @@ int	main(void)
 	std::cout << GRY1 "// after swap()" SALM << RESET << std::endl;
 	std::cout << GRY1 "a  : " SALM << db_a << RESET << std::endl;
 	std::cout << GRY1 "b  : " SALM << db_b << RESET << std::endl;
-	std::cout << GRY1 "min: " SALM << min(db_a, db_b) << RESET << std::endl;
-	std::cout << GRY1 "max: " SALM << max(db_a, db_b) << RESET << std::endl;
+	std::cout << GRY1 "min: " SALM << minus(db_a, db_b) << RESET << std::endl;
+	std::cout << GRY1 "max: " SALM << maxi(db_a, db_b) << RESET << std::endl;
 
 
 	std::cout << std::endl;
@@ -70,8 +70,8 @@ int	main(void)
 	std::cout << GRY1 "// after swap()" REDD << RESET << std::endl;
 	std::cout << GRY1 "a  : " REDD << c_a << RESET << std::endl;
 	std::cout << GRY1 "b  : " REDD << c_b << RESET << std::endl;
-	std::cout << GRY1 "min: " REDD << min(c_a, c_b) << RESET << std::endl;
-	std::cout << GRY1 "max: " REDD << max(c_a, c_b) << RESET << std::endl;
+	std::cout << GRY1 "min: " REDD << minus(c_a, c_b) << RESET << std::endl;
+	std::cout << GRY1 "max: " REDD << maxi(c_a, c_b) << RESET << std::endl;
 
 	std::cout << std::endl;
 	std::cout << BLUE "## WITH STRINGS ##" RESET << std::endl;
@@ -83,8 +83,8 @@ int	main(void)
 	std::cout << GRY1 "// after swap()" PURP << RESET << std::endl;
 	std::cout << GRY1 "a  : " PURP << stra << RESET << std::endl;
 	std::cout << GRY1 "b  : " PURP << strb << RESET << std::endl;
-	std::cout << GRY1 "min: " PURP << min(stra, strb) << RESET << std::endl;
-	std::cout << GRY1 "max: " PURP << max(stra, strb) << RESET << std::endl;
+	std::cout << GRY1 "min: " PURP << minus(stra, strb) << RESET << std::endl;
+	std::cout << GRY1 "max: " PURP << maxi(stra, strb) << RESET << std::endl;
 
 	std::cout << std::endl;
 	std::cout << BLUE "## WITH BOOLS ##" RESET << std::endl;
@@ -96,8 +96,8 @@ int	main(void)
 	std::cout << GRY1 "// after swap()" LIME << RESET << std::endl;
 	std::cout << GRY1 "a  : " LIME << ba << RESET << std::endl;
 	std::cout << GRY1 "b  : " LIME << bb << RESET << std::endl;
-	std::cout << GRY1 "min: " LIME << min(ba, bb) << RESET << std::endl;
-	std::cout << GRY1 "max: " LIME << max(ba, bb) << RESET << std::endl;
+	std::cout << GRY1 "min: " LIME << minus(ba, bb) << RESET << std::endl;
+	std::cout << GRY1 "max: " LIME << maxi(ba, bb) << RESET << std::endl;
 
 	return (0);
 }

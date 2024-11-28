@@ -10,23 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// Indique que T est un paramètre de type
-template<typename T>
+// Indicate to the compilator that T refer to a variable's type
+// that will follow some parameters
+template <typename T>
 void	swap(T &a, T &b)
 {
-	T tmp = a;
+	T	tmp = a;
 	a = b;
 	b = tmp;
 }
 
-template<typename T>
-const T&	min(T &a, T &b)
+// here variables a, b won't me modified
+// the function will accept a const reference of a and b as parameters
+// the function returns a referance on a constant instance (const &max)
+template <typename T>
+const T &minus(T const &a, T const &b)
 {
 	return ((a < b) ? a : b);
 }
 
-template<typename T>
-const T&	max(T &a, T &b)
+template <typename T>
+const T &maxi(T const &a, T const &b)
 {
 	return ((a > b) ? a : b);
 }
