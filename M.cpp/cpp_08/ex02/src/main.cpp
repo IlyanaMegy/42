@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "../inc/MutantStack.hpp"
+#include "../inc/style.hpp"
+#include <list>
 
 int main()
 {
-	std::cout << "\033[33m" << "Subject test\n"<< "\033[0m";
-
+	std::cout << PINK << "Subject test\n"<< RESET;
 	MutantStack<int> mstack;
 
 	mstack.push(5);
@@ -34,9 +35,10 @@ int main()
 
 	MutantStack<int>::iterator it = mstack.begin();
 	MutantStack<int>::iterator ite = mstack.end();
-	
+
 	++it;
 	--it;
+
 	std::cout << "stack: ";
 	while (it != ite)
 	{
@@ -48,10 +50,46 @@ int main()
 
 
 
-	std::cout << "\033[33m" << "Test with rbegin and rend\n"<< "\033[0m";
+	std::cout << PINK << "Test with std::list to compare\n"<< RESET;
+	std::list<int> lst;
 
+	lst.push_back(5);
+	lst.push_back(17);
+
+	std::cout << "top: " << lst.back() << std::endl;
+
+	lst.pop_back();
+
+	std::cout << "size: " << lst.size() << std::endl;
+
+	lst.push_back(3);
+	lst.push_back(5);
+	lst.push_back(737);
+	lst.push_back(0);
+
+	std::list<int>::iterator lst_it = lst.begin();
+	std::list<int>::iterator lst_ite = lst.end();
+
+	std::cout << "list: ";
+	while (lst_it != lst_ite)
+	{
+		std::cout << *lst_it << " ";
+		++lst_it;
+	}
+	std::cout << std::endl;
+
+
+	std::cout << PINK << "Test with rbegin and rend\n"<< RESET;
 	MutantStack<int>::reverse_iterator rit = mstack.rbegin();
 	MutantStack<int>::reverse_iterator rite = mstack.rend();
+
+	mstack.push(5);
+	mstack.push(17);
+	mstack.pop();
+	mstack.push(3);
+	mstack.push(5);
+	mstack.push(737);
+	mstack.push(0);
 
 	std::cout << "stack: ";
 	while (rit != rite)
@@ -60,32 +98,5 @@ int main()
 		++rit;
 	}
 	std::cout << std::endl;
-	
 	return 0;
 }
-
-// int main()
-// {
-// MutantStack<int> mstack;
-// mstack.push(5);
-// mstack.push(17);
-// std::cout << mstack.top() << std::endl;
-// mstack.pop();
-// std::cout << mstack.size() << std::endl;
-// mstack.push(3);
-// mstack.push(5);
-// mstack.push(737);
-// //[...]
-// mstack.push(0);
-// MutantStack<int>::iterator it = mstack.begin();
-// MutantStack<int>::iterator ite = mstack.end();
-// ++it;
-// --it;
-// while (it != ite)
-// {
-// std::cout << *it << std::endl;
-// ++it;
-// }
-// std::stack<int> s(mstack);
-// return 0;
-// }
