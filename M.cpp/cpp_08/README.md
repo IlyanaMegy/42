@@ -34,7 +34,7 @@ Ce sont des conteneurs qui offrent des interfaces restreintes basées sur des st
 | `std::queue`       | Implémentation FIFO (First-In-First-Out) basée sur un autre conteneur.|
 | `std::priority_queue` | Queue avec priorités (éléments sortis selon un ordre défini).      |
 
-### Les conteneurs séquentiels en détail
+### Les conteneurs en détail
 #### 1. `std::vector`
 Un `vector` est un tableau dynamique qui peut croître ou rétrécir dynamiquement. Les éléments sont contigus en mémoire.
 
@@ -49,6 +49,7 @@ Exemple :
 #include <vector>
 
 int main() {
+    //  Creation d'un tableau de int
     std::vector<int> vec;
 
     // Ajouter des éléments
@@ -66,38 +67,7 @@ int main() {
 }
 ```
 
-#### 2. `std::deque`
-Un `deque` (double-ended queue) est un tableau dynamique où l'ajout/suppression d'éléments est rapide aux deux extrémités.
-
-**Caractéristiques** :
-- Accès rapide aux éléments par index.
-- Croissance dynamique des deux côtés.
-- Moins efficace en termes de mémoire que vector.
-
-Exemple :
-```cpp
-#include <iostream>
-#include <deque>
-
-int main() {
-    std::deque<int> dq;
-
-    // Ajouter des éléments aux deux extrémités
-    dq.push_back(10);
-    dq.push_back(20);
-    dq.push_front(5);
-
-    // Afficher les éléments
-    for (size_t i = 0; i < dq.size(); ++i) {
-        std::cout << dq[i] << " ";
-    }
-    std::cout << std::endl;
-
-    return 0;
-}
-```
-
-#### 3. `std::list`
+#### 2. `std::list`
 Un `list` est une liste doublement chaînée, où chaque élément est lié aux éléments précédent et suivant.
 
 **Caractéristiques** :
@@ -111,6 +81,7 @@ Exemple :
 #include <list>
 
 int main() {
+    // Creation d'un tableau de int
     std::list<int> lst;
 
     // Ajouter des éléments
@@ -127,3 +98,47 @@ int main() {
     return 0;
 }
 ```
+
+#### 3. `std::map`
+Un `map` est un tableau associatif qui stocke des paires clé-valeur, avec des clés uniques.
+
+Caractéristiques :
+
+Les paires sont automatiquement triées par clé.
+Accès rapide aux valeurs via les clés.
+Exemple :
+
+```cpp
+#include <iostream>
+#include <map>
+
+int main() {
+    std::map<std::string, int> myMap;           //  equivalent a un dictionnaire ou la cle sera de type string 
+                                                //  et la valeur associee est un int.
+
+    myMap["Alice"] = 30;
+    myMap["Bob"] = 25;
+
+    for (std::map<std::string, int>::iterator it = myMap.begin(); it != myMap.end(); ++it) {
+        std::cout << it->first << ": " << it->second << std::endl;
+    }
+
+    return 0;
+}
+```
+---
+
+### Résumé des Conteneurs
+
+| **Conteneur**       | **Caractéristique principale**            | **Accès direct** | **Tri automatique** | **Doublons autorisés** |
+|---------------------|-------------------------------------------|------------------|---------------------|------------------------|
+| `std::vector`       | Tableau dynamique                        | Oui              | Non                 | Oui                    |
+| `std::deque`        | Tableau doublement dynamique             | Oui              | Non                 | Oui                    |
+| `std::list`         | Liste doublement chaînée                 | Non              | Non                 | Oui                    |
+| `std::set`          | Collection triée d'éléments uniques      | Non              | Oui                 | Non                    |
+| `std::multiset`     | Collection triée avec doublons permis    | Non              | Oui                 | Oui                    |
+| `std::map`          | Table associée clé-valeur, clés uniques  | Non              | Oui                 | Non                    |
+| `std::multimap`     | Table associée clé-valeur avec doublons  | Non              | Oui                 | Oui                    |
+| `std::stack`        | Pile LIFO                                | Non              | Non                 | N/A                    |
+| `std::queue`        | File FIFO                                | Non              | Non                 | N/A                    |
+| `std::priority_queue` | File triée par priorité                | Non              | Oui (selon priorité)| N/A                    |
