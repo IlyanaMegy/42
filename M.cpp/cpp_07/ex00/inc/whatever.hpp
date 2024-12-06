@@ -24,13 +24,7 @@ void	swap(T &a, T &b)
 // the function will accept a const reference of a and b as parameters
 // the function returns a referance on a constant instance (const &max)
 template <typename T>
-const T &minus(T const &a, T const &b)
-{
-	return ((a < b) ? a : b);
-}
+const T &minus(T const &a, T const &b){return ((a < b) ? a : b);}
 
 template <typename T>
-const T &maxi(T const &a, T const &b)
-{
-	return ((a > b) ? a : b);
-}
+const T &maxi(T const &a, T const &b){return ((a > b) ? a : b);}
