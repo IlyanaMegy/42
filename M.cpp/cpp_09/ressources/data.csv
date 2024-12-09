@@ -111,7 +111,7 @@ date,exchange_rate
 2009-11-25,0
 2009-11-28,0
 2009-12-01,0
-2009-12-04,0
+2009-12-04,0std::pair<std::string, double>	getExchangeRateForDate(const std::string &date);
 2009-12-07,0
 2009-12-10,0
 2009-12-13,0
