@@ -25,7 +25,7 @@ int main()
 	sp.addNumber(11);
 	try
 	{
-		sp.addNumber(11);
+		sp.addNumber(0);
 	}
 	catch (std::exception &e)
 	{
