@@ -34,7 +34,7 @@ int	main(void)
 
 	std::cout << GRY1 "  ITER WITH INT ARRAY" << std::endl;
 	std::cout << "****************************************" CYAN << std::endl << "|  ";
-	iter(intArray, sizeof(intArray) / sizeof(int) , printer);
+	iter(intArray, sizeof(intArray) / sizeof(int) , printer<const int>);
 	std::cout << RESET << std::endl << std::endl;
 
 	std::cout << GRY1 "  ITER WITH DOUBLE ARRAY" << std::endl;
