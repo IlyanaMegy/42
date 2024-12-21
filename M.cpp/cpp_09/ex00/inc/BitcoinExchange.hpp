@@ -23,18 +23,19 @@
 class BitcoinExchange
 {
   private:
-	std::string _filename;
+	// std::string _filename;
 	std::map<std::string, double> _rates;
-	void readDB();
+	bool isDateOK(const std::string &date);
+	bool isValueOK(const std::string &value);
+	BitcoinExchange();	
 
   public:
-	BitcoinExchange();
 	BitcoinExchange(std::string dB);
 	BitcoinExchange(BitcoinExchange const &src);
 	BitcoinExchange &operator=(BitcoinExchange const &src);
 	~BitcoinExchange();
 
-	bool isDateOK(const std::string &date);
+	void readDB(const std::string &filename);
 	bool getValidPrice(const std::string &price);
 	std::pair<std::string, double> getRateForDate(const std::string &date);
 
