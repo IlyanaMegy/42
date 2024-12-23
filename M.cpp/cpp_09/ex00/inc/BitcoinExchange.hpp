@@ -13,9 +13,10 @@
 #ifndef BITCOINEXCHANGE__HPP
 # define BITCOINEXCHANGE__HPP
 
+# include <cstdlib>
 # include <exception>
+# include <fstream>
 # include <iostream>
-#include <fstream>
 # include <map>
 # include <sstream>
 # include <string>
@@ -23,23 +24,55 @@
 class BitcoinExchange
 {
   private:
-	// std::string _filename;
 	std::map<std::string, double> _rates;
+	void readDB();
 	bool isDateOK(const std::string &date);
-	bool isValueOK(const std::string &value);
-	BitcoinExchange();	
+	double isValueOK(const std::string &value);
+	void multiplyWithQuote(std::string const &date, double price);
 
   public:
-	BitcoinExchange(std::string dB);
+	BitcoinExchange();
 	BitcoinExchange(BitcoinExchange const &src);
 	BitcoinExchange &operator=(BitcoinExchange const &src);
 	~BitcoinExchange();
 
-	void readDB(const std::string &filename);
-	bool getValidPrice(const std::string &price);
-	std::pair<std::string, double> getRateForDate(const std::string &date);
+	std::map<std::string, double> const &getRates() const;
+	void execute(char const *fileName);
 
-	// Exceptions
+	class InvalidFileException : public std::exception
+	{
+		public:
+		virtual const char *what() const throw()
+		{
+			return ("Error: Invalid file.");
+		}
+	};
+
+	class InvalidColumnFormat : public std::exception
+	{
+		public:
+		virtual const char *what() const throw()
+		{
+			return ("Invalid column format. Expected 'date,exchange_rate'");
+		}
+	};
+
+	class InvalidDateFormat : public std::exception
+	{
+		public:
+		virtual const char *what() const throw()
+		{
+			return ("Invalid date format. Expected 'YYYY-MM-DD'");
+		}
+	};
+
+	class InvalidPriceFormat : public std::exception
+	{
+		public:
+		virtual const char *what() const throw()
+		{
+			return ("Invalid price format. Expected a number between 0.0 and 1000.0");
+		}
+	};
 };
-
 #endif

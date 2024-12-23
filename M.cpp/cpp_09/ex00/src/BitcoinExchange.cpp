@@ -12,7 +12,7 @@
 
 #include "../inc/BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange(){}
+BitcoinExchange::BitcoinExchange(){readDB(); }
 BitcoinExchange::~BitcoinExchange(){}
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &src): _rates(src._rates){}
 BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &src)
@@ -22,86 +22,52 @@ BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &src)
 	return *this;
 }
 
-// BitcoinExchange::BitcoinExchange(std::string dB): _filename(dB)
-// {
-// 	try
-// 	{
-// 		readDB();
-// 	}
-// 	catch(const std::exception& e)
-// 	{
-// 		std::cerr << e.what() << '\n';
-// 	}
-// }
-
-static bool isNotSpace(char c)
+std::map<std::string, double> const &BitcoinExchange::getRates() const
 {
-    return !std::isspace(static_cast<unsigned char>(c));
+	return (_rates);
 }
 
-// Supprime les espaces en tête de la chaîne
-static std::string& ltrim(std::string &s)
+void BitcoinExchange::readDB()
 {
-    s.erase(s.begin(), std::find_if(s.begin(), s.end(), isNotSpace));
-    return s;
-}
+	std::ifstream file("data.csv");
+	if (!file.is_open())
+		throw InvalidFileException();
 
-// Supprime les espaces en queue de la chaîne
-static std::string& rtrim(std::string &s)
-{
-    s.erase(std::find_if(s.rbegin(), s.rend(), isNotSpace).base(), s.end());
-    return s;
-}
-
-// Supprime les espaces en tête et en queue de la chaîne
-std::string& trim(std::string &s)
-{
-    return ltrim(rtrim(s));
-}
-
-void BitcoinExchange::readDB(const std::string &filename)
-{
-	std::ifstream	file(filename.c_str());
-	if (!file)
-		// Exception
-
-	std::string line, date;
-	double rate;
+	std::string line;
 	if (std::getline(file, line))
-		if (line != "date,exchange_rate")
-			// Exception
-	std::istringstream ss(line);
-
-	/* Extract the date and rate from the line */
-	if (std::getline(ss, date, ',') && (ss >> rate))
-		_rates[date] = rate;
-
-	while (getline(file, line))
 	{
-		std::istringstream ss(line);
-
-		// std::getline(iss, date, ',');
-		// std::getline(iss, exchangeRateStr);
-		if (getline(ss, date, ',') && (ss >> rate))
-		{
-			if (!isDateOK(date))
-			// Exception
-			_rates[date] = rate;
-		}
+		std::cout << "line : " << line << "." << std::endl;
+		if (line != "date,exchange_rate")
+			throw InvalidColumnFormat();
 	}
+	while (std::getline(file, line))
+	{
+		std::string date, price;
+		std::istringstream ss(line);
+		std::getline(ss, date, ',');
+		std::getline(ss, price, ',');
+
+		double priceVal;
+		std::istringstream priceStream(price);
+		if (!(priceStream >> priceVal))
+			throw InvalidPriceFormat();
+		_rates[date] = priceVal;
+	}
+	file.close();
 }
 
 bool BitcoinExchange::isDateOK(const std::string &date)
 {
 	if (date.size() != 10) return (false);
-	for (size_t i = 0; i < data.size(); i++)
+	for (size_t i = 0; i < date.size(); i++)
 	{
 		if (i == 4 || i == 7)
+		{
 			if (date[i] != '-')
 				return (false);
-		else
-			if (!isdigit(date[i]))
-				return (false);
+		}
+		else if (!isdigit(date[i]))
+			return (false);
 	}
 	int y = std::atoi(date.substr(0, 4).c_str());
 	int m = std::atoi(date.substr(5, 2).c_str());
@@ -113,14 +79,76 @@ bool BitcoinExchange::isDateOK(const std::string &date)
 	return (true);
 }
 
-double BitcoinExchange::getValidPrice(const std::string &price)
+double BitcoinExchange::isValueOK(const std::string &price)
 {
 	double priceVal;
 	std::istringstream priceStream(price);
 
-	if (!(priceStream >> priceVal)) return (-1);
-	if (priceVal < 0) return (-1);
-	if (priceVal > 1000) return (-1);
+	if (!(priceStream >> priceVal))
+	{
+		std::cout << "Error: bad value input => " << priceVal << std::endl;
+		return (-1);
+	}
+	if (priceVal < 0) 
+	{
+		std::cout << "Error: not a positive number => " << priceVal << std::endl;
+		return (-1);
+	}
+	// if (priceVal > 1000) 
+	// {
+	// 	std::cout << "Error: too large number => " << priceVal << std::endl;
+	// 	return (-1);		
+	// }
 	return (priceVal);
 }
 
+void BitcoinExchange::multiplyWithQuote(std::string const &date, double price)
+{
+	std::map<std::string, double>::iterator it = _rates.find(date);
+	if (it != _rates.end())
+		std::cout << date << " | " << price << " | " << price * it->second << std::endl;
+	else
+	{
+		std::map<std::string, double>::iterator it2 = _rates.lower_bound(date);
+		if (it2 == _rates.begin())
+			std::cout << date << " | " << price << " | " << price * it2->second << std::endl;
+		else
+		{
+			it2--;
+			std::cout << date << " | " << price << " | " << price * it2->second << std::endl;
+		}
+	}
+}
+
+void BitcoinExchange::execute(char const *fileName)
+{
+	std::ifstream file(fileName);
+	if (!file.is_open())
+		throw InvalidFileException();
+
+	std::string line;
+	std::getline(file, line);
+	if (line != "date,exchange_rate")
+		throw InvalidColumnFormat();
+
+	while (std::getline(file, line))
+	{
+		std::string date, valueStr;
+		double priceVal;
+		std::istringstream ss(line);
+		std::getline(ss, date, ',');
+		std::getline(ss, valueStr, ',');
+
+		if (isDateOK(date) == false)
+		{
+			std::cout << "Error: bad input => " << date << std::endl;
+			continue;
+		}
+		if(!valueStr.empty())
+			valueStr = valueStr.erase(0, 1);
+		priceVal = isValueOK(valueStr);
+		if (priceVal != -1)
+			multiplyWithQuote(date, priceVal);
+	}
+	file.close();
+}
