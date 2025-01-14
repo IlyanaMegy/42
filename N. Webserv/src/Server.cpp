@@ -2,10 +2,10 @@
 Server::Server()
 {
     int opt = 1;
-    // create socket
+    // Creation socket
     _socket = socket(AF_INET, SOCK_STREAM, 0);
     if (_socket == -1)
-        // return err
+        SocketCreationErrException();
 
     _sockAddr.sin_family = AF_INET;
     _sockAddr.sin_port = htons(9001);
@@ -15,3 +15,8 @@ Server::Server()
 }
 
 Server::~Server(){}
+
+const char *Server::SocketCreationErrException::what() const throw()
+{
+	return ("[SERVER]_ Error while creating socket.");
+}
