@@ -17,12 +17,7 @@ public:
     int _socket;
     class SocketCreationErrException : public std::exception
     {
-    public:
-        virtual const char *what() const throw();
+        public:
+            virtual const char *what() const throw();
     };
 };
-
-// Sockets
-// HTTP request
-// HTTP response
-// CGI
