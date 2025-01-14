@@ -1,11 +1,8 @@
-#include <sys/socket.h>
 #include <exception>
 #include <netinet/in.h>
 #include <poll.h>
+#include <sys/socket.h>
 #include <unistd.h>
-
-#define PORT 8080
-#define BUFFER_SIZE 15
 
 class Server {
 private:
@@ -21,8 +18,3 @@ public:
     virtual const char *what() const throw();
   };
 };
-
-// Sockets
-// HTTP request
-// HTTP response
-// CGI
