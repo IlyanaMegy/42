@@ -1,3 +1,4 @@
+``` cpp
 enum HttpError {
     OK = 200,
     BAD_REQUEST = 400, // malformed request syntax, invalid request message framing
@@ -11,3 +12,20 @@ enum HttpError {
     FORBIDDEN = 403, // access to resource is forbidden
     UNAUTHORIZED = 401 // authentication is required
 };
+```
+
+Structure pollfd
+``` cpp
+struct pollfd {
+    int fd;         // Le descripteur de fichier à surveiller.
+    short events;   // Les événements à surveiller (ex. POLLIN, POLLOUT).
+    short revents;  // Les événements qui se sont produits (rempli par poll()).
+};
+```
+events : Indique les types d'événements que vous souhaitez surveiller, tels que :
+POLLIN : Prêt à lire (données disponibles à lire).
+POLLOUT : Prêt à écrire (tampon disponible pour écrire).
+POLLERR : Erreur sur le descripteur.
+POLLHUP : Fermeture du descripteur par le pair.
+POLLNVAL : Descripteur non valide.
+revents : Rempli par poll() pour indiquer quels événements se sont réellement produits.
