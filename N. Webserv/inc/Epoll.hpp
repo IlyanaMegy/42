@@ -6,7 +6,7 @@
 # include <exception>
 # include <iostream>
 
-# include "../inc/Server.hpp"
+# include "Server.hpp"
 
 # define MAX_EVENTS 100
 
@@ -25,7 +25,7 @@ class Epoll {
 		int getReadyFd(void) const;
 		int getFd(int i) const;
 
-		void addFD(int fd, int flags);
+		void addFd(int fd, int flags);
 		void wait(void);
 
 		// exceptions

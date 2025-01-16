@@ -1,6 +1,5 @@
 #include "../inc/Epoll.hpp"
-#include <cstddef>
-#include <iostream>
+#include "../inc/Server.hpp"
 
 // #include <vector>
 
@@ -25,8 +24,23 @@ int make_socket_non_blocking(int socket_fd) {
   return 0;
 }
 
-int main(void) {
+void  runServer()
+{
+  Server server;
 
+}
+
+int main(void) {
+  try {
+    runServer();
+  }
+  catch (std::exception &e) {
+    // message
+    return 1;
+  }
+}
+
+int main(void) {
   Server server;
   // verifs
   Epoll epoll(server);

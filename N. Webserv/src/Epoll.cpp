@@ -15,7 +15,7 @@ Epoll::Epoll(const Server &server)
 
   // Ajouter le socket serveur à epoll
   try {
-    addFD(server.getSocket(), EPOLLIN);
+    addFd(server.getSocket(), EPOLLIN);
   }
   catch (std::exception &e) {
     // epoll_ctl
@@ -38,7 +38,7 @@ int Epoll::getReadyFd(void) const
 	return _readyFd;
 }
 
-void Epoll::addFD(int fd, int flags)
+void Epoll::addFd(int fd, int flags)
 {
   struct epoll_event event;
 
