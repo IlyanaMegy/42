@@ -1,14 +1,11 @@
-#include "../inc/Server.hpp"
+#include "../inc/Epoll.hpp"
 #include <cstddef>
-#include <cstring>
-#include <fcntl.h>
 #include <iostream>
-#include <sys/epoll.h>
+
 // #include <vector>
 
 #define PORT 8080
-#define BUFFER_SIZE 42
-#define MAX_EVENTS 10
+
 #define FILE "configs/default.conf"
 
 // Fonction pour mettre un socket en mode non-bloquant
@@ -29,92 +26,81 @@ int make_socket_non_blocking(int socket_fd) {
 }
 
 int main(void) {
+
   Server server;
-  int epoll_fd;
-  struct epoll_event event;
-  struct epoll_event events[MAX_EVENTS];
-
-  // Créer un epoll instance
-  epoll_fd = epoll_create1(0);
-  if (epoll_fd == -1) {
-    perror("epoll_create1");
-    close(server._socket);
-    return 1;
-  }
-
-  // Ajouter le socket serveur à epoll
-  event.events = EPOLLIN;
-  event.data.fd = server._socket;
-  if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, server._socket, &event) == -1) {
-    perror("epoll_ctl");
-    close(server._socket);
-    close(epoll_fd);
-    return 1;
-  }
+  // verifs
+  Epoll epoll(server);
 
   while (true) {
 
-    // Attendre des événements
-    int num_fds = epoll_wait(epoll_fd, events, MAX_EVENTS, -1);
-    if (num_fds == -1) {
-      perror("epoll_wait");
-      break;
+    try {
+      epoll.wait();
+    } catch (std::exception &e) {
+      // epoll_ctl
+      std::cout << e.what() << std::endl;
     }
 
     // Parcourir les événements
-    for (int i = 0; i < num_fds; ++i) {
-      if (events[i].data.fd == server._socket) {
-        // Nouvelle connexion
-        int client_socket = accept(server._socket, NULL, NULL);
-        if (client_socket == -1) {
-          perror("accept");
-          continue;
-        }
+    for (int i = 0; i < epoll.getReadyFd(); i++) {
 
-        std::cout << "New connection accepted." << std::endl;
+      // CASE SERVER
+      if (epoll.getFd(i) == server.getSocket()) {
 
-        // Mettre le socket client en mode non-bloquant
-        make_socket_non_blocking(client_socket);
+        // // Nouvelle connexion
+        // int client_socket = accept(server._socket, NULL, NULL);
+        // if (client_socket == -1) {
+        //   perror("err while trying accept()");
+        //   continue;
+        // }
+        // std::cout << "New connection accepted." << std::endl;
+        // // Mettre le socket client en mode non-bloquant
+        // make_socket_non_blocking(client_socket);
 
-        // Ajouter le socket client à epoll
-        event.events = EPOLLIN | EPOLLET; // Edge-triggered mode
-        event.data.fd = client_socket;
-        if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, client_socket, &event) == -1) {
-          perror("epoll_ctl");
-          close(client_socket);
-        }
+        // CLIENT CLASS
+        int client_socket_to_define;
+        server.acceptClient();
+        // in acceptClient() ==> epoll.addFD(client_socket_to_define, EPOLLIN);
+
       } else {
-
+        server.readFrom(i);
         // Événement sur un socket client
-        char buffer[BUFFER_SIZE];
-        ssize_t bytes_read = recv(events[i].data.fd, buffer, BUFFER_SIZE, 0);
+        // char buffer[BUFFER_SIZE];
+        // ssize_t bytes_read = recv(events[i].data.fd, buffer, BUFFER_SIZE, 0);
+        // if (bytes_read <= 0) {
+        //   // Connexion fermée ou erreur
+        //   if (bytes_read == 0) {
+        //     std::cout << "Client disconnected." << std::endl;
+        //   } else {
+        //     perror("recv");
+        //   }
+        // }
+        continue;
+        
+        // else {
 
-        if (bytes_read <= 0) {
+          // ---------------------------------------------------------------------------------------------
+          // ---------------------------------------------------------------------------------------------
+          // // HTTP Request saved in buffer var
+          // // Traiter la requête et envoyer une réponse
+          // buffer[bytes_read] = '\0';
+          // std::cout << "Received: " << buffer << std::endl;
 
-          // Connexion fermée ou erreur
-          if (bytes_read == 0) {
-            std::cout << "Client disconnected." << std::endl;
-          } else {
-            perror("recv");
-          }
-          close(events[i].data.fd);
-        } else {
 
-          // Traiter la requête et envoyer une réponse
-          buffer[bytes_read] = '\0';
-          std::cout << "Received: " << buffer << std::endl;
-
-          std::string response =
-              "HTTP/1.1 200 OK\r\nContent-Length: 13\r\n\r\nHello, world!";
-          send(events[i].data.fd, response.c_str(), response.size(), 0);
+          // HTTP Response      
+          // send(events[i].data.fd, response.c_str(), response.size(), 0);  
+          // verifs  
+          server.send(i);
+          
         }
       }
     }
   }
 
+  // ---------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------
   // Nettoyage
-  close(server._socket);
-  close(epoll_fd);
+  // close(server._socket);
+  // close(run.epoll_fd);
 
   return 0;
 }

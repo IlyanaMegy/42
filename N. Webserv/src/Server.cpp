@@ -29,7 +29,12 @@ Server::Server() {
   std::cout << "listening..." << std::endl;
 }
 
-Server::~Server() {}
+void Server::readFrom(int i)
+{
+  
+}
+
+Server::~Server() {close(this->_socket);}
 
 const char *Server::SocketCreationErrException::what() const throw() {
   std::cerr << "Erreur lors de la création du socket" << std::endl;
