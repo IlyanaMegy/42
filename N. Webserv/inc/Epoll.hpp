@@ -1,24 +1,34 @@
-#include "../inc/Server.hpp"
-#include <cstring>
-#include <fcntl.h>
-#include <sys/epoll.h>
+#ifndef EPOLL_HPP
+# define EPOLL_HPP
 
-class Server;
-#define MAX_EVENTS 10
+# include <unistd.h>
+# include <sys/epoll.h>
+# include <exception>
+# include <iostream>
+
+# include "../inc/Server.hpp"
+
+# define MAX_EVENTS 100
+
 class Epoll {
-private:
-  int _epollFd;
-  int _readyFd;
-  struct epoll_event _events[MAX_EVENTS];
+	private:
+		int                 _epollFd;
+		int                 _readyFd;
+		struct epoll_event  _events[MAX_EVENTS];
 
-public:
-  Epoll(Server const &server);
-  ~Epoll(void);
-  int getEvents(int i) const;
-  int getEpollFd() const;
-  int getFd(int i) const;
-  int getReadyFd() const;
+	public:
+		Epoll(Server const &server);
+		~Epoll(void);
 
-  void  addFD(int fd, int flags);
-  void wait();
+		int getEpollFd(void) const;
+		int getEvent(int i) const;
+		int getReadyFd(void) const;
+		int getFd(int i) const;
+
+		void addFD(int fd, int flags);
+		void wait(void);
+
+		// exceptions
 };
+
+#endif
