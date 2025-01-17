@@ -1,24 +1,41 @@
 #include "../inc/Server.hpp"
-Server::Server()
-{
-    int opt = 1;
-    // create socket
-    _socket = socket(AF_INET, SOCK_STREAM, 0);
-    if (_socket == -1)
-        // return err
 
-    _sockAddr.sin_family = AF_INET;
-    _sockAddr.sin_port = htons(9001);
-    _sockAddr.sin_addr.s_addr= INADDR_ANY;
-    setsockopt(_socket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
-    bind(_socket, (struct sockaddr*)&_sockAddr, sizeof(_sockAddr));
-    std::cout << "1_ start" << std::endl;
-    listen(_socket, 5);
+#include <iostream>
+
+Server::Server(int port) : _socket(port)
+{
+	if (listen(_socket.getFd(), MAXCONNECT) < 0)
+		throw std::runtime_error("Failed to listen on socket");
+	// std::cout << "server's socket listening..." << std::endl;
+	std::cout << "Server is running on port " << port << "..." << std::endl;
 }
 
-Server::~Server(){}
+Server::~Server(void) {}
 
-const char *Server::SocketCreationErrException::what() const throw()
+Socket &Server::getSocket(void)
 {
-	return ("[SERVER]_ Error while creating socket.");
+	return _socket;
+}
+
+Client &Server::getClient(int i)
+{
+	return _clients[i];
+}
+
+void Server::acceptClient(void)
+{
+	int		clientSocket;
+	Client	client(_socket.getFd());
+
+	clientSocket = client.getSocket().getFd();
+	_clients[clientSocket] = client;
+}
+
+void Server::readFrom(int clientFd) {}
+
+void Server::sendTo(int clientFd) {}
+
+const char *Server::SocketCreationErrException::what() const throw() {
+	std::cerr << "Erreur lors de la création du socket" << std::endl;
+	exit(EXIT_FAILURE);
 }
