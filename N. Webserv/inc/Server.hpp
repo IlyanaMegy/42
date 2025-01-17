@@ -5,9 +5,11 @@
 # include <sys/socket.h>
 # include <netinet/in.h>
 # include <exception>
-# include <string>
 
+# include "Socket.hpp"
 # include "Client.hpp"
+
+# define MAXCONNECT 30
 
 class Server {
 	private:
@@ -19,12 +21,12 @@ class Server {
 		Server(int port);
 		~Server(void);
 
-		int getSocket(void) const;
-		Client  &getClient(int i) const;
+		Socket &getSocket(void);
+		Client  &getClient(int i);
 
 		void acceptClient(void);
-		void readFrom(int i);
-		void send(int fd);
+		void readFrom(int clientFd);
+		void sendTo(int clientFd);
 		
 		class SocketCreationErrException : public std::exception {
 			public:

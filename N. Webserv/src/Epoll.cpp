@@ -1,26 +1,23 @@
 #include "../inc/Epoll.hpp"
 
-
-Epoll::~Epoll(void)
+Epoll::Epoll(int serverFd)
 {
-  close(_epollFd);
-}
-
-Epoll::Epoll(const Server &server) 
-{
-  // Créer un epoll instance
   _epollFd = epoll_create(1);
   if (_epollFd == -1)
     throw std::exception();
 
-  // Ajouter le socket serveur à epoll
   try {
-    addFd(server.getSocket(), EPOLLIN);
+    addFd(serverFd, EPOLLIN);
   }
   catch (std::exception &e) {
     // epoll_ctl
     std::cout << e.what() << std::endl;
   }
+}
+
+Epoll::~Epoll(void)
+{
+  close(_epollFd);
 }
 
 int Epoll::getEpollFd(void) const 
@@ -35,7 +32,7 @@ int Epoll::getEvent(int i) const
 
 int Epoll::getReadyFd(void) const
 {
-	return _readyFd;
+	return _ReadyFdsNb;
 }
 
 void Epoll::addFd(int fd, int flags)
@@ -50,7 +47,7 @@ void Epoll::addFd(int fd, int flags)
 
 void Epoll::wait(void)
 {
-  _readyFd = epoll_wait(_epollFd, _events, MAX_EVENTS, -1);
-  if (_readyFd == -1)
+  _ReadyFdsNb = epoll_wait(_epollFd, _events, MAX_EVENTS, -1);
+  if (_ReadyFdsNb == -1)
     throw std::exception();
 }

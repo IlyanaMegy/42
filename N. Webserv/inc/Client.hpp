@@ -1,18 +1,26 @@
-#define BUFFER_SIZE 42
+#ifndef CLIENT_HPP
+# define CLIENT_HPP
+
+# include <stdexcept>
+
+# include "Socket.hpp"
+
+# define BUFFER_SIZE 42
 
 class Client {
 
 private:
   char buffer[BUFFER_SIZE];
   // HTTPReq request;
-  // HTTPRep reponse;
-  struct sockaddr_in _sockAddr;
-  int _socket;
+//   HTTPRep reponse;
+  Socket _socket;
 
 public:
-  Client();
+  Client(int serverFd);
   ~Client();
-  int getSocket() const;
+  Socket &getSocket();
   void read();
 
 };
+
+#endif

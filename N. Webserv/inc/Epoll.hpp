@@ -12,12 +12,13 @@
 
 class Epoll {
 	private:
+		// Server				_server;
 		int                 _epollFd;
-		int                 _readyFd;
+		int                 _ReadyFdsNb;
 		struct epoll_event  _events[MAX_EVENTS];
 
 	public:
-		Epoll(Server const &server);
+		Epoll(int serverFd);
 		~Epoll(void);
 
 		int getEpollFd(void) const;
