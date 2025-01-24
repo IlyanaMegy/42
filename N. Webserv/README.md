@@ -21,6 +21,7 @@
 	- **Limites**
 - [VI. HTTP](#vi-http)
 - [VII. Sockets](#vii-sockets)
+- [VIII. Structure](#viii-structure)
 
 <p>&nbsp;</p>
 
@@ -475,6 +476,33 @@ int main() {
     return 0;
 }
 ```
+
+
+# VIII. Structure
+
+Apres plusieurs semaines de travail sur le projet on peut deja comprendre que ce projet aura une forme de ce style :
+
+**I. Initialisation**
+
+Parsez le fichier de configuration pour charger tous les blocs server.
+Pour chaque bloc, créez un socket pour le port spécifié dans listen.
+
+**II. Boucle principale**
+
+Ajoutez tous les sockets à un objet epoll (ou similaire).
+Entrez dans une boucle pour surveiller les événements sur ces sockets.
+
+**III. Traitement des connexions**
+
+Lorsqu'un socket signale une nouvelle connexion :
+- Acceptez la connexion.
+- Identifiez à quel bloc de configuration elle appartient (par le port ou les en-têtes HTTP).
+- Appliquez les règles de configuration de ce bloc pour traiter la requête.
+
+**IV. Réponse au client**
+
+En fonction de la configuration du bloc (racine root, erreurs error_page, etc.), générez une réponse HTTP.
+
 
 ### Résumé de l'Utilisation des Sockets dans le Projet Webserv
 

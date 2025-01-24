@@ -1,81 +1,76 @@
-#include "../inc/Epoll.hpp"
-#include "../inc/Server.hpp"
+#include "../inc/Webserv.hpp"
+#include "../inc/Network/config/ConfigParser.hpp"
 
-// #include <vector>
+// void	runServer(void)
+// {
+// 	Server	server(PORT);
+// 	Epoll	epoll(server.getSocket().getFd());
 
-#define PORT 8080
+// 	while (true) {
+// 		try {
+// 			epoll.wait();
+// 		} catch (std::exception &e) {
+// 			std::cout << e.what() << std::endl;
+// 		}
 
-#define FILE "configs/default.conf"
+// 		for (int i = 0; i < epoll.getReadyFd(); i++) {
+// 			if (epoll.getFd(i) == server.getSocket().getFd()) {
+// 				try {
+// 					server.acceptClient();
+// 				} catch (std::exception &e) {
+// 					std::cout << e.what() << std::endl;
+// 				}
+// 			}
+// 			else {
+// 				server.readFrom(i);
+// 				server.sendTo(i);
+// 			}
+// 		}
+// 	}
+// }
 
-void	runServer(void)
-{
+// int	main(void)
+// {
+// 	try {
+// 		runServer();
+// 	}
+// 	catch (std::exception &e) {
+// 		std::cout << e.what() << std::endl;
+// 		return 1;
+// 	}
+// 	return 0;
+// }
 
-	Server	server(PORT);
-	Epoll	epoll(server.getSocket().getFd());
+#define PORT 9001
 
-	while (true) {
-		try {
-			epoll.wait();
-		} catch (std::exception &e) {
-			// epoll_ctl
-			std::cout << e.what() << std::endl;
+// void runServer(void) {
+// 	Server server(PORT);
+// 	Epoll epoll(server.getSocket().getFd());
+// }
+
+int main(int ac, char** av) {
+	if (ac == 1 || ac == 2) {
+		ConfigParser parser;
+		try
+		{
+			parser.createCluster(ac == 1 ? "config/webserv.conf" : av[1]);
+			// std::cout << "Root: " << parser.getValue("root") << std::endl;
+			// std::cout << "Port: " << parser.getValue("listen") << std::endl;
+		}
+		catch (std::exception& e)
+		{
+			std::cerr << e.what() << std::endl;
 		}
 
-		// Parcourir les événements
-		for (int i = 0; i < epoll.getReadyFd(); i++) {
-			// CASE SERVER
-			if (epoll.getFd(i) == server.getSocket().getFd()) {
-				try {
-					server.acceptClient();
-				} catch (std::exception &e) {
-					// epoll_ctl
-					std::cout << e.what() << std::endl;
-				}
-			}
-			else {
-				server.readFrom(i);
-				// Événement sur un socket client
-				// char buffer[BUFFER_SIZE];
-				// ssize_t bytes_read = recv(events[i].data.fd, buffer,
-				// BUFFER_SIZE, 0); if (bytes_read <= 0) {
-				//   // Connexion fermée ou erreur
-				//   if (bytes_read == 0) {
-				//     std::cout << "Client disconnected." << std::endl;
-				//   } else {
-				//     perror("recv");
-				//   }
-				// }
-				continue;
-
-				// else {
-
-				// ---------------------------------------------------------------------------------------------
-				// ---------------------------------------------------------------------------------------------
-				// // HTTP Request saved in buffer var
-				// // Traiter la requête et envoyer une réponse
-				// buffer[bytes_read] = '\0';
-				// std::cout << "Received: " << buffer << std::endl;
-
-				// HTTP Response
-				// send(events[i].data.fd, response.c_str(), response.size(),
-				// 0); verifs
-				server.sendTo(i);
-			}
-		}
+		// try {
+		// 	runServer();
+		// } catch (std::exception& e) {
+		// 	std::cout << e.what() << std::endl;
+		// 	return 1m 
+		// }
+		// std::cout << "Closing server, bye !" << std::endl;
+		return 0;
 	}
+
+	return (std::cout << "Error: wrong number of arguments." << std::endl, 1);
 }
-
-
-
-int	main(void)
-{
-	try {
-		runServer();
-	}
-	catch (std::exception &e) {
-    	std::cout << e.what() << std::endl;
-		return 1;
-	}
-	return 0;
-}
-
