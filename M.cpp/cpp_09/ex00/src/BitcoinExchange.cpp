@@ -38,6 +38,8 @@ void BitcoinExchange::readDB(const std::string & filename)
 	std::ifstream file(filename.c_str());
 	if (!file)
 		throw InvalidFileException();
+	if (file.peek() == std::ifstream::traits_type::eof())
+		throw std::runtime_error("Error: input file is empty.");
 
 	std::string line, date;
 	double rate;
@@ -121,6 +123,20 @@ void BitcoinExchange::multiplyWithQuote(std::string const &date, double price)
 	}
 }
 
+void	BitcoinExchange::calculate(std::map<int, std::string>::iterator &it)
+{
+	_date = it->second.substr(0, 10);
+	std::map<std::string, float>::iterator bit_it = this->_bitcoin.lower_bound(_date);
+	if (bit_it->first != _date)
+		bit_it--;
+	_result = bit_it->second * _value;
+	it->second.replace(11, 1, "=>");
+	std::stringstream ss;
+	ss << _result;
+	std::string result_str = ss.str();
+	it->second.append(" = " + result_str);
+}
+
 void BitcoinExchange::execute(const std::string &fileName)
 {
 	std::ifstream file(fileName.c_str());
@@ -140,37 +156,38 @@ void BitcoinExchange::execute(const std::string &fileName)
 	{
 		trim(line);
 
-		size_t separator = line.find('|');
-        if (separator == std::string::npos || separator != 10 || line[11] != ' ') {
-            std::cout << "Error: bad input => " << line << std::endl;
+		size_t separator = line.find(',');
+		if (separator == std::string::npos || separator != 10) {
+            std::cout << "Error: bad format input => " << line << std::endl;
             continue;
         }
 
-        std::string date = line.substr(0, separator - 1);
-        std::string valueStr = line.substr(separator + 2);
-
+        std::string date = line.substr(0, separator);
+        std::string valueStr = line.substr(separator + 1);
+		std::cout << GOLD << "date = " << date << " value = " << valueStr << RESET << std::endl;
+        
         trim(date);
         trim(valueStr);
 	
 		if (!isDateOK(date))
 		{
-			std::cout << "Error: bad input => " << date << std::endl;
+			std::cout << "Error: bad date input => " << date << std::endl;
 			continue;
 		}
 		if (!isValueOK(valueStr))
 		{
-			std::cout << "Error: bad input => " << valueStr << std::endl;
+			std::cout << "Error: bad value input => " << valueStr << std::endl;
 			continue;
 		}
 
 		double value;
 		std::stringstream ss(valueStr);
 		if (!(ss >> value)) {
-			std::cout << "Error: bad input => " << valueStr << std::endl;
+			std::cout << "Error: bad conversion of input => " << valueStr << std::endl;
 			continue;
 		}
 		
 		double rate = getRates(date);
-		std::cout << date << " | " << value << " | " << value * rate << std::endl;
+		std::cout << date << " => " << value << " = " << value * rate << std::endl;
 	}
 }

@@ -27,11 +27,14 @@
 class BitcoinExchange
 {
   private:
+	std::map<int, std::string> _input;
 	std::map<std::string, double> _rates;
+
 	
 	bool isDateOK(const std::string &date);
 	bool isValueOK(const std::string &value);
 	void multiplyWithQuote(std::string const &date, double price);
+	void calculate(std::map<int, std::string>::iterator &it);
 
   public:
 	BitcoinExchange();
