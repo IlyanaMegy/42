@@ -1,33 +1,36 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ilymegy <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 21:14:11 by ilymegy           #+#    #+#             */
-/*   Updated: 2024/12/06 21:14:18 by ilymegy          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+#pragma once
 #ifndef BITCOINEXCHANGE__HPP
 # define BITCOINEXCHANGE__HPP
 
-# include <cstdlib>
-# include <exception>
-# include <fstream>
-# include <iostream>
-# include <map>
-# include <sstream>
-# include <string>
+#include <map>
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <stdexcept>
+#include <cstdlib>
+#include <algorithm>
+#include <ostream>
+#include <cctype>
+#include "../inc/style.hpp"
+
+#define YEAR_LENGTH 4
+#define MONTH_LENGTH 2
+#define DAY_LENGTH 2
+
+#define FEBRUARY 2
+#define APRIL 4
+#define JUNE 6
+#define SEPTEMBER 9
+#define NOVEMBER 11
 
 class BitcoinExchange
 {
   private:
 	std::map<std::string, double> _rates;
-	void readDB();
+	
 	bool isDateOK(const std::string &date);
-	double isValueOK(const std::string &value);
+	bool isValueOK(const std::string &value);
 	void multiplyWithQuote(std::string const &date, double price);
 
   public:
@@ -36,8 +39,9 @@ class BitcoinExchange
 	BitcoinExchange &operator=(BitcoinExchange const &src);
 	~BitcoinExchange();
 
-	std::map<std::string, double> const &getRates() const;
-	void execute(char const *fileName);
+	double getRates(const std::string &date) const;
+	void readDB(const std::string & filename);
+	void execute(const std::string &fileName);
 
 	class InvalidFileException : public std::exception
 	{
