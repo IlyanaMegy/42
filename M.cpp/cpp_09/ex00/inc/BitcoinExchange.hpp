@@ -1,4 +1,3 @@
-#pragma once
 #ifndef BITCOINEXCHANGE__HPP
 # define BITCOINEXCHANGE__HPP
 
