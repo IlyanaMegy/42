@@ -27,13 +27,15 @@
 class BitcoinExchange
 {
   private:
-	std::map<int, std::string> _input;
-	std::map<std::string, double> _rates;
 
-	
+	std::map<int, std::string> _input;
+	double _value;
+	double _result;
+	std::map<std::string, double> _dB;
+
+	void addDB(void);
 	bool isDateOK(const std::string &date);
-	bool isValueOK(const std::string &value);
-	void multiplyWithQuote(std::string const &date, double price);
+	int checkValue(const std::string &value);
 	void calculate(std::map<int, std::string>::iterator &it);
 
   public:
@@ -42,9 +44,9 @@ class BitcoinExchange
 	BitcoinExchange &operator=(BitcoinExchange const &src);
 	~BitcoinExchange();
 
-	double getRates(const std::string &date) const;
-	void readDB(const std::string & filename);
-	void execute(const std::string &fileName);
+	void readInput(const std::string &filename);
+	void execute(void);
+	void printResult(void);
 
 	class InvalidFileException : public std::exception
 	{
@@ -60,25 +62,7 @@ class BitcoinExchange
 		public:
 		virtual const char *what() const throw()
 		{
-			return ("Invalid column format. Expected 'date,exchange_rate'");
-		}
-	};
-
-	class InvalidDateFormat : public std::exception
-	{
-		public:
-		virtual const char *what() const throw()
-		{
-			return ("Invalid date format. Expected 'YYYY-MM-DD'");
-		}
-	};
-
-	class InvalidPriceFormat : public std::exception
-	{
-		public:
-		virtual const char *what() const throw()
-		{
-			return ("Invalid price format. Expected a number between 0.0 and 1000.0");
+			return ("Invalid column format. Expected 'date | exchange_rate'");
 		}
 	};
 };

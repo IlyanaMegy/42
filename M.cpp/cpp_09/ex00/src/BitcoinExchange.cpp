@@ -12,28 +12,38 @@ std::string trim(const std::string &s) {
     return std::string(start, end + 1);
 }
 
-BitcoinExchange::BitcoinExchange(){}
+BitcoinExchange::BitcoinExchange(){ addDB(); }
+
 BitcoinExchange::~BitcoinExchange(){}
-BitcoinExchange::BitcoinExchange(BitcoinExchange const &src): _rates(src._rates){}
+BitcoinExchange::BitcoinExchange(BitcoinExchange const &src): _dB(src._dB){}
 BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &src)
 {
 	if (this != &src)
-		_rates = src._rates;
+		_dB = src._dB;
 	return *this;
 }
 
-double BitcoinExchange::getRates(const std::string &date) const
+void BitcoinExchange::addDB(void)
 {
-	std::map<std::string, double>::const_iterator it = _rates.lower_bound(date);
-    if (it == _rates.end() || it->first != date) {
-        if (it == _rates.begin())
-            return 0;
-        --it;
-    }
-    return it->second;
+	std::ifstream dataBase("data.csv");
+	if (!dataBase.is_open())
+		throw std::runtime_error("Error: could not open database.");
+	if (dataBase.peek() == std::ifstream::traits_type::eof())
+		throw std::runtime_error("Error: database is empty.");
+	std::string dB_line;
+	while (getline(dataBase, dB_line))
+	{
+		if (dB_line.size() < 12)
+			throw std::runtime_error("Error: bad database format.");
+		std::stringstream ss(dB_line.substr(11));
+		double val;
+		ss >> val;
+		_dB.insert(std::pair<std::string, double>(dB_line.substr(0, 10), val));
+	}
+	dataBase.close();
 }
 
-void BitcoinExchange::readDB(const std::string & filename)
+void BitcoinExchange::readInput(const std::string &filename)
 {
 	std::ifstream file(filename.c_str());
 	if (!file)
@@ -41,41 +51,35 @@ void BitcoinExchange::readDB(const std::string & filename)
 	if (file.peek() == std::ifstream::traits_type::eof())
 		throw std::runtime_error("Error: input file is empty.");
 
-	std::string line, date;
-	double rate;
+	std::string line;
+	int i = 0;
 
-	if (std::getline(file, line))
-		if (line != "date,exchange_rate")
+	if (std::getline(file, line)){
+		if (line != "date | value")
 			throw InvalidColumnFormat();
-
-	std::cout << "date | value" << std::endl;
-
-	while (std::getline(file, line))
-	{
-		std::istringstream ss(line);
-		if (getline(ss, date, ',') && (ss >> rate))
-			_rates[date] = rate;
+		_input.insert(std::pair<int, std::string>(i, line));
+		i++;
 	}
+
+	while (std::getline(file, line)) {
+		if (line.size() < 12)
+			throw std::runtime_error("Error: bad database format. " + line);
+		_input.insert(std::pair<int, std::string>(i, line));
+		i++;
+	}
+	file.close();
 }
 
 bool BitcoinExchange::isDateOK(const std::string &date)
 {
     if (date.size() != 10 || date[4] != '-' || date[7] != '-')
-        return false;
+		return false;
 
-    for (int i = 0; i < 4; ++i) {
-        if (!isdigit(date[i]))
-            return false;
-	}
-
-    for (int i = 5; i < 7; ++i) {
-        if (!isdigit(date[i]))
-            return false;
-	}
-
-    for (int i = 8; i < 10; ++i) {
+	for (int i = 0; i < 10; ++i) {
+		if (i == 4 || i == 7)
+			continue;
 		if (!isdigit(date[i]))
-            return false;
+			return false;
 	}
 
 	int year = atoi(date.substr(0, 4).c_str());
@@ -83,111 +87,76 @@ bool BitcoinExchange::isDateOK(const std::string &date)
 	int day = atoi(date.substr(8, 2).c_str());
 
     if (month < 1 || month > 12 || day < 1 || day > 31)
-        return false;
+		return false;
 
-    if (month == FEBRUARY)
-    {
-        bool isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-    	return day <= (isLeap ? 29 : 28);
-    } else if (month == APRIL || month == JUNE || month == SEPTEMBER || month == NOVEMBER) {
-        return day <= 30;
-	}
+	bool isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    if (month == FEBRUARY && day <= (isLeap ? 29 : 28))
+		return false;
+	
+    if ((month == APRIL || month == JUNE || month == SEPTEMBER || month == NOVEMBER) && day > 30)
+		return false;
 
 	return true;
 }
 
-bool BitcoinExchange::isValueOK(const std::string &value)
+int BitcoinExchange::checkValue(const std::string &value)
 {
 	std::stringstream ss(value);
-    double val;
-    if (!(ss >> val) || val < 0)
-        return false;
-    return true;
+    if (!(ss >> _value) || _value < 0)
+        return 1;
+	else if (_value > 1000)
+		return 2;
+    return 0;
 }
 
-void BitcoinExchange::multiplyWithQuote(std::string const &date, double price)
+void	BitcoinExchange::calculate(std::map<int, std::string>::iterator &it_input)
 {
-	std::map<std::string, double>::iterator it = _rates.find(date);
-	if (it != _rates.end())
-		std::cout << date << " | " << price << " | " << price * it->second << std::endl;
-	else
+	std::string inputDate = it_input->second.substr(0, 10);
+	std::map<std::string, double>::iterator it_dB = _dB.lower_bound(inputDate);
+	if (it_dB->first != inputDate)
+		it_dB--;
+	_result = it_dB->second * _value;
+	it_input->second.replace(11, 1, "=>");
+	std::stringstream ss;
+	ss << _result;
+	it_input->second.append(" = " + ss.str());
+}
+
+void BitcoinExchange::execute(void)
+{
+	std::map<int, std::string>::iterator it = _input.begin();
+	it++;
+
+	while (it != _input.end())
 	{
-		std::map<std::string, double>::iterator it2 = _rates.lower_bound(date);
-		if (it2 == _rates.begin())
-			std::cout << date << " | " << price << " | " << price * it2->second << std::endl;
-		else
+		std::string date = it->second.substr(0, 10);
+		std::string value = it->second.substr(13);
+		int resValueCheck = checkValue(value);
+		if (!isDateOK(date))
+			it->second.replace(0, it->second.size(), ("Error: invalid date : " + date));
+		else if (resValueCheck)
 		{
-			it2--;
-			std::cout << date << " | " << price << " | " << price * it2->second << std::endl;
+			if (resValueCheck == 1)
+				it->second.replace(0, it->second.size(), "Error: not positive number : " + value);
+			else if (resValueCheck == 2)
+				it->second.replace(0, it->second.size(), "Error: too large a number : " + value);
 		}
+		else
+			calculate(it);
+		it++;
 	}
 }
 
-void	BitcoinExchange::calculate(std::map<int, std::string>::iterator &it)
+void	BitcoinExchange::printResult()
 {
-	_date = it->second.substr(0, 10);
-	std::map<std::string, float>::iterator bit_it = this->_bitcoin.lower_bound(_date);
-	if (bit_it->first != _date)
-		bit_it--;
-	_result = bit_it->second * _value;
-	it->second.replace(11, 1, "=>");
-	std::stringstream ss;
-	ss << _result;
-	std::string result_str = ss.str();
-	it->second.append(" = " + result_str);
-}
-
-void BitcoinExchange::execute(const std::string &fileName)
-{
-	std::ifstream file(fileName.c_str());
-	if (!file)
-		throw InvalidFileException();
-
-	std::string line, date, value;
-	bool firstLine = true;
-
-	std::getline(file, line);
-	
-	trim(line);
-	if (firstLine && line != "date,exchange_rate")
-		throw InvalidColumnFormat();
-
-	while (std::getline(file, line))
+	std::map<int, std::string>::iterator it = _input.begin();
+	it++;
+	while (it != _input.end())
 	{
-		trim(line);
-
-		size_t separator = line.find(',');
-		if (separator == std::string::npos || separator != 10) {
-            std::cout << "Error: bad format input => " << line << std::endl;
-            continue;
-        }
-
-        std::string date = line.substr(0, separator);
-        std::string valueStr = line.substr(separator + 1);
-		std::cout << GOLD << "date = " << date << " value = " << valueStr << RESET << std::endl;
-        
-        trim(date);
-        trim(valueStr);
-	
-		if (!isDateOK(date))
-		{
-			std::cout << "Error: bad date input => " << date << std::endl;
-			continue;
-		}
-		if (!isValueOK(valueStr))
-		{
-			std::cout << "Error: bad value input => " << valueStr << std::endl;
-			continue;
-		}
-
-		double value;
-		std::stringstream ss(valueStr);
-		if (!(ss >> value)) {
-			std::cout << "Error: bad conversion of input => " << valueStr << std::endl;
-			continue;
-		}
-		
-		double rate = getRates(date);
-		std::cout << date << " => " << value << " = " << value * rate << std::endl;
+		if (it->second.find("Error") != std::string::npos)
+			std::cout << RED1 <<  "/!\\ line " << it->first << " " << it->second << RESET << std::endl;
+		else
+			std::cout << LIME << it->second << RESET << std::endl;
+		it++;
 	}
 }

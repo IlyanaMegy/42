@@ -8,8 +8,10 @@ int main(int ac, char **av)
 	try
 	{
 		BitcoinExchange exchange;
-		exchange.readDB(av[1]);
-		exchange.execute(av[1]);
+
+		exchange.readInput(av[1]);
+		exchange.execute();
+		exchange.printResult();
 	}
 	catch (std::exception &e)
 	{
