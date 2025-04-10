@@ -44,7 +44,7 @@ void RPN::inputCheck(void) {
 	}
 
 	if (nbCount != 1 || opCount == 0)
-		throw std::invalid_argument("Error: Invalid RPN expression");	
+		throw std::invalid_argument("Error: Invalid RPN expression");
 }
 
 int RPN::calculate(void) {
