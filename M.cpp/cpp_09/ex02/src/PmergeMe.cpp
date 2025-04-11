@@ -146,12 +146,12 @@ void PmergeMe::sortAndDisplay() {
     clock_t startVec = clock();
     sortVectorWithMerge(_vec);
     clock_t endVec = clock();
-    double timeVec = static_cast<double>(endVec - startVec) / CLOCKS_PER_SEC * 1000; // Temps en millisecondes
+    double timeVec = static_cast<double>(endVec - startVec) / CLOCKS_PER_SEC * 1000;
 
     clock_t startList = clock();
     sortListWithMerge(_list);
     clock_t endList = clock();
-    double timeList = static_cast<double>(endList - startList) / CLOCKS_PER_SEC * 1000; // Temps en millisecondes
+    double timeList = static_cast<double>(endList - startList) / CLOCKS_PER_SEC * 1000;
 
     std::cout << "After sorting:" << std::endl;
     printIt("Sorted state");
