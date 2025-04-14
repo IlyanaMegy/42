@@ -1,9 +1,6 @@
 #include "../inc/RPN.hpp"
 
-RPN::RPN(void)
-{
-	throw std::invalid_argument("Error: please provide an argument");
-}
+RPN::RPN(void) { throw std::invalid_argument("Error: please provide an argument"); }
 RPN::RPN(std::string input) : _input(input), _result(0) { inputCheck(); }
 RPN::RPN(const RPN &copy) { *this = copy; }
 RPN &RPN::operator=(const RPN &copy) {
@@ -15,6 +12,12 @@ RPN &RPN::operator=(const RPN &copy) {
 	return (*this);
 }
 RPN::~RPN() {}
+
+bool isOperator(char c) {
+	if (c != '+' && c != '-' && c != '*' && c != '/')
+		return false;
+	return true;
+}
 
 void RPN::inputCheck(void) {
 	int nbCount = 0;
@@ -28,11 +31,10 @@ void RPN::inputCheck(void) {
 		if (isdigit(c))
 		{
 			nbCount++;
-			while (i < _input.size() && isdigit(_input[i]))
-				i++;
-			i--;
+			if (_input[i+1] && isdigit(_input[i+1]))
+				throw std::invalid_argument("Error: numbers must not be more than 1 digit");
 		}
-		else if (c == '+' || c == '-' || c == '*' || c == '/')
+		else if (isOperator(c))
 		{
 			opCount++;
 			if (nbCount < 2)
@@ -42,7 +44,6 @@ void RPN::inputCheck(void) {
 		else
 			throw std::invalid_argument("Error: invalid character");
 	}
-
 	if (nbCount != 1 || opCount == 0)
 		throw std::invalid_argument("Error: Invalid RPN expression");
 }
@@ -54,13 +55,13 @@ int RPN::calculate(void) {
 		if (isdigit(*it)) {
 			int num = 0;
 			while (isdigit(*it)) {
-				num = num * 10 + *it - '0';		// ? Convert to int (atoi remember ?)
+				num = num * 10 + *it - '0';
 				it++;
 			}
 			_stack.push(num);
 		}
 		else {
-			int a = _stack.top(); _stack.pop();	// ? Pop the top two elements
+			int a = _stack.top(); _stack.pop();
 			int b = _stack.top(); _stack.pop();
 
 			switch (*it)
