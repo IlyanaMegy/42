@@ -7,15 +7,14 @@ int main(int ac, char **av) {
 	try {
         sorter.parseIt(ac, av);
     } catch (const std::exception &e) {
-        std::cerr << e.what() << std::endl;
-        return 1;
+		return (std::cerr << e.what() << std::endl, 1);
     }
+
 	try {
 		sorter.sortAndDisplay();
 	}
 	catch(const std::exception& e) {
 		std::cerr << e.what() << '\n';
 	}
-	
     return 0;
 }

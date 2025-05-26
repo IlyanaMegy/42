@@ -97,59 +97,86 @@ std::list<int> PmergeMe::mergeSortedLists(const std::list<int> &left, const std:
     return result;
 }
 
-void PmergeMe::sortVectorWithMerge(std::vector<int> &vec) {
+void PmergeMe::sortVectorWithFordJohnson(std::vector<int> &vec) {
     if (vec.size() <= 1)
         return;
 
-    size_t middle = vec.size() / 2;
-    std::vector<int> left(vec.begin(), vec.begin() + middle);
-    std::vector<int> right(vec.begin() + middle, vec.end());
+    std::vector<int> bigOne;
+    std::vector<int> smolOne;
+    for (size_t i = 0; i + 1 < vec.size(); i+=2 ) {
+        if (vec[i] > vec[i + 1])
+            std::swap(vec[i], vec[i + 1]);
+        bigOne.push_back(vec[i + 1]);
+        smolOne.push_back(vec[i]);
+    }
+    if (vec.size() % 2 != 0)
+        bigOne.push_back(vec.back());
 
-    sortVectorWithMerge(left);
-    sortVectorWithMerge(right);
-    vec = mergeSortedVectors(left, right);
+    sortVectorWithFordJohnson(bigOne);
+
+    for (size_t i = 0; i < smolOne.size(); ++i) {
+        std::vector<int>::iterator pos = std::lower_bound(bigOne.begin(), bigOne.end(), smolOne[i]);
+        bigOne.insert(pos, smolOne[i]);
+    }
+    vec = bigOne;
 }
 
-void PmergeMe::sortListWithMerge(std::list<int> &list) {
+void PmergeMe::sortListWithFordJohnson(std::list<int> &list) {
     if (list.size() <= 1)
         return;
 
-    std::list<int>::iterator middle = list.begin();
-    std::advance(middle, list.size() / 2);
+    std::list<int> bigOne;
+    std::list<int> smolOne;
+    std::list<int>::iterator it = list.begin();
+    while (it != list.end()) {
+        int first = *it;
+        ++it;
+        if (it != list.end()) {
+            int second = *it;
+            if (first > second)
+                std::swap(first, second);
+            bigOne.push_back(second);
+            smolOne.push_back(first);
+            ++it;
+        } else
+            bigOne.push_back(first);
+    }
 
-    std::list<int> left(list.begin(), middle);
-    std::list<int> right(middle, list.end());
-
-    sortListWithMerge(left);
-    sortListWithMerge(right);
-    list = mergeSortedLists(left, right);
+    sortListWithFordJohnson(bigOne);
+    for (std::list<int>::iterator smolIt = smolOne.begin(); smolIt != smolOne.end(); ++smolIt) {
+        std::list<int>::iterator pos = bigOne.begin();
+        while (pos != bigOne.end() && *pos < *smolIt)
+            ++pos;
+        bigOne.insert(pos, *smolIt);
+    }
+    list = bigOne;
 }
 
-bool PmergeMe::isVectorSorted() const {
+bool PmergeMe::isVectorSorted(void) const {
     for (std::vector<int>::const_iterator it = _vec.begin(), next = ++_vec.begin(); next != _vec.end(); ++it, ++next)
         if (*it > *next)
             return false;
     return true;
 }
 
-bool PmergeMe::isListSorted() const {
+bool PmergeMe::isListSorted(void) const {
     for (std::list<int>::const_iterator it = _list.begin(), next = ++_list.begin(); next != _list.end(); ++it, ++next)
         if (*it > *next)
             return false;
     return true;
 }
 
-void PmergeMe::sortAndDisplay() {
+void PmergeMe::sortAndDisplay(void) {
     std::cout << "Before sorting:" << std::endl;
     printIt("Initial state");
 
     clock_t startVec = clock();
-    sortVectorWithMerge(_vec);
+    sortVectorWithFordJohnson(_vec);
     clock_t endVec = clock();
     double timeVec = static_cast<double>(endVec - startVec) / CLOCKS_PER_SEC * 1000;
 
     clock_t startList = clock();
-    sortListWithMerge(_list);
+    sortListWithFordJohnson(_list);
     clock_t endList = clock();
     double timeList = static_cast<double>(endList - startList) / CLOCKS_PER_SEC * 1000;
 
