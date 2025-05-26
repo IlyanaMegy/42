@@ -3,10 +3,7 @@
 int main(int ac, char **av) {
 
 	if (ac != 2)
-	{
-		std::cerr << "Error: please provide an argument" << std::endl;
-		return 1;
-	}
+		return (std::cerr << "Error: please provide an argument" << std::endl, 1);
 	try
 	{
 		RPN rpn(av[1]);
@@ -15,7 +12,7 @@ int main(int ac, char **av) {
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
+		return 1;
 	}
-	
 	return 0;
 }
