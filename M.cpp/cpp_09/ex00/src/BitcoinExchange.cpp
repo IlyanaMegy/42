@@ -90,7 +90,7 @@ bool BitcoinExchange::isDateOK(const std::string &date)
 		return false;
 
 	bool isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-    if (month == FEBRUARY && day <= (isLeap ? 29 : 28))
+    if (month == FEBRUARY && day > (isLeap ? 29 : 28))
 		return false;
 	
     if ((month == APRIL || month == JUNE || month == SEPTEMBER || month == NOVEMBER) && day > 30)
