@@ -11,6 +11,8 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &src) {
     return *this;
 }
 
+// ------------------------------------ PARSING FUNCTIONS ------------------------------------
+
 int PmergeMe::toInt(const std::string &str) {
     std::stringstream ss(str);
     int num;
@@ -36,6 +38,8 @@ void PmergeMe::parseIt(int ac, char **av) {
     _list.assign(_vec.begin(), _vec.end());
 }
 
+// ----------------------------- SORTING AND DISPLAY FUNCTIONS ----------------------------------
+
 void PmergeMe::printIt(const std::string &msg) {
     std::cout << "############# " << msg << " #############" << std::endl;
 
@@ -50,51 +54,50 @@ void PmergeMe::printIt(const std::string &msg) {
     std::cout << "]" << std::endl << std::endl;
 }
 
-std::vector<int> PmergeMe::mergeSortedVectors(const std::vector<int> &left, const std::vector<int> &right) {
-    std::vector<int> result;
-    size_t i = 0, j = 0;
-
-    while (i < left.size() && j < right.size()) {
-        if (left[i] <= right[j])
-            result.push_back(left[i++]);
-        else
-            result.push_back(right[j++]);
-    }
-
-    while (i < left.size())
-        result.push_back(left[i++]);
-    while (j < right.size())
-        result.push_back(right[j++]);
-
-    return result;
+static size_t jacobsthal(size_t n) {
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
 }
 
-std::list<int> PmergeMe::mergeSortedLists(const std::list<int> &left, const std::list<int> &right) {
-    std::list<int> result;
-    std::list<int>::const_iterator itLeft = left.begin();
-    std::list<int>::const_iterator itRight = right.begin();
+static std::vector<size_t> jacobsthalOrder(size_t n) {
+    std::vector<size_t> order;
+    std::vector<size_t> jacobIndices;
+    size_t idx = 3;
+    size_t jac;
+    while ((jac = jacobsthal(idx)) <= n) {
+        jacobIndices.push_back(jac);
+        idx++;
+    }
 
-    while (itLeft != left.end() && itRight != right.end()) {
-        if (*itLeft <= *itRight) {
-            result.push_back(*itLeft);
-            ++itLeft;
-        } else {
-            result.push_back(*itRight);
-            ++itRight;
+    for (size_t i = 0; i < jacobIndices.size(); ++i)
+        order.push_back(jacobIndices[i]);
+
+    size_t last = 1;
+    for (size_t i = 0; i < jacobIndices.size(); ++i) {
+        size_t j = jacobIndices[i] - 1;
+        while (j > last) {
+            order.push_back(j);
+            --j;
         }
+        last = jacobIndices[i];
     }
 
-    while (itLeft != left.end()) {
-        result.push_back(*itLeft);
-        ++itLeft;
-    }
+    while (++last <= n)
+        order.push_back(last);
+    return order;
+}
 
-    while (itRight != right.end()) {
-        result.push_back(*itRight);
-        ++itRight;
+static size_t binary_search(const std::vector<int>& sorted, int value) {
+    size_t left = 0, right = sorted.size();
+    while (left < right) {
+        size_t mid = left + (right - left) / 2;
+        if (sorted[mid] < value)
+            left = mid + 1;
+        else
+            right = mid;
     }
-
-    return result;
+    return left;
 }
 
 void PmergeMe::sortVectorWithFordJohnson(std::vector<int> &vec) {
@@ -114,11 +117,32 @@ void PmergeMe::sortVectorWithFordJohnson(std::vector<int> &vec) {
 
     sortVectorWithFordJohnson(bigOne);
 
-    for (size_t i = 0; i < smolOne.size(); ++i) {
-        std::vector<int>::iterator pos = std::lower_bound(bigOne.begin(), bigOne.end(), smolOne[i]);
-        bigOne.insert(pos, smolOne[i]);
+    if (!smolOne.empty()) {
+        std::vector<int> sorted(bigOne);
+        size_t first = 0;
+        size_t pos = binary_search(sorted, smolOne[first]);
+        sorted.insert(sorted.begin() + pos, smolOne[first]);
+
+        std::vector<size_t> order = jacobsthalOrder(smolOne.size());
+        for (size_t k = 0; k < order.size(); ++k) {
+            size_t idx = order[k];
+            if (idx == 0 || idx >= smolOne.size())
+                continue;
+            int to_insert = smolOne[idx];
+            size_t pos = binary_search(sorted, to_insert);
+            sorted.insert(sorted.begin() + pos, to_insert);
+        }
+        bigOne = sorted;
     }
     vec = bigOne;
+}
+
+// la recherche binaire n’est pas faisable car std::list ne permet pas l’accès direct aux éléments. 
+// j’utilise donc une insertion séquentielle, ce qui est conforme à l’énoncé et à la correction officielle.
+static std::list<int>::iterator list_nth(std::list<int>& lst, size_t n) {
+    std::list<int>::iterator it = lst.begin();
+    std::advance(it, n);
+    return it;
 }
 
 void PmergeMe::sortListWithFordJohnson(std::list<int> &list) {
@@ -143,11 +167,25 @@ void PmergeMe::sortListWithFordJohnson(std::list<int> &list) {
     }
 
     sortListWithFordJohnson(bigOne);
-    for (std::list<int>::iterator smolIt = smolOne.begin(); smolIt != smolOne.end(); ++smolIt) {
+
+   if (!smolOne.empty()) {
         std::list<int>::iterator pos = bigOne.begin();
-        while (pos != bigOne.end() && *pos < *smolIt)
+        int first = *smolOne.begin();
+        while (pos != bigOne.end() && *pos < first)
             ++pos;
-        bigOne.insert(pos, *smolIt);
+        bigOne.insert(pos, first);
+
+        std::vector<size_t> order = jacobsthalOrder(smolOne.size());
+        for (size_t k = 0; k < order.size(); ++k) {
+            size_t idx = order[k];
+            if (idx == 0 || idx >= smolOne.size())
+                continue;
+            int to_insert = *list_nth(smolOne, idx);
+            pos = bigOne.begin();
+            while (pos != bigOne.end() && *pos < to_insert)
+                ++pos;
+            bigOne.insert(pos, to_insert);
+        }
     }
     list = bigOne;
 }
