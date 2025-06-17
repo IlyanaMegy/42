@@ -194,6 +194,24 @@ Quand l'installation est fini pense au port Forwarding pour te connecter à ta V
 
 Installe dans cet ordre : 
 
+Tu peux déjà commencer par ajouter les droits sudo à ton user perso !
+```bash
+su
+nano /etc/sudoers
+```
+<p align="center">
+  <img src="ressources/sudoers.png" alt="sudoers"/>
+</p>
+Ajoute ton user perso sous celui de root, ensuite sauvegarde et quitte avec `CTRL + X`, `Y` puis `ENTREE`.
+
+Maintenant ajoute ton user au groupe sudo avec cette commande
+
+```bash
+usermod -aG sudo <username>
+groups <username>               // pour vérifier que tu es bien dans le groupe sudo
+```
+Ok carré maintenant on va installer SSH pour pouvoir se connecter à ta VM depuis ton PC local (et pas que depuis l'interface de VirtualBox)
+
 ```bash
 sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt-get install openssh-server
@@ -540,3 +558,14 @@ Ajoute quand meme ces lignes dans les `.dockerignore` :
 ../.gitignore
 ../.git
 ```
+
+--- 
+
+### **7. Correction**
+
+Petit cadeau parce que je suis un amour ❤️
+<p align="center">
+  <img src="ressources/1.png" alt="correction_page1"/>
+  <img src="ressources/2.png" alt="correction_page1"/>
+  <img src="ressources/3.png" alt="correction_page1"/>
+</p>
