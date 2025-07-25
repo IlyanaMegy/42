@@ -1,11 +1,12 @@
 # Projet ft_transcendence
-##### _ ilymegy
 
-<p align="center">
+_ ilymegy
+
+<!-- <p align="center">
   <img src="#" alt="ft_transcendence structure" width="400"/>
-</p>
+</p> -->
 
-### **Sommaire**
+## **Sommaire**
 
 - [Introduction](#0-introduction)
 - [Comprendre le projet](#1-comprendre-le-projet)
@@ -13,10 +14,10 @@
 - [Petit cours de web](#3-petit-cours-de-web)
 - [Architecture du projet](#4-architecture-du-projet)
 - [Setup](#5-setup)
-- [Développement](#6-développement-par-phases)
-- [Commandes utiles](#7-commandes-utiles)
-- [Ressources utiles](#8-ressources-utiles)
-- [Conseils de développement](#9-conseils-de-développement)
+- [Commandes utiles](#6-commandes-utiles)
+- [Développement](#7-développement-par-phases)
+- [Checklist de progression](#8-checklist-de-progression)
+- [Ressources utiles](#9-ressources-utiles)
 
 ### **0. Introduction**
 
@@ -744,7 +745,7 @@ Problèmes...
 
 *Avec Nginx* :
 
-```bash 
+```bash
 👤 Utilisateur → <https://monsite.com> (port 443)
                         ↓
                    🚪 Nginx (reverse proxy)
@@ -1015,8 +1016,6 @@ Cette séquence va
 
 > **Note** : Le premier démarrage peut prendre quelques minutes car Docker doit télécharger et construire les images nécessaires.
 
-
-
 #### **Base de données**
 
 Installe quelques **CLI Node** qui vont grandement simplifier la vie :
@@ -1059,39 +1058,7 @@ docker-compose up --build
 
 ---
 
-### **6. Développement par phases**
-
-#### **Phase 1 : Infrastructure**
-
-- Setup Docker Compose
-- Configuration base de données
-- API backend minimal
-- Interface frontend basique
-
-#### **Phase 2 : Authentification**
-
-- Système de connexion/inscription
-- Gestion des profils utilisateurs
-- JWT tokens et sécurité
-- Upload d'avatars
-
-#### **Phase 3 : Jeu Pong**
-
-- Canvas HTML5 et logique de jeu
-- WebSockets pour le multijoueur
-- Interface de jeu responsive
-- Système de score
-
-#### **Phase 4 : Fonctionnalités sociales**
-
-- Historique des matchs
-- Classements et statistiques
-- Système d'amis (optionnel)
-- Chat en temps réel (optionnel)
-
----
-
-### **7. Commandes utiles**
+### **6. Commandes utiles**
 
 #### **Docker**
 
@@ -1189,64 +1156,87 @@ pnpm format
 
 ---
 
-### **8. Ressources utiles**
+### **7. Développement par phases**
 
-#### **Documentation officielle**
+#### **Infrastructure**
 
-- [Docker Documentation](https://docs.docker.com/)
-- [PostgreSQL Docs](https://www.postgresql.org/docs/)
-- [FastAPI Documentation](https://fastapi.tiangolo.com/)
-- [React Documentation](https://react.dev/)
-- [Socket.io Guide](https://socket.io/docs/)
+- Setup Docker Compose
+- Configuration base de données
+- API backend minimal
+- Interface frontend basique
 
-#### **Tutoriels spécialisés**
+#### **Authentification**
 
-- [WebSocket avec JavaScript](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
-- [HTML5 Canvas pour jeux](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
-- [JWT Authentication](https://jwt.io/introduction/)
-- [Docker Compose pour développeurs](https://docs.docker.com/compose/gettingstarted/)
+- Système de connexion/inscription
+- Gestion des profils utilisateurs
+- JWT tokens et sécurité
+- Upload d'avatars
 
-#### **Outils de développement**
+#### **Jeu Pong**
 
-- **Postman** : Test des APIs
-- **pgAdmin** : Interface PostgreSQL
-- **Browser DevTools** : Debug frontend et WebSockets
+- Canvas HTML5 et logique de jeu
+- WebSockets pour le multijoueur
+- Interface de jeu responsive
+- Système de score
 
-#### Links
+#### **Fonctionnalités sociales**
 
-- [docker-compose.yml](https://github.com/Nimon77/ft_transcendence/blob/main/docker-compose.yml)
+- Historique des matchs
+- Classements et statistiques
+- Système d'amis (optionnel)
+- Chat en temps réel (optionnel)
+
+#### **Ma progression personnelle**
+
+#### **Backend (NestJS)**
+
+- Serveur opérationnel sur `localhost:8000`
+  - Route de base (`/`) et santé (`/health`)
+  - Configuration des contrôleurs et services
+
+- Configuration Docker optimisée
+  - Multi-stage build
+  - Gestion des dépendances de production
+
+- Intégration de Prisma avec PostgreSQL
+  - Schéma de base de données défini
+  - Migrations configurées
+  - Client Prisma généré
+
+#### **La Base de données**
+
+- Conteneur PostgreSQL fonctionnel
+  - Persistance des données avec volumes Docker
+  - Configuration sécurisée
+
+- Outils installés
+  - Prisma ORM
+  - @prisma/client
+  - pg (driver PostgreSQL)
+
+#### **Frontend**
+
+- Configuration React + Vite + TypeScript
+- Intégration de Chakra UI
+- Gestion d'état avec Zustand
+
+- Composants principaux
+  - Authentification
+  - Tableau de bord
+  - Interface de jeu
+
+#### **Fonctionnalités à implémenter**
+
+- Système d'authentification
+- Logique du jeu Pong
+- Chat en temps réel
+- Gestion des matchs et classements
 
 ---
 
-### **9. Conseils de développement**
+### **8. Checklist de progression**
 
-#### **Bonnes pratiques**
-
-- **Commencez simple** : Version MVP d'abord, puis ajoutez les fonctionnalités
-- **Testez régulièrement** : Chaque feature doit fonctionner avant de passer à la suivante
-- **Documentez votre code** : Commentaires et README détaillés
-- **Utilisez Git efficacement** : Commits réguliers, branches par feature
-- **Sécurité dès le début** : Ne laissez pas la sécurité pour la fin
-
-#### **Gestion d'équipe**
-
-- **Répartition des tâches** : Backend, Frontend, DevOps, Design
-- **Communication** : Slack, Discord, ou autre outil de chat
-- **Code review** : Relecture croisée des pull requests
-- **Intégration continue** : Tests automatisés si possible
-
-#### **Debugging courant**
-
-- **CORS errors** : Vérifiez la configuration nginx et backend
-- **WebSocket déconnexions** : Implémentez la reconnexion automatique
-- **Performance** : Optimisez les requêtes DB et le rendu frontend
-- **Sécurité** : Validez toutes les entrées utilisateur
-
----
-
-## **📋 CHECKLIST DE PROGRESSION**
-
-### **🏗️ Phase 1 : Infrastructure & Setup**
+#### **🏗️ Phase 1 : Infrastructure & Setup**
 
 - [x] Créer la structure de projet
 - [X] Configurer Docker Compose
@@ -1256,7 +1246,7 @@ pnpm format
 - [ ] Makefile avec commandes utiles
 - [ ] Repository Git initialisé
 
-### **⚙️ Phase 2 : Backend API**
+#### **⚙️ Phase 2 : Backend API**
 
 - [X] Framework backend choisi et installé
 - [ ] Modèles de données (User, Game, etc.)
@@ -1275,7 +1265,7 @@ pnpm format
 - [ ] Middleware de sécurité (CORS, JWT)
 - [ ] Tests API avec Postman
 
-### **🎨 Phase 3 : Frontend Interface**
+#### **🎨 Phase 3 : Frontend Interface**
 
 - [ ] Framework frontend choisi et configuré
 - [ ] Système de routing
@@ -1290,7 +1280,7 @@ pnpm format
 - [ ] Responsive design mobile
 - [ ] Connexion API backend
 
-### **🎮 Phase 4 : Jeu Pong**
+#### **🎮 Phase 4 : Jeu Pong**
 
 - [ ] Canvas HTML5 configuré
 - [ ] Logique de jeu implémentée
@@ -1307,7 +1297,7 @@ pnpm format
 - [ ] Animations et effets
 - [ ] Mode spectateur (optionnel)
 
-### **🔐 Phase 5 : Authentification & Sécurité**
+#### **🔐 Phase 5 : Authentification & Sécurité**
 
 - [ ] Système JWT complet
 - [ ] Hachage mots de passe (bcrypt)
@@ -1318,7 +1308,7 @@ pnpm format
 - [ ] Rate limiting API
 - [ ] Logs de sécurité
 
-### **📊 Phase 6 : Fonctionnalités sociales**
+#### **📊 Phase 6 : Fonctionnalités sociales**
 
 - [ ] Profils utilisateurs complets
 - [ ] Historique des matchs
@@ -1328,9 +1318,9 @@ pnpm format
 - [ ] Chat en temps réel (optionnel)
 - [ ] Notifications (optionnel)
 
-### **🏆 Phase 7 : Modules Bonus**
+#### **🏆 Phase 7 : Modules Bonus**
 
-#### **Server-Side Pong + API (10 pts)**
+##### **Server-Side Pong + API (10 pts)**
 
 - [ ] Logique Pong côté serveur
 - [ ] API endpoints pour le jeu
@@ -1366,14 +1356,31 @@ pnpm format
 - [ ] Effets visuels avancés
 - [ ] Performance optimisée
 
-### **🚀 Phase 8 : Finalisation**
-
-- [ ] Tests complets de l'application
-- [ ] Optimisation des performances
-- [ ] Documentation utilisateur
-- [ ] Documentation technique
-- [ ] Déploiement de production
-- [ ] Backup et restauration
-- [ ] Monitoring en production
-
 ---
+
+### **9. Ressources utiles**
+
+#### **Documentation officielle**
+
+- [Docker Documentation](https://docs.docker.com/)
+- [PostgreSQL Docs](https://www.postgresql.org/docs/)
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- [React Documentation](https://react.dev/)
+- [Socket.io Guide](https://socket.io/docs/)
+
+#### **Tutoriels spécialisés**
+
+- [WebSocket avec JavaScript](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
+- [HTML5 Canvas pour jeux](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
+- [JWT Authentication](https://jwt.io/introduction/)
+- [Docker Compose pour développeurs](https://docs.docker.com/compose/gettingstarted/)
+
+#### **Outils de développement**
+
+- **Postman** : Test des APIs
+- **pgAdmin** : Interface PostgreSQL
+- **Browser DevTools** : Debug frontend et WebSockets
+
+#### Links
+
+- [docker-compose.yml](https://github.com/Nimon77/ft_transcendence/blob/main/docker-compose.yml)
