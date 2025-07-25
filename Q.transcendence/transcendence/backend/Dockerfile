@@ -1,4 +1,3 @@
-# Étape 1 : Installation des dépendances
 FROM node:18-alpine
 
 # Création du répertoire de travail
