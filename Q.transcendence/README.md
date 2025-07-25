@@ -203,14 +203,17 @@ Exemples : Vérifier ton mot de passe, sauvegarder tes données, calculer ton sc
 🔄 Comment ils communiquent ?
 Via des API (Application Programming Interface) = des "portes" pour échanger des infos.
 
-Exemple concret avec ton Pong :
+Exemple concret avec le Pong :
 
 Tu cliques "Jouer" (frontend)
 Le frontend dit au backend "Lance une partie !" (API)
 Le backend crée la partie et répond "OK, partie créée !" (API)
 Le frontend affiche "Partie en cours..." (frontend)
 
- Base de données (ton carnet magique)
+---
+
+#### **Base de données (ton carnet magique)**
+
 Une base de données = un carnet ultra-organisé qui retient TOUT.
 
 Exemple avec des utilisateurs :
@@ -387,6 +390,7 @@ Les super-pouvoirs de Prisma :
 
 #### **WebSockets (le temps réel magique)**
 
+Ils permettent une communication bidirectionnelle entre le frontend et le backend sans avoir besoin de recharger la page, de façon instantanée et persistante.
 Le problème avec HTTP classique :
 
 ```markdown
@@ -424,6 +428,54 @@ socket.on('paddle-updated', (data) => {
   // Mettre à jour la position de la raquette
   setPaddlePosition(data);
 });
+```
+
+**Socket.io** est une bibliothèque qui simplifie les WebSockets :
+
+```javascript
+// Sans Socket.io (WebSocket natif)
+const ws = new WebSocket('ws://localhost:8000');
+ws.onopen = function() { /* code */ };
+ws.onmessage = function(event) { /* code */ };
+ws.onerror = function(error) { /* code */ };
+
+// Avec Socket.io
+const socket = io();
+socket.emit('message', data);
+socket.on('response', (data) => { /* code */ });
+```
+
+Fonctionnalités avancées :
+
+- Reconnexion automatique si la connexion tombe
+- Fallback vers HTTP long-polling si WebSocket ne marche pas
+- Rooms et namespaces pour organiser les connexions
+- Événements personnalisés au lieu de messages bruts
+
+> Très utile dans notre projet pour diffuser les positions des raquettes et les scores du jeu, mais aussi recevoir les messages, invitations et statuts des utilisateurs, et tout en temps réel.
+
+---
+
+#### **Nginx (ton serveur web)**
+
+Nginx est un serveur web et un reverse proxy qui permet de gérer les connexions entrantes et sortantes, c'est le chef d'orchestre.
+
+Avec lui une seule URL suffit pour accéder à ton application et aucun accès direct au backend.
+
+Rôles :
+
+- Serveur web : Il sert les fichiers statiques (HTML, CSS, JS)
+- Reverse proxy : Il permet de rediriger les requêtes vers les bons services
+- Load balancer : Il permet de distribuer les requêtes sur plusieurs backends
+- SSL termination : Gère les certificats HTTPS
+
+```bash
+Utilisateur (navigateur)
+    ↓
+Nginx (port 80)
+    ├── /          → Fichiers React (statiques)
+    ├── /api       → Backend NestJS (port 8000)
+    └── /socket.io → WebSockets NestJS (port 8000)
 ```
 
 ---
@@ -945,6 +997,7 @@ pnpm create vite . --template react-ts
 # Installer les dépendances frontend
 pnpm install
 pnpm add axios socket.io-client zustand @chakra-ui/react @emotion/react @emotion/styled framer-motion
+pnpm run build
 ```
 
 > Pour la petite explication des dépendances
@@ -1241,8 +1294,8 @@ pnpm format
 - [x] Créer la structure de projet
 - [X] Configurer Docker Compose
 - [X] Setup PostgreSQL avec volumes
-- [ ] Configuration Nginx de base
-- [ ] Variables d'environnement (.env)
+- [X] Configuration Nginx de base
+- [X] Variables d'environnement (.env)
 - [ ] Makefile avec commandes utiles
 - [ ] Repository Git initialisé
 
@@ -1374,12 +1427,6 @@ pnpm format
 - [HTML5 Canvas pour jeux](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
 - [JWT Authentication](https://jwt.io/introduction/)
 - [Docker Compose pour développeurs](https://docs.docker.com/compose/gettingstarted/)
-
-#### **Outils de développement**
-
-- **Postman** : Test des APIs
-- **pgAdmin** : Interface PostgreSQL
-- **Browser DevTools** : Debug frontend et WebSockets
 
 #### Links
 
