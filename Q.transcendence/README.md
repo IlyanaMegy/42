@@ -15,6 +15,8 @@
 - [Setup](#5-setup)
 - [Développement](#6-développement-par-phases)
 - [Commandes utiles](#7-commandes-utiles)
+- [Ressources utiles](#8-ressources-utiles)
+- [Conseils de développement](#9-conseils-de-développement)
 
 ### **0. Introduction**
 
@@ -890,14 +892,14 @@ Frontend affiche "Partie créée !"
 
 #### **Installation des outils sur Windows**
 
-Voici la liste minimale d'outils que j'utilise **sous Windows** pour développer le projet :
+Voici la liste minimale d'outils que j'utilise **sous Windows** :
 
 - [Docker Desktop (WSL 2)](https://www.docker.com/products/docker-desktop/)
 - [Git](https://git-scm.com/downloads)
 - [Node.js LTS](https://nodejs.org/)
 - [Python (incl. pip)](https://www.python.org/downloads/windows/)
 
-Une fois installés, vérifie les versions :
+Une fois installés je vérifie les versions :
 
 ```bash
 C:\Users\ilymegy>docker --version
@@ -918,6 +920,102 @@ Python 3.13.5
 C:\Users\ilymegy>pip --version
 pip 25.1.1 from C:\Users\ilymegy\AppData\Local\Programs\Python\Python313\Lib\site-packages\pip (python 3.13)
 ```
+
+#### **Initialisation du projet**
+
+Voici les commandes pour initialiser mon projet :
+
+```bash
+# Initialiser le backend NestJS
+cd backend
+nest new . --package-manager pnpm --skip-git
+
+# Installer les dépendances backend
+pnpm add @nestjs/websockets @nestjs/config @nestjs/jwt @nestjs/passport passport-jwt socket.io @prisma/client
+pnpm add -D prisma @types/passport-jwt
+
+# Initialiser Prisma
+npx prisma init
+
+# Initialiser le frontend React/Vite
+cd ../frontend
+pnpm create vite . --template react-ts
+
+# Installer les dépendances frontend
+pnpm install
+pnpm add axios socket.io-client zustand @chakra-ui/react @emotion/react @emotion/styled framer-motion
+```
+
+> Pour la petite explication des dépendances
+**Backend :**
+
+- `@nestjs/websockets` : Pour la communication en temps réel (jeu en ligne, chat)
+- `@nestjs/config` : Gestion des variables d'environnement
+- `@nestjs/jwt` & `passport-jwt` : Authentification sécurisée avec JWT
+- `socket.io` : Implémentation des WebSockets
+- `@prisma/client` : ORM pour la base de données
+- `prisma` (dev) : Outils de développement pour les migrations
+
+**Frontend :**
+
+- `axios` : Requêtes HTTP vers l'API
+- `socket.io-client` : Connexion WebSocket avec le serveur
+- `zustand` : Gestion d'état légère et performante
+- `@chakra-ui/react` : Composants UI modernes et accessibles
+- `@emotion/*` : Styles en JS requis par Chakra UI
+- `framer-motion` : Animations fluides
+
+Et on arrive à une structure comme ça :
+
+```bash
+transcendence/
+├── backend/               # Code source du backend
+│   ├── src/               # Code source NestJS
+│   ├── prisma/            # Schéma et migrations Prisma
+│   ├── Dockerfile         # Configuration Docker
+│   └── ...
+├── frontend/              # Code source du frontend
+│   ├── src/               # Composants React
+│   ├── public/            # Fichiers statiques
+│   └── ...
+├── docker-compose.yml     # Configuration des conteneurs
+└── .env                   # Variables d'environnement
+```
+
+#### **Initialisation complète du projet**
+
+Après avoir exécuté les commandes d'installation voici comment obtenir une structure complète avec toutes les dépendances :
+
+```bash
+# Installer les dépendances du backend
+cd backend
+pnpm install
+
+# Générer le client Prisma
+npx prisma generate
+
+# Installer les dépendances du frontend
+cd ../frontend
+pnpm install
+
+# Configurer le .env docker-compose.yml et les Dockerfiles
+...
+
+# Démarrer les conteneurs Docker
+cd ..
+docker-compose up -d
+```
+
+Cette séquence va
+
+1. Installer tous les modules Node.js nécessaires dans `backend/node_modules`
+2. Générer le client Prisma pour interagir avec la base de données
+3. Installer toutes les dépendances frontend dans `frontend/node_modules`
+4. Lancer les conteneurs Docker (base de données + backend)
+
+> **Note** : Le premier démarrage peut prendre quelques minutes car Docker doit télécharger et construire les images nécessaires.
+
+
 
 #### **Base de données**
 
@@ -957,29 +1055,6 @@ cp .env.example .env
 make up
 # ou
 docker-compose up --build
-```
-
-#### **Variables d'environnement (.env)**
-
-```bash
-# Database
-POSTGRES_DB=transcendence
-POSTGRES_USER=user
-POSTGRES_PASSWORD=password
-POSTGRES_HOST=database
-
-# Backend
-SECRET_KEY=your-secret-key
-JWT_SECRET=your-jwt-secret
-DEBUG=true
-
-# Frontend
-REACT_APP_API_URL=http://localhost:8000
-REACT_APP_WS_URL=ws://localhost:8000
-
-# SSL (pour production)
-SSL_CERT_PATH=/etc/ssl/certs/transcendence.crt
-SSL_KEY_PATH=/etc/ssl/private/transcendence.key
 ```
 
 ---
@@ -1050,77 +1125,67 @@ docker exec -it transcendence_database_1 psql -U user -d transcendence
 SELECT * FROM users;  # Voir tous les utilisateurs
 ```
 
-#### **Backend (FastAPI exemple)**
+#### **Frontend (React + Vite + TypeScript)**
 
 ```bash
 # Installer les dépendances
-pip install -r requirements.txt
+pnpm install
 
 # Lancer en mode développement
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-
-# Migrations de base de données
-alembic upgrade head
-alembic revision --autogenerate -m "Add users table"
-```
-
-#### **Frontend (React exemple)**
-
-```bash
-# Installer les dépendances
-npm install
-
-# Lancer en mode développement
-npm start
+pnpm dev
 
 # Build pour production
-npm run build
+pnpm build
 
-# Tests
-npm test
+# Prévisualiser le build de production localement
+pnpm preview
+
+# Lancer les tests
+pnpm test
+
+# Lancer le linter
+pnpm lint
+
+# Formater le code
+pnpm format
 ```
 
----
-
-### **7. Tests et vérifications**
-
-#### **Vérifier que tout fonctionne**
-
-1. **Conteneurs actifs**
+#### **Backend (NestJS + Prisma)**
 
 ```bash
-docker ps
-# Vous devez voir : nginx, backend, frontend, database
+# Installer les dépendances
+pnpm install
+
+# Lancer en mode développement (avec rechargement à chaud)
+pnpm run start:dev
+
+# Build pour production
+pnpm run build
+
+# Lancer en production
+pnpm run start:prod
+
+# Exécuter les migrations Prisma
+npx prisma migrate dev --name init
+
+# Générer le client Prisma
+npx prisma generate
+
+# Lancer les tests
+pnpm test
+
+# Lancer le linter
+pnpm lint
+
+# Formater le code
+pnpm format
 ```
 
-2. **Accès à l'application**
+#### **Accès à l'application**
 
 - Frontend : <http://localhost:3000>
 - Backend API : <http://localhost:8000/docs> (FastAPI)
 - Base de données : localhost:5432
-
-3. **Tests fonctionnels**
-
-- Inscription/connexion utilisateur
-- Création et modification de profil
-- Lancement d'une partie de Pong
-- Jeu multijoueur en temps réel
-
-#### **Debugging**
-
-```bash
-# Logs en temps réel
-docker-compose logs -f
-
-# Vérifier la santé des conteneurs
-docker-compose ps
-
-# Redémarrer un service
-docker-compose restart backend
-
-# Reconstruire après changements
-docker-compose up --build
-```
 
 ---
 
@@ -1183,9 +1248,9 @@ docker-compose up --build
 
 ### **🏗️ Phase 1 : Infrastructure & Setup**
 
-- [ ] Créer la structure de projet
-- [ ] Configurer Docker Compose
-- [ ] Setup PostgreSQL avec volumes
+- [x] Créer la structure de projet
+- [X] Configurer Docker Compose
+- [X] Setup PostgreSQL avec volumes
 - [ ] Configuration Nginx de base
 - [ ] Variables d'environnement (.env)
 - [ ] Makefile avec commandes utiles
@@ -1193,7 +1258,7 @@ docker-compose up --build
 
 ### **⚙️ Phase 2 : Backend API**
 
-- [ ] Framework backend choisi et installé
+- [X] Framework backend choisi et installé
 - [ ] Modèles de données (User, Game, etc.)
 - [ ] Endpoints d'authentification
   - [ ] POST /auth/register
@@ -1311,25 +1376,4 @@ docker-compose up --build
 - [ ] Backup et restauration
 - [ ] Monitoring en production
 
-### **📝 Phase 9 : Documentation & Présentation**
-
-- [ ] README.md complet
-- [ ] Guide d'installation
-- [ ] Guide utilisateur
-- [ ] Documentation API
-- [ ] Diagrammes d'architecture
-- [ ] Présentation de soutenance
-- [ ] Démonstration vidéo
-
 ---
-
-### **🎯 Objectifs par semaine**
-
-**Semaine 1-2** : Infrastructure + Backend API ✅  
-**Semaine 3** : Frontend + Authentification ✅  
-**Semaine 4-5** : Jeu Pong + WebSockets ✅  
-**Semaine 6** : Fonctionnalités sociales ✅
-
----
-
-
