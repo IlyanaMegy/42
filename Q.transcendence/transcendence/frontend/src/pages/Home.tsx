@@ -10,7 +10,7 @@ const Home = () => {
 			justify="space-around" 
 			// spacing={12} 
 			px={4}
-			bg="#E2DDD7"
+			bg="rgb(203 185 163 / 92%)"
 			color="black"
 		>
 			<Image 

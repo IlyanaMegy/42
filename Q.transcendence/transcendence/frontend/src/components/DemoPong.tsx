@@ -1,5 +1,6 @@
 import { Box, type BoxProps } from "@chakra-ui/react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import demo from "../assets/HomePage/demo.png";
 
 interface DemoPongProps extends BoxProps {
 	backgroundImage?: string;
@@ -41,6 +42,31 @@ const DemoPong = ({
 							loop
 							autoplay
 							style={{width: '100%', height: '100%', objectFit: 'cover'}}
+						/>
+					</Box>
+					<Box
+						position="absolute"
+						top="30px"
+						right="150px"
+						px={3}
+						py={1}
+						borderRadius="md"
+						display="flex"
+						alignItems="center"
+						zIndex={10}
+						transform="rotate(-5deg)"
+						transformOrigin="center"
+						_hover={{
+							transform: "rotate(-5deg) scale(1.05)",
+							transition: "transform 0.2s ease-in-out"
+						}}
+					  >
+						<Box
+						  as="img"
+						  src={demo}
+						  width="140px"
+						  height="125px"
+						  alt="Logo"
 						/>
 					</Box>
 				</Box>
