@@ -127,13 +127,21 @@ Vite est un outil de build moderne qui améliore considérablement l'expérience
 
 #### **Qu'est-ce qu'une application web ?**
 
+🖼️ Analogie : Un restaurant
+
 Imagine que tu veux créer un restaurant :
 
+```markdown
 🏪 Le restaurant = ton application web (ex: ton jeu Pong)
+
 👨‍🍳 La cuisine = le backend (là où on prépare les plats)
+
 🍽️ La salle = le frontend (là où les clients mangent)
+
 📋 Le carnet de commandes = la base de données (où on stocke les infos)
+
 🚪 Le serveur = l'API (qui fait le lien entre cuisine et salle)
+```
 
 Concrètement pour ton projet Pong :
 Frontend : ce que tu vois (le jeu, les boutons, les scores)
@@ -144,7 +152,9 @@ Base de données : où on stocke (profils joueurs, historique des parties)
 
 #### **Les langages de base du web**
 
-HTML = La structure (les murs de ta maison)
+🖼️ Analogie : Une maison
+
+`HTML` = La structure (les murs de ta maison)
 
 ```html
 <h1>Mon titre</h1>
@@ -154,7 +164,7 @@ HTML = La structure (les murs de ta maison)
 
 C'est comme les murs et pièces de ta maison.
 
-CSS = Le style (la décoration)
+`CSS` = Le style (la décoration)
 
 ```css
 h1 { color: blue; font-size: 24px; }
@@ -162,13 +172,55 @@ h1 { color: blue; font-size: 24px; }
 
 C'est la peinture, les meubles, la déco.
 
-JavaScript = L'interactivité (l'électricité)
+`JavaScript` = L'interactivité (l'électricité)
 
 ```javascript
 button.onclick = function() { alert("Coucou !"); }
 ```
 
 C'est ce qui fait que les lumières s'allument quand tu appuies sur l'interrupteur.
+
+---
+
+#### **SPA (Single Page Application)**
+
+Comment ça marche ?
+
+-> Une seule page `HTML` :
+
+Ton application charge une seule fois au départ
+
+-> Changement d'URL sans rechargement :
+
+Quand tu cliques sur un lien :
+
+- L'URL change (ex: /game) mais le navigateur ne recharge pas la page
+- `React Router` intercepte la navigation
+- Seul le contenu à l'intérieur du composant `<Routes>` est mis à jour
+
+🖼️ Analogie : Une pièce de théâtre
+
+Imagine ton application comme une pièce de théâtre
+
+```markdown
+La scène (le navigateur) reste la même
+Les acteurs (composants) entrent et sortent
+L'URL c'est comme l'affiche devant le théâtre qui change pour indiquer la scène en cours
+```
+
+Exemple concret
+Quand tu vas sur `/game` :
+
+1. L'URL change
+2. `React Router` voit le changement
+3. Il regarde ses `<Route>` et voit que pour `/game` il faut afficher `<GamePage />`
+Il remplace le contenu précédent par `<GamePage />` sans recharger la page
+
+**Avantages :**
+
+- Fluide : Pas de clignotement/blanc pendant le chargement
+- Rapide : Seules les données nécessaires sont chargées
+- UX moderne : Se comporte comme une application native
 
 ---
 
@@ -192,14 +244,18 @@ Google t'envoie la page HTML/CSS/JS (réponse)
 
 #### **Frontend vs Backend (en détail)**
 
+```markdown
 🎨 FRONTEND = Ce que TU vois
 Où ça tourne : Dans ton navigateur (Chrome, Firefox...)
 Langages : HTML, CSS, JavaScript
 Exemples : Boutons, animations, formulaires, menus
+
 ⚙️ BACKEND = Ce que tu NE vois PAS
 Où ça tourne : Sur un serveur (ordinateur distant)
 Langages : Python, JavaScript (Node.js), Java, PHP...
 Exemples : Vérifier ton mot de passe, sauvegarder tes données, calculer ton score
+```
+
 🔄 Comment ils communiquent ?
 Via des API (Application Programming Interface) = des "portes" pour échanger des infos.
 
@@ -242,13 +298,19 @@ Pourquoi c'est important ?
 
 Un framework = une boîte à outils avec des fonctions toutes prêtes.
 
-Analogie : Construire une maison
+🖼️ Analogie : Construire une maison
 
-Sans framework : Tu fabriques chaque clou, chaque planche, chaque vis à la main 😵
+```markdown
+Sans framework : Tu fabriques chaque clou, chaque planche, chaque vis à la main 🥱
 Avec framework : Tu as déjà des murs préfabriqués, des portes standard, etc. 😎
+```
+
 Pour le web :
+
+```markdown
 Sans framework : Tu écris tout le code JavaScript à la main
-Avec React : Tu as des "composants" tout prêts (boutons, formulaires...)
+🪄 Avec React ✨: Tu as des "composants" tout prêts (boutons, formulaires...)
+```
 
 Pour le projet j'utilise la pile **NestJS + React** et définit tous les termes techniques employés dans ce README.
 
@@ -482,7 +544,7 @@ Nginx (port 80)
 
 #### **Docker (tes conteneurs magiques)**
 
-Analogie : Les conteneurs de transport
+🖼️ Analogie : Les conteneurs de transport
 
 ```markdown
 🚢 Un conteneur Docker = une boîte standardisée qui contient tout ce qu'il faut pour faire tourner ton app.
@@ -603,6 +665,8 @@ Headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." }
 
 ### **4. Architecture du projet**
 
+> **Note**📝 : Ceci est une représentation simplifiée de l'architecture du projet.
+
 ```markdown
 transcendence/
 ├── docker-compose.yml              # 🎭 Le chef d'orchestre : lance tout
@@ -697,10 +761,11 @@ handlePaddleMove(client, data) { ... }
 
 Pourquoi séparé ?
 
-Components : Un bouton = un fichier → réutilisable partout
-Pages : Chaque écran = un fichier → navigation claire
-Services : Toutes les requêtes API au même endroit
-Types : Partage des types entre front et back
+- Components : Un bouton = un fichier → réutilisable partout
+- Pages : Chaque écran = un fichier → navigation claire
+- Services : Toutes les requêtes API au même endroit
+- Types : Partage des types entre front et back
+
 Exemple concret :
 
 ```tsx
@@ -719,6 +784,21 @@ function Game() {
 export async function startGame() {
   return fetch('/api/game/start', { method: 'POST' });
 }
+```
+
+Et plus en détail voilà comment j'organise mon frontend :
+
+```bash
+frontend/
+├── src/
+│   ├── components/     # Composants réutilisables
+│   ├── pages/          # Pages de l'application
+│   ├── hooks/          # Hooks personnalisés
+│   ├── services/       # Appels API
+│   ├── styles/         # Styles globaux
+│   ├── utils/          # Fonctions utilitaires
+│   ├── App.tsx         # Composant racine
+│   └── main.tsx        # Point d'entrée
 ```
 
 🗄️ **Database/ (La mémoire)**
@@ -778,7 +858,7 @@ Réceptionniste : "Piscine ? Par là !" → Redirige vers port 3001
 Réceptionniste : "Chambres ? Par là !" → Redirige vers port 5432
 ```
 
-🔄 Comment ça marche concrètement ?
+💭 Comment ça marche concrètement ?
 
 *Sans Nginx* :
 
@@ -890,7 +970,7 @@ Scénario : Joueur lance une partie
 Résultat : L'utilisateur ne voit qu'une seule URL, mais Nginx orchestre tout en arrière-plan ! 🎭
 ```
 
-🔄 **Comment tout communique ?**
+💭 **Comment tout communique ?**
 
 ```mermaid
     User[👤 Utilisateur] --> Nginx[🚪 Nginx]
@@ -952,26 +1032,26 @@ Voici la liste minimale d'outils que j'utilise **sous Windows** :
 - [Node.js LTS](https://nodejs.org/)
 - [Python (incl. pip)](https://www.python.org/downloads/windows/)
 
-Une fois installés je vérifie les versions :
+Une fois installés on vérifie les versions :
 
 ```bash
 C:\Users\ilymegy>docker --version
-Docker version 28.3.2, build 578ccf6
+> Docker version 28.3.2, build 578ccf6
 
 C:\Users\ilymegy>docker-compose --version
-Docker Compose version v2.38.2-desktop.1
+> Docker Compose version v2.38.2-desktop.1
 
 C:\Users\ilymegy>git --version
-git version 2.47.1.windows.2
+> git version 2.47.1.windows.2
 
 C:\Users\ilymegy>node --version
-v22.17.1
+> v22.17.1
 
 C:\Users\ilymegy>python --version
-Python 3.13.5
+> Python 3.13.5
 
 C:\Users\ilymegy>pip --version
-pip 25.1.1 from C:\Users\ilymegy\AppData\Local\Programs\Python\Python313\Lib\site-packages\pip (python 3.13)
+> pip 25.1.1 from C:\Users\ilymegy\AppData\Local\Programs\Python\Python313\Lib\site-packages\pip (python 3.13)
 ```
 
 #### **Initialisation du projet**
@@ -985,19 +1065,11 @@ nest new . --package-manager pnpm --skip-git
 
 # Installer les dépendances backend
 pnpm add @nestjs/websockets @nestjs/config @nestjs/jwt @nestjs/passport passport-jwt socket.io @prisma/client
+
 pnpm add -D prisma @types/passport-jwt
 
 # Initialiser Prisma
 npx prisma init
-
-# Initialiser le frontend React/Vite
-cd ../frontend
-pnpm create vite . --template react-ts
-
-# Installer les dépendances frontend
-pnpm install
-pnpm add axios socket.io-client zustand @chakra-ui/react @emotion/react @emotion/styled framer-motion
-pnpm run build
 ```
 
 > Pour la petite explication des dépendances
@@ -1010,14 +1082,57 @@ pnpm run build
 - `@prisma/client` : ORM pour la base de données
 - `prisma` (dev) : Outils de développement pour les migrations
 
-**Frontend :**
+```bash
+# Initialiser le frontend React/Vite
+cd ../frontend
+pnpm create vite . --template react-ts
 
-- `axios` : Requêtes HTTP vers l'API
-- `socket.io-client` : Connexion WebSocket avec le serveur
-- `zustand` : Gestion d'état légère et performante
-- `@chakra-ui/react` : Composants UI modernes et accessibles
-- `@emotion/*` : Styles en JS requis par Chakra UI
-- `framer-motion` : Animations fluides
+pnpm add axios socket.io-client zustand @chakra-ui/react @emotion/react @emotion/styled framer-motion
+
+pnpm add react-router-dom @types/react-router-dom
+
+pnpm add @chakra-ui/icons
+
+pnpm run build
+```
+
+> Pour la petite explication des dépendances **Frontend** :
+
+**UI et Style :**
+
+- `@chakra-ui/react` : Une bibliothèque de composants UI modulaires et accessibles qui te permet de créer des interfaces utilisateur rapidement et efficacement. Parfait pour ton projet car elle offre :
+  - Des composants prêts à l'emploi (boutons, formulaires, modales...)
+  - Un système de thème personnalisable
+  - Une excellente accessibilité
+  - Un système de style basé sur des props
+- `@emotion/react` et `@emotion/styled` : Bibliothèques de style en JavaScript nécessaires pour Chakra UI. Elles permettent d'écrire du CSS en JS de manière performante.
+- `framer-motion` : Bibliothèque d'animations qui s'intègre parfaitement avec React. Utile pour :
+  - Animer les transitions entre les pages
+  - Créer des effets de survol fluides
+  - Animer les composants du jeu
+
+**Navigation :**
+
+- `react-router-dom` : Gère la navigation entre les différentes pages de ton application SPA (Single Page Application).
+- `@types/react-router-dom` : Les types TypeScript pour react-router-dom.
+
+**Gestion d'état :**
+
+- `zustand` : Une solution de gestion d'état légère et simple à utiliser. Parfait pour :
+  - Gérer l'état global de l'application (utilisateur connecté, paramètres, etc.)
+  - Partager des états entre composants éloignés
+  - Alternative plus simple que Redux
+
+**Communication en temps réel :**
+
+- `socket.io-client` : Client pour la communication WebSocket, essentiel pour :
+  - Le jeu multijoueur en temps réel
+  - Les notifications en direct
+  - Le chat en temps réel
+
+**Utilitaires UI :**
+
+- `@chakra-ui/icons` : Une collection d'icônes optimisées pour Chakra UI.
 
 Et on arrive à une structure comme ça :
 
@@ -1060,18 +1175,18 @@ cd ..
 docker-compose up -d
 ```
 
-Cette séquence va
+Cette séquence va :
 
 1. Installer tous les modules Node.js nécessaires dans `backend/node_modules`
 2. Générer le client Prisma pour interagir avec la base de données
 3. Installer toutes les dépendances frontend dans `frontend/node_modules`
 4. Lancer les conteneurs Docker (base de données + backend)
 
-> **Note** : Le premier démarrage peut prendre quelques minutes car Docker doit télécharger et construire les images nécessaires.
+> 📝 **Note** : Le premier démarrage peut prendre quelques minutes car Docker doit télécharger et construire les images nécessaires.
 
 #### **Base de données**
 
-Installe quelques **CLI Node** qui vont grandement simplifier la vie :
+Installation de quelques **CLI Node** qui vont grandement simplifier la vie :
 
 - **pnpm** : gestionnaire de paquets ultra-rapide (alternative à npm/yarn).
 - **@nestjs/cli** : génère la structure d’un projet NestJS, des modules, contrôleurs, tests…

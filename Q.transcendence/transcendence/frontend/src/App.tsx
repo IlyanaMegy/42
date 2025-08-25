@@ -1,34 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { Box, Container } from "@chakra-ui/react"
+import { Routes, Route } from "react-router-dom"
+// import Nav from "./components/Nav"
+
+import Home from "./pages/Home"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
+import Game from "./pages/Game"
+import User from "./pages/User"
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <div className="logo vite-logo">⚡</div>
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Box minH="100vh" bg="gray.100">
+      {/* <Nav /> */}
+      <Container maxW="container.lg" py={8}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/game" element={<Game />} />
+          <Route path="/user/:id" element={<User />} />
+        </Routes>
+      </Container>
+    </Box>
   )
 }
 
 export default App
+
+// LEARNING
+//
+// App.tsx : point d'entrée logique de l'application
+// Définition du layout (structure) principal
+// Configuration des routes de l'application
