@@ -1,6 +1,12 @@
-// <reference types="vite/client" />
+/// <reference types="vite/client" />
 
-declare module '*.lottie' {
-  const content: any;
-  export default content;
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+  readonly hot: {
+    accept: (callback?: () => void) => void;
+    dispose: (callback: () => void) => void;
+    decline: () => void;
+    invalidate: () => void;
+    data: any;
+  };
 }

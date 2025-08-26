@@ -1,17 +1,33 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
-  plugins: [react()],
+  root: '.',
+  publicDir: 'public',
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: resolve(__dirname, 'index.html')
+    }
+  },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    alias: {
+      '@': resolve(__dirname, './src'),
+    },
   },
   server: {
-    watch: {
-      usePolling: true,
+    port: 3000,
+    open: true,
+  },
+  css: {
+    postcss: {
+      plugins: [
+        tailwindcss,
+        autoprefixer,
+      ],
     },
-    host: true, // Needed for the Docker Container port mapping to work
-    strictPort: true,
-    port: 5173, // you can remove this if you don't need it
-  }
-})
+  },
+});
