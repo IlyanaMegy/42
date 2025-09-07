@@ -1,3 +1,5 @@
-transcendence_new/
-transcendence_old/
-transcendence_old_2/
+Makefile
+docker-compose.yml
+frontend/
+nginx/
+README.md
