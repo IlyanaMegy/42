@@ -3,4 +3,4 @@ docker-compose.yml
 frontend/
 nginx/
 README.md
-ressources/
+srcs/imgs
