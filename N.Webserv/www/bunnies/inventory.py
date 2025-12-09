@@ -58,12 +58,25 @@ defaultHTML = f"""
 				color: rgb(20, 211, 131);
 			}}
 			h3 {{
-				margin-left: 50px;
-				font-family: "Lexend";
-				font-weight:800;
-				font-size: 30px;
-				color: rgb(0, 120, 42);
-			}}
+                margin-left: 50px;
+                font-family: "Lexend";
+                font-weight:800;
+                font-size: 30px;
+                color: rgb(0, 120, 42);
+            }}
+            h3 a {{
+                color: #b0e0d8;
+                text-decoration: none;
+                transition: color 0.3s ease;
+                border: 1px solid #b0e0d8;
+                padding: 8px 15px;
+                border-radius: 2px;
+                display: inline-block;
+            }}
+            h3 a:hover {{
+                color: #7fd4c1;
+				border-color: #7fd4c1;
+            }}
 			#inventory {{
 				background-color:rgb(0, 168, 104);
 				border: 12px solid rgb(1, 186, 118);
@@ -75,7 +88,7 @@ defaultHTML = f"""
 			}}
 		</style>
 		<h3>
-			<a href="hunt.py">Return to Hunt</a>
+			<a href="hunt.py">Back</a>
 		</h3>
 		<h1>
 			Inventory
