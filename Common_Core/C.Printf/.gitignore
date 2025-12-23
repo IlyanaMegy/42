@@ -1,0 +1,8 @@
+*.out
+*.png
+main.c
+*.o
+*.a
+obj/
+printfTester/
+ft_printf_tester/
