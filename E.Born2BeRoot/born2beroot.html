@@ -1,0 +1,571 @@
+<link href="style.css" rel="stylesheet">
+<div class="title-head">
+        <h1 id="born2beroot">Born2beroot</h1>
+        <div id="table-div">
+                <h1 id="table-of-contents">Table of contents</h1>
+                <ul>
+                        <li><a class="titles" href="#i-ssh-and-firewall">I. SSH and Firewall</a>
+                                <ul>
+                                        <li id="sun"><strong>☀️ Un service SSH sera actif sur le port 4242
+                                                        uniquement.</strong></li>
+                                        <li id="sun"><strong>☀️ On ne devra pas pouvoir se connecter par SSH avec
+                                                        l’utilisateur root.</strong></li>
+                                        <li id="sun"><strong>☀️ Configurer votre OS avec le pare-feu UFW ne laisser
+                                                        ouvert que le port 4242.</strong></li>
+                                </ul>
+                        </li>
+                        <li><a class="titles" href="#ii-hostname">II. Hostname</a>
+                                <ul>
+                                        <li id="sun"><strong>☀️ Hostname votre login suivi de 42</strong></li>
+                                </ul>
+                        </li>
+                        <li><a class="titles" href="#iii-sudo">III. SUDO</a>
+                                <ul>
+                                        <li id="sun"><strong>☀️ ilymegy appartiendra aux groupes user42 et sudo</strong>
+                                        </li>
+                                        <li id="sun"><strong>☀️ Mettre en place une configuration stricte dans votre
+                                                        groupe sudo</strong></li>
+                                </ul>
+                        </li>
+                        <li><a class="titles" href="#iv-installing-tools">IV. Installing tools</a></li>
+                        <ul>
+                                <li id="sun"><strong>☀️ Installing GIT . Vim . wget . zip . Oh my zsh</strong></li>
+                        </ul>
+                        <li><a class="titles" href="#v-monitoring">V. Monitoring</a>
+                                <ul>
+                                        <li id="sun"><strong>☀️ Mettre en place un petit script nommé
+                                                        monitoring.sh</strong></li>
+                                </ul>
+                        </li>
+                        <li><a class="titles" href="#vi-bonus">VI. BONUS</a>
+                                <ul>
+                                        <li id="sun"><strong>☀️ Partitions</strong></li>
+                                        <li id="sun"><strong>☀️ Web Server</strong></li>
+                        </li>
+                </ul>
+                </li>
+                </ul>
+        </div>
+</div>
+<div class="sep">...</div>
+<div class="part">
+        <h1 class="title-part" id="i-ssh-and-firewall">I. SSH and Firewall</h1>
+        <div id="table-div">
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Port forwarding</p>
+                        </div>
+                </div>
+                <p><img class="img-centered"
+                                src="https://cdn.discordapp.com/attachments/889061317321838627/1118528277838045264/1.png"
+                                alt="VM settings"><br />
+                        <img class="img-centered"
+                                src="https://cdn.discordapp.com/attachments/889061317321838627/1118528278479781979/2.png"
+                                alt="port forwarding rules">
+                </p>
+                <pre><code>sudo apt-get <span class="hljs-keyword">update</span>
+        sudo apt <span class="hljs-keyword">install</span> openssh-<span class="hljs-keyword">server</span>
+        sudo systemctl <span class="hljs-keyword">status</span> ssh
+        </code></pre>
+                <p><a href="https://emojipedia.org/fr/soleil/"></a></p>
+                <div class="rule">
+                        <strong>☀️ Un service SSH sera actif sur le port 4242 uniquement.</strong><br />
+                        <strong>☀️ On ne devra pas pouvoir se connecter par SSH avec l’utilisateur root.</strong>
+                </div>
+                <p><img class="img-centered"
+                                src="https://cdn.discordapp.com/attachments/889061317321838627/1118531181420486776/ssh.png"
+                                alt="ssh config"></p>
+                <pre><code>sudo systemctl restart ssh</code></pre>
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Connection on host machine :</p>
+                        </div>
+                </div>
+                <pre><code><span class="hljs-selector-tag">ssh</span> <span class="hljs-selector-tag">-p</span> 4141 <span class="hljs-selector-tag">ilymegy</span>@<span class="hljs-keyword">127</span>.<span class="hljs-keyword">0</span>.<span class="hljs-keyword">0</span>.<span class="hljs-keyword">1</span>
+        </code></pre>
+                <div class="rule">
+                        <strong>☀️ configurer votre OS avec le pare-feu UFW ne laisser ouvert que le port 4242.</strong>
+                </div>
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Add ssh to firewall :</p>
+                        </div>
+                </div>
+                <pre><code>sudo apt-get <span class="hljs-keyword">install</span> ufw -y
+        sudo ufw <span class="hljs-keyword">enable</span>
+        &gt; Command may disrupt existing ssh connections. Proceed <span class="hljs-keyword">with</span> operation (y|n)? y
+        Firewall <span class="hljs-keyword">is</span> active <span class="hljs-keyword">and</span> enabled <span class="hljs-keyword">on</span> <span class="hljs-keyword">system</span> <span class="hljs-keyword">startup</span>
+        
+        sudo ufw <span class="hljs-keyword">allow</span> <span class="hljs-number">4242</span>/tcp
+        sudo ufw reload
+        sudo ufw <span class="hljs-keyword">status</span>
+        </pre>
+                <p></code>
+        </div>
+</div>
+<div class="sep">...</div>
+<div class="part">
+        <h1 class="title-part" id="ii-hostname">II. Hostname</h1>
+        <div id="table-div">
+                <div class="rule">
+                        <strong>☀️ hostname votre login suivi de 42 (exemple : wil42)</strong>
+                </div>
+                <pre><code><span class="hljs-attribute">hostname</span></code></pre>
+                <p><img class="img-centered"
+                                src="https://cdn.discordapp.com/attachments/889061317321838627/1118533152202309712/4.png"
+                                alt="in /etc/hosts">
+        </div>
+</div>
+<div class="sep">...</div>
+<div class="part">
+        <h1 class="title-part" id="iii-sudo">III. SUDO</h1>
+        <div id="table-div">
+                <div class="rule">
+                        <strong>☀️ ilymegy appartiendra aux groupes user42 et sudo</strong>
+                </div>
+                <pre><code>cut <span class="hljs-_">-d</span>: <span class="hljs-_">-f</span>1 /etc/passwd
+        sudo groupadd user42
+        sudo usermod <span class="hljs-_">-a</span>G root ilymegy
+        sudo usermod <span class="hljs-_">-a</span>G user42 ilymegy
+        groups ilymegy
+        ilymegy : ilymegy root cdrom floppy audio dip video plugdev netdev user42
+        </code></pre>
+                <div class="rule">
+                        <strong>☀️ Pour mettre en place une configuration stricte dans votre groupe sudo, il faudra
+                                remplir les conditions suivantes :</strong></p>
+                        <p style="color:#867853;margin-left: 15px;">
+                                - L’authentification en utilisant sudo sera limitée à 3 essais en cas de mot de passe
+                                erroné.<br />
+                                - Un message de votre choix s’affichera en cas d’erreur suite à un mauvais mot de passe
+                                lors de l’utilisation de sudo.<br />
+                                - Chaque action utilisant sudo sera archivée, aussi bien les inputs que les
+                                outputs.<br />
+                                - Le journal se trouvera dans le dossier /var/log/sudo/.<br />
+                                - Le mode TTY sera activé pour des questions de sécurité.<br />
+                                - Les paths utilisables par sudo seront restreints, là encore pour des questions de
+                                sécurité.<br />(Exemple :
+                                /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin).</p>
+                </div>
+                <pre><code> cat /etc/sudoers
+        # This <span class="hljs-keyword">file</span> MUST be edited <span class="hljs-keyword">with</span> the <span class="hljs-symbol">'visudo</span>' command as root.
+        # Please consider adding local content <span class="hljs-keyword">in</span> /etc/sudoers.d/ instead <span class="hljs-keyword">of</span>
+        # directly modifying this <span class="hljs-keyword">file</span>.
+        # See the man page <span class="hljs-keyword">for</span> details <span class="hljs-keyword">on</span> how <span class="hljs-keyword">to</span> write a sudoers <span class="hljs-keyword">file</span>.
+        #
+        Defaults    env_reset
+        Defaults    mail_badpass
+        Defaults    passwd_tries=<span class="hljs-number">3</span>
+        Defaults    badpass_message=<span class="hljs-string">"&lt;you message when some enter a wrong password&gt;"</span>
+        Defaults    logfile=<span class="hljs-string">"/var/log/sudo/sudo.log"</span>
+        Defaults    log_input,log_output
+        Defaults    requiretty
+        Defaults    secure_path=<span class="hljs-string">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"</span>
+        
+        # Host <span class="hljs-keyword">alias</span> specification
+        # User <span class="hljs-keyword">alias</span> specification
+        # Cmnd <span class="hljs-keyword">alias</span> specification
+        # User privilege specification
+        root    <span class="hljs-keyword">ALL</span>=(<span class="hljs-keyword">ALL</span>:<span class="hljs-keyword">ALL</span>) <span class="hljs-keyword">ALL</span>
+        ilymegy    <span class="hljs-keyword">ALL</span>=(<span class="hljs-keyword">ALL</span>:<span class="hljs-keyword">ALL</span>) <span class="hljs-keyword">ALL</span>
+        </code></pre>
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Strong password rules :</p>
+                        </div>
+                </div>
+                <div class="rule">
+                        <strong>☀️ Pour mettre en place une politique de mot de passe fort, il faudra remplir les
+                                conditions suivantes :</strong></p>
+                        <p style="color:#867853;margin-left: 15px;">
+                                - Votre mot de passe devra expirer tous les 30 jours.<br />- Le nombre minimum de jours
+                                avant de pouvoir modifier un mot de passe sera configuré à 2.<br />
+                                - L’utilisateur devra recevoir un avertissement 7 jours avant que son mot de passe
+                                n’expire.<br />
+                                - Votre mot de passe sera de 10 caractères minimums dont une majuscule et un chiffre, et
+                                ne devra pas comporter plus de 3 caractères identiques consécutifs.<br />
+                                - Le mot de passe ne devra pas comporter le nom de l’utilisateur.<br />
+                                - La règle suivante ne s’applique pas à l’utilisateur root : le mot de passe devra
+                                comporter au moins 7 caractères qui ne sont pas présents dans l’ancien mot de
+                                passe.<br />
+                                - Bien entendu votre mot de passe root devra suivre cette politique</p>
+                </div>
+                <pre><code><span class="hljs-symbol">sudo</span>  apt-<span class="hljs-meta">get</span> install libpam-pwquality
+        <span class="hljs-symbol">sudo</span> <span class="hljs-meta">cp</span> /etc/pam.d/<span class="hljs-meta">common</span>-password /etc/pam.d/<span class="hljs-meta">common</span>-password.<span class="hljs-keyword">bak</span>
+        </code></pre>
+                <pre><code>sudo nano /etc/pam.d/common-password
+        password  requisite  pam_pwquality.so retry=<span class="hljs-number">3</span> minlen=<span class="hljs-number">10</span> ucredit=<span class="hljs-number">-1
+        </span> dcredit=<span class="hljs-number">-1</span> maxrepeat=<span class="hljs-number">3</span> reject_username difok=<span class="hljs-number">7</span> enforce_for_root
+        </code></pre>
+                <pre><code>sudo nano /etc/login.defs
+        
+        PASS_MAX_DAYS <span class="hljs-number">30</span>
+        PASS_MIN_DAYS <span class="hljs-number">2</span>
+        PASS_WARN_AGE <span class="hljs-number">7</span>
+        </code></pre>
+                <pre><code>chage -l ilymegy
+        
+        Last password <span class="hljs-keyword">change</span>               : May <span class="hljs-number">26</span>, <span class="hljs-number">2023</span>
+        <span class="hljs-keyword">Password</span> expires                      : Jun <span class="hljs-number">25</span>, <span class="hljs-number">2023</span>
+        <span class="hljs-keyword">Password</span> inactive                     : <span class="hljs-keyword">never</span>
+        <span class="hljs-keyword">Account</span> expires                        : <span class="hljs-keyword">never</span>
+        <span class="hljs-keyword">Minimum</span> <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">days</span> <span class="hljs-keyword">between</span> <span class="hljs-keyword">password</span> <span class="hljs-keyword">change</span>        : <span class="hljs-number">2</span>
+        Maximum <span class="hljs-built_in">number</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">days</span> <span class="hljs-keyword">between</span> <span class="hljs-keyword">password</span> <span class="hljs-keyword">change</span>       : <span class="hljs-number">30</span>
+        <span class="hljs-built_in">Number</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">days</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">warning</span> <span class="hljs-keyword">before</span> <span class="hljs-keyword">password</span> expires        : <span class="hljs-number">7</span>
+        </code></pre>
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Changing password :</p>
+                        </div>
+                </div>
+                <pre><code>sudo passwd ilymegy
+        <span class="hljs-quote">&gt; Strongmdp2709</span>
+        </code></pre>
+        </div>
+</div>
+<div class="sep">...</div>
+<div class="part">
+        <h1 class="title-part" id="iv-installing-tools">IV. Installing tools</h1>
+        <div id="table-div">
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Installing git</p>
+                        </div>
+                </div>
+                <pre><code>$ apt-get <span class="hljs-keyword">update</span> -y
+        $ apt-<span class="hljs-keyword">get</span> <span class="hljs-keyword">upgrade</span> -y
+        $ apt-<span class="hljs-keyword">get</span> <span class="hljs-keyword">install</span> git -y
+        </code></pre>
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Installing wget and zip</p>
+                        </div>
+                </div>
+                <blockquote style="margin: 0;margin-left: 5%;">
+                        <p style="color:#2f4a2f5c;font-style: italic;margin: 0;">&gt; zip is a command line utility for
+                                compressing and decompressing files in ZIP format.<br />
+                                wget is a free and open source tool for downloading files from web repositories.</p>
+                </blockquote>
+                <pre><code>$ sudo apt-<span class="hljs-keyword">get</span> install wget <span class="hljs-built_in">zip</span>
+        </code></pre>
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Installing Vim</p>
+                        </div>
+                </div>
+                <pre><code>$ sudo apt-<span class="hljs-built_in">get</span> install <span class="hljs-keyword">vim</span>
+        </code></pre>
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Installing Oh my zsh</p>
+                        </div>
+                </div>
+                <pre><code>$ sh -c <span class="hljs-string">"<span class="hljs-variable">$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)</span>"</span>
+        </code></pre>
+        </div>
+</div>
+<div class="sep">...</div>
+<div class="part">
+        <h1 class="title-part" id="v-monitoring">V. Monitoring</h1>
+        <div id="table-div">
+                <div class="rule">
+                        <strong>☀️ Mettre en place un petit script nommé monitoring.sh</strong>
+                        <p></p>
+                        <p style="color:#867853;margin-left: 15px;">Dès le lancement de votre serveur, le script écrira
+                                des informations toutes les 10 minutes sur tous les terminaux.<br>
+                                La bannière est facultative.<br>
+                                À aucun moment la moindre erreur ne doit être visible.<br>
+                                Votre script devra toujours pouvoir afficher les informations suivantes :</p>
+                        <p style="color:#867853;margin-left: 15px;">- L’architecture de votre système d’exploitation
+                                ainsi que sa version de kernel.<br>
+                                - Le nombre de processeurs physiques.<br>
+                                - Le nombre de processeurs virtuels.<br>
+                                - La mémoire vive disponible actuelle sur votre serveur ainsi que son taux d’utilisation
+                                sous forme de pourcentage.<br>
+                                - La mémoire disponible actuelle sur votre serveur ainsi que son taux d’utilisation sous
+                                forme de pourcentage.<br>
+                                - Le taux d’utilisation actuel de vos processeurs sous forme de pourcentage.<br>
+                                - La date et l’heure du dernier redémarrage.<br>
+                                - Si LVM est actif ou pas.<br>
+                                - Le nombre de connexions actives.<br>
+                                - Le nombre d’utilisateurs utilisant le serveur.<br>
+                                - L’adresse IPv4 de votre serveur, ainsi que son adresse MAC (Media Access Control).<br>
+                                - Le nombre de commande executées avec le programme sudo.</p>
+                </div>
+                <pre><code>sudo apt-get install -y <span class="hljs-keyword">net</span>-tools
+        sudo touch /usr/<span class="hljs-keyword">local</span>/bin/monitoring.<span class="hljs-keyword">sh</span>
+        sudo chmod 777 monitoring.<span class="hljs-keyword">sh</span>
+        </code></pre>
+                <pre><code>#!/bin/bash
+        arc=$(uname -a)
+        pcpu=$(grep <span class="hljs-string">"physical id"</span> /proc/cpuinfo | <span class="hljs-keyword">sort</span> | uniq | wc -<span class="hljs-keyword">l</span>)
+        vcpu=$(grep <span class="hljs-string">"^processor"</span> /proc/cpuinfo | wc -<span class="hljs-keyword">l</span>)
+        fram=$(free -<span class="hljs-keyword">m</span> | awk '<span class="hljs-variable">$1</span> == <span class="hljs-string">"Mem:"</span> {<span class="hljs-keyword">print</span> <span class="hljs-variable">$2}</span>')
+        uram=$(free -<span class="hljs-keyword">m</span> | awk '<span class="hljs-variable">$1</span> == <span class="hljs-string">"Mem:"</span> {<span class="hljs-keyword">print</span> <span class="hljs-variable">$3}</span>')
+        pram=$(free | awk '<span class="hljs-variable">$1</span> == <span class="hljs-string">"Mem:"</span> {printf(<span class="hljs-string">"%.2f"</span>), <span class="hljs-variable">$3</span>/<span class="hljs-variable">$2</span>*100}')
+        fdisk=$(df -BG | grep '^/dev/' | grep -v '/<span class="hljs-keyword">boot</span>
+        </code></pre>
+                <pre><code>sudo <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin/m</span>onitoring.sh
+        sudo crontab -u root -e
+        
+        *<span class="hljs-regexp">/10 * * * * /u</span>sr<span class="hljs-regexp">/local/</span>bin<span class="hljs-regexp">/monitoring.sh</span>
+        </code></pre>
+        </div>
+</div>
+<div class="sep">...</div>
+<div class="part">
+        <h1 class="title-part" id="vi-bonus">VI. BONUS</h1>
+
+        <div style="margin-bottom : 20px;" id="table-div">
+                <h2 class="subtitles" id="partitions">Partitions</h2>
+                <pre><code>lsblk</code></pre>
+                <img class="img-centered"
+                        src="https://media.discordapp.net/attachments/889061317321838627/1118533918220628028/5.png"
+                        alt="lsblk">
+        </div>
+
+        <div id="table-div">
+                <h2 class="subtitles" id="web-server">Web Server</h2>
+                <p class="question">🧠 <b> What is Lighttpd ?</b></p>
+                <blockquote style="margin: 0;margin-left: 5%;">
+                        <p style="color:#2f4a2f5c;font-style: italic;margin: 0;">&gt; Lighttpd is a web server designed
+                                to be fast, secure, flexible, and faithful to standards. It is optimized for
+                                environments where speed is very important because it consumes less CPU and RAM than
+                                other servers.</p>
+                </blockquote>
+
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Lighttpd install</p>
+                        </div>
+                </div>
+
+                <pre><code>sudo apt install lighttpd</code></pre>
+
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Allow connections through port 80 with the command</p>
+                        </div>
+                </div>
+
+                <pre><code><span class="hljs-symbol">sudo</span> ufw allow <span class="hljs-number">80</span>
+        <span class="hljs-symbol">sudo</span> ufw status
+        <span class="hljs-symbol">
+        Status:</span> active
+        
+        <span class="hljs-symbol">To</span>                         Action      From
+        --                         ------      ----
+        <span class="hljs-number">4242</span>/tcp                   ALLOW       Anywhere                  
+        <span class="hljs-number">80</span>                         ALLOW       Anywhere                  
+        <span class="hljs-number">4242</span>/tcp (<span class="hljs-built_in">v6</span>)              ALLOW       Anywhere (<span class="hljs-built_in">v6</span>)             
+        <span class="hljs-number">80</span> (<span class="hljs-built_in">v6</span>)                    ALLOW       Anywhere (<span class="hljs-built_in">v6</span>)
+        </code></pre>
+
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Port forwarding</p>
+                        </div>
+                </div>
+
+                <img class="img-centered"
+                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118534606396870696/6.png"
+                        alt="add port 80">
+
+                <p class="question">🧠 <b> What is Wordpress ?</b></p>
+                <p>
+                </p>
+                <blockquote style="margin: 0;margin-left: 5%;">
+                        <p style="color:#2f4a2f5c;font-style: italic;margin: 0;">&gt; Wordpress is a content management
+                                system focused on the creation of any type of website.</p>
+                </blockquote>
+
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Wordpress install :</p>
+                        </div>
+                </div>
+
+                <pre><code>cd /var/www/
+        sudo wget https:<span class="hljs-comment">//es.wordpress.org/latest-es_ES.zip</span>
+        sudo unzip latest-en_US<span class="hljs-selector-class">.zip</span>
+        sudo mv <span class="hljs-selector-tag">html</span> html_old
+        ls
+        ➜ html_old  latest-es_ES<span class="hljs-selector-class">.zip</span>  wordpress
+        
+        sudo mv wordpress <span class="hljs-selector-tag">html</span>
+        ls
+        ➜ <span class="hljs-selector-tag">html</span>  html_old  latest-es_ES<span class="hljs-selector-class">.zip</span>
+        
+        sudo chmod -R <span class="hljs-number">755</span> html
+        </code></pre>
+                <p class="question">🧠 <b> What is MariaDB ?</b></p>
+                <blockquote style="margin: 0;margin-left: 5%;">
+                        <p style="color:#2f4a2f5c;font-style: italic;margin: 0;">&gt; MariaDB is a database. It is used
+                                for various purposes, such as data warehousing, e-commerce, enterprise-level functions,
+                                and logging applications.</p>
+                </blockquote>
+
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>MariaDB install</p>
+                        </div>
+                </div>
+
+                <pre><code>sudo apt install mariadb-server</code></pre>
+
+
+                <blockquote style="margin: 0;margin-left: 5%;">
+                        <p style="color:#2f4a2f5c;font-style: italic;margin: 0;">&gt; Because the default configuration
+                                leaves your MariaDB installation unsecure, we will use a script provided by the
+                                mariadb-server package to restrict access to the server and remove unused accounts.</p>
+                </blockquote>
+                <pre><code>sudo mysql_secure_installation
+        
+        <span class="hljs-built_in">Switch</span> to unix_socket authentication [Y/<span class="hljs-built_in">n</span>] <span class="hljs-built_in">n</span>
+        Change the root password? [Y/<span class="hljs-built_in">n</span>] <span class="hljs-built_in">n</span>
+        Remove anonymous users? [Y/<span class="hljs-built_in">n</span>] y
+        Disallow root login remotely? [Y/<span class="hljs-built_in">n</span>] y
+        Remove test database <span class="hljs-built_in">and</span> access to it? [Y/<span class="hljs-built_in">n</span>] y
+        Reload privilege tables <span class="hljs-built_in">now</span>? [Y/<span class="hljs-built_in">n</span>] y
+        </code></pre>
+
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Create the database and the user for the WordPress :</p>
+                        </div>
+                </div>
+
+                <pre><code>root@ilymegy42:/var/www# mariadb
+        MariaDB [(none)]&gt; CREATE DATABASE my<span class="hljs-emphasis">_db;
+        Query OK, 1 row affected (0.000 sec)
+        
+        </span>MariaDB [(none)]&gt; SHOW DATABASES;
+        <span class="hljs-code">+--------------------+</span>
+        <span class="hljs-section">| Database           |
+        +--------------------+</span>
+        | information<span class="hljs-emphasis">_schema |
+        | my_</span>db              |
+        | mysql              |
+        <span class="hljs-section">| performance_schema |
+        +--------------------+</span>
+        4 rows in set (0.001 sec)
+        
+        MariaDB [(none)]&gt; CREATE USER <span class="hljs-emphasis">'ilymegy'</span>@<span class="hljs-emphasis">'localhost'</span> IDENTIFIED BY <span class="hljs-emphasis">'12345'</span>;
+        
+        MariaDB [(none)]&gt; GRANT ALL PRIVILEGES ON my<span class="hljs-emphasis">_db.* TO 'ilymegy'@'localhost';
+        Query OK, 0 rows affected (0.001 sec)
+        
+        </span>MariaDB [(none)]&gt; FLUSH PRIVILEGES;
+        Query OK, 0 rows affected (0.001 sec)
+        </code></pre>
+                <p class="question">🧠 <b> What is PHP ?</b></p>
+                <blockquote style="margin: 0;margin-left: 5%;">
+                        <p style="color:#2f4a2f5c;font-style: italic;margin: 0;">&gt; PHP is a programming language. It
+                                is mainly used to develop dynamic web applications and interactive websites. PHP runs on
+                                the server side.</p>
+                </blockquote>
+
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>PHP install</p>
+                        </div>
+                </div>
+
+
+                <pre><code>sudo apt install php-cgi php-mysql</code></pre>
+                <p style="text-align : center; margin-top : 35px;"><strong>WordPress configuration</strong></p>
+
+
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Configure wf-config.php with our db informations :</p>
+                        </div>
+                </div>
+
+                <pre><code>cd /var/www/<span class="hljs-selector-tag">html</span>
+        cp wp-config-sample<span class="hljs-selector-class">.php</span> wp-config<span class="hljs-selector-class">.php</span>
+        nano wp-config.php
+        </code></pre>
+
+
+                <img class="img-centered"
+                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118535515776491591/7.png"
+                        alt="wp-config">
+
+                <div class="doing-it">
+                        <div><img class="arrow"
+                                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118842464686592053/fleche-vers-le-bas.png"
+                                        alt="arrow right"></div>
+                        <div>
+                                <p>Enabled the fastcgi-php and fastcgi-php modules :</p>
+                        </div>
+                </div>
+
+                <pre><code>sudo lighty-enable-<span class="hljs-built_in">mod</span> fastcgi
+        sudo lighty-enable-<span class="hljs-built_in">mod</span> fastcgi-php
+        sudo service lighttpd force-<span class="hljs-built_in">reload</span>
+        </code></pre>
+                <blockquote>
+                        <blockquote style="margin: 0;margin-left: 5%;">
+                                <p style="color:#2f4a2f5c;font-style: italic;margin: 0;">&gt; We enabled the fastcgi-php
+                                        module to improve the performance and speed of web applications on the server
+                                        and the fastcgi-php module to improve the performance and speed of PHP-based web
+                                        applications on the server.</p>
+                        </blockquote>
+                </blockquote>
+
+                <img class="img-centered"
+                        src="https://cdn.discordapp.com/attachments/889061317321838627/1118535976956997663/8.png"
+                        alt="wp-admin">
+        </div>
+</div>

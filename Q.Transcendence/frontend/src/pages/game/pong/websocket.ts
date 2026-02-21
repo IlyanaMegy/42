@@ -1,0 +1,212 @@
+import { GameState } from './types';
+import { updateScene } from './renderer';
+import { rollNeonColor } from './utils';
+
+
+let refreshSent = false;
+
+export function createWebSocketHandler(
+  gameId: string,
+  token: string | null,
+  gameOptions: any,
+  onGameEnd: (winner: string) => void,
+  cleanup: () => void
+): WebSocket {
+  const ws = new WebSocket(`wss://${window.location.host}/api/pong/wss?game_id=${gameId}`);
+
+  // Function to send refresh message
+  const sendRefresh = () => {
+    if (!refreshSent && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ type: 'refresh' }));
+      refreshSent = true;
+      console.log('Refresh message sent to backend');
+    }
+  };
+
+  ws.onopen = () => {
+    console.log('Game WebSocket connected successfully');
+    if (gameOptions.gameMode === 'local') {
+      if (sessionStorage.getItem('pong_connected')) {
+        ws.send(JSON.stringify({ type: 'refresh' }));
+      } else {
+        sessionStorage.setItem('pong_connected', 'true');
+      }
+    }
+    ws.send(JSON.stringify({ type: 'auth', token }));
+  };
+
+  // Set up navigation tracking
+  setupNavigationTracking(sendRefresh, gameOptions.gameMode);
+
+  if (gameOptions.gameMode !== 'local') {
+    // const handleBeforeUnload = () => {
+    //   if (ws.readyState === WebSocket.OPEN) {
+    //     ws.send(JSON.stringify({ type: 'refresh' }));
+    //   }
+    // };
+    window.addEventListener('beforeunload', sendRefresh, { once: true });
+    // window.addEventListener('beforeunload', handleBeforeUnload);
+    
+  }
+
+  ws.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      handleWebSocketMessage(data, onGameEnd, cleanup);
+    } catch (error) {
+      console.error('Error parsing Game WebSocket message:', error);
+    }
+  };
+
+  ws.onerror = (error) => {
+    console.error('Game WebSocket error:', error);
+  };
+
+  ws.onclose = (event) => {
+    console.log('Game WebSocket closed:', event.code, event.reason);
+    if (event.code === 4006) {
+      alert('This game has already finished and game room is closed. Returning to home.');
+      cleanup();
+      (window as any).navigate('/');
+    }
+    if (event.code === 4003) {
+      alert('You left and cam back, this causes a disconnection. Returning to home.');
+      cleanup();
+      (window as any).navigate('/');
+    }
+  };
+
+  return ws;
+}
+
+function setupNavigationTracking(sendRefresh: () => void, gameMode: string) {
+  if (gameMode !== 'local') {
+    const handleBeforeUnload = () => {
+      sendRefresh();
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    const originalPushState = history.pushState;
+    history.pushState = function(...args) {
+      sendRefresh();
+      return originalPushState.apply(this, args);
+    };
+
+    const originalReplaceState = history.replaceState;
+    history.replaceState = function(...args) {
+      sendRefresh();
+      return originalReplaceState.apply(this, args);
+    };
+
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a');
+      
+      if (link && link.href && !link.href.includes('/game/pong')) {
+        sendRefresh();
+      }
+    });
+
+    const originalNavigate = (window as any).navigate;
+    if (originalNavigate) {
+      (window as any).navigate = function(path: string) {
+        if (!path.startsWith('/game/pong')) {
+          sendRefresh();
+        }
+        return originalNavigate.call(this, path);
+      };
+    }
+  }
+}
+
+export function handleWebSocketMessage(
+  data: any,
+  onGameEnd: (winner: string) => void,
+  cleanup: () => void
+): void {
+  switch (data.type) {
+    case 'auth_success':
+      break;
+
+    case 'game_state':
+    case 'game_update':
+      updateScene(data.state);
+      break;
+
+    case 'countdown':
+      updateScene({ ...data.state, countdown: data.number, namesSet: false });
+      break;
+
+    case 'round_pause':
+      updateScene({ holdUntil: performance.now() + 1500 });
+      rollNeonColor();
+      break;
+
+    case 'game_started':
+      rollNeonColor();
+      updateScene({ countdown: null });
+      // console.log('Game started');
+      break;
+
+    case 'game_ended':
+      console.log("GAME ENDED DATA:", data);
+      if (data.reason === 'opponent_disconnected' && data.gameType === '2player') {
+        alert('Opponent disconnected. You win by default! Returning home.');
+        onGameEnd(data.winner);
+        cleanup();
+        (window as any).navigate('/');
+      } else if (data.reason === 'opponent_disconnected' && data.gameType === 'tournament') {
+        alert('Opponent disconnected. You win by default! Returning to bracket.');
+        onGameEnd(data.winner);
+        cleanup();
+        (window as any).navigate(`/tournament/${data.tournament_id}`);
+      } else if (data.reason === 'normal') {
+        onGameEnd(data.winner);
+        cleanup();
+      }
+      break;
+
+    case 'game_abandoned_local':
+      alert('Yikes! Sorry, Game abandoned due to disconnection/refresh from previous game. Returning to home.');
+      cleanup();
+      (window as any).navigate('/');
+      break;
+    
+    case 'tournament_abandoned_local':
+      alert('Yikes! Sorry, Tournament abandoned due to disconnection/refresh from previous game. Returning to home.');
+      cleanup();
+      (window as any).navigate('/');
+      break;
+
+    // case 'tournament_match_start':
+    //   (window as any).navigate(`/game/pong?game_id=${data.game_id}&tournament_id=${data.tournament_id}`);
+    //   break;
+
+    case 'tournament_update':
+      // (window as any).navigate(`/tournament/${data.tournament_id}`);
+      break;
+
+    case 'powerup_spawned':
+    case 'powerup_collected':
+    case 'extra_ball_spawned':
+    case 'extra_ball_removed':
+    case 'all_extra_balls_cleared':
+    case 'powerup_ended':
+    case 'paddle_speed_changed':
+    case 'paddle_size_changed':
+    case 'powerup_expired':
+    case 'all_powerups_cleared':
+      updateScene(data.state || {});
+      break;
+
+    default:
+      console.warn('Unknown message type:', data.type);
+  }
+}
+
+export function sendPaddleMove(ws: WebSocket, input: any): void {
+  if (ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ type: 'paddle_move', ...input }));
+  }
+}
+
