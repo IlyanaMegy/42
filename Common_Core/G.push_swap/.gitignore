@@ -1,6 +1,0 @@
-*/*.out
-*/*.o
-libft/libft
-obj/
-push_swap
-checker

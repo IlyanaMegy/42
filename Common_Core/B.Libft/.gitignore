@@ -1,7 +1,0 @@
-*.exe
-.vscode
-*.o
-a.out
-libftTester
-libft.a
-libft-war-machine

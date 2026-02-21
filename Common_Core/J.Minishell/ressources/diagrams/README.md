@@ -1,1 +1,0 @@
---> open diagrams in https://app.diagrams.net/ 😎
